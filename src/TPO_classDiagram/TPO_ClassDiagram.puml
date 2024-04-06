@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+'Relaciones'
+Juego--Jugador
+Juego--Planeta
+''
+Jugador--Mercado
+''
+Mercado--Arma
+Mercado--Escudo
+Mercado--Aegis
+Mercado--Swift
+''
+class Juego{
+-jugador:Jugador;
+-planetas: ListaPlanetas;
+}
+
+class Jugador {
+-nombre: string
+-uadecoins: int
+-nave: Nave;
+}
+
+class Mercado{
+-items: ListaItems;
+-naves: LisaNaves;
+}
+
+class Escudo {
+-coste:double;
+-catidadEscudo:double;
+}
+class Arma{
+-coste:double;
+-poderArma:double;
+}
+
+abstract class Nave{
+- escudo: int
+- vida: int
+- velocidad: int
+- combustible: int
+- arma: Arma
+getPoderAtaque():double;
+
+}
+
+class Aegis extends Nave {
+
+}
+class Swift extends Nave {
+
+}
+class Pirata extends Nave{
+}
+
+
+class Planeta {
+}
+
+class Hostil extends Planeta{
+}
+
+class Neutral extends Planeta{
+}
+
+@enduml
