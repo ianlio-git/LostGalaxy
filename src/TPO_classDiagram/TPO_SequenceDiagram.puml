@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Juego --> GestorDeJuego
+activate Juego
+activate GestorDeJuego
+Juego --> Jugador
+activate Jugador
+Jugador --> Nave
+activate Nave
+Jugador --> Planeta
+Nave --> Aegis
+Nave --> Swift
+Planeta --> Hostil
+Planeta --> Neutral
+deactivate Juego
+deactivate GestorDeJuego
+deactivate Jugador
+deactivate Nave
+
+
+@enduml

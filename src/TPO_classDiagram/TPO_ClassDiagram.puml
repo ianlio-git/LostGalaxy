@@ -1,68 +1,125 @@
+
+
 @startuml
-'https://plantuml.com/class-diagram
-'Relaciones'
-Juego--Jugador
-Juego--Planeta
-''
-Jugador--Mercado
-''
-Mercado--Arma
-Mercado--Escudo
-Mercado--Aegis
-Mercado--Swift
-''
-class Juego{
--jugador:Jugador;
--planetas: ListaPlanetas;
+
+'class Juego
+Juego -- GestorDeJuego
+Juego "1" o-- "1" Jugador
+
+Jugador "1" o-- "*" Nave
+GestorDeJuego -- Planeta
+GestorDeJuego -- Nave
+
+class GestorDeJuego{
+- listaPlanetas: Lista Planetas
+- navesDisponibles: Lista Naves
++ getPlaneta(): Planeta
++ getNave():Nave
+}
+class Juego {
+    - turno: int
+    - jugador: Jugador
+    - gestor: GestorDeJuego
+    + Juego(jugador Jugador)
+    + siguienteTurno():Void
+    + FinJuego(): Void
 }
 
+'class Jugador
 class Jugador {
--nombre: string
--uadecoins: int
--nave: Nave;
+    - navesDelJugador: Lista Nave
+    - nombre: string
+    - uadecoins: double  ' Cantidad de Uadecoins del jugador
+    + Jugador()
+    + visitarPlaneta(planeta Planeta, nave Nave) : void
 }
 
-class Mercado{
--items: ListaItems;
--naves: LisaNaves;
+'class Nave
+
+Nave -- Arma
+Nave -- Escudo
+
+abstract class Nave {
+    - vida: double
+    - velocidad: double
+    - combustible: double
+    - escudo: Escudo
+    - arma: Arma
+
+    + PoderAtaque(): double
+    + calcularDaño(): double
+}
+'class Arma
+class Arma {
+    - nivel : int
+    - poder: double
+    + Arma(poder: double)
+
 }
 
+'class Escudo
 class Escudo {
--coste:double;
--catidadEscudo:double;
+    - nivel: int
+    - proteccion: double
+    + Escudo(proteccion: double)
 }
-class Arma{
--coste:double;
--poderArma:double;
-}
-
-abstract class Nave{
-- escudo: int
-- vida: int
-- velocidad: int
-- combustible: int
-- arma: Arma
-getPoderAtaque():double;
-
+' Clase para Nave Aegis
+class NaveAegis extends Nave{
+    + isResistente(): boolean
 }
 
-class Aegis extends Nave {
-
+' Clase para Nave Swift
+class NaveSwift extends Nave {
+    + isEvitable(): boolean
 }
-class Swift extends Nave {
+'class Enemigo
+class Enemigo extends Nave {
 
-}
-class Pirata extends Nave{
-}
-
-
-class Planeta {
+    + Enemigo()
+    + calcularRecompensa(): double
 }
 
-class Hostil extends Planeta{
+'class Planeta
+
+Hostil -- Enemigo
+Neutral -- NaveAegis
+Neutral -- NaveSwift
+Neutral -- Mercado
+
+abstract class Planeta {
+    - nombre: String
+    - tipo : boolean
+    + Planeta (nombre String, tipo bolean)
 }
 
+'class Mercado
 class Neutral extends Planeta{
+    - mercado: Mercado
+    - navesDisponibles: Lista
+    + AccionDeMercado(mercado Mercado)
 }
+Abstract class Mercado {
+    uadecoins:double
+
+}
+class Venta extends Mercado{
+    + venderNave(nave:Nave): void
+}
+class Compra extends Mercado{
+    + comprarNave(nave:Nave): void
+    +  comprarCombustible(nave: Nave):void
+}
+class Mejora extends Mercado{
+    + mejorarEscudo(nave: Nave):
+    + mejorarArma(nave: Nave):double
+}
+
+' Subclase de Planeta: Hostil
+class Hostil extends Planeta{
+    - tesoro : boolean
+    - listaEnemigos: ListaEnemigos
+    + combate(nave: Nave, enemigo: Enemigo):void
+}
+
 
 @enduml
