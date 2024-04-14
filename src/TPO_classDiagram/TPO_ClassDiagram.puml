@@ -1,29 +1,27 @@
 
 
 @startuml
-
 'class Juego
-Juego -- Planeta
-Juego "1" o-- "1" Jugador
-
-Jugador "1" o-- "*" Nave
+Enave --> Jugador
 enum Enave{
-    Aegis
-    Swift
+    AEGIS
+    SWIFT
 }
-Juego -- Eplaneta
+Juego <-- Eplaneta
 enum Eplaneta{
-    Hostil
-    Neutral
+    HOSTIL
+    NEUTRAL
 }
-Arma -- EArma
+Arma <-- EArma
 enum EArma{
-   cañonDeIones,
-   laserDeFusion,
-   misilDeAntimateria,
-   cañonDeParticulas,
-   cañonGauss,
+   CAÑON_DE_IONES
+   LASER_DE_FUSION
+   MISIL_DE_ANTIMATERIA
+   CAÑON_DE_PARTICULAS
+   CAÑON_GAUSS
 }
+Juego "1" *-- "n" Planeta
+Juego "1" *-- "1" Jugador
 class Juego {
     - listaPlanetas: Lista Planeta
     - turno: int
@@ -40,7 +38,7 @@ class Juego {
     + getPlanetaNeutral()
     + getPlanetaHostil()
 }
-Enave -- Jugador
+Jugador "1" *-- "1" Nave
 'class Jugador
 class Jugador {
     - nave: Nave
@@ -55,19 +53,30 @@ class Jugador {
 }
 
 'class Nave
-
 abstract class Nave {
     - vida: double
     - velocidad: double
-    - combustible: double
     - escudo: Escudo
-    - arma: Arma
+    + Nave()
     + PoderAtaque(): double
-    + removeArma(): Arma
-    + setArma(): Arma
-    + calcularDaño(): double
+
 }
-Item -- Nave
+abstract class NaveAliada extends Nave{
+ - combustible: double
+ - arma: Arma
+ + removeArma(): Arma
+ + setArma(): Arma
+ + {abstract} calcularDaño(): double
+}
+' Clase para Nave Aegis
+class NaveAegis extends NaveAliada{
++ calcularDaño(): double
+}
+' Clase para Nave Swift
+class NaveSwift extends NaveAliada {
++ calcularDaño(): double
+}
+Nave "1"*--"n" Item
 abstract class Item{
 - precio: double
 
@@ -85,31 +94,19 @@ class Escudo extends Item {
     - proteccion: double
     + Escudo(proteccion: double)
 }
-' Clase para Nave Aegis
-class NaveAegis extends Nave{
-    + isResistente(): boolean
-}
-
-' Clase para Nave Swift
-class NaveSwift extends Nave {
-    + isEvitable(): boolean
-}
+Hostil "1"*--"1" NavePirata
 'class Enemigo
 class NavePirata extends Nave {
-
-    + NavePirata()
     + calcularRecompensa(): double
 }
 
 'class Planeta
 
-Hostil -- NavePirata
-Neutral -- Mercado
-
+Neutral "1"*--"1" Mercado
 abstract class Planeta {
     - nombre: String
     - tipo : Eplaneta
-    + Planeta (nombre String, tipo bolean)
+    + Planeta (nombre String, tipo EPlaneta)
 }
 
 'class Mercado
@@ -117,8 +114,9 @@ class Neutral extends Planeta{
     + Neutral()
     + AccionDeMercado(jugador Jugador):void
 }
-Mercado -- Item
+Mercado "1" o-- "n" Item
 Abstract class Mercado {
+    -Armas: EArma
     -uadecoins:double
 }
 class Venta extends Mercado{
@@ -126,7 +124,6 @@ class Venta extends Mercado{
     + venderArma()
 }
 class Compra extends Mercado{
-    Armas: EArma
     + comprarCombustible()
     + comprarEscudo()
     + comprarArma()
