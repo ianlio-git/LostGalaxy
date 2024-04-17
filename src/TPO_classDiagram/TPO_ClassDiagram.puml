@@ -1,19 +1,12 @@
-
-
 @startuml
 'class Juego
-Enave --> Jugador
-enum Enave{
+TipoDeNave <-- Juego
+enum TipoDeNave{
     AEGIS
     SWIFT
 }
-Juego <-- Eplaneta
-enum Eplaneta{
-    HOSTIL
-    NEUTRAL
-}
-Arma <-- Earma
-enum Earma{
+Arma --> TipoDeArma
+enum TipoDeArma{
    CAÑON_DE_IONES
    LASER_DE_FUSION
    MISIL_DE_ANTIMATERIA
@@ -23,7 +16,7 @@ enum Earma{
 Juego "1" *-- "n" Planeta
 Juego "1" *-- "1" Jugador
 class Juego {
-    - listaPlanetas: Lista Planeta
+    - List<Planeta>
     - turno: int
     - jugador: Jugador
     --
@@ -112,7 +105,7 @@ class NavePirata extends Nave {
 
 Neutral "1"*--"1" Mercado
 abstract class Planeta {
-    - nombre: String
+    - codigoDePlaneta: String
     - tipo : Eplaneta
     + Planeta (nombre String, tipo EPlaneta)
 }
@@ -123,18 +116,16 @@ class Neutral extends Planeta{
     + AccionDeMercado(mercado Mercado):void
 }
 Mercado "1" o-- "n" Item
-Abstract class Mercado {
+class Mercado {
     -Armas: EArma
     -uadecoins:double
-}
-class Venta extends Mercado{
-    + venderArma(jugador Jugador):void
-}
-class Compra extends Mercado{
     + comprarCombustible(jugador Jugador):void
     + comprarEscudo(jugador Jugador):void
     + comprarArma(jugador Jugador):void
+    + venderArma(jugador Jugador):void
+
 }
+
 'Subclase de Planeta: Hostil
 class Hostil extends Planeta{
     - tesoro : boolean
