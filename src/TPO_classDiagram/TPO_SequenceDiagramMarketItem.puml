@@ -5,26 +5,26 @@ participant Neutral
 participant Mercado
 participant Nave
 
-
 activate Juego
 deactivate Juego
 Juego -> Juego: siguienteTurno()
-Juego -> Jugador: getPlanetaHostil()
+Juego -> Jugador: getPlanetaNeutral()
 deactivate Juego
 activate Jugador
 Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
-Jugador -> Neutral: getNave()
+Jugador -> Neutral: getJugador()
 deactivate Jugador
-
 activate Neutral
-Neutral -> Mercado: comerciar()
+Neutral -> Mercado: comerciar(jugador Jugador)
 deactivate Neutral
 activate Mercado
 
-Mercado -> Mercado: comprarArma()
-activate Jugador
-Jugador -> Mercado: getUadeCoins()
-deactivate Jugador
+Mercado -> Nave: comprarEscudo(jugador Jugador)
+activate Nave
 
+Mercado -> Jugador: setUadeCoins(uadecoins float)
+deactivate Mercado
+activate Jugador
 deactivate Jugador
+Nave -> Nave: setEscudo()
 @enduml

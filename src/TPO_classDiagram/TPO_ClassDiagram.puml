@@ -60,7 +60,9 @@ abstract class Nave {
 abstract class NaveAliada extends Nave{
  - combustible: double
  - arma: Arma
- - escudo: Escudo
+ - escudo: double
+ + setEscudo(): void
+ + getEscudo(): void
  + removeArma(): Arma
  + ponerArma(): Arma
  + setCombustible():double
@@ -88,13 +90,7 @@ class Arma extends Item{
     + getPoder():double
 }
 
-'class Escudo
-class Escudo extends Item {
-    - proteccion: double
-    + Escudo()
-    + aumentarEscudo(): double
-    + getEscudo():double
-}
+
 Hostil "1"*--"1" NavePirata
 'class Enemigo
 class NavePirata extends Nave {
@@ -113,12 +109,13 @@ abstract class Planeta {
 class Neutral extends Planeta{
     + mercado: Mercado
     + Neutral()
-    + comerciar():void
+    + comerciar(jugador Jugador):void
 }
 Mercado "1" o-- "n" Item
 class Mercado {
     -armas: TipoDeArma
     -uadecoins:double
+    -jugador : Jugador
     + comprarCombustible(jugador Jugador):void
     + comprarEscudo(jugador Jugador):void
     + comprarArma(jugador Jugador):void
