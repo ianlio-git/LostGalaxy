@@ -1,68 +1,139 @@
 @startuml
-'https://plantuml.com/class-diagram
-'Relaciones'
-Juego--Jugador
-Juego--Planeta
-''
-Jugador--Mercado
-''
-Mercado--Arma
-Mercado--Escudo
-Mercado--Aegis
-Mercado--Swift
-''
-class Juego{
--jugador:Jugador;
--planetas: ListaPlanetas;
+'class Juego
+TipoDeNave <-- Juego
+enum TipoDeNave{
+    AEGIS
+    SWIFT
 }
-
+Arma --> TipoDeArma
+enum TipoDeArma{
+   CAÑON_DE_IONES
+   LASER_DE_FUSION
+   MISIL_DE_ANTIMATERIA
+   CAÑON_DE_PARTICULAS
+   CAÑON_GAUSS
+}
+Juego "1" *-- "n" Planeta
+Juego "1" *-- "1" Jugador
+class Juego {
+    - List<Planeta>
+    - turno: int
+    - jugador: Jugador
+    --
+    + Juego(jugador Jugador)
+    --
+    + elegirNave():Nave
+    + siguienteTurno():Void
+    + FinJuego(planeta Planeta,jugador Jugador): Void
+    --
+    + crearPlanetaNeutral(nombre String): Planeta
+    + crearPlanetaHostil(nombre String): Planeta
+    + getPlanetaNeutral()
+    + getPlanetaHostil()
+}
+Jugador "1" *-- "1" Nave
+'class Jugador
 class Jugador {
--nombre: string
--uadecoins: int
--nave: Nave;
+    - nave: Nave
+    - nombre: string
+    - uadeCoins: double  ' Cantidad de Uadecoins del jugador
+    --
+    + Jugador(nombre String,uadeCoins double)
+    --
+    + visitarPlanetaNeutral(planeta Planeta) : void
+    + visitarPlanetaHostil(planeta Planeta) : void
+    + getUadeCoins(): double
+    + setUadeCoins(): double
+    + setNave(): Nave
+    + getNave(): Nave
 }
 
-class Mercado{
--items: ListaItems;
--naves: LisaNaves;
+'class Nave
+abstract class Nave {
+    - vida: double
+    - velocidad: double
+    + Nave()
+    + poderAtaque(): double
+    + setVida():double
+    + getVida():double
+}
+abstract class NaveAliada extends Nave{
+ - combustible: double
+ - arma: Arma
+ - escudo: Escudo
+ + removeArma(): Arma
+ + ponerArma(): Arma
+ + setCombustible():double
+ + getCombustible():double
+ + {abstract} calcularDaño(): double
+}
+' Clase para Nave Aegis
+class NaveAegis extends NaveAliada{
++ calcularDaño(): double
+}
+' Clase para Nave Swift
+class NaveSwift extends NaveAliada {
++ calcularDaño(): double
+}
+NaveAliada "1"*--"n" Item
+abstract class Item{
+- precio: double
+
+}
+'class Arma
+class Arma extends Item{
+    - tipo : Earma
+    - poder: double
+    + Arma()
+    + getPoder():double
 }
 
-class Escudo {
--coste:double;
--catidadEscudo:double;
+'class Escudo
+class Escudo extends Item {
+    - proteccion: double
+    + Escudo()
+    + aumentarEscudo(): double
+    + getEscudo():double
 }
-class Arma{
--coste:double;
--poderArma:double;
-}
-
-abstract class Nave{
-- escudo: int
-- vida: int
-- velocidad: int
-- combustible: int
-- arma: Arma
-getPoderAtaque():double;
-
+Hostil "1"*--"1" NavePirata
+'class Enemigo
+class NavePirata extends Nave {
+    + calcularRecompensa(): double
 }
 
-class Aegis extends Nave {
+'class Planeta
 
-}
-class Swift extends Nave {
-
-}
-class Pirata extends Nave{
-}
-
-
-class Planeta {
+Neutral "1"*--"1" Mercado
+abstract class Planeta {
+    - codigoDePlaneta: String
+    - tipo : Eplaneta
+    + Planeta (nombre String, tipo EPlaneta)
 }
 
-class Hostil extends Planeta{
-}
-
+'class Mercado
 class Neutral extends Planeta{
+    + mercado: Mercado
+    + Neutral()
+    + comerciar():void
 }
+Mercado "1" o-- "n" Item
+class Mercado {
+    -Armas: EArma
+    -uadecoins:double
+    + comprarCombustible(jugador Jugador):void
+    + comprarEscudo(jugador Jugador):void
+    + comprarArma(jugador Jugador):void
+    + venderArma(jugador Jugador):void
+
+}
+
+'Subclase de Planeta: Hostil
+class Hostil extends Planeta{
+    - tesoro : boolean
+    - naveEnemiga: navePirata
+    + Hostil(naveEnemiga NavePirata)
+    + combate(nave: Nave):void
+}
+
 
 @enduml
