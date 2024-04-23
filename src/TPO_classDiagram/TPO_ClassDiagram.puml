@@ -112,8 +112,9 @@ abstract class Planeta {
 
 'class Mercado
 class Neutral extends Planeta{
+    + mercado: Mercado
     + Neutral()
-    + AccionDeMercado(mercado Mercado):void
+    + comerciar():void
 }
 Mercado "1" o-- "n" Item
 class Mercado {
