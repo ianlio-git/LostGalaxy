@@ -82,7 +82,7 @@ abstract class Item{
 }
 'class Arma
 class Arma extends Item{
-    - tipo : Earma
+    - tipo : TipoDeArma
     - poder: double
     + Arma()
     + getPoder():double
@@ -106,7 +106,6 @@ class NavePirata extends Nave {
 Neutral "1"*--"1" Mercado
 abstract class Planeta {
     - codigoDePlaneta: String
-    - tipo : Eplaneta
     + Planeta (nombre String, tipo EPlaneta)
 }
 
@@ -118,7 +117,7 @@ class Neutral extends Planeta{
 }
 Mercado "1" o-- "n" Item
 class Mercado {
-    -Armas: EArma
+    -armas: TipoDeArma
     -uadecoins:double
     + comprarCombustible(jugador Jugador):void
     + comprarEscudo(jugador Jugador):void
