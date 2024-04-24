@@ -26,8 +26,8 @@ class Juego {
     + siguienteTurno():Void
     + FinJuego(planeta Planeta,jugador Jugador): Void
     --
-    + crearPlanetaNeutral(nombre String): Planeta
-    + crearPlanetaHostil(nombre String): Planeta
+    + crearPlanetaNeutral(): Planeta
+    + crearPlanetaHostil(): Planeta
     + getPlanetaNeutral()
     + getPlanetaHostil()
 }
@@ -61,8 +61,8 @@ abstract class NaveAliada extends Nave{
  - combustible: double
  - arma: Arma
  - escudo: double
- + setEscudo(): void
- + getEscudo(): void
+ + setEscudo(double): void
+ + getEscudo(): double
  + removeArma(): Arma
  + ponerArma(): Arma
  + setCombustible():double
@@ -102,14 +102,15 @@ class NavePirata extends Nave {
 Neutral "1"*--"1" Mercado
 abstract class Planeta {
     - codigoDePlaneta: String
-    + Planeta (nombre String, tipo EPlaneta)
+    + Planeta ()
 }
 
 'class Mercado
 class Neutral extends Planeta{
-    + mercado: Mercado
-    + Neutral()
-    + comerciar(jugador Jugador):void
+    - mercado: Mercado
+    + Neutral(codigoDePlaneta String, mercado Mercado)
+    + getMercado() : Mercado
+
 }
 Mercado "1" o-- "n" Item
 class Mercado {
@@ -117,17 +118,19 @@ class Mercado {
     -uadecoins:double
     -jugador : Jugador
     + comprarCombustible(jugador Jugador):void
-    + comprarEscudo(jugador Jugador):void
+    + comprarEscudo(jugador Jugador, cantDeEscudoAComprar double):void
     + comprarArma(jugador Jugador):void
     + venderArma(jugador Jugador):void
 
 }
 
+
+
 'Subclase de Planeta: Hostil
 class Hostil extends Planeta{
     - tesoro : boolean
     - naveEnemiga: navePirata
-    + Hostil(naveEnemiga NavePirata)
+    + Hostil(naveEnemiga NavePirata, tesoro Boolean, codigoDePlaneta String)
     + combate(nave: Nave):void
 }
 

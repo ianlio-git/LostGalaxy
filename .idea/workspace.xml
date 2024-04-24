@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba1131ea-3983-4939-adb1-0561873b317a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/TPO_classDiagram/DiagramaDeClase.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_ClassDiagram.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_ClassDiagram.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_SequenceDiagramCombat.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_SequenceDiagramCombat.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_SequenceDiagramMarketItem.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/TPO_classDiagram/TPO_SequenceDiagramMarketItem.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

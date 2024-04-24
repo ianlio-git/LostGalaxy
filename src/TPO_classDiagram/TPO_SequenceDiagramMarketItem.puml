@@ -15,16 +15,21 @@ Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
 Jugador -> Neutral: getJugador()
 deactivate Jugador
 activate Neutral
-Neutral -> Mercado: comerciar(jugador Jugador)
+Mercado <- Neutral : getMercado()
 deactivate Neutral
 activate Mercado
 
-Mercado -> NaveAliada: comprarEscudo(jugador Jugador)
-activate NaveAliada
 
-Mercado -> Jugador: setUadeCoins(uadecoins float)
-deactivate Mercado
+
+
+Mercado -> Mercado: comprarEscudo(cantDeEscudoAComprar float)
 activate Jugador
+Jugador -> Mercado: getUadeCoins();
+
+
+Mercado -> Jugador: setUadeCoins(uadecoins doable)
 deactivate Jugador
-NaveAliada -> NaveAliada: setEscudo()
+activate NaveAliada
+Mercado -> NaveAliada: setEscudo(cantDeEscudoAComprar float) float)
+deactivate Mercado
 @enduml

@@ -8,7 +8,6 @@ participant NavePirata
 activate Juego
 deactivate Juego
 Juego -> Juego: siguienteTurno()
-Juego -> Juego: crearPlanetaHostil()
 Juego -> Jugador: getPlanetaHostil()
 
 deactivate Juego
