@@ -3,7 +3,7 @@ participant Juego
 participant Jugador
 participant Neutral
 participant Mercado
-participant Nave
+participant NaveAliada
 
 activate Juego
 deactivate Juego
@@ -19,12 +19,12 @@ Neutral -> Mercado: comerciar(jugador Jugador)
 deactivate Neutral
 activate Mercado
 
-Mercado -> Nave: comprarEscudo(jugador Jugador)
-activate Nave
+Mercado -> NaveAliada: comprarEscudo(jugador Jugador)
+activate NaveAliada
 
 Mercado -> Jugador: setUadeCoins(uadecoins float)
 deactivate Mercado
 activate Jugador
 deactivate Jugador
-Nave -> Nave: setEscudo()
+NaveAliada -> NaveAliada: setEscudo()
 @enduml

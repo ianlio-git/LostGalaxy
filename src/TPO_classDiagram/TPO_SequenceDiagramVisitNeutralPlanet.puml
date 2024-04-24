@@ -1,7 +1,6 @@
 @startuml
 participant Juego
 participant Jugador
-participant Neutral
 
 
 activate Juego
@@ -11,7 +10,5 @@ Juego -> Jugador: getPlanetaNeutral()
 deactivate Juego
 activate Jugador
 Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
-Jugador -> Neutral: getJugador()
 deactivate Jugador
-activate Neutral
 @enduml
