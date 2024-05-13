@@ -1,0 +1,14 @@
+@startuml
+participant Juego
+participant Jugador
+
+
+activate Juego
+deactivate Juego
+Juego -> Juego: siguienteTurno()
+Juego -> Jugador: getPlanetaNeutral()
+deactivate Juego
+activate Jugador
+Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
+deactivate Jugador
+@enduml
