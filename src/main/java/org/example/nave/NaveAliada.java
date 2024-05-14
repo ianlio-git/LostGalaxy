@@ -1,5 +1,7 @@
 package org.example.nave;
 
+import org.example.partesDeLaNave.Arma;
+
 public abstract class NaveAliada extends Nave {
     private double combustible;
     private Arma arma;

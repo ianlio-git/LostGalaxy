@@ -1,7 +1,27 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+package org.example;
+
+import org.example.enums.Acciones;
+import org.example.enums.Dificultades;
+import org.example.enums.TipoDeNave;
+import org.example.enums.TipoDePlaneta;
+
 public class Main {
     public static void main(String[] args) {
+        Juego juego = Juego.getInstancia();
+        juego.iniciarJuego("Bruno Fernandes", 100.0, TipoDeNave.NAVE_AEGIS, 20, Dificultades.DIFICIL);
 
+        System.out.println("Listado de planetas neutrales:");
+        juego.mostarListadoPlanetas(TipoDePlaneta.NEUTRAL);
+
+        System.out.println("Listado de planetas hostiles:");
+        juego.mostarListadoPlanetas(TipoDePlaneta.HOSTIL);
+
+        juego.siguienteTurno(Acciones.COMPRAR_ARMA,"NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE,"NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO,"NEU-1");
+        juego.siguienteTurno(Acciones.VENDER_ARMA,"NEU-1");
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-1");
+
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"NEU-1");
     }
 }

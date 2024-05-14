@@ -1,25 +1,16 @@
 package org.example.mercado;
 
+import org.example.Jugador;
+import org.example.mercado.accionesMercado.*;
+
 public class Mercado {
-    public static class Mercado {
-        private TipoDeArma armas;
-        private double uadecoins;
-        private Jugador jugador;
+    private AccionMercado comprarCombustibleAccion = new ComprarCombustibleAccion();
+    private AccionMercado comprarEscudoAccion = new ComprarEscudoAccion();
+    private AccionMercado comprarArmaAccion = new ComprarArmaAccion();
+    private AccionMercado venderArmaAccion = new VenderArmaAccion();
 
-        public void comprarCombustible(Jugador jugador) {
-            // Implementación
-        }
-
-        public void comprarEscudo(Jugador jugador, double cantDeEscudoAComprar) {
-            // Implementación
-        }
-
-        public void comprarArma(Jugador jugador) {
-            // Implementación
-        }
-
-        public void venderArma(Jugador jugador) {
-            // Implementación
-        }
+    // Método para realizar una acción del mercado
+    public void realizarAccionMercado(AccionMercado accion, Jugador jugador) {
+        accion.realizarAccion(jugador);
     }
 }

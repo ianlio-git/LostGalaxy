@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.nave.Nave;
+import org.example.planeta.Planeta;
 
 public class Jugador {
     private Nave nave;
@@ -12,14 +13,6 @@ public class Jugador {
         this.uadeCoins = uadeCoins;
     }
 
-    public void visitarPlanetaNeutral(Planeta planeta) {
-        // Implementación
-    }
-
-    public void visitarPlanetaHostil(Planeta planeta) {
-        // Implementación
-    }
-
     public double getUadeCoins() {
         return uadeCoins;
     }
@@ -28,9 +21,6 @@ public class Jugador {
         this.uadeCoins = uadeCoins;
     }
 
-    public void setNave(Nave nave) {
-        this.nave = nave;
-    }
 
     public Nave getNave() {
         return nave;

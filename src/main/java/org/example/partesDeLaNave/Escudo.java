@@ -1,3 +1,5 @@
+package org.example.partesDeLaNave;
+
 public class Escudo {
     private double proteccion;
 

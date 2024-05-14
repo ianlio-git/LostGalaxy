@@ -1,7 +1,9 @@
 package org.example.planeta;
 
+import org.example.enums.TipoDePlaneta;
+
 public abstract class Planeta {
-    private boolean tipoDePlaneta;
+
     private String codigoDePlaneta;
 
     public Planeta(String codigoDePlaneta) {
@@ -11,6 +13,7 @@ public abstract class Planeta {
     public String getCodigoDePlaneta() {
         return codigoDePlaneta;
     }
-    public abstract boolean soyPlanetaTipo();
+    public abstract TipoDePlaneta soyPlanetaTipo();
+
 
 }
