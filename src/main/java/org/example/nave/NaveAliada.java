@@ -30,8 +30,8 @@ public abstract class NaveAliada extends Nave {
         return arma;
     }
 
-    public void setCombustible(double combustible) {
-        this.combustible = combustible;
+    public void llenarTanqueDeCombustible(double combustible) {
+        this.combustible += combustible;
     }
 
     public double getCombustible() {
