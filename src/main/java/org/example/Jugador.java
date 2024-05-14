@@ -1,9 +1,13 @@
+package org.example;
+
+import org.example.nave.Nave;
+
 public class Jugador {
     private Nave nave;
     private String nombre;
     private double uadeCoins;
 
-    public Jugador(String nombre, double uadeCoins) {
+    public Jugador(String nombre, double uadeCoins,Nave nave) {
         this.nombre = nombre;
         this.uadeCoins = uadeCoins;
     }

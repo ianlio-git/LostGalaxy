@@ -1,3 +1,5 @@
+package org.example.nave;
+
 public abstract class Nave {
     private double vida;
     private double velocidad;
