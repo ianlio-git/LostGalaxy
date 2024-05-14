@@ -5,10 +5,17 @@ import org.example.partesDeLaNave.Arma;
 public abstract class NaveAliada extends Nave {
     private double combustible;
     private Arma arma;
-    private double escudo;
+    private double escudo = 0;
 
-    public void setEscudo(double escudo) {
+    public NaveAliada(double velocidad, double vida, double combustible, Arma arma, double escudo) {
+        super(velocidad, vida);
+        this.combustible = combustible;
+        this.arma = arma;
         this.escudo = escudo;
+    }
+
+    public void agregarEscudo(double cantDeEscudo){
+        this.escudo+=cantDeEscudo;
     }
 
     public double getEscudo() {

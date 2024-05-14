@@ -20,8 +20,7 @@ public class Main {
         juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE,"NEU-1");
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO,"NEU-1");
         juego.siguienteTurno(Acciones.VENDER_ARMA,"NEU-1");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-1");
-
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"NEU-1");
+        //juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-1");
+        juego.mostrarJugador();
     }
 }

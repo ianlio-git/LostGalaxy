@@ -3,7 +3,9 @@ package org.example.nave.tiposDeNaves;
 import org.example.nave.NaveAliada;
 
 public class NaveAegis extends NaveAliada {
+
     public NaveAegis() {
+        super(100, 100, 100, null, 0);
     }
 
     @Override

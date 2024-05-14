@@ -12,6 +12,7 @@ import org.example.planeta.Hostil;
 import org.example.planeta.Neutral;
 import org.example.planeta.Planeta;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,11 +35,13 @@ public class Juego {
     public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int tamanioDeLaGalaxia, Dificultades dificultad){
         if (jugador == null) {
             if(naveJugador == TipoDeNave.NAVE_AEGIS){
+                System.out.println("Entre al if de nave aegis");
                 NaveAegis naveAegis = new NaveAegis();
                 this.jugador = new Jugador(nombreDelJugador,uadeCoinsJugador,naveAegis);
             }else{
-                NaveSwift naveAegis = new NaveSwift();
-                this.jugador = new Jugador(nombreDelJugador,uadeCoinsJugador,naveAegis);
+                System.out.println("Entre al if de nave swift");
+                NaveSwift naveSwift = new NaveSwift();
+                this.jugador = new Jugador(nombreDelJugador,uadeCoinsJugador,naveSwift);
             }
             crearPlanetas(tamanioDeLaGalaxia,dificultad);
         } else {
@@ -126,5 +129,12 @@ public class Juego {
             }
         }
         throw new RuntimeException("No se encontró el planeta solicitado: " + codigoPlaneta);
+    }
+
+    public void mostrarJugador(){
+
+        System.out.println(jugador.getNave().getEscudo());
+        System.out.println(jugador.getNombre());
+        System.out.println(jugador.getUadeCoins());
     }
 }

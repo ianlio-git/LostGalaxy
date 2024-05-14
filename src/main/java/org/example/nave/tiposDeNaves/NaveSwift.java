@@ -1,9 +1,12 @@
 package org.example.nave.tiposDeNaves;
 
 import org.example.nave.NaveAliada;
+import org.example.partesDeLaNave.Arma;
 
 public class NaveSwift extends NaveAliada {
+
     public NaveSwift() {
+        super(100, 100, 100, null, 0);
     }
 
     @Override
