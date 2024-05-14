@@ -133,8 +133,11 @@ public class Juego {
 
     public void mostrarJugador(){
 
-        System.out.println(jugador.getNave().getEscudo());
-        System.out.println(jugador.getNombre());
-        System.out.println(jugador.getUadeCoins());
+        System.out.println("Cantidad de escudo:"+jugador.getNave().getEscudo());
+        System.out.println("Nombre:"+jugador.getNombre());
+        System.out.println("Cant de uade coins:"+jugador.getUadeCoins());
+        System.out.println("Cantidad de combustible:"+jugador.getNave().getCombustible());
+        System.out.println("Cantidad de vida:"+jugador.getNave().getVida());
+
     }
 }

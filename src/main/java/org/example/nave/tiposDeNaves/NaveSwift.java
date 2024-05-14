@@ -6,7 +6,7 @@ import org.example.partesDeLaNave.Arma;
 public class NaveSwift extends NaveAliada {
 
     public NaveSwift() {
-        super(100, 100, 100, null, 0);
+        super(100, 100, 10, null, 0);
     }
 
     @Override

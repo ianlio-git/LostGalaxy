@@ -5,7 +5,7 @@ import org.example.nave.NaveAliada;
 public class NaveAegis extends NaveAliada {
 
     public NaveAegis() {
-        super(100, 100, 100, null, 0);
+        super(100, 100, 10, null, 0);
     }
 
     @Override

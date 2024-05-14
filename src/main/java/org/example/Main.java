@@ -8,7 +8,7 @@ import org.example.enums.TipoDePlaneta;
 public class Main {
     public static void main(String[] args) {
         Juego juego = Juego.getInstancia();
-        juego.iniciarJuego("Bruno Fernandes", 100.0, TipoDeNave.NAVE_AEGIS, 20, Dificultades.DIFICIL);
+        juego.iniciarJuego("Bruno Fernandes", 1000.0, TipoDeNave.NAVE_AEGIS, 20, Dificultades.DIFICIL);
 
         System.out.println("Listado de planetas neutrales:");
         juego.mostarListadoPlanetas(TipoDePlaneta.NEUTRAL);
@@ -20,6 +20,7 @@ public class Main {
         juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE,"NEU-1");
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO,"NEU-1");
         juego.siguienteTurno(Acciones.VENDER_ARMA,"NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "NEU-1");
         //juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-1");
         juego.mostrarJugador();
     }
