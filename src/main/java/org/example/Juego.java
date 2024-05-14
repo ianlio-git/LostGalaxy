@@ -46,10 +46,6 @@ public class Juego {
         }
     }
 
-    public void FinJuego(Planeta planeta, Jugador jugador) {
-        // Implementación
-    }
-
     private void crearPlanetas(int tamanioDeLaGalaxia,Dificultades dificultad) {
         Random rand = new Random();
         int cantPlanetasNeutrales = 0;
