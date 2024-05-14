@@ -85,7 +85,6 @@ public class Juego {
             case COMPRAR_COMBUSTIBLE:
             case COMPRAR_ESCUDO:
             case COMPRAR_ARMA:
-            case VENDER_ARMA:
                 if (planeta instanceof Neutral) {
                     Neutral planetaNeutral = (Neutral) planeta;
                     planetaNeutral.realizarAccionEnMercado(accion, jugador);
@@ -138,6 +137,7 @@ public class Juego {
         System.out.println("Cant de uade coins:"+jugador.getUadeCoins());
         System.out.println("Cantidad de combustible:"+jugador.getNave().getCombustible());
         System.out.println("Cantidad de vida:"+jugador.getNave().getVida());
+        System.out.println("Mi arma es una:"+jugador.getNave().getArma().getTipoDeArma());
 
     }
 }

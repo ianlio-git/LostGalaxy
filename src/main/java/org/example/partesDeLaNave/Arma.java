@@ -2,20 +2,25 @@ package org.example.partesDeLaNave;
 
 import org.example.enums.TipoDeArma;
 
-public class Arma extends Item {
+abstract public class Arma{
 
-    private TipoDeArma tipo;
-    private double poder;
+   protected float precio;
+   protected float poderDeAtaque;
+   protected TipoDeArma tipoDeArma;
 
-    public Arma(TipoDeArma tipo, double poder) {
-        this.tipo = tipo;
-        this.poder = poder;
+    public Arma(TipoDeArma tipoDeArma, float precio, float poderDeAtaque) {
+        this.precio = precio;
+        this.poderDeAtaque = poderDeAtaque;
+        this.tipoDeArma = tipoDeArma;
     }
 
-    public double getPoder() {
-
-        return poder;
+    public double getPoder(){
+        return poderDeAtaque;
     }
-    double getPoderDeAtaque();
-    double getPrecio();
+    public double getPrecio(){
+        return precio;
+    }
+    public TipoDeArma getTipoDeArma(){
+        return tipoDeArma;
+    }
 }

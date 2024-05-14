@@ -6,7 +6,6 @@ import org.example.enums.TipoDePlaneta;
 import org.example.mercado.accionesMercado.ComprarCombustibleAccion;
 import org.example.mercado.accionesMercado.ComprarEscudoAccion;
 import org.example.mercado.accionesMercado.ComprarArmaAccion;
-import org.example.mercado.accionesMercado.VenderArmaAccion;
 import org.example.mercado.Mercado;
 
 public class Neutral extends Planeta {

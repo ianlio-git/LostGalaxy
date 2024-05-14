@@ -22,13 +22,14 @@ public abstract class NaveAliada extends Nave {
         return escudo;
     }
 
-    public Arma removeArma() {
+    public void cambiarArma(Arma nuevaArma) {
+        this.arma=nuevaArma;
+    }
+
+    public Arma getArma() {
         return arma;
     }
 
-    public Arma ponerArma() {
-        return arma;
-    }
 
     public void llenarTanqueDeCombustible(double combustible) {
         this.combustible += combustible;

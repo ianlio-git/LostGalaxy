@@ -1,4 +1,10 @@
 package org.example.partesDeLaNave.Armas;
 
-public class LaserDeFusion {
+import org.example.enums.TipoDeArma;
+import org.example.partesDeLaNave.Arma;
+
+public class LaserDeFusion extends Arma {
+    public LaserDeFusion() {
+        super(TipoDeArma.LASER_DE_FUSION, 300, 200);
+    }
 }
