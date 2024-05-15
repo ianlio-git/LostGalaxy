@@ -10,11 +10,11 @@ public class NaveAegis extends NaveAliada {
 
     @Override
     public double poderAtaque() {
-        return 0;
-    }
-
-    public double calcularDaño() {
-        // Implementación
-        return 0;
+        if(this.getArma() == null){
+            return 0;
+        }
+        else{
+            return (this.getArma().getPoder()*this.getVida())/this.getVelocidad();
+        }
     }
 }

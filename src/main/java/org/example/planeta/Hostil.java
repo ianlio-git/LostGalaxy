@@ -26,29 +26,20 @@ public class Hostil extends Planeta {
     }
 
     public boolean combate(NaveAliada naveAliada) {
+        float acumDeDanio =0;
         while (naveEnemiga.getVida() > 0 && naveAliada.getVida() > 0) {
-            if (naveAliada instanceof NaveSwift) {
-                NaveSwift naveAliadaSwift = (NaveSwift) naveAliada;
-                if (naveAliadaSwift.getEscudo() > naveEnemiga.poderAtaque()) {
-                    naveAliadaSwift.agregarEscudo(naveAliadaSwift.getEscudo() - naveEnemiga.poderAtaque());
-                } else {
-                    double danio = naveEnemiga.poderAtaque() - naveAliadaSwift.getEscudo();
-                    naveAliadaSwift.agregarEscudo(0);
-                    naveAliadaSwift.setVida(naveAliadaSwift.getVida() - danio);
-                }
-                naveEnemiga.setVida(naveEnemiga.getVida() - naveAliadaSwift.poderAtaque());
-            } else if (naveAliada instanceof NaveAegis) {
-                NaveAegis naveAliadaAegis = (NaveAegis) naveAliada;
-                if (naveAliadaAegis.getEscudo() > naveEnemiga.poderAtaque()) {
-                    naveAliadaAegis.agregarEscudo(naveAliadaAegis.getEscudo() - naveEnemiga.poderAtaque());
-                } else {
-                    double danio = naveEnemiga.poderAtaque() - naveAliadaAegis.getEscudo();
-                    naveAliadaAegis.agregarEscudo(0);
-                    naveAliadaAegis.setVida(naveAliadaAegis.getVida() - danio);
-                }
-                naveEnemiga.setVida(naveEnemiga.getVida() - naveAliadaAegis.poderAtaque());
+            while(naveEnemiga.poderAtaque()<=naveAliada.getEscudo()&& naveEnemiga.getVida() > 0){
+                naveAliada.agregarEscudo((0 - naveEnemiga.poderAtaque()));
+                naveEnemiga.setVida((0 - naveAliada.poderAtaque()));
+                acumDeDanio+=naveEnemiga.poderAtaque();
+            }
+            if(naveEnemiga.getVida()>0) {
+                naveAliada.setVida((0 - naveEnemiga.poderAtaque()));
+                naveEnemiga.setVida((0 - naveAliada.poderAtaque()));
+                acumDeDanio+=naveEnemiga.poderAtaque();
             }
         }
+        naveAliada.setRecompensa(((2*naveEnemiga.poderAtaque())-acumDeDanio));
         // Devolver true si la nave enemiga fue destruida, false si la nave aliada fue destruida
         return naveEnemiga.getVida() <= 0;
     }

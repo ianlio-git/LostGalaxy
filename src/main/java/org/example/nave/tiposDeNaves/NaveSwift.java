@@ -1,7 +1,6 @@
 package org.example.nave.tiposDeNaves;
 
 import org.example.nave.NaveAliada;
-import org.example.partesDeLaNave.Arma;
 
 public class NaveSwift extends NaveAliada {
 
@@ -11,11 +10,7 @@ public class NaveSwift extends NaveAliada {
 
     @Override
     public double poderAtaque() {
-        return 0;
+        return ((this.getArma().getPoder()*this.getVelocidad())+this.getVida()+this.getCombustible());
     }
 
-    public double calcularDaño() {
-        // Implementación
-        return 0;
-    }
 }

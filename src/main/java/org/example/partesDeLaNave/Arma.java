@@ -23,4 +23,6 @@ abstract public class Arma{
     public TipoDeArma getTipoDeArma(){
         return tipoDeArma;
     }
+
+
 }

@@ -20,4 +20,7 @@ public abstract class Nave {
     }
 
 
+    public double getVelocidad() {
+        return velocidad;
+    }
 }

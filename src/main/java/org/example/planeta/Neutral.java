@@ -33,9 +33,6 @@ public class Neutral extends Planeta {
             case COMPRAR_ARMA:
                 mercado.realizarAccionMercado(new ComprarArmaAccion(), jugador);
                 break;
-            case VENDER_ARMA:
-                mercado.realizarAccionMercado(new VenderArmaAccion(), jugador);
-                break;
             default:
                 throw new IllegalArgumentException("Acción no válida para el mercado.");
         }

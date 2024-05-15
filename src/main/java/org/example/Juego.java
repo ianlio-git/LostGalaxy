@@ -4,6 +4,7 @@ package org.example;
 import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
 import org.example.enums.TipoDePlaneta;
+import org.example.nave.NaveAliada;
 import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePirata;
 import org.example.nave.tiposDeNaves.NaveSwift;
@@ -35,11 +36,9 @@ public class Juego {
     public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int tamanioDeLaGalaxia, Dificultades dificultad){
         if (jugador == null) {
             if(naveJugador == TipoDeNave.NAVE_AEGIS){
-                System.out.println("Entre al if de nave aegis");
                 NaveAegis naveAegis = new NaveAegis();
                 this.jugador = new Jugador(nombreDelJugador,uadeCoinsJugador,naveAegis);
             }else{
-                System.out.println("Entre al if de nave swift");
                 NaveSwift naveSwift = new NaveSwift();
                 this.jugador = new Jugador(nombreDelJugador,uadeCoinsJugador,naveSwift);
             }
@@ -96,14 +95,20 @@ public class Juego {
                 if (planeta instanceof Hostil) {
                     Hostil planetaHostil = (Hostil) planeta;
                     finDelJuego(planetaHostil.combate(jugador.getNave()), planetaHostil.isTesoro());
+                    jugador.agregarUadeCoins(jugador.getNave().getRecompensa());
+                    jugador.getNave().setRecompensa(0);
+                    planetas.remove(planetaHostil);
                 } else {
                     throw new IllegalArgumentException("La acción no es válida para este tipo de planeta.");
                 }
+
+
                 break;
             default:
                 throw new IllegalArgumentException("Acción no válida.");
         }
         this.turno++;
+        mostrarDatosDelJugador();
 
     }
 
@@ -116,9 +121,18 @@ public class Juego {
     }
     private void finDelJuego(boolean naveDestruida, boolean tesoroEncontrado) {
         if (naveDestruida) {
-            System.out.println("Tu nave ha sido destruida. ¡Game Over!");
-        } else if (tesoroEncontrado) {
+            System.out.println("La nave enemiga fue destruida. ¡Muy bien!");
+        }
+        else{
+            System.out.println("Tu nave fue destruida. ¡Game Over!");
+            System.exit(1);
+        };
+        if (tesoroEncontrado && naveDestruida) {
             System.out.println("¡Felicidades! Has encontrado el tesoro y has ganado el juego.");
+            System.exit(0);
+        }
+        else{
+            System.out.println("Por desgracia no haz encontrado el tesoro, sigue intentado!");
         }
     }
     private Planeta visitarPlaneta(String codigoPlaneta) {
@@ -127,17 +141,22 @@ public class Juego {
                 return planeta;
             }
         }
-        throw new RuntimeException("No se encontró el planeta solicitado: " + codigoPlaneta);
+        throw new RuntimeException("El planeta "+codigoPlaneta+" solicitado no existe o ya ha sido destruido.");
     }
 
-    public void mostrarJugador(){
+   private void mostrarDatosDelJugador(){
+
 
         System.out.println("Cantidad de escudo:"+jugador.getNave().getEscudo());
         System.out.println("Nombre:"+jugador.getNombre());
         System.out.println("Cant de uade coins:"+jugador.getUadeCoins());
         System.out.println("Cantidad de combustible:"+jugador.getNave().getCombustible());
         System.out.println("Cantidad de vida:"+jugador.getNave().getVida());
-        System.out.println("Mi arma es una:"+jugador.getNave().getArma().getTipoDeArma());
-
+        if(jugador.getNave().getArma()!=null) {
+            System.out.println("Mi arma es una:" + jugador.getNave().getArma().getTipoDeArma());
+        }
+        else{
+            System.out.println("Aun no tengo un arma, pero ya tendre una!");
+        }
     }
 }
