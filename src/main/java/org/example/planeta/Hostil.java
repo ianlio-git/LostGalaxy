@@ -40,7 +40,7 @@ public class Hostil extends Planeta {
             }
         }
         naveAliada.setRecompensa(((2*naveEnemiga.poderAtaque())-acumDeDanio));
-        // Devolver true si la nave enemiga fue destruida, false si la nave aliada fue destruida
+        // true si la nave enemiga fue destruida, false si la nave aliada fue destruida
         return naveEnemiga.getVida() <= 0;
     }
 }

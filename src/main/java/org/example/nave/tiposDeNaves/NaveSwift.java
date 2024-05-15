@@ -10,7 +10,11 @@ public class NaveSwift extends NaveAliada {
 
     @Override
     public double poderAtaque() {
-        return ((this.getArma().getPoder()*this.getVelocidad())+this.getVida()+this.getCombustible());
-    }
+        if (this.getArma() == null) {
+            return 0;
+        } else {
+            return ((this.getArma().getPoder() * this.getVelocidad()) + this.getVida() + this.getCombustible());
 
+        }
+    }
 }

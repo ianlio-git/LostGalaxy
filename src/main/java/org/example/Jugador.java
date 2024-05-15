@@ -18,10 +18,6 @@ public class Jugador {
     public double getUadeCoins() {
         return uadeCoins;
     }
-
-    public void setUadeCoins(double uadeCoins) {
-        this.uadeCoins = uadeCoins;
-    }
     public void agregarUadeCoins(double uadeCoins){
         this.uadeCoins += uadeCoins;
     }

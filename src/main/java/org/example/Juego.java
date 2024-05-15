@@ -141,8 +141,6 @@ public class Juego {
     }
 
    private void mostrarDatosDelJugador(){
-
-
         System.out.println("Cantidad de escudo:"+jugador.getNave().getEscudo());
         System.out.println("Nombre:"+jugador.getNombre());
         System.out.println("Cant de uade coins:"+jugador.getUadeCoins());

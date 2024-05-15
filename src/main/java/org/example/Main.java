@@ -16,13 +16,13 @@ public class Main {
         //System.out.println("Listado de planetas hostiles:");
         //juego.mostarListadoPlanetas(TipoDePlaneta.HOSTIL);
 
-        juego.siguienteTurno(Acciones.COMPRAR_ARMA,"NEU-1");
-        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE,"NEU-1");
-        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO,"NEU-1");
-        juego.siguienteTurno(Acciones.COMPRAR_ARMA,"NEU-1");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-0");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-1");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-2");
+        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "NEU-1");
+        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "NEU-1");
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-0");
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-1");
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-2");
         juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-3");
         juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-4");
     }
