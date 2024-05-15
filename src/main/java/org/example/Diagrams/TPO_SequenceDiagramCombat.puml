@@ -1,46 +1,18 @@
 @startuml
-participant Juego
-participant Jugador
-participant Hostil
-participant NaveAliada
-participant NavePirata
+actor main
 
+main -> Juego: siguienteTurno(Acciones accion, String codigoPlaneta)
 activate Juego
-deactivate Juego
-Juego -> Juego: siguienteTurno()
-Juego -> Jugador: getPlanetaHostil()
-
-deactivate Juego
-activate Jugador
-Jugador -> Jugador: visitarPlanetaHostil(planeta Planeta)
-Jugador -> Hostil: getNave()
-deactivate Jugador
-
-activate Hostil
-Hostil -> Hostil: combate(nave Nave)
-alt pierde nave aliada
-    activate NavePirata
-    NavePirata -> Hostil: poderDeAtaque()
-    deactivate NavePirata
-    activate NaveAliada
-    NaveAliada -> Hostil: poderDeAtaque()
-    deactivate NaveAliada
-    activate NavePirata
-    NavePirata -> Hostil: setVida()
-    deactivate NavePirata
-    activate NaveAliada
-    NaveAliada -> Hostil: calcularDaño()
-    destroy NaveAliada
-    deactivate NaveAliada
-else pierde nave enemiga
-    activate NavePirata
-    NavePirata -> Hostil: setVida()
-    destroy NavePirata
-    deactivate NavePirata
-    activate NaveAliada
-    NaveAliada -> Hostil: calcularDaño()
-    deactivate NaveAliada
-    deactivate Hostil
+Juego -> Juego: finDelJuego(boolean NaveDestruida, boolean TesoroEncontrado)
+Juego -> planetaHostil : Combate(nave Nave, planeta PlanetaHostil)
+activate planetaHostil
+planetaHostil --> Juego : boolean
+deactivate planetaHostil
+opt Nave_enemiga_destruida
+    Juego --> main : Tu nave fue destruida
+    deactivate Juego
+ Tu nave no fue destruida
+    Juego --> main
 end
-@enduml
 
+@enduml
