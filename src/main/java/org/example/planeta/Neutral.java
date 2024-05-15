@@ -25,13 +25,13 @@ public class Neutral extends Planeta {
     public void realizarAccionEnMercado(Acciones accion, Jugador jugador) {
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
-                mercado.realizarAccionMercado(new ComprarCombustibleAccion(), jugador);
+                mercado.realizarAccion(new ComprarCombustibleAccion(), jugador);
                 break;
             case COMPRAR_ESCUDO:
-                mercado.realizarAccionMercado(new ComprarEscudoAccion(), jugador);
+                mercado.realizarAccion(new ComprarEscudoAccion(), jugador);
                 break;
             case COMPRAR_ARMA:
-                mercado.realizarAccionMercado(new ComprarArmaAccion(), jugador);
+                mercado.realizarAccion(new ComprarArmaAccion(), jugador);
                 break;
             default:
                 throw new IllegalArgumentException("Acción no válida para el mercado.");

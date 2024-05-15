@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ComprarEscudoAccion implements AccionMercado {
     @Override
-    public void realizarAccion(Jugador jugador) {
+    public void realizar(Jugador jugador) {
         System.out.println("¡Compra de escudo!");
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese la cantidad de escudo a agregar:");

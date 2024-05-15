@@ -8,7 +8,7 @@ import java.sql.SQLOutput;
 public class ComprarCombustibleAccion implements AccionMercado {
 
     @Override
-    public void realizarAccion(Jugador jugador) {
+    public void realizar(Jugador jugador) {
         System.out.println("¡Bienvenido a YPF!");
 
         if(jugador.getNave().getCombustible()== 100){

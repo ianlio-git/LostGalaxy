@@ -168,7 +168,7 @@ class Neutral extends Planeta {
 
 
 class Mercado {
-  + realizarAccionMercado(accion: AccionMercado, jugador: Jugador):void
+  + realizarAccion(accion: AccionMercado, jugador: Jugador):void
 }
 
 Mercado *-- ComprarCombustibleAccion
@@ -177,24 +177,24 @@ Mercado *-- ComprarArmaAccion
 Mercado *-- VenderArmaAccion
 
 interface AccionMercado {
-  + realizarAccion(Jugador):void
+  + realizar(Jugador):void
 }
 
 class ComprarArmaAccion implements AccionMercado{
-  + realizarAccion(Jugador): void
+  + realizar(Jugador): void
   - validarCoins(Arma, Jugador):void
 }
 
 class ComprarCombustibleAccion implements AccionMercado {
-  + realizarAccion(Jugador):void
+  + realizar(Jugador):void
 }
 
 class ComprarEscudoAccion implements AccionMercado {
-    +realizarAccion(Jugador jugador)
+    +realizar(Jugador jugador)
 }
 
 class VenderArmaAccion implements AccionMercado {
-    +realizarAccion(Jugador jugador)
+    +realizar(Jugador jugador)
 }
 
 

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ComprarArmaAccion implements AccionMercado {
 
     @Override
-    public void realizarAccion(Jugador jugador) {
+    public void realizar(Jugador jugador) {
 
         System.out.println("Bienvenido a la tienda de armas");
         System.out.println("Ingrese el numero de arma deseada:");

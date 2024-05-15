@@ -4,5 +4,5 @@ import org.example.Jugador;
 
 public interface AccionMercado {
 
-    void realizarAccion(Jugador jugador);
+    void realizar(Jugador jugador);
 }
