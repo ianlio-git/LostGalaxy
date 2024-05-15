@@ -1,10 +1,8 @@
 package org.example;
 
-
 import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
 import org.example.enums.TipoDePlaneta;
-import org.example.nave.NaveAliada;
 import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePirata;
 import org.example.nave.tiposDeNaves.NaveSwift;
@@ -12,8 +10,6 @@ import org.example.enums.TipoDeNave;
 import org.example.planeta.Hostil;
 import org.example.planeta.Neutral;
 import org.example.planeta.Planeta;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

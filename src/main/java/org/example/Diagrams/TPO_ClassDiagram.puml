@@ -5,6 +5,9 @@ Acciones <-- Juego
 Dificultades <-- Juego
 TipoDePlaneta <-- Juego
 TipoDePlaneta <-- Planeta
+Arma -- NaveAliada
+
+Arma -- Mercado
 enum TipoDeNave{
     AEGIS
     SWIFT
@@ -13,7 +16,6 @@ enum Acciones {
     COMPRAR_COMBUSTIBLE
     COMPRAR_ESCUDO
     COMPRAR_ARMA
-    VENDER_ARMA
     BUSCAR_TESORO
 }
 
@@ -38,85 +40,111 @@ enum TipoDeArma{
 Juego "1" *-- "n" Planeta
 Juego "1" *-- "1" Jugador
 class Juego {
-    - instanciaJuego: Juego
     - planetas: List<Planeta>
     - turno: int
     - jugador: Jugador
-
+    + Juego()
     + getInstancia(): Juego
     + iniciarJuego(nombreDelJugador: String, uadeCoinsJugador: double, naveJugador: TipoDeNave, tamanioDeLaGalaxia: int, dificultad: Dificultades): void
     + siguienteTurno(accion: Acciones, codigoPlaneta: String): void
     + mostarListadoPlanetas(tipoPlaneta: TipoDePlaneta): void
-    - finDelJuego(naveDestruida: boolean, tesoroEncontrado: boolean): void
     - crearPlanetas(tamanioDeLaGalaxia: int, dificultad: Dificultades): void
+    - finDelJuego(naveDestruida: boolean, tesoroEncontrado: boolean): void
     - visitarPlaneta(codigoPlaneta: String): Planeta
+    - mostrarDatosDelJugador():void
 }
 Jugador "1" *-- "1" Nave
 'class Jugador
 class Jugador {
-    - nave: Nave
+    - nave: NaveAliada
     - nombre: String
     - uadeCoins: double
-    + Jugador(String, double, Nave)
+    + Jugador(nombre: String, uadeCoins: double, nave: NaveAliada)
     + getUadeCoins(): double
-    + setUadeCoins(double): void
-    + getNave(): Nave
+    + setUadeCoins(uadeCoins: double): void
+    + agregarUadeCoins(uadeCoins: double): void
+    + quitarUadeCoins(uadeCoins: double): void
+    + getNave(): NaveAliada
+    + getNombre(): String
 }
+
 
 
 'class Nave
 abstract class Nave {
-    - vida: double
-    - velocidad: double
-    + Nave()
-    + poderAtaque(): double
-    + setVida():double
-    + getVida():double
+  - vida: double
+  - velocidad: double
+
+  + Nave(velocidad: double, vida: double)
+  + poderAtaque(): double
+  + setVida(vida: double): void
+  + getVida(): double
+  + getVelocidad(): double
 }
+
 abstract class NaveAliada extends Nave{
- - combustible: double
- - arma: Arma
- - escudo: double
- + setEscudo(double): void
- + getEscudo(): double
- + removeArma(): Arma
- + ponerArma(): Arma
- + setCombustible():double
- + getCombustible():double
- + {abstract} calcularDaño(): double
+  - combustible: double
+  - arma: Arma
+  - escudo: double
+  - recompensa: double
+
+  + NaveAliada(velocidad: double, vida: double, combustible: double, arma: Arma, escudo: double)
+  + agregarEscudo(cantDeEscudo: double): void
+  + cambiarArma(nuevaArma: Arma): void
+  + getArma(): Arma
+  + llenarTanqueDeCombustible(combustible: double): void
+  + getCombustible(): double
+  + setRecompensa(cantDeRecompenza: double): void
+  + getRecompensa():double
 }
 ' Clase para Nave Aegis
-class NaveAegis extends NaveAliada {
-    +NaveAegis()
-    +poderAtaque(): double
-    +calcularDaño(): double
+class NaveAegis extends NaveAliada{
+  + NaveAegis()
+  + poderAtaque():double
 }
 ' Clase para Nave Swift
-class NaveSwift extends NaveAliada {
-    +NaveSwift()
-    +poderAtaque(): double
-    +calcularDaño(): double
+class NaveSwift extends NaveAliada{
+  + NaveSwift()
+  + poderAtaque():double
 }
-NaveAliada "1"*--"n" Item
-abstract class Item{
-- precio: double
 
-}
+
 'class Arma
-class Arma extends Item{
-    - tipo : TipoDeArma
-    - poder: double
-    + Arma()
-    + getPoder():double
+abstract class Arma {
+    - precio: float
+    - poderDeAtaque: float
+    - tipoDeArma: TipoDeArma
+    + Arma(tipoDeArma: TipoDeArma, precio: float, poderDeAtaque: float)
+    + getPoder(): double
+    + getPrecio(): double
+    + getTipoDeArma():TipoDeArma
 }
 
+class MisilDeAntiMateria extends Arma{
+  + MisilDeAntiMateria()
+}
+class LaserDeFusion extends Arma{
+  + LaserDeFusion()
+}
+class CañonGauss extends Arma{
+  + CañonGauss()
+}
+class CañonDeParticulas extends Arma{
+  + CañonDeParticulas()
+}
+class CañonDeIones extends Arma{
+  + CañonDeIones()
+}
 
 Hostil "1"*--"1" NavePirata
+
 'class Enemigo
-class NavePirata extends Nave{
-    +calcularRecompensa(): double
-    +poderAtaque(): double
+class NavePirata extends Nave {
+  - poderDeAtaque: double
+  + NavePirata()
+  + poderAtaque():double
 }
+
 
 
 'class Planeta
@@ -124,44 +152,41 @@ class NavePirata extends Nave{
 Neutral "1"*--"1" Mercado
 abstract class Planeta {
     - codigoDePlaneta: String
-    + Planeta(String)
+    + Planeta(codigoDePlaneta: String)
     + getCodigoDePlaneta(): String
-    + abstract soyPlanetaTipo(): TipoDePlaneta
+    {abstract} + soyPlanetaTipo(): TipoDePlaneta
 }
 
-'class org.example.mercado.a.Mercado
+
 class Neutral extends Planeta {
     - count: int
     - mercado: Mercado
-
     + Neutral()
-    + soyPlanetaTipo(): TipoDePlaneta
     + realizarAccionEnMercado(accion: Acciones, jugador: Jugador): void
+    + soyPlanetaTipo(): TipoDePlaneta
 }
 
-Mercado "1" o-- "n" Item
+
 class Mercado {
-    - comprarCombustibleAccion: AccionMercado
-    - comprarEscudoAccion: AccionMercado
-    - comprarArmaAccion: AccionMercado
-    - venderArmaAccion: AccionMercado
-
-    + realizarAccionMercado(accion: AccionMercado, jugador: Jugador): void
+  + realizarAccionMercado(accion: AccionMercado, jugador: Jugador):void
 }
+
 Mercado *-- ComprarCombustibleAccion
 Mercado *-- ComprarEscudoAccion
 Mercado *-- ComprarArmaAccion
 Mercado *-- VenderArmaAccion
+
 interface AccionMercado {
-    {abstract} +realizarAccion(Jugador jugador)
+  + realizarAccion(Jugador):void
 }
 
-class ComprarArmaAccion implements AccionMercado {
-    +realizarAccion(Jugador jugador)
+class ComprarArmaAccion implements AccionMercado{
+  + realizarAccion(Jugador): void
+  - validarCoins(Arma, Jugador):void
 }
 
 class ComprarCombustibleAccion implements AccionMercado {
-    +realizarAccion(Jugador jugador)
+  + realizarAccion(Jugador):void
 }
 
 class ComprarEscudoAccion implements AccionMercado {
@@ -178,11 +203,12 @@ class Hostil extends Planeta{
     - count: int
     - tesoro: boolean
     - naveEnemiga: NavePirata
-    + Hostil(boolean, NavePirata)
+    + Hostil(tesoro: boolean, naveEnemiga: NavePirata)
     + isTesoro(): boolean
-    + combate(Nave): boolean
+    + combate(naveAliada: NaveAliada): boolean
     + soyPlanetaTipo(): TipoDePlaneta
 }
+
 
 
 @enduml
