@@ -1,35 +1,28 @@
 @startuml
+actor main
 participant Juego
-participant Jugador
 participant Neutral
 participant Mercado
-participant NaveAliada
-
+participant ComprarArmaAccion
+participant Arma
+main -> Juego: siguienteTurno(COMPRAR_ARMA, "NEU-1")
 activate Juego
-deactivate Juego
-Juego -> Juego: siguienteTurno()
-Juego -> Jugador: getPlanetaNeutral()
-deactivate Juego
-activate Jugador
-Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
-Jugador -> Neutral: getJugador()
-deactivate Jugador
+Juego -> Neutral: visitarPlaneta("NEU-1")
 activate Neutral
-Mercado <- Neutral : getMercado()
-deactivate Neutral
+Neutral -> Mercado: realizarAccionEnMercado(COMPRAR_ARMA, jugador)
 activate Mercado
-
-
-
-
-Mercado -> Mercado: comprarEscudo(cantDeEscudoAComprar float)
-activate Jugador
-Jugador -> Mercado: getUadeCoins();
-
-
-Mercado -> Jugador: setUadeCoins(uadecoins doable)
-deactivate Jugador
-activate NaveAliada
-Mercado -> NaveAliada: setEscudo(cantDeEscudoAComprar float) float)
+Mercado -> ComprarArmaAccion: realizarAccion(jugador)
+activate ComprarArmaAccion
+ComprarArmaAccion -> Arma: Crear nueva instancia de arma
+activate Arma
+Arma --> ComprarArmaAccion: Arma creada
+deactivate Arma
+ComprarArmaAccion --> Mercado: Arma comprada
+deactivate ComprarArmaAccion
+Mercado --> Neutral: Acción completada
 deactivate Mercado
+Neutral --> Juego: Acción completada
+deactivate Neutral
+Juego --> main: Acción completada
+deactivate Juego
 @enduml

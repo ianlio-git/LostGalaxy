@@ -1,14 +1,13 @@
 @startuml
+actor main
 participant Juego
-participant Jugador
-
-
+participant Neutral
+main -> Juego: siguienteTurno(Acciones.VISITAR_PLANETA, "NEU-1")
 activate Juego
+Juego -> Neutral: visitarPlaneta("NEU-1")
+activate Neutral
+Neutral -> main: Planeta visitado
+deactivate Neutral
+Juego --> main: Acción completada
 deactivate Juego
-Juego -> Juego: siguienteTurno()
-Juego -> Jugador: getPlanetaNeutral()
-deactivate Juego
-activate Jugador
-Jugador -> Jugador: visitarPlanetaNeutral(planeta Planeta)
-deactivate Jugador
 @enduml
