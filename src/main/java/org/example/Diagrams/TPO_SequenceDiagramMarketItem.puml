@@ -11,7 +11,7 @@ activate Juego
                 Planeta --> Juego: Planeta
             deactivate Planeta
 
-Juego -> planetaNeutral : realizarAccionEnMercado(accion, jugador)
+Juego -> PlanetaNeutral : realizarAccionEnMercado(accion, jugador)
 activate PlanetaNeutral
 
 PlanetaNeutral -> PlanetaNeutral : switch (accion)
