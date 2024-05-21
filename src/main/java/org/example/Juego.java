@@ -105,7 +105,6 @@ public class Juego {
         }
         this.turno++;
         mostrarDatosDelJugador();
-
     }
 
     public void mostarListadoPlanetas(TipoDePlaneta tipoPlaneta) {

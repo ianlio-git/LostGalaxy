@@ -1,31 +1,114 @@
 @startuml
 actor main
-participant Juego
-participant Hostil
 
-main -> Juego: siguienteTurno(BUSCAR_TESORO, "ENE-0")
+alt accion buscar tesoro
+
+main->Juego: siguienteTurno(Acciones accion, String codigoPlaneta ): void
 activate Juego
-Juego -> Juego: visitarPlaneta("ENE-0")
-activate Juego
-Juego -> Hostil: combate()
-activate Hostil
-Hostil --> Juego: boolean
-deactivate Hostil
-Juego -> Juego: finDelJuego(boolean naveDestruida, boolean tesoroEncontrado)
-activate Juego
-alt naveDestruida
-    Juego -> main: Imprimir mensaje de nave destruida
-    deactivate Juego
-    main -> main: Salir del juego (Game Over)
-else not naveDestruida
-    alt tesoroEncontrado
-        Juego -> main: Imprimir mensaje de tesoro encontrado
-        deactivate Juego
-        main -> main: Salir del juego (Victoria)
-    else not tesoroEncontrado
-        Juego -> main: Imprimir mensaje de no tesoro encontrado
-        deactivate Juego
-    end
+    loop busca planeta segun codigo
+        alt codigo de planeta valido
+            activate Juego
+                Juego -> Planeta: visitarPlaneta(String codigoPlaneta): Planeta
+            activate Planeta
+                Planeta --> Juego: Planeta
+            deactivate Planeta
+        else el planeta no existe no fue destruido
+                Juego --> main : RuntimeException
+            deactivate Juego
 end
+Juego -> Hostil: combate(NaveAliada naveAliada): boolean
+activate Hostil
+    loop verifica si nave enemiga y nave aliada tienen vida.
+
+        Hostil -> NaveAliada: getVida(): double
+        activate NaveAliada
+        NaveAliada --> Hostil: double
+        deactivate NaveAliada
+
+        Hostil -> NaveEnemiga: getVida(): double
+        activate NaveEnemiga
+        NaveEnemiga --> Hostil: double
+        deactivate NaveEnemiga
+
+            loop Verifica ataque enemigo ≤ escudo aliado y enemigo con este con vida
+
+                Hostil -> NaveEnemiga: getPoder(): double
+                activate NaveEnemiga
+                NaveEnemiga --> Hostil: double
+                deactivate NaveEnemiga
+
+                Hostil -> NaveEnemiga: getVida(): double
+                activate NaveEnemiga
+                NaveEnemiga --> Hostil: double
+                deactivate NaveEnemiga
+
+                Hostil -> NaveAliada: getPoder(): double
+                activate NaveAliada
+                NaveAliada --> Hostil: double
+                deactivate NaveAliada
+
+                Hostil -> NaveAliada: getPoder(): double
+                activate NaveAliada
+                NaveAliada --> Hostil: double
+                deactivate NaveAliada
+
+                Hostil -> NaveAliada: agregarEscudo(double cantDeEscudo): void
+                Hostil -> NaveEnemiga: setVida(double vida): void
+            end
+            alt si escudo de nave aliada es destruido
+
+                Hostil -> NaveEnemiga: getPoder(): double
+                activate NaveEnemiga
+                NaveEnemiga --> Hostil: double
+                deactivate NaveEnemiga
+
+                Hostil -> NaveAliada: getPoder(): double
+                activate NaveAliada
+                NaveAliada --> Hostil: double
+                deactivate NaveAliada
+                Hostil -> NaveAliada: setVida(double vida): void
+                Hostil -> NaveEnemiga: setVida(double vida): void
+            end
+    end
+    alt si la nave enemiga fue destruida
+        Hostil -> NaveEnemiga: getPoder(): double
+        activate NaveEnemiga
+        NaveEnemiga --> Hostil: double
+        deactivate NaveEnemiga
+        Hostil -> NaveAliada: setRecompensa(double cantDeRecompenza): Void
+        Hostil --> Juego : true
+    else si la nave aliada fue destruida
+        Hostil --> Juego : false
+    end
+    end
+deactivate Hostil
+
+Juego -> Hostil: isTesoro():boolean
+    activate Hostil
+    alt tine tesoro
+        Hostil-->Juego: true
+    else no tienen tesoro
+        Hostil-->Juego: false
+    end
+    deactivate Hostil
+
+Juego->Juego: mostrarDatosDelJugador(): Void
+Juego->Juego: finDelJuego(boolean naveDestruida, boolean tesoroEncontrado): Void
+activate Juego
+    alt nave enemiga fue destruida
+        Juego --> main: La nave enemiga fue destruida
+    else tu nave fue destruida
+        Juego --> main: Tu nave fue destruida
+        Juego -> Juego: salir del juego
+    end
+
+    alt tesoroEncontrado y nave enemiga es destruida
+        Juego --> main: Has encontrado el tesoro y has ganado el juego.
+        Juego -> Juego: salir del juego
+    else (tesoroEncontrado es false o naveDestruida es false)
+        Juego -> main: tesoro no encontrado
+    end
 deactivate Juego
+deactivate Juego
+end
 @enduml

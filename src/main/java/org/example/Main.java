@@ -26,4 +26,5 @@ public class Main {
         juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-3");
         juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-4");
     }
+
 }

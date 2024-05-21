@@ -39,7 +39,9 @@ public class Hostil extends Planeta {
                 acumDeDanio+=naveEnemiga.poderAtaque();
             }
         }
-        naveAliada.setRecompensa(((2*naveEnemiga.poderAtaque())-acumDeDanio));
+        if(naveEnemiga.getVida()==0) {
+            naveAliada.setRecompensa(((2*naveEnemiga.poderAtaque())-acumDeDanio));
+        }
         // true si la nave enemiga fue destruida, false si la nave aliada fue destruida
         return naveEnemiga.getVida() <= 0;
     }

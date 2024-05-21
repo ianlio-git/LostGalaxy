@@ -14,7 +14,6 @@ public class NaveSwift extends NaveAliada {
             return 0;
         } else {
             return ((this.getArma().getPoder() * this.getVelocidad()) + this.getVida() + this.getCombustible());
-
         }
     }
 }
