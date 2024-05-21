@@ -1,15 +1,24 @@
 @startuml
+actor main
 main->Juego: siguienteTurno(Acciones accion, String codigoPlaneta ): void
 activate Juego
     loop busca planeta segun codigo
         alt codigo de planeta valido
+
             activate Juego
                 Juego -> Planeta: visitarPlaneta(String codigoPlaneta): Planeta
             activate Planeta
                 Planeta --> Juego: Planeta
             deactivate Planeta
+
+            Juego -> Jugador : getNave():NaveAliada
+            activate Jugador
+            Jugador -->Juego: NaveAliada
+            deactivate Jugador
+
         else el planeta no existe o fue destruido.
                 Juego --> main : RuntimeException
             deactivate Juego
+    end
 end
 @enduml

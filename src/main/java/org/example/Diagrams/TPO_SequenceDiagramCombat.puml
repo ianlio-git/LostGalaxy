@@ -65,7 +65,11 @@ activate Hostil
                 deactivate NaveAliada
 
                 Hostil -> NaveAliada: agregarEscudo(double cantDeEscudo): void
+                activate NaveAliada
+                deactivate NaveAliada
                 Hostil -> NavePirata: setVida(double vida): void
+                activate NavePirata
+                deactivate NavePirata
             end
             alt si escudo de nave aliada es destruido
 
@@ -83,7 +87,12 @@ activate Hostil
                 NaveAliada --> Hostil: double
                 deactivate NaveAliada
                 Hostil -> NaveAliada: setVida(double vida): void
+                activate NaveAliada
+                deactivate NaveAliada
                 Hostil -> NavePirata: setVida(double vida): void
+                activate NavePirata
+
+                deactivate NavePirata
             end
     end
     alt si la nave enemiga fue destruida
@@ -92,7 +101,9 @@ activate Hostil
         NavePirata --> Hostil: double
         deactivate NavePirata
         Hostil -> NaveAliada: setRecompensa(double cantDeRecompenza): Void
+        activate NaveAliada
         Hostil --> Juego : true
+        deactivate NaveAliada
     else si la nave aliada fue destruida
         Hostil --> Juego : false
     end
@@ -131,7 +142,9 @@ activate Juego
         NaveAliada --> Juego: double
         deactivate NaveAliada
         Juego -> Jugador: agregarUadeCoins(double uadeCoins): void
+        activate Jugador
         Juego -> Juego: remove(): Planeta
+        deactivate Jugador
     end
 deactivate Juego
 deactivate Juego
