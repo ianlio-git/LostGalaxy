@@ -19,7 +19,7 @@ public class ComprarArmaAccion implements AccionMercado {
         System.out.println("4. CAÑON_DE_PARTICULAS");
         System.out.println("5. CAÑON_GAUSS");
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese el tipo de arma a comprar:");
+        System.out.println("Ingrese el numero de arma a comprar:");
         int tipoDeArma = sc.nextInt();
         switch (tipoDeArma) {
             case 1:

@@ -120,10 +120,12 @@ public class Juego {
         }
         else{
             System.out.println("Tu nave fue destruida. ¡Game Over!");
+            mostrarDatosDelJugador();
             System.exit(1);
         };
         if (tesoroEncontrado && naveDestruida) {
             System.out.println("¡Felicidades! Has encontrado el tesoro y has ganado el juego.");
+            mostrarDatosDelJugador();
             System.exit(0);
         }
         else{
@@ -140,6 +142,7 @@ public class Juego {
     }
 
    private void mostrarDatosDelJugador(){
+        System.out.println("==============================================");
         System.out.println("Cantidad de escudo:"+jugador.getNave().getEscudo());
         System.out.println("Nombre:"+jugador.getNombre());
         System.out.println("Cant de uade coins:"+jugador.getUadeCoins());
@@ -151,5 +154,6 @@ public class Juego {
         else{
             System.out.println("Aun no tengo un arma, pero ya tendre una!");
         }
+        System.out.println("==============================================");
     }
 }

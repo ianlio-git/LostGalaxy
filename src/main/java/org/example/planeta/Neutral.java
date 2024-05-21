@@ -35,6 +35,7 @@ public class Neutral extends Planeta {
                 break;
             default:
                 throw new IllegalArgumentException("Acción no válida para el mercado.");
+            // A futuro, se puede agregar la venta de armas, cuando se tenga una o mas por ejemplo.
         }
     }
 }

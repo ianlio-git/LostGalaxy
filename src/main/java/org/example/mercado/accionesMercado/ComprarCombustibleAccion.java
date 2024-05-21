@@ -18,7 +18,7 @@ public class ComprarCombustibleAccion implements AccionMercado {
             double combustibleFaltante = 100 - jugador.getNave().getCombustible();
             if (jugador.getUadeCoins() > jugador.getNave().getCombustible()) {
                 jugador.getNave().llenarTanqueDeCombustible(combustibleFaltante);
-                System.out.println("¡Has agregado " + (combustibleFaltante) + "de combustible a la nave!");
+                System.out.println("¡Has agregado " + (combustibleFaltante) + " de combustible a la nave!");
                 jugador.quitarUadeCoins(combustibleFaltante);
             } else {
                 System.out.println("No tenes suficientes uadeCoins.");

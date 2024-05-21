@@ -1,13 +1,15 @@
 @startuml
-actor main
-participant Juego
-participant Neutral
-main -> Juego: siguienteTurno(Acciones.VISITAR_PLANETA, "NEU-1")
+main->Juego: siguienteTurno(Acciones accion, String codigoPlaneta ): void
 activate Juego
-Juego -> Neutral: visitarPlaneta("NEU-1")
-activate Neutral
-Neutral -> main: Planeta visitado
-deactivate Neutral
-Juego --> main: Acción completada
-deactivate Juego
+    loop busca planeta segun codigo
+        alt codigo de planeta valido
+            activate Juego
+                Juego -> Planeta: visitarPlaneta(String codigoPlaneta): Planeta
+            activate Planeta
+                Planeta --> Juego: Planeta
+            deactivate Planeta
+        else el planeta no existe o fue destruido.
+                Juego --> main : RuntimeException
+            deactivate Juego
+end
 @enduml

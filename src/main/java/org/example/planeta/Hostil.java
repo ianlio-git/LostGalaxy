@@ -27,12 +27,15 @@ public class Hostil extends Planeta {
 
     public boolean combate(NaveAliada naveAliada) {
         float acumDeDanio =0;
+
         while (naveEnemiga.getVida() > 0 && naveAliada.getVida() > 0) {
             while(naveEnemiga.poderAtaque()<=naveAliada.getEscudo()&& naveEnemiga.getVida() > 0){
                 naveAliada.agregarEscudo((0 - naveEnemiga.poderAtaque()));
                 naveEnemiga.setVida((0 - naveAliada.poderAtaque()));
                 acumDeDanio+=naveEnemiga.poderAtaque();
             }
+            // estaria copado que si salis de este while y continua la pelea, que primero te saque
+            // todo el escudo antes de sacarte vida, para una proxima iteracion.
             if(naveEnemiga.getVida()>0) {
                 naveAliada.setVida((0 - naveEnemiga.poderAtaque()));
                 naveEnemiga.setVida((0 - naveAliada.poderAtaque()));

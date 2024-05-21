@@ -10,13 +10,13 @@ import java.util.Scanner;
 public class ComprarEscudoAccion implements AccionMercado {
     @Override
     public void realizar(Jugador jugador) {
-        System.out.println("¡Compra de escudo!");
+        System.out.println("¡Bienvenido a la tienda de escudo!");
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese la cantidad de escudo a agregar:");
         double cantidadDeEscudo = sc.nextDouble();
         if(jugador.getUadeCoins()>cantidadDeEscudo){
             jugador.getNave().agregarEscudo(cantidadDeEscudo);
-            System.out.println("¡Has agregado " + cantidadDeEscudo + " al escudo de la nave!");
+            System.out.println("¡Has comprado " + cantidadDeEscudo + " de escudo para tu nave");
             jugador.quitarUadeCoins(cantidadDeEscudo);
         }
         else{

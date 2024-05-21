@@ -12,7 +12,7 @@ activate Juego
             activate Planeta
                 Planeta --> Juego: Planeta
             deactivate Planeta
-        else el planeta no existe no fue destruido
+        else el planeta no existe o fue destruido.
                 Juego --> main : RuntimeException
             deactivate Juego
 end
