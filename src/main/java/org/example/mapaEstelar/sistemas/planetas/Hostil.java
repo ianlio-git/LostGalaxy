@@ -1,11 +1,8 @@
-package org.example.planeta;
+package org.example.mapaEstelar.sistemas.planetas;
 
 import org.example.enums.TipoDePlaneta;
-import org.example.nave.Nave;
 import org.example.nave.NaveAliada;
-import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePirata;
-import org.example.nave.tiposDeNaves.NaveSwift;
 
 public class Hostil extends Planeta {
     private static int count;

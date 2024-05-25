@@ -1,9 +1,8 @@
 package org.example.mercado.accionesMercado;
-import org.example.Jugador;
+import org.example.gameMaster.Jugador;
 import org.example.partesDeLaNave.Arma;
 import org.example.partesDeLaNave.Armas.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ComprarArmaAccion implements AccionMercado {

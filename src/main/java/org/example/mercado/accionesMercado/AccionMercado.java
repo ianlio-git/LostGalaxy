@@ -1,6 +1,6 @@
 package org.example.mercado.accionesMercado;
 
-import org.example.Jugador;
+import org.example.gameMaster.Jugador;
 
 public interface AccionMercado {
 

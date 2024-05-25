@@ -1,4 +1,4 @@
-package org.example.planeta;
+package org.example.mapaEstelar.sistemas.planetas;
 
 import org.example.enums.TipoDePlaneta;
 

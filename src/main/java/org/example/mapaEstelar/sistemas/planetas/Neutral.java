@@ -1,6 +1,6 @@
-package org.example.planeta;
+package org.example.mapaEstelar.sistemas.planetas;
 
-import org.example.Jugador;
+import org.example.gameMaster.Jugador;
 import org.example.enums.Acciones;
 import org.example.enums.TipoDePlaneta;
 import org.example.mercado.accionesMercado.ComprarCombustibleAccion;

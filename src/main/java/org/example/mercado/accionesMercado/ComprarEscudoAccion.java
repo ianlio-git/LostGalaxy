@@ -1,11 +1,6 @@
 package org.example.mercado.accionesMercado;
 
-import org.example.Jugador;
-import org.example.nave.NaveAliada;
-import org.example.nave.tiposDeNaves.NaveAegis;
-import org.example.nave.tiposDeNaves.NaveSwift;
-
-import java.util.Scanner;
+import org.example.gameMaster.Jugador;
 
 import java.util.Scanner;
 

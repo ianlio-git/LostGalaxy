@@ -1,9 +1,6 @@
 package org.example.mercado.accionesMercado;
 
-import org.example.Jugador;
-
-import javax.xml.transform.Source;
-import java.sql.SQLOutput;
+import org.example.gameMaster.Jugador;
 
 public class ComprarCombustibleAccion implements AccionMercado {
 

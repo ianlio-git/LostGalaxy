@@ -1,8 +1,6 @@
-package org.example;
+package org.example.gameMaster;
 
-import org.example.nave.Nave;
 import org.example.nave.NaveAliada;
-import org.example.planeta.Planeta;
 
 public class Jugador {
     private NaveAliada nave;

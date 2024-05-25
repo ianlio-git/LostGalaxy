@@ -1,6 +1,6 @@
 package org.example.mercado;
 
-import org.example.Jugador;
+import org.example.gameMaster.Jugador;
 import org.example.mercado.accionesMercado.*;
 
 public class Mercado {
