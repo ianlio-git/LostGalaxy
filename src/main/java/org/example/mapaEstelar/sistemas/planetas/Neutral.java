@@ -41,9 +41,8 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public void combate() {
+    public void combate(Jugador jugador) {
         System.out.println("Un planeta Neutral no puede combatir");
-        return ;
     }
 
 

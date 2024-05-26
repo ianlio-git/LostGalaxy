@@ -46,7 +46,7 @@ public class SistemaEstelar {
                 return planeta;
             }
         }
-        throw new RuntimeException("No hay planetas hostiles en este sistema solar");
+        return null;
     }
     public Planeta obtenerPlanetaAliado() {
         for (Planeta planeta : planetas) {
@@ -54,7 +54,7 @@ public class SistemaEstelar {
                 return planeta;
             }
         }
-        throw new RuntimeException("No hay planetas aliados en este sistema solar");
+        return null;
     }
 
     public void quitarPlaneta(Planeta planeta){

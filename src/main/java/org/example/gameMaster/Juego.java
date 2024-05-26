@@ -2,19 +2,14 @@ package org.example.gameMaster;
 
 import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
-import org.example.enums.TipoDePlaneta;
 import org.example.mapaEstelar.MapaEstelar;
 import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePhantom;
 import org.example.nave.tiposDeNaves.NaveSwift;
 import org.example.enums.TipoDeNave;
-import org.example.mapaEstelar.sistemas.planetas.Hostil;
-import org.example.mapaEstelar.sistemas.planetas.Neutral;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
 import org.example.nave.tiposDeNaves.NaveTitan;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Juego {
@@ -67,15 +62,15 @@ public class Juego {
             mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
         }
     }
-    public void siguienteTurno(Acciones accion, String codigoDeSistema,String codigoDePlaneta,double compra) {
+    public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
             case COMPRAR_ESCUDO:
             case COMPRAR_ARMA:
-                this.realizarAccionDeCompra(accion,codigoDeSistema, codigoDePlaneta,compra);
+                this.realizarAccionDeCompra(accion,codigoDeSistema,compra);
                 break;
             case BUSCAR_TESORO:
-                this.realizarAccionDeAtaque(codigoDeSistema, codigoDePlaneta);
+                this.realizarAccionDeAtaque(codigoDeSistema);
                 break;
             default:
         }
@@ -84,25 +79,20 @@ public class Juego {
     }
     private void realizarAccionDeCompra(Acciones accion,String codigoDeSistema,double compra) {
         Planeta planetaNeutral = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaNeutral();
-        planetaNeutral.realizarAccionEnMercado(accion, jugador,compra);
-        if () {
-
-
+        if (planetaNeutral != null) {
+            planetaNeutral.realizarAccionEnMercado(accion,jugador,compra);
         } else {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
-
     }
-    private void realizarAccionDeAtaque(String codigoDeSistema,String codigoDePlaneta) {
+    private void realizarAccionDeAtaque(String codigoDeSistema) {
         Planeta planetaHostil = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaHostil();
-        if (planeta instanceof Hostil) {
-            Hostil planetaHostil = (Hostil) planeta;
-            finDelJuego(planetaHostil.combate(jugador.getNave()), planetaHostil.isTesoro());
-            jugador.agregarUadeCoins(jugador.getNave().getRecompensa());
-            jugador.getNave().setRecompensa(0);
+        if (planetaHostil != null) {
+            planetaHostil.combate(this.jugador);
+            finDelJuego(jugador.getNave().tengoVida(), jugador.mostrarTesoro());
             mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).quitarPlaneta(planetaHostil);
         } else {
-            System.out.println("No hay planetas que puedan cumplir con esta accion ");
+            System.out.println("No quedan mas planetas enemigos en este sitema solar por favor viaja al siguiente");
         }
     }
 

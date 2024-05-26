@@ -6,11 +6,13 @@ public class Jugador {
     private NaveAliada nave;
     private String nombre;
     private double uadeCoins;
+    private boolean tesoro;
 
     public Jugador(String nombre, double uadeCoins,NaveAliada nave) {
         this.nombre = nombre;
         this.uadeCoins = uadeCoins;
         this.nave = nave;
+        this.tesoro = false;
     }
 
     public double getUadeCoins() {
@@ -29,6 +31,12 @@ public class Jugador {
     }
     public String getNombre(){
         return nombre;
+    }
+    public void encontreElTesoro(boolean planetaTesoro){
+         this.tesoro=planetaTesoro;
+    }
+    public boolean mostrarTesoro(){
+        return tesoro;
     }
 
 }

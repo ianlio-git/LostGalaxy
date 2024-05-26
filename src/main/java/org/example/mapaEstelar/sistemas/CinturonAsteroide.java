@@ -19,7 +19,7 @@ public class CinturonAsteroide {
 
     public void atravesar(Jugador jugador) {
         double dañoRecibido = this.calcularPoder();
-        jugador.getNave().setVida(0-dañoRecibido);
+        jugador.getNave().quitarVida(dañoRecibido);
         double uadeCoinsGanados = this.calcularPoder() - dañoRecibido;
         jugador.agregarUadeCoins(uadeCoinsGanados);
     }

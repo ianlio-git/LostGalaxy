@@ -14,7 +14,7 @@ public abstract class Planeta {
     }
     public abstract TipoDePlaneta soyPlanetaTipo();
     public abstract void realizarAccionEnMercado(Acciones accion, Jugador jugador, double cantidad);
-    public abstract void combate();
+    public abstract void combate(Jugador jugador);
 
 
 }
