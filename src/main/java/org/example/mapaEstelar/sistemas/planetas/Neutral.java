@@ -22,7 +22,8 @@ public class Neutral extends Planeta {
         return TipoDePlaneta.NEUTRAL;
     }
 
-    public void realizarAccionEnMercado(Acciones accion, Jugador jugador) {
+    @Override
+    public void realizarAccionEnMercado(Acciones accion, Jugador jugador,double cantidad) {
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
                 mercado.realizarAccion(new ComprarCombustibleAccion(), jugador);
@@ -35,7 +36,15 @@ public class Neutral extends Planeta {
                 break;
             default:
                 throw new IllegalArgumentException("Acción no válida para el mercado.");
-            // A futuro, se puede agregar la venta de armas, cuando se tenga una o mas por ejemplo.
+                // A futuro, se puede agregar la venta de armas, cuando se tenga una o mas por ejemplo.
         }
     }
+
+    @Override
+    public void combate() {
+        System.out.println("Un planeta Neutral no puede combatir");
+        return ;
+    }
+
+
 }

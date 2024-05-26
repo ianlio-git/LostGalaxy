@@ -32,14 +32,31 @@ public class SistemaEstelar {
             System.out.println(planeta.getCodigoDePlaneta());
         }
     }
-    public Planeta obtenerPlaneta(String codigoDePlaneta) {
+    public Planeta obtenerPlanetaNeutral() {
         for (Planeta planeta : planetas) {
-            if (planeta.getCodigoDePlaneta().equals(codigoDePlaneta)) {
+            if (planeta.soyPlanetaTipo()==TipoDePlaneta.NEUTRAL) {
                 return planeta;
             }
         }
-        throw new RuntimeException("Planeta no encontrado: " + codigoDePlaneta);
+        throw new RuntimeException("No hay planetas neutrales en este sistema solar");
     }
+    public Planeta obtenerPlanetaHostil() {
+        for (Planeta planeta : planetas) {
+            if (planeta.soyPlanetaTipo()==TipoDePlaneta.HOSTIL) {
+                return planeta;
+            }
+        }
+        throw new RuntimeException("No hay planetas hostiles en este sistema solar");
+    }
+    public Planeta obtenerPlanetaAliado() {
+        for (Planeta planeta : planetas) {
+            if (planeta.soyPlanetaTipo()==TipoDePlaneta.ALIADO) {
+                return planeta;
+            }
+        }
+        throw new RuntimeException("No hay planetas aliados en este sistema solar");
+    }
+
     public void quitarPlaneta(Planeta planeta){
         this.planetas.remove(planeta);
     }
@@ -58,22 +75,22 @@ public class SistemaEstelar {
                 // Para el nivel FÁCIL, el total de planetas estará entre 3 y 6.
                 int totalFacil = rand.nextInt(4) + 3;
                 cantPlanetasNeutrales = (int) (totalFacil * 0.4); // 30% de planetas neutrales
-                cantPlanetasAliados = (int) (totalFacil * 0.4);  // 30% de planetas hostiles
-                cantPlanetasHostiles  = totalFacil - cantPlanetasNeutrales - cantPlanetasHostiles;
+                cantPlanetasAliados = (int) (totalFacil * 0.3);  // 30% de planetas Aliados
+                cantPlanetasHostiles  = totalFacil - cantPlanetasNeutrales - cantPlanetasAliados;
                 break;
             case MEDIO:
                 // Para el nivel MEDIO, el total de planetas estará entre 4 y 8.
                 int totalMedio = rand.nextInt(5) + 4;
                 cantPlanetasNeutrales = (int) (totalMedio * 0.3); // 30% de planetas neutrales
-                cantPlanetasAliados = (int) (totalMedio * 0.5); // 50% de planetas hostiles
-                cantPlanetasHostiles = totalMedio - cantPlanetasNeutrales - cantPlanetasHostiles;
+                cantPlanetasAliados = (int) (totalMedio * 0.2); // 20% de planetas Aliados
+                cantPlanetasHostiles  = totalMedio - cantPlanetasNeutrales - cantPlanetasAliados;
                 break;
             case DIFICIL:
                 // Para el nivel DIFÍCIL, el total de planetas estará entre 6 y 12.
                 int totalDificil = rand.nextInt(7) + 6;
-                cantPlanetasNeutrales = (int) (totalDificil * 0.2); // 20% de planetas neutrales
-                cantPlanetasAliados = (int) (totalDificil * 0.5);  // 50% de planetas hostiles
-                cantPlanetasHostiles = totalDificil - cantPlanetasNeutrales - cantPlanetasHostiles;
+                cantPlanetasNeutrales = (int) (totalDificil * 0.3); // 30% de planetas neutrales
+                cantPlanetasAliados = (int) (totalDificil * 0.2);  // 10% de planetas Aliados
+                cantPlanetasHostiles  = totalDificil - cantPlanetasNeutrales - cantPlanetasAliados;
                 break;
             default:
         }

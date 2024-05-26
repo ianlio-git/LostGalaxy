@@ -59,8 +59,10 @@ public class Juego {
     }
     private void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares){
         Random random = new Random();
+        int var = random.nextInt(cantidadSistemasEstelares);
         for (int i = 0; i < cantidadSistemasEstelares; i++) {
-            boolean tieneTesoro = (i == random.nextInt(cantidadSistemasEstelares));
+            boolean tieneTesoro = (i == var);
+            System.out.println(tieneTesoro);
             boolean tieneCinturon = random.nextBoolean();
             mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
         }
@@ -80,18 +82,19 @@ public class Juego {
         this.turno++;
         mostrarDatosDelJugador();
     }
-    private void realizarAccionDeCompra(Acciones accion,String codigoDeSistema,String codigoDePlaneta,double compra) {
-        Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlaneta(codigoDePlaneta);
-        if (planeta instanceof Neutral) {
-            Neutral planetaNeutral = (Neutral) planeta;
-            planetaNeutral.realizarAccionEnMercado(accion, jugador);
+    private void realizarAccionDeCompra(Acciones accion,String codigoDeSistema,double compra) {
+        Planeta planetaNeutral = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaNeutral();
+        planetaNeutral.realizarAccionEnMercado(accion, jugador,compra);
+        if () {
+
+
         } else {
-            throw new IllegalArgumentException("La acción no es válida para este tipo de planeta.");
+            System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
 
     }
     private void realizarAccionDeAtaque(String codigoDeSistema,String codigoDePlaneta) {
-        Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlaneta(codigoDePlaneta);
+        Planeta planetaHostil = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaHostil();
         if (planeta instanceof Hostil) {
             Hostil planetaHostil = (Hostil) planeta;
             finDelJuego(planetaHostil.combate(jugador.getNave()), planetaHostil.isTesoro());
@@ -99,9 +102,8 @@ public class Juego {
             jugador.getNave().setRecompensa(0);
             mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).quitarPlaneta(planetaHostil);
         } else {
-            throw new IllegalArgumentException("La acción no es válida para este tipo de planeta.");
+            System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
-        throw new IllegalArgumentException("Acción no válida.");
     }
 
 
