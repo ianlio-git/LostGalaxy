@@ -1,0 +1,45 @@
+@startuml
+actor main
+
+main -> Juego: siguienteTurno(Acciones accion, String codigoPlaneta ): void
+activate Juego
+    loop busca planeta segun codigo
+        alt codigo de planeta valido
+            activate Juego
+                Juego -> Planeta: visitarPlaneta(String codigoPlaneta): Planeta
+            activate Planeta
+                Planeta --> Juego: Planeta
+            deactivate Planeta
+
+Juego -> PlanetaNeutral : realizarAccionEnMercado(accion, jugador)
+activate PlanetaNeutral
+
+PlanetaNeutral -> PlanetaNeutral : switch (accion)
+alt COMPRAR_COMBUSTIBLE
+    PlanetaNeutral -> Mercado : realizarAccion(AccionMercado accionMercado, Jugador jugador)
+    activate Mercado
+    Mercado --> PlanetaNeutral: Acción completada
+    deactivate Mercado
+else COMPRAR_ESCUDO
+    PlanetaNeutral -> Mercado : realizarAccion(AccionMercado accionMercado, Jugador jugador)
+    activate Mercado
+    Mercado --> PlanetaNeutral: Acción completada
+    deactivate Mercado
+else COMPRAR_ARMA
+    PlanetaNeutral -> Mercado : realizarAccion(AccionMercado accionMercado, Jugador jugador)
+    activate Mercado
+    Mercado --> PlanetaNeutral: Acción completada
+    deactivate Mercado
+else
+    PlanetaNeutral -> PlanetaNeutral : throw new IllegalArgumentException("Acción no válida para el mercado.")
+else
+    PlanetaNeutral -> PlanetaNeutral : UadeCoins insuficientes.
+end
+      else el planeta no existe o fue destruido.
+                Juego --> main : RuntimeException
+            deactivate Juego
+end
+
+deactivate PlanetaNeutral
+deactivate Juego
+@enduml
