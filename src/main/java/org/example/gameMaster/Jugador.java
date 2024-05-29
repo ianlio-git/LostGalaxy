@@ -1,7 +1,6 @@
 package org.example.gameMaster;
 
 import org.example.nave.NaveAliada;
-import org.example.partesDeLaNave.Arma;
 
 public class Jugador {
     private NaveAliada nave;
@@ -45,7 +44,8 @@ public class Jugador {
         System.out.println("Mi Nave es:"+this.nave.soyNaveTipo());
         System.out.println("--Stats--");
         System.out.println("Vida:" + this.nave.getVida());
-        System.out.println("Escudo:" + this.nave.getEscudo());
+        System.out.println("Escudo Actual:" + this.nave.getEscudo().cantidadEscudoActual());
+        System.out.println("Escudo Maximo:" + this.nave.getEscudo().cantidadEscudoMax());
         System.out.println("Combustible:" + this.nave.getTanque().getCombustible());
         System.out.println("--Weapons--");
         if (this.nave.tengoArmas()) {

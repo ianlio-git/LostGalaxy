@@ -2,7 +2,7 @@ package org.example.nave.tiposDeNaves;
 
 import org.example.enums.TipoDeNave;
 import org.example.nave.NaveAliada;
-import org.example.partesDeLaNave.Arma;
+import org.example.nave.partesDeLaNave.Arma;
 
 public class NaveTitan extends NaveAliada {
     public NaveTitan() {

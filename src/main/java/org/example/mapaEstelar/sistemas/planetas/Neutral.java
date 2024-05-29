@@ -32,9 +32,11 @@ public class Neutral extends Planeta {
             case COMPRAR_ARMA, VENDER_ARMA:
                 procesarCompraOVentaArma(accion,jugador,cantidad);
                 break;
+            case RECARGAR_ESCUDO:
+                mercado.recargarEscudo(jugador,cantidad);
+                break;
             default:
                 System.out.println("Acción no válida para el mercado.");
-                // A futuro, se puede agregar la venta de armas, cuando se tenga una o mas por ejemplo.
         }
     }
     private void procesarCompraOVentaArma(Acciones accion,Jugador jugador,double cantidad) {

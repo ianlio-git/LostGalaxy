@@ -67,6 +67,8 @@ public class Juego {
             case COMPRAR_COMBUSTIBLE:
             case COMPRAR_ESCUDO:
             case COMPRAR_ARMA:
+            case RECARGAR_ESCUDO:
+            case VENDER_ARMA:
                 this.realizarAccionDeCompra(accion,codigoDeSistema,compra);
                 break;
             case BUSCAR_TESORO:

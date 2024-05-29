@@ -2,9 +2,9 @@ package org.example.nave;
 
 import org.example.enums.TipoDeArma;
 import org.example.enums.TipoDeNave;
-import org.example.partesDeLaNave.Arma;
-import org.example.partesDeLaNave.Escudo;
-import org.example.partesDeLaNave.TanqueDeCombustible;
+import org.example.nave.partesDeLaNave.Arma;
+import org.example.nave.partesDeLaNave.Escudo;
+import org.example.nave.partesDeLaNave.TanqueDeCombustible;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,13 @@ public abstract class NaveAliada extends Nave {
             escudo.escudoAcero();
         }else {
             this.quitarVida(ataque);
+        }
+
+    }
+    public void updateVida(){
+        if(escudo.cantidadEscudoActual()<0){
+            this.vida+= escudo.cantidadEscudoActual();
+            escudo.escudoAcero();
         }
     }
 

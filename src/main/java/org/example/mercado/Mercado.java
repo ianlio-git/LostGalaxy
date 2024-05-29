@@ -2,14 +2,24 @@ package org.example.mercado;
 
 import org.example.enums.TipoDeArma;
 import org.example.gameMaster.Jugador;
-import org.example.partesDeLaNave.Arma;
+import org.example.nave.partesDeLaNave.Arma;
 
 public class Mercado {
     private Arma arma;
     public Mercado() {
     }
 
-    public void comprarEscudo(Jugador jugador, double cantidadDeEscudo) {
+    public void comprarEscudo(Jugador jugador, double cantidadDeEscudoMaximo) {
+        System.out.println("¡Bienvenido a la tienda de escudo!");
+        if (jugador.puedoComprar(cantidadDeEscudoMaximo)) {
+            jugador.getNave().getEscudo().agregarEscudoMaximo(cantidadDeEscudoMaximo);
+            System.out.println("¡Has comprado " + cantidadDeEscudoMaximo + " de escudo maximo para tu nave!");
+            jugador.quitarUadeCoins(cantidadDeEscudoMaximo);
+        } else {
+            System.out.println("No tienes suficientes uadeCoins.");
+        }
+    }
+    public  void recargarEscudo(Jugador jugador, double cantidadDeEscudo){
         System.out.println("¡Bienvenido a la tienda de escudo!");
         if (jugador.puedoComprar(cantidadDeEscudo)) {
             jugador.getNave().getEscudo().agregarEscudo(cantidadDeEscudo);

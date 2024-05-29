@@ -20,6 +20,7 @@ public class Main {
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-2",1);
         juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-2",150);
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-2",150);
+        juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-2",150);
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-2",2);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-2",0);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-2",0);

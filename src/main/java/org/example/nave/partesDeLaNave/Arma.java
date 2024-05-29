@@ -1,4 +1,4 @@
-package org.example.partesDeLaNave;
+package org.example.nave.partesDeLaNave;
 
 import org.example.enums.TipoDeArma;
 
