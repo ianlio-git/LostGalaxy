@@ -29,16 +29,9 @@ public class Hostil extends Planeta {
     public void combate(Jugador jugador) {
         double acumDeDanio =0;
         while (jugador.getNave().tengoVida()&& naveEnemiga.tengoVida()) {
-            while(jugador.getNave().tengoEscudo()&& naveEnemiga.tengoVida()){
-                jugador.getNave().quitarEscudo(naveEnemiga.poderAtaque());
-                naveEnemiga.quitarVida(jugador.getNave().poderAtaque());
-                acumDeDanio+=naveEnemiga.poderAtaque();
-            }
-            if(naveEnemiga.tengoVida()) {
-                jugador.getNave().quitarVida(naveEnemiga.poderAtaque());
-                naveEnemiga.quitarVida(jugador.getNave().poderAtaque());
-                acumDeDanio+=naveEnemiga.poderAtaque();
-            }
+            jugador.getNave().recibirGolpe(naveEnemiga.poderAtaque());
+            naveEnemiga.quitarVida(jugador.getNave().poderAtaque());
+            acumDeDanio+=naveEnemiga.poderAtaque();
         }
         if(!naveEnemiga.tengoVida()) {
             asignarRecomprensas(jugador,acumDeDanio);

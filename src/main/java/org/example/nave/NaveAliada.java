@@ -1,50 +1,46 @@
 package org.example.nave;
 
 import org.example.enums.TipoDeArma;
+import org.example.enums.TipoDeNave;
 import org.example.partesDeLaNave.Arma;
+import org.example.partesDeLaNave.Escudo;
+import org.example.partesDeLaNave.TanqueDeCombustible;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public abstract class NaveAliada extends Nave {
-    private double combustible;
+    private Escudo escudo;
+    private TanqueDeCombustible tanque;
     protected List<Arma> armas;
-    private double escudo = 0;
 
-    public NaveAliada(double velocidad, double vida, double combustible, double escudo) {
+    public NaveAliada(double velocidad, double vida, double capacidadMaxTanque, double cantidadEscudo) {
         super(velocidad, vida);
-        this.combustible = combustible;
+        this.tanque = new TanqueDeCombustible(capacidadMaxTanque);
         this.armas = new ArrayList<>();
-        this.escudo = escudo;
+        this.escudo = new Escudo(cantidadEscudo);
     }
-    public void agregarEscudo(double cantDeEscudo){
-        this.escudo += cantDeEscudo;
-
-    }
-    public void quitarEscudo(double cantDeEscudo) {
-        this.escudo -= cantDeEscudo;
-        if (this.escudo < 0) {
-            this.quitarVida(this.escudo);
-            this.escudo = 0;
+    public void recibirGolpe(double ataque){
+        if(escudo.tengoEscudo()){
+            escudo.quitarEscudo(ataque);
+        } else if (escudo.cantidadEscudoActual()<0) {
+            this.quitarVida(abs(escudo.cantidadEscudoActual()));
+            escudo.escudoAcero();
+        }else {
+            this.quitarVida(ataque);
         }
     }
 
-    public double getEscudo() {
+    public Escudo getEscudo() {
         return escudo;
     }
 
-    public boolean tengoEscudo() {
-        return this.escudo>0;
+    public TanqueDeCombustible getTanque() {
+        return tanque;
     }
 
-
-    public void llenarTanqueDeCombustible(double combustible) {
-        this.combustible += combustible;
-    }
-
-    public double getCombustible() {
-        return combustible;
-    }
     public void agregarArma(Arma nuevaArma) {
         this.armas.add(nuevaArma);
     }
@@ -64,6 +60,14 @@ public abstract class NaveAliada extends Nave {
         return armas.size()<=2;
     }
 
+    public boolean tengoEsaArma(TipoDeArma tipoDeArma) {
+        for (Arma arma : armas) {
+            if (arma.soyTipoDeArma() == tipoDeArma) {
+                return true;
+            }
+        }
+        return false;
+    }
     public Arma elegirMiArma(TipoDeArma tipoDeArma) {
         for (Arma arma : armas) {
             if (arma.soyTipoDeArma() == tipoDeArma) {
@@ -77,6 +81,7 @@ public abstract class NaveAliada extends Nave {
             System.out.println(arma.soyTipoDeArma());
         }
     }
+    abstract public TipoDeNave soyNaveTipo();
 
 
 }

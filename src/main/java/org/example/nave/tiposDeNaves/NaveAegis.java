@@ -1,13 +1,14 @@
 package org.example.nave.tiposDeNaves;
 
 import org.example.enums.TipoDeArma;
+import org.example.enums.TipoDeNave;
 import org.example.nave.NaveAliada;
 import org.example.partesDeLaNave.Arma;
 
 public class NaveAegis extends NaveAliada {
 
     public NaveAegis() {
-        super(100, 100, 10,  0);
+        super(5, 100, 100,0);
     }
 
     @Override
@@ -18,9 +19,14 @@ public class NaveAegis extends NaveAliada {
         }
         else{
             for (Arma arma : this.armas){
-                danio+=(arma.getPoder()*this.getVida())/this.getVelocidad();
+                danio+=arma.getPoder();
             }
-            return (danio);
+            return ((danio*this.getVida())/this.getVelocidad());
         }
+    }
+
+    @Override
+    public TipoDeNave soyNaveTipo() {
+        return TipoDeNave.NAVE_AEGIS;
     }
 }

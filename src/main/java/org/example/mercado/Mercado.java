@@ -3,7 +3,6 @@ package org.example.mercado;
 import org.example.enums.TipoDeArma;
 import org.example.gameMaster.Jugador;
 import org.example.partesDeLaNave.Arma;
-import org.example.partesDeLaNave.Armas.*;
 
 public class Mercado {
     private Arma arma;
@@ -12,8 +11,8 @@ public class Mercado {
 
     public void comprarEscudo(Jugador jugador, double cantidadDeEscudo) {
         System.out.println("¡Bienvenido a la tienda de escudo!");
-        if (jugador.getUadeCoins() > cantidadDeEscudo) {
-            jugador.getNave().agregarEscudo(cantidadDeEscudo);
+        if (jugador.puedoComprar(cantidadDeEscudo)) {
+            jugador.getNave().getEscudo().agregarEscudo(cantidadDeEscudo);
             System.out.println("¡Has comprado " + cantidadDeEscudo + " de escudo para tu nave!");
             jugador.quitarUadeCoins(cantidadDeEscudo);
         } else {
@@ -23,15 +22,13 @@ public class Mercado {
 
     public void comprarCombustible(Jugador jugador, double cantidadDeCombustible) {
         System.out.println("¡Bienvenido a YPF!");
-
-        if (jugador.getNave().getCombustible() == 100) {
+        if (jugador.getNave().getTanque().tanqueLleno()) {
             System.out.println("Combustible lleno");
         } else {
-            double combustibleFaltante = 100 - jugador.getNave().getCombustible();
-            if (jugador.getUadeCoins() > combustibleFaltante) {
-                jugador.getNave().llenarTanqueDeCombustible(combustibleFaltante);
-                System.out.println("¡Has agregado " + combustibleFaltante + " de combustible a la nave!");
-                jugador.quitarUadeCoins(combustibleFaltante);
+            if (jugador.puedoComprar(cantidadDeCombustible)) {
+                double combustibleCargado = jugador.getNave().getTanque().cargarCombustible(cantidadDeCombustible);
+                System.out.println("¡Has agregado " + combustibleCargado + " de combustible a la nave!");
+                jugador.quitarUadeCoins(combustibleCargado);
             } else {
                 System.out.println("No tienes suficientes uadeCoins.");
             }
@@ -41,28 +38,28 @@ public class Mercado {
     public void comprarArma(Jugador jugador, TipoDeArma tipoDeArma) {
         switch (tipoDeArma) {
             case TipoDeArma.CAÑON_DE_IONES:
-                arma = new CañonDeIones();
+                arma = new Arma(tipoDeArma,150,5);
                 break;
             case TipoDeArma.LASER_DE_FUSION:
-                arma = new LaserDeFusion();
+                arma = new Arma(tipoDeArma,300,10);
                 break;
             case TipoDeArma.MISIL_DE_ANTIMATERIA:
-                arma = new MisilDeAntiMateria();
+                arma = new Arma(tipoDeArma,450,15);
                 break;
             case TipoDeArma.CAÑON_DE_PARTICULAS:
-                arma = new CañonDeParticulas();
+                arma = new Arma(tipoDeArma,600,20);
                 break;
             case TipoDeArma.CAÑON_GAUSS:
-                arma = new CañonGauss();
+                arma = new Arma(tipoDeArma,750,25);
                 break;
             default:
                 throw new IllegalArgumentException("Número de arma no válida.");
         }
-        validarCoins(arma, jugador);
+        comprarArma(arma, jugador);
     }
 
-    private void validarCoins(Arma arma, Jugador jugador) {
-        if (jugador.getUadeCoins() > arma.getPrecio() && jugador.getNave().limiteDeArmas()) {
+    private void comprarArma(Arma arma, Jugador jugador) {
+        if (jugador.puedoComprar(arma.getPrecio()) && jugador.getNave().limiteDeArmas()) {
             jugador.getNave().agregarArma(arma);
             jugador.quitarUadeCoins(arma.getPrecio());
             System.out.println("Usted ha comprado un: " + arma.soyTipoDeArma());
@@ -72,7 +69,7 @@ public class Mercado {
     }
 
     public void venderArma(Jugador jugador, TipoDeArma tipoDeArma) {
-        if (jugador.getNave().elegirMiArma(tipoDeArma)!= null){
+        if (jugador.getNave().tengoEsaArma(tipoDeArma)){
             double venta = jugador.getNave().elegirMiArma(tipoDeArma).getPrecio();
             jugador.agregarUadeCoins(venta);
             jugador.getNave().quitarArma(tipoDeArma);

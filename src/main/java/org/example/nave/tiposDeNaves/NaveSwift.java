@@ -1,12 +1,13 @@
 package org.example.nave.tiposDeNaves;
 
+import org.example.enums.TipoDeNave;
 import org.example.nave.NaveAliada;
 import org.example.partesDeLaNave.Arma;
 
 public class NaveSwift extends NaveAliada {
 
     public NaveSwift() {
-        super(100, 100, 10, 0);
+        super(20, 50, 100, 0);
 
     }
 
@@ -18,9 +19,14 @@ public class NaveSwift extends NaveAliada {
         }
         else{
             for (Arma arma : this.armas){
-                danio+= ((arma.getPoder() * this.getVelocidad()) + this.getVida() + this.getCombustible());
+                danio+= arma.getPoder();
             }
         }
-        return danio;
+        return (danio * this.getVelocidad()) + this.getVida() + this.getTanque().getCombustible();
+    }
+
+    @Override
+    public TipoDeNave soyNaveTipo() {
+        return TipoDeNave.NAVE_SWIFT;
     }
 }

@@ -1,11 +1,12 @@
 package org.example.nave.tiposDeNaves;
 
+import org.example.enums.TipoDeNave;
 import org.example.nave.NaveAliada;
 import org.example.partesDeLaNave.Arma;
 
 public class NavePhantom extends NaveAliada {
     public NavePhantom() {
-        super(100, 100, 10,  0);
+        super(100, 100, 100,0);
     }
 
     @Override
@@ -16,9 +17,14 @@ public class NavePhantom extends NaveAliada {
         }
         else{
             for (Arma arma : this.armas){
-                danio+= ((arma.getPoder() * this.getVelocidad()) + this.getVida() + this.getCombustible());
+                danio+= ((arma.getPoder() * this.getVelocidad()) + this.getVida() + this.getTanque().getCombustible());
             }
         }
         return danio;
+    }
+
+    @Override
+    public TipoDeNave soyNaveTipo() {
+        return TipoDeNave.NAVE_PHANTOM;
     }
 }

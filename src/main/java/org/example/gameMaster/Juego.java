@@ -58,7 +58,6 @@ public class Juego {
         int var = random.nextInt(cantidadSistemasEstelares);
         for (int i = 0; i < cantidadSistemasEstelares; i++) {
             boolean tieneTesoro = (i == var);
-            System.out.println(tieneTesoro);
             boolean tieneCinturon = random.nextBoolean();
             mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
         }
@@ -117,20 +116,7 @@ public class Juego {
     }
 
     private void mostrarDatosDelJugador() {
-        System.out.println("==============================================");
-        System.out.println("Cantidad de escudo:" + jugador.getNave().getEscudo());
-        System.out.println("Nombre:" + jugador.getNombre());
-        System.out.println("Cant de uade coins:" + jugador.getUadeCoins());
-        System.out.println("Cantidad de combustible:" + jugador.getNave().getCombustible());
-        System.out.println("Cantidad de vida:" + jugador.getNave().getVida());
-        if (jugador.getNave().tengoArmas()) {
-            System.out.println("Mis armas son:" );
-            jugador.getNave().getArmas();
-            System.out.println("Poder:" + jugador.getNave().poderAtaque());
-        } else {
-            System.out.println("Aun no tengo un arma, pero ya tendre una!");
-        }
-        System.out.println("==============================================");
+       jugador.mostrarDatos();
     }
     public void mostrarSistemas(){
         System.out.println("Sistemas:");
