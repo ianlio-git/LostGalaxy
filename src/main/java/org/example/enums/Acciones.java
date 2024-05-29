@@ -5,4 +5,5 @@ public enum Acciones {
     COMPRAR_COMBUSTIBLE,
     COMPRAR_ESCUDO,
     COMPRAR_ARMA,
+    VENDER_ARMA,
 }

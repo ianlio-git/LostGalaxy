@@ -2,6 +2,7 @@ package org.example.gameMaster;
 
 import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
+import org.example.enums.TipoDeArma;
 import org.example.mapaEstelar.MapaEstelar;
 import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePhantom;
@@ -122,8 +123,10 @@ public class Juego {
         System.out.println("Cant de uade coins:" + jugador.getUadeCoins());
         System.out.println("Cantidad de combustible:" + jugador.getNave().getCombustible());
         System.out.println("Cantidad de vida:" + jugador.getNave().getVida());
-        if (jugador.getNave().getArma() != null) {
-            System.out.println("Mi arma es una:" + jugador.getNave().getArma().getTipoDeArma());
+        if (jugador.getNave().tengoArmas()) {
+            System.out.println("Mis armas son:" );
+            jugador.getNave().getArmas();
+            System.out.println("Poder:" + jugador.getNave().poderAtaque());
         } else {
             System.out.println("Aun no tengo un arma, pero ya tendre una!");
         }

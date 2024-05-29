@@ -5,11 +5,20 @@ import org.example.partesDeLaNave.Arma;
 
 public class NavePhantom extends NaveAliada {
     public NavePhantom() {
-        super(100, 100, 10, null, 0);
+        super(100, 100, 10,  0);
     }
 
     @Override
     public double poderAtaque() {
-        return 0;
+        double danio = 0;
+        if(this.armas.size() == 0){
+            return danio;
+        }
+        else{
+            for (Arma arma : this.armas){
+                danio+= ((arma.getPoder() * this.getVelocidad()) + this.getVida() + this.getCombustible());
+            }
+        }
+        return danio;
     }
 }

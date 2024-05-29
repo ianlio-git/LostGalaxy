@@ -20,7 +20,7 @@ abstract public class Arma{
     public double getPrecio(){
         return precio;
     }
-    public TipoDeArma getTipoDeArma(){
+    public TipoDeArma soyTipoDeArma(){
         return tipoDeArma;
     }
 

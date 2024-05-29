@@ -1,11 +1,9 @@
 package org.example.mapaEstelar.sistemas.planetas;
 
+import org.example.enums.TipoDeArma;
 import org.example.gameMaster.Jugador;
 import org.example.enums.Acciones;
 import org.example.enums.TipoDePlaneta;
-import org.example.mercado.accionesMercado.ComprarCombustibleAccion;
-import org.example.mercado.accionesMercado.ComprarEscudoAccion;
-import org.example.mercado.accionesMercado.ComprarArmaAccion;
 import org.example.mercado.Mercado;
 
 public class Neutral extends Planeta {
@@ -26,19 +24,32 @@ public class Neutral extends Planeta {
     public void realizarAccionEnMercado(Acciones accion, Jugador jugador,double cantidad) {
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
-                mercado.realizarAccion(new ComprarCombustibleAccion(), jugador);
+                mercado.comprarCombustible(jugador,cantidad);
                 break;
             case COMPRAR_ESCUDO:
-                mercado.realizarAccion(new ComprarEscudoAccion(), jugador);
+                mercado.comprarEscudo(jugador,cantidad);
                 break;
-            case COMPRAR_ARMA:
-                mercado.realizarAccion(new ComprarArmaAccion(), jugador);
+            case COMPRAR_ARMA, VENDER_ARMA:
+                procesarCompraOVentaArma(accion,jugador,cantidad);
                 break;
             default:
-                throw new IllegalArgumentException("Acción no válida para el mercado.");
+                System.out.println("Acción no válida para el mercado.");
                 // A futuro, se puede agregar la venta de armas, cuando se tenga una o mas por ejemplo.
         }
     }
+    private void procesarCompraOVentaArma(Acciones accion,Jugador jugador,double cantidad) {
+        TipoDeArma arma = TipoDeArma.buscarId(cantidad);
+        if (arma != null) {
+            if (accion == Acciones.COMPRAR_ARMA) {
+                mercado.comprarArma(jugador, arma);
+            } else {
+                mercado.venderArma(jugador, arma);
+            }
+        } else {
+            System.out.println("No ingresó un ID de arma válido");
+        }
+    }
+
 
     @Override
     public void combate(Jugador jugador) {
