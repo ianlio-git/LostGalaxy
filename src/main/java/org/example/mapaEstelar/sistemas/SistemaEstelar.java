@@ -24,6 +24,7 @@ public class SistemaEstelar {
         this.planetas = new ArrayList<>();
         crearSistemaEstelar(dificultad,tesoro,cinturon);
     }
+
     public String mostrarNombre() {
         return nombre;
     }

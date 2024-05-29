@@ -14,24 +14,26 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Juego juego = Juego.getInstancia();
-        juego.iniciarJuego("Bruno Fernandes", 1000.0, TipoDeNave.NAVE_AEGIS, 4, Dificultades.FACIL);
+        juego.iniciarJuego("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_AEGIS, 1, Dificultades.FACIL);
         mostrarSistemas(juego);
 
-        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-2",1);
-        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-2",150);
-        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-2",150);
-        juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-2",150);
-        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-2",2);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-2",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-2",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-2",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-2",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-2",0);
+        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",1);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",150);
+        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-0",150);
+        juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-0",150);
+        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",2);
+        juego.siguienteTurno(Acciones.OBTENER_INFORMACION, "SIST-0", 0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
+        juego.siguienteTurno(Acciones.REPARAR_NAVE, "SIST-0",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-0",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-0",0);
     }
     public static  void mostrarSistemas(Juego juego){
         juego.mostrarSistemas();
         System.out.println("Listado de planetas:");
-        juego.mostrarPlanetasEnSistema("SIST-2");
+        juego.mostrarPlanetasEnSistema("SIST-0");
     }
     public void comprarArma (Juego juego) {
         System.out.println("Bienvenido a la tienda de armas");

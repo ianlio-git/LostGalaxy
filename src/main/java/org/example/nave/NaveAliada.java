@@ -22,6 +22,7 @@ public abstract class NaveAliada extends Nave {
         this.armas = new ArrayList<>();
         this.escudo = new Escudo(cantidadEscudo);
     }
+
     public void recibirGolpe(double ataque){
         if(escudo.tengoEscudo()){
             escudo.quitarEscudo(ataque);

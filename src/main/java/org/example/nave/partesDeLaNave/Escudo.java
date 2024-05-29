@@ -39,4 +39,7 @@ public class Escudo {
         this.escudo = 0;
     }
 
+    public void setEscudo(double escudo) {
+        this.escudo = escudo;
+    }
 }

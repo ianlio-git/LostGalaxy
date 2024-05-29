@@ -4,6 +4,8 @@ import org.example.enums.TipoDeArma;
 import org.example.gameMaster.Jugador;
 import org.example.enums.Acciones;
 import org.example.enums.TipoDePlaneta;
+import org.example.mapaEstelar.MapaEstelar;
+import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.mercado.Mercado;
 
 public class Neutral extends Planeta {
@@ -56,6 +58,16 @@ public class Neutral extends Planeta {
     @Override
     public void combate(Jugador jugador) {
         System.out.println("Un planeta Neutral no puede combatir");
+    }
+
+    @Override
+    public void repararNaveAliada(Jugador jugador) {
+        System.out.println("Debes pagar para realizar estas acciones aqui");
+    }
+
+    @Override
+    public void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+        System.out.println("No puedes obtener informacion aqui.");
     }
 
 

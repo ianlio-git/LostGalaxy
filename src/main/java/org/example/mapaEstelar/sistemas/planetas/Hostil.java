@@ -3,6 +3,8 @@ package org.example.mapaEstelar.sistemas.planetas;
 import org.example.enums.Acciones;
 import org.example.enums.TipoDePlaneta;
 import org.example.gameMaster.Jugador;
+import org.example.mapaEstelar.MapaEstelar;
+import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.nave.NaveAliada;
 import org.example.nave.tiposDeNaves.NavePirata;
 
@@ -38,9 +40,19 @@ public class Hostil extends Planeta {
             asignarRecomprensas(jugador,acumDeDanio);
         }
     }
+
+    @Override
+    public void repararNaveAliada(Jugador jugador) {
+        System.out.println("Aca haces todo menos reparar master");
+    }
+
     private void asignarRecomprensas(Jugador jugador,double acumDeDanio){
         jugador.agregarUadeCoins(2*naveEnemiga.poderAtaque()-acumDeDanio);
         jugador.encontreElTesoro(this.tesoro);
+    }
+    @Override
+    public void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+        System.out.println("No puedes obtener informacion aqui.");
     }
 
 }

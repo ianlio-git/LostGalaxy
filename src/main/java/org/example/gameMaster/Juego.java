@@ -4,6 +4,7 @@ import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
 import org.example.enums.TipoDeArma;
 import org.example.mapaEstelar.MapaEstelar;
+import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.nave.tiposDeNaves.NaveAegis;
 import org.example.nave.tiposDeNaves.NavePhantom;
 import org.example.nave.tiposDeNaves.NaveSwift;
@@ -18,6 +19,7 @@ public class Juego {
     private MapaEstelar mapaEstelar;
     private static int turno;
     private Jugador jugador;
+    private SistemaEstelar sistemaEstelarConTesoro;
 
     private Juego() {
         this.mapaEstelar = new MapaEstelar();
@@ -55,12 +57,21 @@ public class Juego {
     }
     private void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares){
         Random random = new Random();
+
         int var = random.nextInt(cantidadSistemasEstelares);
         for (int i = 0; i < cantidadSistemasEstelares; i++) {
             boolean tieneTesoro = (i == var);
             boolean tieneCinturon = random.nextBoolean();
-            mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
+            SistemaEstelar sistemaEstelar = mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
+            if(tieneTesoro){
+                sistemaEstelarConTesoro = sistemaEstelar;
+            }
         }
+
+    }
+
+    public String devolverSistemaConTesoro(){
+        return sistemaEstelarConTesoro.mostrarNombre();
     }
     public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
         switch (accion) {
@@ -73,6 +84,12 @@ public class Juego {
                 break;
             case BUSCAR_TESORO:
                 this.realizarAccionDeAtaque(codigoDeSistema);
+                break;
+            case REPARAR_NAVE:
+                this.realizarAccionDeReparacion(codigoDeSistema);
+                break;
+            case OBTENER_INFORMACION:
+                this.realizarAccionDeInformacion(codigoDeSistema, sistemaEstelarConTesoro);
                 break;
             default:
         }
@@ -87,6 +104,28 @@ public class Juego {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
     }
+    private void realizarAccionDeReparacion(String codigoDeSistema){
+        Planeta planetaAliado = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
+        if (planetaAliado != null) {
+            planetaAliado.repararNaveAliada(jugador);
+        }
+        else {
+            System.out.println("No hay planetas que puedan cumplir con esta accion ");
+        }
+    }
+
+
+    private void realizarAccionDeInformacion(String codigoDeSistema, SistemaEstelar sistemaEstelarConTesoro){
+        Planeta planetaAliado = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
+        if (planetaAliado != null) {
+            planetaAliado.obtenerInformacion(sistemaEstelarConTesoro, jugador);
+        }
+        else {
+            System.out.println("No hay planetas que puedan cumplir con esta accion ");
+        }
+    }
+
+
     private void realizarAccionDeAtaque(String codigoDeSistema) {
         Planeta planetaHostil = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaHostil();
         if (planetaHostil != null) {

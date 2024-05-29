@@ -7,4 +7,6 @@ public enum Acciones {
     RECARGAR_ESCUDO,
     COMPRAR_ARMA,
     VENDER_ARMA,
+    REPARAR_NAVE,
+    OBTENER_INFORMACION
 }

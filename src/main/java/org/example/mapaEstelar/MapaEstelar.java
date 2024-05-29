@@ -13,9 +13,10 @@ public class MapaEstelar {
         this.sistemasEstelares = new ArrayList<>();
     }
 
-    public void agregarSistemaEstelar(Dificultades dificutad,boolean tieneTesoro,boolean tieneCinturon) {
+    public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad,boolean tieneTesoro,boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad,tieneTesoro,tieneCinturon);
         sistemasEstelares.add(nuevoSistema);
+        return nuevoSistema;
     }
 
     public SistemaEstelar obtenerSistemaEstelar(String codigo) {
@@ -25,6 +26,10 @@ public class MapaEstelar {
             }
         }
         throw new RuntimeException("Sistema estelar no encontrado: " + codigo);
+    }
+
+    public List<SistemaEstelar> getSistemasEstelares() {
+        return sistemasEstelares;
     }
 
     public void mostrarSistemas() {
