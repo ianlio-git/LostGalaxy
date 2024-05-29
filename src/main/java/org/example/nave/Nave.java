@@ -1,8 +1,8 @@
 package org.example.nave;
 
 public abstract class Nave {
-    private double vida;
-    private double velocidad;
+    protected double vida;
+    protected double velocidad;
 
     public Nave(double velocidad, double vida) {
         this.velocidad = velocidad;
@@ -11,16 +11,21 @@ public abstract class Nave {
 
     public abstract double poderAtaque();
 
-    public void setVida(double vida) {
-        this.vida = vida;
+    public void agregarVida(double vida) {
+        this.vida += vida;
+    }
+    public void quitarVida(double vida) {
+        this.vida -= vida;
     }
 
     public double getVida() {
         return vida;
     }
 
-
     public double getVelocidad() {
         return velocidad;
+    }
+    public boolean tengoVida(){
+        return this.vida > 0 ;
     }
 }
