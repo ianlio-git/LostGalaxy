@@ -18,7 +18,7 @@ public class Main {
         mostrarSistemas(juego);
 
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",1);
-        //juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",20);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",20);
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",2);
@@ -26,9 +26,10 @@ public class Main {
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
         juego.siguienteTurno(Acciones.REPARAR_NAVE, "SIST-0",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-0",0);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-0",0);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-1",60);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-1",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-1",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-2",0);
     }
     public static  void mostrarSistemas(Juego juego){
         juego.mostrarSistemas();

@@ -19,7 +19,7 @@ public class Jugador {
         this.tesoro = false;
     }
     public boolean naveEstaDestruida(){
-        return this.getNave().tengoVida();
+        return !this.getNave().tengoVida();
     }
 
     public double getUadeCoins() {
@@ -44,7 +44,7 @@ public class Jugador {
         return tesoro;
     }
     public void mostrarDatos(){
-        System.out.println("==============================================");
+        System.out.println("===============================================================");
         if (this.planetaActual==null){
             System.out.println("estoy en el planeta: null");
         }else{
@@ -67,21 +67,36 @@ public class Jugador {
             System.out.println("Aun no tengo un arma, pero ya tendre una!");
         }
         System.out.println("Poder:" + this.nave.poderAtaque());
-        System.out.println("==============================================");
+        System.out.println("===============================================================");
     }
     public boolean puedoComprar(double precio) {
         return (this.getUadeCoins() > precio);
     }
+
     public void viajeAPlaneta(Planeta planeta){
         if(this.planetaActual == null || !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
             nave.getTanque().cosumirCombustible(planeta.combustibleNecesario());
         }
-        this.planetaActual = planeta;
+        if(planeta!=null) {
+            this.planetaActual = planeta;
+        }
     }
     public boolean puedoViajar(Planeta planeta){
-        double combustibleNecesario = planeta.combustibleNecesario();
-        return nave.getTanque().getCombustible()>combustibleNecesario||(this.planetaActual.soyPlanetaTipo()== TipoDePlaneta.NEUTRAL&&uadeCoins>=combustibleNecesario);
+        if(planeta != null){
+            double combustibleNecesario = planeta.combustibleNecesario();
+            return (nave.getTanque().getCombustible()>=(combustibleNecesario))||(this.planetaActual.soyPlanetaTipo()== TipoDePlaneta.NEUTRAL&&uadeCoins>=combustibleNecesario);
+        }
+        else{
+            return false;
+        }
     }
 
+    public void establecerPlanetaActual(Planeta planetaActual) {
+        this.planetaActual = planetaActual;
+    }
+
+    public Planeta MiPlanetaActual() {
+        return planetaActual;
+    }
 }
 
