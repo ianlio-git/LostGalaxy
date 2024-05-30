@@ -180,17 +180,11 @@ public class Juego {
            System.out.println("****************************************************");
            System.exit(1);
        }
-       if (!jugador.puedoViajar(planeta)&&(planeta!=jugador.MiPlanetaActual())&&planeta!=null) {
+       if (((!jugador.puedoViajar(planeta)&&(planeta!=jugador.MiPlanetaActual())&&planeta!=null))||(jugador.getNave().getTanque().getCombustible()==0)) {
             System.out.println("******************************************");
             System.out.println("Sin combustible. ¡Game Over!");
            System.out.println("******************************************");
             System.exit(2);
-       }
-       if(jugador.getNave().getTanque().getCombustible()==0) {
-           System.out.println("******************************************");
-           System.out.println("Sin combustible. ¡Game Over!");
-           System.out.println("******************************************");
-           System.exit(2);
        }
             System.out.println("Turno: "+this.turno);
     }
