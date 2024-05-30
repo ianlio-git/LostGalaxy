@@ -1,5 +1,6 @@
 package org.example.gameMaster;
 
+import org.example.enums.TipoDePlaneta;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
 import org.example.nave.NaveAliada;
 
@@ -10,12 +11,15 @@ public class Jugador {
     private double uadeCoins;
     private boolean tesoro;
 
-    public Jugador(String nombre, double uadeCoins,NaveAliada nave) {
-        this.planetaActual = null;
+    public Jugador(String nombre, double uadeCoins,NaveAliada nave,Planeta planetaInicial) {
+        this.planetaActual = planetaInicial;
         this.nombre = nombre;
         this.uadeCoins = uadeCoins;
         this.nave = nave;
         this.tesoro = false;
+    }
+    public boolean naveEstaDestruida(){
+        return this.getNave().tengoVida();
     }
 
     public double getUadeCoins() {
@@ -76,7 +80,7 @@ public class Jugador {
     }
     public boolean puedoViajar(Planeta planeta){
         double combustibleNecesario = planeta.combustibleNecesario();
-        return nave.getTanque().getCombustible()>=combustibleNecesario||planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta());
+        return nave.getTanque().getCombustible()>combustibleNecesario||(this.planetaActual.soyPlanetaTipo()== TipoDePlaneta.NEUTRAL&&uadeCoins>=combustibleNecesario);
     }
 
 }

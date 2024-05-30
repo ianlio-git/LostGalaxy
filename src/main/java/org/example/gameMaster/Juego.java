@@ -32,25 +32,26 @@ public class Juego {
     }
     public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad){
         if (jugador == null) {
+            crearMapaEstelar(dificultad,cantidadSistemasEstelares);
+            Planeta planetaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0").obtenerPlanetaAliado();
             switch (naveJugador) {
                 case NAVE_AEGIS:
                     NaveAegis naveAegis = new NaveAegis();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveAegis);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveAegis,planetaInicial);
                     break;
                 case NAVE_SWIFT:
                     NaveSwift naveSwift = new NaveSwift();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveSwift);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveSwift,planetaInicial);
                     break;
                 case NAVE_PHANTOM:
                     NavePhantom navePhantom = new NavePhantom();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, navePhantom);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, navePhantom,planetaInicial);
                     break;
                 case NAVE_TITAN:
                     NaveTitan naveTitan = new NaveTitan();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan,planetaInicial);
                     break;
             }
-            crearMapaEstelar(dificultad,cantidadSistemasEstelares);
         } else {
             throw new RuntimeException("El juego ya fue iniciado");
         }
@@ -109,6 +110,7 @@ public class Juego {
         } else {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
+        finDelJuego(planeta);
     }
     private void realizarAccionDeReparacion(String codigoDeSistema){
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
@@ -122,6 +124,7 @@ public class Juego {
         } else {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
+        finDelJuego(planeta);
     }
 
     private void realizarAccionDeInformacion(String codigoDeSistema, SistemaEstelar sistemaEstelarConTesoro){
@@ -136,6 +139,7 @@ public class Juego {
         } else {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
+        finDelJuego(planeta);
     }
 
 
@@ -145,7 +149,6 @@ public class Juego {
             if (jugador.puedoViajar(planeta)){
                 jugador.viajeAPlaneta(planeta);
                 planeta.combate(this.jugador);
-                finDelJuego(jugador.getNave().tengoVida(), jugador.mostrarTesoro(),planeta);
                 mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).quitarPlaneta(planeta);
             }else{
                 System.out.println("no tengo combustible suficiente");
@@ -153,31 +156,23 @@ public class Juego {
         } else {
             System.out.println("No hay planetas que puedan cumplir con esta accion ");
         }
+        finDelJuego(planeta);
     }
 
 
-    private void finDelJuego(boolean naveDestruida, boolean tesoroEncontrado,Planeta planeta) {
-        if (!jugador.puedoViajar(planeta) && planeta.soyPlanetaTipo() != TipoDePlaneta.NEUTRAL) {
-            System.out.println("Te quedaste a vivir en el planeta " + planeta.getCodigoDePlaneta() + " por falta de combustible. ¡Game Over!");
-            System.exit(1);
-        }
-        if (naveDestruida) {
-            System.out.println("La nave enemiga fue destruida. ¡Muy bien!");
-        } else {
-            System.out.println("Tu nave fue destruida. ¡Game Over!");
-            mostrarDatosDelJugador();
-            System.exit(1);
-        }
-
-        if (tesoroEncontrado && naveDestruida) {
-            System.out.println("¡Felicidades! Has encontrado el tesoro y has ganado el juego.");
-            mostrarDatosDelJugador();
+    private void finDelJuego(Planeta planeta) {
+        if(jugador.mostrarTesoro()){
+            System.out.println("¡Game Over!");
             System.exit(0);
-        } else {
-            System.out.println("Por desgracia no haz encontrado el tesoro, sigue intentado!");
+        } else if (!jugador.naveEstaDestruida()) {
+            System.out.println("Tu nave fue destruida. ¡Game Over!");
+            System.exit(1);
+        } else if (!jugador.puedoViajar(planeta)) {
+            System.out.println("no podes viajar mas. ¡Game Over!");
+            System.exit(2);
+        }else{
+            System.out.println("Turno: "+this.turno);
         }
-
-
     }
 
     private void mostrarDatosDelJugador() {

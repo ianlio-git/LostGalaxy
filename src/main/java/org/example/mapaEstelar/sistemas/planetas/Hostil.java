@@ -38,6 +38,7 @@ public class Hostil extends Planeta {
         }
         if(!naveEnemiga.tengoVida()) {
             asignarRecomprensas(jugador,acumDeDanio);
+            resultadoCombate();
         }
     }
 
@@ -58,6 +59,15 @@ public class Hostil extends Planeta {
     @Override
     public double combustibleNecesario() {
         return 20;
+    }
+
+    private void resultadoCombate(){
+        System.out.println("La nave enemiga fue destruida. ¡Muy bien!");
+        if (this.tesoro){
+            System.out.println("¡Felicidades! Has encontrado el tesoro");
+        }else{
+            System.out.println("Por desgracia no haz encontrado el tesoro, sigue intentado!");
+        }
     }
 
 }

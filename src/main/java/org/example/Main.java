@@ -18,7 +18,7 @@ public class Main {
         mostrarSistemas(juego);
 
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",1);
-        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",20);
+        //juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",20);
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",2);
