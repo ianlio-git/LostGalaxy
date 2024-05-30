@@ -56,10 +56,6 @@ public class Hostil extends Planeta {
         System.out.println("No puedes obtener informacion aqui.");
     }
 
-    @Override
-    public double combustibleNecesario() {
-        return 20;
-    }
 
     private void resultadoCombate(){
         System.out.println("La nave enemiga fue destruida. ¡Muy bien!");

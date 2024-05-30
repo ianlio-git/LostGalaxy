@@ -70,10 +70,6 @@ public class Neutral extends Planeta {
         System.out.println("No puedes obtener informacion aqui.");
     }
 
-    @Override
-    public double combustibleNecesario() {
-        return 10;
-    }
 
 
 }

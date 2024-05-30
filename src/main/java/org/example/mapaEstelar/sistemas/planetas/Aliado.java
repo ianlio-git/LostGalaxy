@@ -65,8 +65,4 @@ public class Aliado extends Planeta {
         }
     }
 
-    @Override
-    public double combustibleNecesario() {
-        return 15;
-    }
 }

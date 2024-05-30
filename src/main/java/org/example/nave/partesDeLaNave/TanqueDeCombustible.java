@@ -1,5 +1,7 @@
 package org.example.nave.partesDeLaNave;
 
+
+import org.example.enums.TipoDePlaneta;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
 
 public class TanqueDeCombustible {
@@ -7,7 +9,7 @@ public class TanqueDeCombustible {
     private double capacidadMaxTanque;
 
     public TanqueDeCombustible(double capacidadMaxTanque) {
-        this.combustible = 100;
+        this.combustible = 15;
         this.capacidadMaxTanque = capacidadMaxTanque;
     }
     public double cargarCombustible(double cantidad){
@@ -30,4 +32,18 @@ public class TanqueDeCombustible {
     public double getCombustible() {
         return combustible;
     }
+
+    public double combustibleNecesario(TipoDePlaneta planeta){
+        switch (planeta) {
+            case NEUTRAL:
+                return 10;
+            case ALIADO:
+                return 15;
+            case HOSTIL:
+                return 20;
+            default:
+                return 0;
+        }
+    }
+
 }

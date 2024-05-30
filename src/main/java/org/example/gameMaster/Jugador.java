@@ -34,9 +34,6 @@ public class Jugador {
     public NaveAliada getNave() {
         return nave;
     }
-    public String getNombre(){
-        return nombre;
-    }
     public void encontreElTesoro(boolean planetaTesoro){
          this.tesoro=planetaTesoro;
     }
@@ -51,7 +48,7 @@ public class Jugador {
             System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
         }
         System.out.println("--Player--");
-        System.out.println("Nombre:" + this.getNombre());
+        System.out.println("Nombre:" + this.nombre);
         System.out.println("Cant de uade coins:" + this.getUadeCoins());
         System.out.println("Mi Nave es:"+this.nave.soyNaveTipo());
         System.out.println("--Stats--");
@@ -74,29 +71,26 @@ public class Jugador {
     }
 
     public void viajeAPlaneta(Planeta planeta){
-        if(this.planetaActual == null || !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
-            nave.getTanque().cosumirCombustible(planeta.combustibleNecesario());
-        }
-        if(planeta!=null) {
+        if( !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
+            nave.getTanque().cosumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
             this.planetaActual = planeta;
         }
     }
-    public boolean puedoViajar(Planeta planeta){
-        if(planeta != null){
-            double combustibleNecesario = planeta.combustibleNecesario();
-            return (nave.getTanque().getCombustible()>=(combustibleNecesario))||(this.planetaActual.soyPlanetaTipo()== TipoDePlaneta.NEUTRAL&&uadeCoins>=combustibleNecesario);
-        }
-        else{
+    public boolean puedoViajar(Planeta planeta) {
+        if (planeta == null) {
             return false;
         }
+        return nave.getTanque().getCombustible() >= combustibleParaViajar(planeta.soyPlanetaTipo());
+    }
+    private double combustibleParaViajar(TipoDePlaneta tipo){
+        return nave.getTanque().combustibleNecesario(tipo);
+    }
+    public boolean puedoVoleverPlanetaNeutral(){
+        return  this.nave.getTanque().getCombustible() > combustibleParaViajar(TipoDePlaneta.NEUTRAL);
     }
 
-    public void establecerPlanetaActual(Planeta planetaActual) {
-        this.planetaActual = planetaActual;
-    }
-
-    public Planeta MiPlanetaActual() {
-        return planetaActual;
+    public boolean tengoUadeCoinsParaCombustible(){
+        return uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL);
     }
 }
 

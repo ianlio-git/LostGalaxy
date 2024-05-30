@@ -19,6 +19,5 @@ public abstract class Planeta {
     public abstract void combate(Jugador jugador);
     public abstract void repararNaveAliada(Jugador jugador);
     public abstract void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador);
-    public abstract double combustibleNecesario();
 
 }
