@@ -49,6 +49,7 @@ public abstract class NaveAliada extends Nave {
         return tanque;
     }
 
+
     public void agregarArma(Arma nuevaArma) {
         this.armas.add(nuevaArma);
     }

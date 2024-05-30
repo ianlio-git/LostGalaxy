@@ -14,11 +14,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Juego juego = Juego.getInstancia();
-        juego.iniciarJuego("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_AEGIS, 1, Dificultades.FACIL);
+        juego.iniciarJuego("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_AEGIS, 4, Dificultades.FACIL);
         mostrarSistemas(juego);
 
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",1);
-        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",150);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",20);
         juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.RECARGAR_ESCUDO, "SIST-0",150);
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",2);

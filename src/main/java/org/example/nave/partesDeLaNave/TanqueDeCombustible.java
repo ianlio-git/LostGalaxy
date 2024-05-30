@@ -1,11 +1,13 @@
 package org.example.nave.partesDeLaNave;
 
+import org.example.mapaEstelar.sistemas.planetas.Planeta;
+
 public class TanqueDeCombustible {
     private double combustible;
     private double capacidadMaxTanque;
 
     public TanqueDeCombustible(double capacidadMaxTanque) {
-        this.combustible = 50;
+        this.combustible = 10;
         this.capacidadMaxTanque = capacidadMaxTanque;
     }
     public double cargarCombustible(double cantidad){
@@ -17,6 +19,9 @@ public class TanqueDeCombustible {
             this.combustible+= faltante;
             return faltante;
         }
+    }
+    public void cosumirCombustible(double consumir){
+       this.combustible-=consumir;
     }
     public  boolean tanqueLleno(){
         return  this.combustible == this.capacidadMaxTanque;

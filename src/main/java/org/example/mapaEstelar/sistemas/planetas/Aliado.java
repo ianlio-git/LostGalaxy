@@ -9,6 +9,7 @@ import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import java.util.List;
 
 public class Aliado extends Planeta {
+
     private static int count;
 
     public Aliado() {
@@ -62,5 +63,10 @@ public class Aliado extends Planeta {
         else {
             System.out.println("Reune mas uade coins para obtener esa informacion!");
         }
+    }
+
+    @Override
+    public double combustibleNecesario() {
+        return 15;
     }
 }
