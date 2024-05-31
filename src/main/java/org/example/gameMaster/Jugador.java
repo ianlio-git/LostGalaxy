@@ -94,11 +94,15 @@ public class Jugador {
     public boolean tengoUadeCoinsParaCombustible(){
         return uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL);
     }
-    public void heCambiadoDeSistema(SistemaEstelar sistemaEstelar) {
+    public void cambioDeSistema(SistemaEstelar sistemaEstelar) {
         if ( !sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
             sistemaActual = sistemaEstelar;
 
+
+        }else{
+            System.out.println("el jugador no cambio de sistema! puede seguir la aventura entre los planetas.");
         }
     }
+
 }
 
