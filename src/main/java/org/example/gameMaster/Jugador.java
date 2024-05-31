@@ -1,18 +1,21 @@
 package org.example.gameMaster;
 
 import org.example.enums.TipoDePlaneta;
+import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
 import org.example.nave.NaveAliada;
 
 public class Jugador {
+    private SistemaEstelar sistemaActual;
     private Planeta planetaActual;
     private NaveAliada nave;
     private String nombre;
     private double uadeCoins;
     private boolean tesoro;
 
-    public Jugador(String nombre, double uadeCoins,NaveAliada nave,Planeta planetaInicial) {
+    public Jugador(String nombre, double uadeCoins,NaveAliada nave,Planeta planetaInicial,SistemaEstelar sistemaEstelar) {
         this.planetaActual = planetaInicial;
+        this.sistemaActual = sistemaEstelar;
         this.nombre = nombre;
         this.uadeCoins = uadeCoins;
         this.nave = nave;
@@ -88,9 +91,14 @@ public class Jugador {
     public boolean puedoVoleverPlanetaNeutral(){
         return  this.nave.getTanque().getCombustible() > combustibleParaViajar(TipoDePlaneta.NEUTRAL);
     }
-
     public boolean tengoUadeCoinsParaCombustible(){
         return uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL);
+    }
+    public void heCambiadoDeSistema(SistemaEstelar sistemaEstelar) {
+        if ( !sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
+            sistemaActual = sistemaEstelar;
+
+        }
     }
 }
 

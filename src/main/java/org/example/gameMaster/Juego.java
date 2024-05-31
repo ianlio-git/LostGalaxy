@@ -33,23 +33,30 @@ public class Juego {
     public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad){
         if (jugador == null) {
             crearMapaEstelar(dificultad,cantidadSistemasEstelares);
-            Planeta planetaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0").obtenerPlanetaNeutral();
+            SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
+            Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
+            System.out.println("Juego Iniciado!");
+            System.out.println("Sistema estelar actual: "+sistemaInicial.mostrarNombre());
             switch (naveJugador) {
                 case NAVE_AEGIS:
                     NaveAegis naveAegis = new NaveAegis();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveAegis,planetaInicial);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveAegis,planetaInicial,sistemaInicial);
+                    mostrarDatosDelJugador();
                     break;
                 case NAVE_SWIFT:
                     NaveSwift naveSwift = new NaveSwift();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveSwift,planetaInicial);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveSwift,planetaInicial,sistemaInicial);
+                    mostrarDatosDelJugador();
                     break;
                 case NAVE_PHANTOM:
                     NavePhantom navePhantom = new NavePhantom();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, navePhantom,planetaInicial);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, navePhantom,planetaInicial,sistemaInicial);
+                    mostrarDatosDelJugador();
                     break;
                 case NAVE_TITAN:
                     NaveTitan naveTitan = new NaveTitan();
-                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan,planetaInicial);
+                    this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan,planetaInicial,sistemaInicial);
+                    mostrarDatosDelJugador();
                     break;
             }
         } else {
@@ -70,9 +77,10 @@ public class Juego {
 
     }
 
-
     public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
-
+        mostrarTurno();
+        SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
+        jugador.heCambiadoDeSistema(sistemaNuevo);
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
             case COMPRAR_ESCUDO:
@@ -94,9 +102,9 @@ public class Juego {
 
                 break;
         }
-        mostrarTurno();
         mostrarDatosDelJugador();
     }
+
 
     private void realizarAccionDeCompra(Acciones accion, String codigoDeSistema, double compra) {
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaNeutral();
@@ -159,7 +167,6 @@ public class Juego {
 
 
         if (jugador.mostrarTesoro()) {
-            mostrarTurno();
             System.out.println("****************************************************");
             System.out.println("¡Game Over! Encontraste el tesoro.");
             System.out.println("****************************************************");
@@ -168,7 +175,6 @@ public class Juego {
         }
 
         if (jugador.naveEstaDestruida()) {
-            mostrarTurno();
             System.out.println("****************************************************");
             System.out.println("Tu nave fue destruida en el planeta " + planeta.getCodigoDePlaneta() + ". ¡Game Over!");
             System.out.println("****************************************************");
@@ -179,7 +185,6 @@ public class Juego {
         if (!jugador.puedoVoleverPlanetaNeutral()) {
             switch (planeta.soyPlanetaTipo()) {
                 case ALIADO:
-                    mostrarTurno();
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
                     System.out.println("****************************************************");
@@ -187,7 +192,6 @@ public class Juego {
                     System.exit(2);
                     break;
                 case HOSTIL:
-                    mostrarTurno();
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta hostil. ¡Game Over!");
                     System.out.println("****************************************************");
@@ -196,7 +200,6 @@ public class Juego {
                     break;
                 case NEUTRAL:
                     if (!jugador.getNave().tengoArmas()&&jugador.tengoUadeCoinsParaCombustible()) {
-                        mostrarTurno();
                         System.out.println("****************************************************");
                         System.out.println("Te quedaste sin combustible en un planeta neutral y no tienes suficientes UadeCoins ni armas para vender. ¡Game Over!");
                         System.out.println("****************************************************");

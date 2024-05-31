@@ -28,13 +28,10 @@ public class MapaEstelar {
         throw new RuntimeException("Sistema estelar no encontrado: " + codigo);
     }
 
-    public List<SistemaEstelar> getSistemasEstelares() {
-        return sistemasEstelares;
-    }
 
     public void mostrarSistemas() {
         for (SistemaEstelar sistema : sistemasEstelares) {
-            System.out.println(sistema.mostrarNombre());
+            System.out.println(sistema.mostrarNombre()+" Cinturon de asteroides: "+ sistema.tieneCinturonAsteroides());
         }
     }
 }
