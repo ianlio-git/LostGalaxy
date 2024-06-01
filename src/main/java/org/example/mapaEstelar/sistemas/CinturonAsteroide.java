@@ -9,18 +9,24 @@ public class CinturonAsteroide {
         this.cantidadDeAsteroides = cantidadDeAsteroides;
     }
 
-    public int getCantidadDeAsteroides() {
-        return cantidadDeAsteroides;
-    }
 
     public double calcularPoder() {
-        return cantidadDeAsteroides * 10;
+        return this.cantidadDeAsteroides * 10;
     }
 
     public void atravesar(Jugador jugador) {
-        double dañoRecibido = this.calcularPoder();
-        jugador.getNave().quitarVida(dañoRecibido);
-        double uadeCoinsGanados = this.calcularPoder() - dañoRecibido;
-        jugador.agregarUadeCoins(uadeCoinsGanados);
+        System.out.println("CUIDADO! atravesando cinturon de asteroides.....");
+        double vidaInicial= jugador.getNave().getVida();
+        jugador.getNave().recibirGolpe(this.calcularPoder());
+        if(jugador.getNave().tengoVida()){
+            double uadeCoinsConseguidos = calcularRecompensa(vidaInicial,jugador.getNave().getVida());
+            System.out.println("conseguiste atravezar el cinturon!");
+            System.out.println("ganaste: "+uadeCoinsConseguidos+" UADEcoins");
+            jugador.agregarUadeCoins(uadeCoinsConseguidos);
+        }
+
+    }
+    private double calcularRecompensa(double vidaInicial,double vidaFinal){
+        return this.calcularPoder() - (vidaInicial-vidaFinal);
     }
 }

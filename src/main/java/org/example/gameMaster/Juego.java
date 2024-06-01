@@ -36,7 +36,6 @@ public class Juego {
             SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
             Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
             System.out.println("Juego Iniciado!");
-            System.out.println("Sistema estelar actual: "+sistemaInicial.mostrarNombre());
             switch (naveJugador) {
                 case NAVE_AEGIS:
                     NaveAegis naveAegis = new NaveAegis();
@@ -80,7 +79,8 @@ public class Juego {
     public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
         mostrarTurno();
         SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
-        jugador.heCambiadoDeSistema(sistemaNuevo);
+        jugador.cambioDeSistema(sistemaNuevo);
+        finDelJuego();
         switch (accion) {
             case COMPRAR_COMBUSTIBLE:
             case COMPRAR_ESCUDO:
@@ -113,7 +113,7 @@ public class Juego {
             planeta.realizarAccionEnMercado(accion, jugador, compra);
         } else {
             System.out.println("No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.");
-            finDelJuego(planeta);
+            finDelJuego();
         }
     }
 
@@ -124,7 +124,7 @@ public class Juego {
             planeta.repararNaveAliada(jugador);
         } else {
             System.out.println("No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.");
-            finDelJuego(planeta);
+            finDelJuego();
         }
     }
 
@@ -136,10 +136,10 @@ public class Juego {
         } else {
             if(planeta==null){
                 System.out.println("No hay planeta aliado en este sistema.");
-                finDelJuego(planeta);
+                finDelJuego();
             }else {
                 System.out.println("No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.");
-                finDelJuego(planeta);
+                finDelJuego();
             }
         }
     }
@@ -149,21 +149,21 @@ public class Juego {
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             planeta.combate(this.jugador);
-            finDelJuego(planeta);
+            finDelJuego();
             mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).quitarPlaneta(planeta);
         } else {
             if(planeta==null){
                 System.out.println("No hay planeta mas planetas hostiles en este sistema.");
-                finDelJuego(planeta);
+                finDelJuego();
             }else {
                 System.out.println("No puedo atacar el planeta hostil, la nave no tiene combustible suficiente para esta accion.");
-                finDelJuego(planeta);
+                finDelJuego();
             }
         }
     }
 
 
-    private void finDelJuego(Planeta planeta) {
+    private void finDelJuego() {
 
 
         if (jugador.mostrarTesoro()) {
@@ -176,14 +176,14 @@ public class Juego {
 
         if (jugador.naveEstaDestruida()) {
             System.out.println("****************************************************");
-            System.out.println("Tu nave fue destruida en el planeta " + planeta.getCodigoDePlaneta() + ". ¡Game Over!");
+            System.out.println("Tu nave fue destruida en el planeta " + jugador.getPlanetaActual().getCodigoDePlaneta() + ". ¡Game Over!");
             System.out.println("****************************************************");
             mostrarDatosDelJugador();
             System.exit(1);
         }
 
         if (!jugador.puedoVoleverPlanetaNeutral()) {
-            switch (planeta.soyPlanetaTipo()) {
+            switch (jugador.getPlanetaActual().soyPlanetaTipo()) {
                 case ALIADO:
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
@@ -214,20 +214,21 @@ public class Juego {
 
     }
     private void mostrarTurno(){
+        pasarTurno();
         System.out.println("---------------------------------------------------------------");
-        System.out.println("Turno: " + pasarTurno());
+        System.out.println("Turno: " + this.turno);
         System.out.println("---------------------------------------------------------------");
     }
-    private int pasarTurno(){
+    private void pasarTurno(){
         if (jugador.getNave().soyNaveTipo() == TipoDeNave.NAVE_TITAN) {
             if (!turnoExtra) {
                 turnoExtra = true;
             } else {
                 turnoExtra = false;
-                return ++this.turno;
+                ++this.turno;
             }
         }
-        return ++this.turno;
+        ++this.turno;
     }
     private void mostrarDatosDelJugador() {
        jugador.mostrarDatos();

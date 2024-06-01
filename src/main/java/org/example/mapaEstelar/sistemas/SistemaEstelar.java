@@ -28,6 +28,11 @@ public class SistemaEstelar {
     public String mostrarNombre() {
         return nombre;
     }
+
+    public CinturonAsteroide mostrarCinturonAsteroides() {
+        return cinturonAsteroides;
+    }
+
     public void mostarListadoPlanetas() {
         for (Planeta planeta : planetas) {
             System.out.println(planeta.getCodigoDePlaneta());

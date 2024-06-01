@@ -24,6 +24,9 @@ public class Jugador {
     public boolean naveEstaDestruida(){
         return !this.getNave().tengoVida();
     }
+    public Planeta getPlanetaActual(){
+        return planetaActual;
+    }
 
     public double getUadeCoins() {
         return uadeCoins;
@@ -45,11 +48,8 @@ public class Jugador {
     }
     public void mostrarDatos(){
         System.out.println("===============================================================");
-        if (this.planetaActual==null){
-            System.out.println("estoy en el planeta: null");
-        }else{
-            System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
-        }
+        System.out.println("dentro del sistema:"+sistemaActual.mostrarNombre());
+        System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
         System.out.println("--Player--");
         System.out.println("Nombre:" + this.nombre);
         System.out.println("Cant de uade coins:" + this.getUadeCoins());
@@ -95,12 +95,17 @@ public class Jugador {
         return uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL);
     }
     public void cambioDeSistema(SistemaEstelar sistemaEstelar) {
-        if ( !sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
-            sistemaActual = sistemaEstelar;
-
-
+        if (sistemaEstelar != null) {
+            if (!sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
+                System.out.println("Cambiando de sistema....");
+                nave.getTanque().cosumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
+                if (sistemaEstelar.tieneCinturonAsteroides()){
+                    sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
+                    sistemaActual = sistemaEstelar;
+                }
+            }
         }else{
-            System.out.println("el jugador no cambio de sistema! puede seguir la aventura entre los planetas.");
+            System.out.println("el sistema donde queres ir no existe");
         }
     }
 

@@ -41,6 +41,8 @@ public class TanqueDeCombustible {
                 return 15;
             case HOSTIL:
                 return 20;
+            case CINTURON_ASTEROIDE:
+                return 30;
             default:
                 return 0;
         }
