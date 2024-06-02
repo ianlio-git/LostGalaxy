@@ -40,22 +40,18 @@ public class Juego {
                 case NAVE_AEGIS:
                     NaveAegis naveAegis = new NaveAegis();
                     this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveAegis,planetaInicial,sistemaInicial);
-                    mostrarDatosDelJugador();
                     break;
                 case NAVE_SWIFT:
                     NaveSwift naveSwift = new NaveSwift();
                     this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveSwift,planetaInicial,sistemaInicial);
-                    mostrarDatosDelJugador();
                     break;
                 case NAVE_PHANTOM:
                     NavePhantom navePhantom = new NavePhantom();
                     this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, navePhantom,planetaInicial,sistemaInicial);
-                    mostrarDatosDelJugador();
                     break;
                 case NAVE_TITAN:
                     NaveTitan naveTitan = new NaveTitan();
                     this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan,planetaInicial,sistemaInicial);
-                    mostrarDatosDelJugador();
                     break;
             }
         } else {
@@ -102,7 +98,6 @@ public class Juego {
 
                 break;
         }
-        mostrarDatosDelJugador();
     }
 
 
@@ -168,7 +163,6 @@ public class Juego {
             System.out.println("****************************************************");
             System.out.println("¡Game Over! Me quede sin combustible en el cinturon.");
             System.out.println("****************************************************");
-            mostrarDatosDelJugador();
             System.exit(3);
         }
 
@@ -176,7 +170,6 @@ public class Juego {
             System.out.println("****************************************************");
             System.out.println("¡Game Over! Encontraste el tesoro.");
             System.out.println("****************************************************");
-            mostrarDatosDelJugador();
             System.exit(0);
         }
 
@@ -184,7 +177,6 @@ public class Juego {
             System.out.println("****************************************************");
             System.out.println("Tu nave fue destruida. ¡Game Over!");
             System.out.println("****************************************************");
-            mostrarDatosDelJugador();
             System.exit(1);
         }
 
@@ -194,14 +186,12 @@ public class Juego {
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
                     System.out.println("****************************************************");
-                    mostrarDatosDelJugador();
                     System.exit(2);
                     break;
                 case HOSTIL:
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta hostil. ¡Game Over!");
                     System.out.println("****************************************************");
-                    mostrarDatosDelJugador();
                     System.exit(2);
                     break;
                 case NEUTRAL:
@@ -209,7 +199,6 @@ public class Juego {
                         System.out.println("****************************************************");
                         System.out.println("Te quedaste sin combustible en un planeta neutral y no tienes suficientes UadeCoins ni armas para vender. ¡Game Over!");
                         System.out.println("****************************************************");
-                        mostrarDatosDelJugador();
                         System.exit(2);
                     }
                     break;
@@ -239,9 +228,6 @@ public class Juego {
         }
 
     }
-    private void mostrarDatosDelJugador() {
-       jugador.mostrarDatos();
-    }
     public void mostrarSistemas(){
         System.out.println("Sistemas:");
         mapaEstelar.mostrarSistemas();
@@ -249,5 +235,9 @@ public class Juego {
     public void mostrarPlanetasEnSistema(String codigoDeSistema){
         System.out.println("planetas en sistema "+ codigoDeSistema+":");
         mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).mostarListadoPlanetas();
+    }
+
+    public Jugador getJugador() {
+        return jugador;
     }
 }

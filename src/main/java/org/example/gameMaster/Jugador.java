@@ -1,5 +1,6 @@
 package org.example.gameMaster;
 
+import org.example.Views.JugadorView;
 import org.example.enums.TipoDePlaneta;
 import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
@@ -50,35 +51,7 @@ public class Jugador {
     public boolean mostrarTesoro(){
         return tesoro;
     }
-    public void mostrarDatos(){
-        System.out.println("===============================================================");
-        System.out.println("--Posicion--");
-        System.out.println("dentro del sistema:"+sistemaActual.mostrarNombre());
-        if(planetaActual==null){
-            System.out.println("Estoy en el cinturon de asteroides");
-        }
-        else{
-            System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
-        }
-        System.out.println("--Player--");
-        System.out.println("Nombre:" + this.nombre);
-        System.out.println("Cant de uade coins:" + this.getUadeCoins());
-        System.out.println("Mi Nave es:"+this.nave.soyNaveTipo());
-        System.out.println("--Stats--");
-        System.out.println("Vida:" + this.nave.getVida());
-        System.out.println("Escudo Actual:" + this.nave.getEscudo().cantidadEscudoActual());
-        System.out.println("Escudo Maximo:" + this.nave.getEscudo().cantidadEscudoMax());
-        System.out.println("Combustible:" + this.nave.getTanque().getCombustible());
-        System.out.println("--Weapons--");
-        if (this.nave.tengoArmas()) {
-            System.out.println("Mis armas son:" );
-            this.nave.getArmas();
-        } else {
-            System.out.println("Aun no tengo un arma, pero ya tendre una!");
-        }
-        System.out.println("Poder:" + this.nave.poderAtaque());
-        System.out.println("===============================================================");
-    }
+
     public boolean puedoComprar(double precio) {
         return (this.getUadeCoins() > precio);
     }
@@ -112,13 +85,16 @@ public class Jugador {
                 nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
                 if (sistemaEstelar.tieneCinturonAsteroides()){
                     sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
-                    mostrarDatos();
                 }
                 sistemaActual = sistemaEstelar;
             }
         }else{
             System.out.println("el sistema donde queres ir no existe");
         }
+    }
+
+    public JugadorView toViewJugador() {
+        return new JugadorView(sistemaActual,planetaActual.getCodigoDePlaneta(),nave,nombre,uadeCoins,tesoro);
     }
 
 
