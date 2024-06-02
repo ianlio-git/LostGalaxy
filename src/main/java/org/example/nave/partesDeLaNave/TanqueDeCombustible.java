@@ -39,20 +39,7 @@ public class TanqueDeCombustible {
     }
 
     public double combustibleNecesario(TipoDePlaneta planeta, double cantidadDeArmas){
-        double tasaDeAumento = 0;
-        switch ((int) cantidadDeArmas){
-            case 0:
-                tasaDeAumento = 1;
-                break;
-            case 1:
-                tasaDeAumento = 1.5;
-                break;
-            case 2:
-                tasaDeAumento = 2;
-                break;
-            default:
-                break;
-        }
+        double tasaDeAumento = Math.pow(1.5, cantidadDeArmas);
         switch (planeta) {
             case NEUTRAL:
                 return (10*tasaDeAumento);
