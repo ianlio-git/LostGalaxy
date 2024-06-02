@@ -23,7 +23,13 @@ public class TanqueDeCombustible {
         }
     }
     public void cosumirCombustible(double consumir){
-       this.combustible-=consumir;
+       if(consumir>combustible) {
+           combustible=0;
+       }
+       else {
+           this.combustible -= consumir;
+       }
+
     }
     public  boolean tanqueLleno(){
         return  this.combustible == this.capacidadMaxTanque;
@@ -46,6 +52,9 @@ public class TanqueDeCombustible {
             default:
                 return 0;
         }
+    }
+    public boolean tengoCombustible(){
+        return combustible!=0;
     }
 
 }

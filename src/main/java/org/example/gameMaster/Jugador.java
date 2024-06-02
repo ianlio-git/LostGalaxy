@@ -28,6 +28,10 @@ public class Jugador {
         return planetaActual;
     }
 
+    public void setPlanetaActual(Planeta planetaActual) {
+        this.planetaActual = planetaActual;
+    }
+
     public double getUadeCoins() {
         return uadeCoins;
     }
@@ -48,8 +52,14 @@ public class Jugador {
     }
     public void mostrarDatos(){
         System.out.println("===============================================================");
+        System.out.println("--Posicion--");
         System.out.println("dentro del sistema:"+sistemaActual.mostrarNombre());
-        System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
+        if(planetaActual==null){
+            System.out.println("Estoy en el cinturon de asteroides");
+        }
+        else{
+            System.out.println("estoy en el planeta:"+planetaActual.getCodigoDePlaneta());
+        }
         System.out.println("--Player--");
         System.out.println("Nombre:" + this.nombre);
         System.out.println("Cant de uade coins:" + this.getUadeCoins());
@@ -88,11 +98,12 @@ public class Jugador {
     private double combustibleParaViajar(TipoDePlaneta tipo){
         return nave.getTanque().combustibleNecesario(tipo);
     }
-    public boolean puedoVoleverPlanetaNeutral(){
-        return  this.nave.getTanque().getCombustible() > combustibleParaViajar(TipoDePlaneta.NEUTRAL);
+    public boolean puedoVolverPlanetaNeutral(){
+        return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDePlaneta.NEUTRAL);
     }
+
     public boolean tengoUadeCoinsParaCombustible(){
-        return uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL);
+        return (uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL));
     }
     public void cambioDeSistema(SistemaEstelar sistemaEstelar) {
         if (sistemaEstelar != null) {
@@ -101,13 +112,15 @@ public class Jugador {
                 nave.getTanque().cosumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
                 if (sistemaEstelar.tieneCinturonAsteroides()){
                     sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
-                    sistemaActual = sistemaEstelar;
+                    mostrarDatos();
                 }
+                sistemaActual = sistemaEstelar;
             }
         }else{
             System.out.println("el sistema donde queres ir no existe");
         }
     }
+
 
 }
 

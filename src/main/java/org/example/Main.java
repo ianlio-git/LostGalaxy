@@ -14,7 +14,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Juego juego = Juego.getInstancia();
-        juego.iniciarJuego("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_SWIFT, 4, Dificultades.FACIL);
+        juego.iniciarJuego("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_PHANTOM, 4, Dificultades.FACIL);
         mostrarSistemas(juego);
 
         juego.siguienteTurno(Acciones.COMPRAR_ARMA, "SIST-0",1);
@@ -25,11 +25,11 @@ public class Main {
         juego.siguienteTurno(Acciones.OBTENER_INFORMACION, "SIST-0", 0);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
-        //juego.siguienteTurno(Acciones.REPARAR_NAVE, "SIST-0",0);
-        //juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-1",60);
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "SIST-0",0);
+        //juego.siguienteTurno(Acciones.REPARAR_NAVE, "SIST-1",0);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-3",60);
         juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-1",0);
-        //juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-2",0);
+        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"SIST-2",0);
+        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "SIST-0",100);
     }
     public static  void mostrarSistemas(Juego juego){
         juego.mostrarSistemas();

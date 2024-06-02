@@ -164,7 +164,13 @@ public class Juego {
 
 
     private void finDelJuego() {
-
+        if(jugador.getPlanetaActual()==null){
+            System.out.println("****************************************************");
+            System.out.println("¡Game Over! Me quede sin combustible en el cinturon.");
+            System.out.println("****************************************************");
+            mostrarDatosDelJugador();
+            System.exit(3);
+        }
 
         if (jugador.mostrarTesoro()) {
             System.out.println("****************************************************");
@@ -176,13 +182,13 @@ public class Juego {
 
         if (jugador.naveEstaDestruida()) {
             System.out.println("****************************************************");
-            System.out.println("Tu nave fue destruida en el planeta " + jugador.getPlanetaActual().getCodigoDePlaneta() + ". ¡Game Over!");
+            System.out.println("Tu nave fue destruida. ¡Game Over!");
             System.out.println("****************************************************");
             mostrarDatosDelJugador();
             System.exit(1);
         }
 
-        if (!jugador.puedoVoleverPlanetaNeutral()) {
+        if (!jugador.puedoVolverPlanetaNeutral()) {
             switch (jugador.getPlanetaActual().soyPlanetaTipo()) {
                 case ALIADO:
                     System.out.println("****************************************************");
