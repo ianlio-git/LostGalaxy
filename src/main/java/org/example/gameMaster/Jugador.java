@@ -85,7 +85,7 @@ public class Jugador {
 
     public void viajeAPlaneta(Planeta planeta){
         if( !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
-            nave.getTanque().cosumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
+            nave.getTanque().consumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
             this.planetaActual = planeta;
         }
     }
@@ -96,7 +96,7 @@ public class Jugador {
         return nave.getTanque().getCombustible() >= combustibleParaViajar(planeta.soyPlanetaTipo());
     }
     private double combustibleParaViajar(TipoDePlaneta tipo){
-        return nave.getTanque().combustibleNecesario(tipo);
+        return nave.getTanque().combustibleNecesario(tipo, getNave().cantidadDeArmas());
     }
     public boolean puedoVolverPlanetaNeutral(){
         return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDePlaneta.NEUTRAL);
@@ -109,7 +109,7 @@ public class Jugador {
         if (sistemaEstelar != null) {
             if (!sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
                 System.out.println("Cambiando de sistema....");
-                nave.getTanque().cosumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
+                nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
                 if (sistemaEstelar.tieneCinturonAsteroides()){
                     sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
                     mostrarDatos();

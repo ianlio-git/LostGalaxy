@@ -227,14 +227,17 @@ public class Juego {
     }
     private void pasarTurno(){
         if (jugador.getNave().soyNaveTipo() == TipoDeNave.NAVE_TITAN) {
-            if (!turnoExtra) {
-                turnoExtra = true;
-            } else {
+            if (turnoExtra) {
                 turnoExtra = false;
+            } else {
+                turnoExtra = true;
                 ++this.turno;
             }
         }
-        ++this.turno;
+        else{
+            ++this.turno;
+        }
+
     }
     private void mostrarDatosDelJugador() {
        jugador.mostrarDatos();

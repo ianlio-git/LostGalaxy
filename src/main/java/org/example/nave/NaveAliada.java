@@ -90,6 +90,10 @@ public abstract class NaveAliada extends Nave {
             System.out.println(arma.soyTipoDeArma());
         }
     }
+
+    public double cantidadDeArmas(){
+        return armas.size();
+    }
     abstract public TipoDeNave soyNaveTipo();
 
 
