@@ -1,11 +1,9 @@
 package org.example.mapaEstelar.sistemas.planetas;
 
 import org.example.enums.Acciones;
-import org.example.enums.TipoDePlaneta;
+import org.example.enums.TipoDeCuerpoCeleste;
 import org.example.gameMaster.Jugador;
-import org.example.mapaEstelar.MapaEstelar;
 import org.example.mapaEstelar.sistemas.SistemaEstelar;
-import org.example.nave.NaveAliada;
 import org.example.nave.tiposDeNaves.NavePirata;
 
 public class Hostil extends Planeta {
@@ -19,8 +17,8 @@ public class Hostil extends Planeta {
         this.naveEnemiga = naveEnemiga;
     }
     @Override
-    public TipoDePlaneta soyPlanetaTipo() {
-        return TipoDePlaneta.HOSTIL;
+    public TipoDeCuerpoCeleste soyPlanetaTipo() {
+        return TipoDeCuerpoCeleste.PLANETA_HOSTIL;
     }
 
     @Override

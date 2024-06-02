@@ -3,8 +3,7 @@ package org.example.mapaEstelar.sistemas.planetas;
 import org.example.enums.TipoDeArma;
 import org.example.gameMaster.Jugador;
 import org.example.enums.Acciones;
-import org.example.enums.TipoDePlaneta;
-import org.example.mapaEstelar.MapaEstelar;
+import org.example.enums.TipoDeCuerpoCeleste;
 import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.mercado.Mercado;
 
@@ -18,8 +17,8 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public TipoDePlaneta soyPlanetaTipo() {
-        return TipoDePlaneta.NEUTRAL;
+    public TipoDeCuerpoCeleste soyPlanetaTipo() {
+        return TipoDeCuerpoCeleste.PLANETA_NEUTRAL;
     }
 
     @Override

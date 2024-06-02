@@ -17,7 +17,7 @@ public class PantallaGameBeginInfo {
         System.out.println("Nombre del Jugador:          " + gameBeginView.getNombreDelJugador());
         System.out.println("UADE Coins del Jugador:      " + gameBeginView.getUadeCoinsJugador());
         System.out.println("Nave del Jugador:            " + gameBeginView.getNaveJugador());
-        System.out.println("Cantidad de Sistemas Estelares: " + gameBeginView.getCantidadSistemasEstelares());
+        System.out.println("Sistemas Estelares:          " + gameBeginView.getCantidadSistemasEstelares());
         System.out.println("Dificultad:                  " + gameBeginView.getDificultad());
         System.out.println("=============================================");
     }

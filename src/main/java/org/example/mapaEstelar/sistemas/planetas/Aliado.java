@@ -2,11 +2,8 @@ package org.example.mapaEstelar.sistemas.planetas;
 
 import org.example.enums.Acciones;
 import org.example.gameMaster.Jugador;
-import org.example.enums.TipoDePlaneta;
-import org.example.mapaEstelar.MapaEstelar;
+import org.example.enums.TipoDeCuerpoCeleste;
 import org.example.mapaEstelar.sistemas.SistemaEstelar;
-
-import java.util.List;
 
 public class Aliado extends Planeta {
 
@@ -17,8 +14,8 @@ public class Aliado extends Planeta {
     }
 
     @Override
-    public TipoDePlaneta soyPlanetaTipo() {
-        return TipoDePlaneta.ALIADO;
+    public TipoDeCuerpoCeleste soyPlanetaTipo() {
+        return TipoDeCuerpoCeleste.PLANETA_ALIADO;
     }
 
     @Override

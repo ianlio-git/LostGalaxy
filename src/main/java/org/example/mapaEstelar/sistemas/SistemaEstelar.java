@@ -1,9 +1,8 @@
 package org.example.mapaEstelar.sistemas;
 
-import org.example.Views.GameBeginView;
 import org.example.Views.SistemasView;
 import org.example.enums.Dificultades;
-import org.example.enums.TipoDePlaneta;
+import org.example.enums.TipoDeCuerpoCeleste;
 import org.example.mapaEstelar.sistemas.planetas.Aliado;
 import org.example.mapaEstelar.sistemas.planetas.Neutral;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
@@ -42,7 +41,7 @@ public class SistemaEstelar {
     }
     public Planeta obtenerPlanetaNeutral() {
         for (Planeta planeta : planetas) {
-            if (planeta.soyPlanetaTipo()==TipoDePlaneta.NEUTRAL) {
+            if (planeta.soyPlanetaTipo()== TipoDeCuerpoCeleste.PLANETA_NEUTRAL) {
                 return planeta;
             }
         }
@@ -55,7 +54,7 @@ public class SistemaEstelar {
 
     public Planeta obtenerPlanetaHostil() {
         for (Planeta planeta : planetas) {
-            if (planeta.soyPlanetaTipo()==TipoDePlaneta.HOSTIL) {
+            if (planeta.soyPlanetaTipo()== TipoDeCuerpoCeleste.PLANETA_HOSTIL) {
                 return planeta;
             }
         }
@@ -63,7 +62,7 @@ public class SistemaEstelar {
     }
     public Planeta obtenerPlanetaAliado() {
         for (Planeta planeta : planetas) {
-            if (planeta.soyPlanetaTipo()==TipoDePlaneta.ALIADO) {
+            if (planeta.soyPlanetaTipo()== TipoDeCuerpoCeleste.PLANETA_ALIADO) {
                 return planeta;
             }
         }

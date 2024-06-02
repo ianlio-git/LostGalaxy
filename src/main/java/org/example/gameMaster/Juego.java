@@ -72,36 +72,16 @@ public class Juego {
 
     }
 
-    public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
+    private void siguienteTurno(String codigoDeSistema) {
         pasarTurno();
         SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
         jugador.cambioDeSistema(sistemaNuevo);
         finDelJuego();
-        switch (accion) {
-            case COMPRAR_COMBUSTIBLE:
-            case COMPRAR_ESCUDO:
-            case COMPRAR_ARMA:
-            case RECARGAR_ESCUDO:
-            case VENDER_ARMA:
-                this.realizarAccionDeCompra(accion,codigoDeSistema,compra);
-                break;
-            case BUSCAR_TESORO:
-                this.realizarAccionDeAtaque(codigoDeSistema);
-                break;
-            case REPARAR_NAVE:
-                this.realizarAccionDeReparacion(codigoDeSistema);
-                break;
-            case OBTENER_INFORMACION:
-                this.realizarAccionDeInformacion(codigoDeSistema, sistemaEstelarConTesoro);
-                break;
-            default:
-                break;
-        }
-
     }
 
 
-    private void realizarAccionDeCompra(Acciones accion, String codigoDeSistema, double compra) {
+    public void realizarAccionDeCompra(Acciones accion, String codigoDeSistema, double compra) {
+        siguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaNeutral();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
@@ -112,7 +92,8 @@ public class Juego {
         }
     }
 
-    private void realizarAccionDeReparacion(String codigoDeSistema) {
+    public void realizarAccionDeReparacion(String codigoDeSistema) {
+        siguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
@@ -123,7 +104,8 @@ public class Juego {
         }
     }
 
-    private void realizarAccionDeInformacion(String codigoDeSistema, SistemaEstelar sistemaEstelarConTesoro) {
+    public void realizarAccionDeInformacion(String codigoDeSistema) {
+        siguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
@@ -139,7 +121,8 @@ public class Juego {
         }
     }
 
-    private void realizarAccionDeAtaque(String codigoDeSistema) {
+    public void atacarPlanetaHostil(String codigoDeSistema) {
+        siguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaHostil();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
@@ -182,19 +165,19 @@ public class Juego {
 
         if (!jugador.puedoVolverPlanetaNeutral()) {
             switch (jugador.getPlanetaActual().soyPlanetaTipo()) {
-                case ALIADO:
+                case PLANETA_ALIADO:
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
                     System.out.println("****************************************************");
                     System.exit(2);
                     break;
-                case HOSTIL:
+                case PLANETA_HOSTIL:
                     System.out.println("****************************************************");
                     System.out.println("Te quedaste sin combustible en un planeta hostil. ¡Game Over!");
                     System.out.println("****************************************************");
                     System.exit(2);
                     break;
-                case NEUTRAL:
+                case PLANETA_NEUTRAL:
                     if (!jugador.getNave().tengoArmas()&&jugador.tengoUadeCoinsParaCombustible()) {
                         System.out.println("****************************************************");
                         System.out.println("Te quedaste sin combustible en un planeta neutral y no tienes suficientes UadeCoins ni armas para vender. ¡Game Over!");

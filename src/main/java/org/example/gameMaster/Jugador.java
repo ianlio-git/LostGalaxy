@@ -1,7 +1,7 @@
 package org.example.gameMaster;
 
 import org.example.Views.JugadorView;
-import org.example.enums.TipoDePlaneta;
+import org.example.enums.TipoDeCuerpoCeleste;
 import org.example.mapaEstelar.sistemas.SistemaEstelar;
 import org.example.mapaEstelar.sistemas.planetas.Planeta;
 import org.example.nave.NaveAliada;
@@ -68,21 +68,21 @@ public class Jugador {
         }
         return nave.getTanque().getCombustible() >= combustibleParaViajar(planeta.soyPlanetaTipo());
     }
-    private double combustibleParaViajar(TipoDePlaneta tipo){
+    private double combustibleParaViajar(TipoDeCuerpoCeleste tipo){
         return nave.getTanque().combustibleNecesario(tipo, getNave().cantidadDeArmas());
     }
     public boolean puedoVolverPlanetaNeutral(){
-        return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDePlaneta.NEUTRAL);
+        return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_NEUTRAL);
     }
 
     public boolean tengoUadeCoinsParaCombustible(){
-        return (uadeCoins > combustibleParaViajar(TipoDePlaneta.HOSTIL));
+        return (uadeCoins > combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_HOSTIL));
     }
     public void cambioDeSistema(SistemaEstelar sistemaEstelar) {
         if (sistemaEstelar != null) {
             if (!sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
                 System.out.println("Cambiando de sistema....");
-                nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDePlaneta.CINTURON_ASTEROIDE));
+                nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.CINTURON_ASTEROIDE));
                 if (sistemaEstelar.tieneCinturonAsteroides()){
                     sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
                 }

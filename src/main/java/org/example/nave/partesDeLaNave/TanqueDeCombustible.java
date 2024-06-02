@@ -1,7 +1,7 @@
 package org.example.nave.partesDeLaNave;
 
 
-import org.example.enums.TipoDePlaneta;
+import org.example.enums.TipoDeCuerpoCeleste;
 
 public class TanqueDeCombustible {
     private double combustible;
@@ -38,14 +38,14 @@ public class TanqueDeCombustible {
         return combustible;
     }
 
-    public double combustibleNecesario(TipoDePlaneta planeta, double cantidadDeArmas){
+    public double combustibleNecesario(TipoDeCuerpoCeleste planeta, double cantidadDeArmas){
         double tasaDeAumento = Math.pow(1.5, cantidadDeArmas);
         switch (planeta) {
-            case NEUTRAL:
+            case PLANETA_NEUTRAL:
                 return (10*tasaDeAumento);
-            case ALIADO:
+            case PLANETA_ALIADO:
                 return (15*tasaDeAumento);
-            case HOSTIL:
+            case PLANETA_HOSTIL:
                 return (20*tasaDeAumento);
             case CINTURON_ASTEROIDE:
                 return (30*tasaDeAumento);
