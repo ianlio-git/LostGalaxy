@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MapaEstelar {
     private List<SistemaEstelar> sistemasEstelares;
-
+    Dificultades dificultad;
     public MapaEstelar() {
         this.sistemasEstelares = new ArrayList<>();
     }
@@ -16,7 +16,12 @@ public class MapaEstelar {
     public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad,boolean tieneTesoro,boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad,tieneTesoro,tieneCinturon);
         sistemasEstelares.add(nuevoSistema);
+        dificultad = dificutad;
         return nuevoSistema;
+    }
+
+    public List<SistemaEstelar> getSistemasEstelares() {
+        return sistemasEstelares;
     }
 
     public SistemaEstelar obtenerSistemaEstelar(String codigo) {
@@ -28,10 +33,8 @@ public class MapaEstelar {
         throw new RuntimeException("Sistema estelar no encontrado: " + codigo);
     }
 
-
-    public void mostrarSistemas() {
-        for (SistemaEstelar sistema : sistemasEstelares) {
-            System.out.println(sistema.mostrarNombre()+" Cinturon de asteroides: "+ sistema.tieneCinturonAsteroides());
-        }
+    public Dificultades getDificultad() {
+        return dificultad;
     }
+
 }

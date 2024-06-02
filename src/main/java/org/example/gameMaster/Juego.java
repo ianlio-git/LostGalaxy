@@ -1,5 +1,6 @@
 package org.example.gameMaster;
 
+import org.example.Views.GameBeginView;
 import org.example.enums.Acciones;
 import org.example.enums.Dificultades;
 import org.example.mapaEstelar.MapaEstelar;
@@ -20,7 +21,6 @@ public class Juego {
     private Jugador jugador;
     private SistemaEstelar sistemaEstelarConTesoro;
     private boolean turnoExtra;
-
     private Juego() {
         this.mapaEstelar = new MapaEstelar();
     }
@@ -73,7 +73,7 @@ public class Juego {
     }
 
     public void siguienteTurno(Acciones accion, String codigoDeSistema,double compra) {
-        mostrarTurno();
+        pasarTurno();
         SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
         jugador.cambioDeSistema(sistemaNuevo);
         finDelJuego();
@@ -95,9 +95,9 @@ public class Juego {
                 this.realizarAccionDeInformacion(codigoDeSistema, sistemaEstelarConTesoro);
                 break;
             default:
-
                 break;
         }
+
     }
 
 
@@ -208,12 +208,7 @@ public class Juego {
         }
 
     }
-    private void mostrarTurno(){
-        pasarTurno();
-        System.out.println("---------------------------------------------------------------");
-        System.out.println("Turno: " + this.turno);
-        System.out.println("---------------------------------------------------------------");
-    }
+
     private void pasarTurno(){
         if (jugador.getNave().soyNaveTipo() == TipoDeNave.NAVE_TITAN) {
             if (turnoExtra) {
@@ -228,10 +223,7 @@ public class Juego {
         }
 
     }
-    public void mostrarSistemas(){
-        System.out.println("Sistemas:");
-        mapaEstelar.mostrarSistemas();
-    }
+
     public void mostrarPlanetasEnSistema(String codigoDeSistema){
         System.out.println("planetas en sistema "+ codigoDeSistema+":");
         mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).mostarListadoPlanetas();
@@ -239,5 +231,13 @@ public class Juego {
 
     public Jugador getJugador() {
         return jugador;
+    }
+
+    public GameBeginView toViewgameBegin(){
+        return new GameBeginView(jugador.getNombre(), jugador.getUadeCoins(),jugador.getNave().soyNaveTipo(),mapaEstelar.getSistemasEstelares().size(),mapaEstelar.getDificultad(),turno);
+    }
+
+    public MapaEstelar getMapaEstelar() {
+        return mapaEstelar;
     }
 }

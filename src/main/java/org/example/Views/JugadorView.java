@@ -43,4 +43,5 @@ public class JugadorView {
     public boolean isTesoro() {
         return tesoro;
     }
+
 }

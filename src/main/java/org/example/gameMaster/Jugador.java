@@ -97,6 +97,8 @@ public class Jugador {
         return new JugadorView(sistemaActual,planetaActual.getCodigoDePlaneta(),nave,nombre,uadeCoins,tesoro);
     }
 
-
+    public String getNombre() {
+        return nombre;
+    }
 }
 

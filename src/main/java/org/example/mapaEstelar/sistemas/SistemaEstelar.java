@@ -1,5 +1,7 @@
 package org.example.mapaEstelar.sistemas;
 
+import org.example.Views.GameBeginView;
+import org.example.Views.SistemasView;
 import org.example.enums.Dificultades;
 import org.example.enums.TipoDePlaneta;
 import org.example.mapaEstelar.sistemas.planetas.Aliado;
@@ -44,8 +46,13 @@ public class SistemaEstelar {
                 return planeta;
             }
         }
-        throw new RuntimeException("No hay planetas neutrales en este sistema solar");
+        return null;
     }
+
+    public List<Planeta> getPlanetas() {
+        return planetas;
+    }
+
     public Planeta obtenerPlanetaHostil() {
         for (Planeta planeta : planetas) {
             if (planeta.soyPlanetaTipo()==TipoDePlaneta.HOSTIL) {
@@ -132,5 +139,8 @@ public class SistemaEstelar {
     }
     private void agregarPlaneta(Planeta planeta) {
         this.planetas.add(planeta);
+    }
+    public SistemasView toViewSistema(){
+        return new SistemasView(this.nombre,this.planetas,tieneCinturonAsteroides());
     }
 }
