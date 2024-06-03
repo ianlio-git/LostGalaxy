@@ -1,16 +1,14 @@
 package org.example.Controller;
-import javax.swing.JOptionPane;
 
 import org.example.Views.GameBeginView;
 import org.example.Views.JugadorView;
 import org.example.Views.SistemasView;
-import org.example.enums.Acciones;
-import org.example.enums.Dificultades;
-import org.example.enums.TipoDeNave;
-import org.example.futuraPantalla.*;
-import org.example.gameMaster.Juego;
-import org.example.gameMaster.Jugador;
-import org.example.mapaEstelar.sistemas.SistemaEstelar;
+import org.example.Enums.Dificultades;
+import org.example.Enums.TipoDeNave;
+import org.example.FuturoFront.*;
+import org.example.GameMaster.Juego;
+import org.example.GameMaster.Jugador;
+import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 
 public class Controller {
 

@@ -1,7 +1,7 @@
 package org.example.Views;
 
-import org.example.mapaEstelar.sistemas.SistemaEstelar;
-import org.example.nave.NaveAliada;
+import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Nave.NaveAliada;
 
 public class JugadorView {
     private SistemaEstelar sistemaActual;

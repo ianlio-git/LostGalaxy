@@ -1,10 +1,10 @@
 package org.example;
 
 import org.example.Controller.Controller;
-import org.example.enums.Acciones;
-import org.example.enums.Dificultades;
-import org.example.enums.TipoDeNave;
-import org.example.gameMaster.Juego;
+import org.example.Enums.Acciones;
+import org.example.Enums.Dificultades;
+import org.example.Enums.TipoDeNave;
+import org.example.GameMaster.Juego;
 
 public class Main {
     public static void main(String[] args) {

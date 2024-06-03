@@ -1,7 +1,7 @@
 package org.example.Views;
 
-import org.example.enums.Dificultades;
-import org.example.enums.TipoDeNave;
+import org.example.Enums.Dificultades;
+import org.example.Enums.TipoDeNave;
 
 public class GameBeginView {
 

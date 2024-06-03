@@ -1,7 +1,6 @@
 package org.example.Views;
 
-import org.example.mapaEstelar.sistemas.SistemaEstelar;
-import org.example.mapaEstelar.sistemas.planetas.Planeta;
+import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import java.util.List;
 
