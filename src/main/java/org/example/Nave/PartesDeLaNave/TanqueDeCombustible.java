@@ -56,5 +56,5 @@ public class TanqueDeCombustible {
     public boolean tengoCombustible(){
         return combustible!=0;
     }
-
+    public boolean tanqueVacio() { return combustible==0; }
 }

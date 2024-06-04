@@ -22,11 +22,7 @@ public class PantallaJugador {
     private void mostrarPosicion() {
         System.out.println("--Posición--");
         System.out.println("Dentro del sistema: " + jugadorView.getSistemaActual().mostrarNombre());
-        if (jugadorView.getPlanetaActual() == null) {
-            System.out.println("Estoy en el cinturón de asteroides");
-        } else {
-            System.out.println("Estoy en el planeta: " + jugadorView.getPlanetaActual());
-        }
+        System.out.println("Posicionado en el: "+jugadorView.getPosicionEnElEspacio());
     }
 
     private void mostrarDatosJugador() {

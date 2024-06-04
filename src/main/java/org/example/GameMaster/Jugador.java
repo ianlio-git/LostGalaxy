@@ -13,6 +13,7 @@ public class Jugador {
     private String nombre;
     private double uadeCoins;
     private boolean tesoro;
+    private String posicionEnElEspacio;
 
     public Jugador(String nombre, double uadeCoins,NaveAliada nave,Planeta planetaInicial,SistemaEstelar sistemaEstelar) {
         this.planetaActual = planetaInicial;
@@ -21,14 +22,20 @@ public class Jugador {
         this.uadeCoins = uadeCoins;
         this.nave = nave;
         this.tesoro = false;
+        this.posicionEnElEspacio = planetaActual.getCodigoDePlaneta();
     }
+
+    public void setPosicionEnElEspacio(String posicionEnElEspacio) {
+        this.posicionEnElEspacio = posicionEnElEspacio;
+    }
+
     public boolean naveEstaDestruida(){
         return !this.getNave().tengoVida();
     }
     public Planeta getPlanetaActual(){
         return planetaActual;
     }
-
+    public String getPosicionEnElEspacio() {return posicionEnElEspacio;}
     public void setPlanetaActual(Planeta planetaActual) {
         this.planetaActual = planetaActual;
     }
@@ -64,6 +71,7 @@ public class Jugador {
         if( !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
             nave.getTanque().consumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
             this.planetaActual = planeta;
+            this.posicionEnElEspacio = planeta.getCodigoDePlaneta();
         }
     }
     public boolean puedoViajar(Planeta planeta) {
@@ -91,7 +99,10 @@ public class Jugador {
     }
 
     public JugadorView toViewJugador() {
-        return new JugadorView(sistemaActual,planetaActual.getCodigoDePlaneta(),nave,nombre,uadeCoins,tesoro);
+        if(planetaActual == null){
+            return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro);
+        }
+        return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro);
     }
 
 

@@ -1,10 +1,7 @@
 package org.example.GameMaster;
 
 import org.example.Enums.TipoDeArma;
-import org.example.GameMaster.Exception.CombustibleInsuficienteException;
-import org.example.GameMaster.Exception.NaveDestruidaException;
-import org.example.GameMaster.Exception.SinCombustibleException;
-import org.example.GameMaster.Exception.TesoroEncontradoException;
+import org.example.GameMaster.Exception.*;
 import org.example.Views.GameBeginView;
 import org.example.Enums.Dificultades;
 import org.example.MapaEstelar.MapaEstelar;
@@ -76,13 +73,18 @@ public class Juego {
 
     }
 
-    public void cambiarDeSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+    public void cambiarDeSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         if(mapaEstelar.verificarExistenciaDeSistemaEstelar(codigoDeSistema)){
             if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
                 String mensaje = ("Cambiando de sistema....");
                 SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
                 jugador.viajarANuevoSistema(sistemaNuevo);
+                if(sistemaNuevo.tieneCinturonAsteroides()) {
+                    jugador.setPosicionEnElEspacio("En cinturon de asteroides");
+                }else{
+                    jugador.setPosicionEnElEspacio("En el espacio");
+                }
                 finDelJuego(mensaje);
             }
             else{
@@ -91,15 +93,15 @@ public class Juego {
             }
         }
         else {
-            String mensaje = "Ingresa un sistema valido";
+            String mensaje = "Ingresaste un sistema valido";
             finDelJuego(mensaje);
         }
     }
 
 
 
-    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
-        Planeta planeta = Shopping();
+    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
         if(planeta!=null){
             if(planeta.ingresarAlMercado().accionDeComprarArma(jugador, tipoDeArma)){
                 finDelJuego("Compraste el "+tipoDeArma+" con exito!");
@@ -110,8 +112,8 @@ public class Juego {
         }
     }
 
-    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
-        Planeta planeta = Shopping();
+    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
         if (!jugador.getNave().getTanque().tanqueLleno()) {
             if (planeta.ingresarAlMercado().accionDeComprarCombustible(jugador, cantidad)) {
                 finDelJuego("Compraste combustible con exito!");
@@ -123,8 +125,8 @@ public class Juego {
         }
     }
 
-    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
-        Planeta planeta = Shopping();
+    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
         if(!jugador.getNave().getEscudo().escudoLleno()){
             if(planeta!=null){
                 if(planeta.ingresarAlMercado().accionDeRecargarEscudo(jugador,cantidad)){
@@ -140,8 +142,8 @@ public class Juego {
         }
     }
 
-    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
-        Planeta planeta = Shopping();
+    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
             if(planeta!=null){
                 if(planeta.ingresarAlMercado().accionDeComprarEscudoMaximo(jugador,cantidad)){
                     finDelJuego("Compraste escudo con exito");
@@ -152,8 +154,8 @@ public class Juego {
             }
     }
 
-    public void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
-        Planeta planeta = Shopping();
+    public void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
         if(planeta!=null){
             if(planeta.ingresarAlMercado().accionDeVenderArma(jugador,tipoDeArma)){
                 finDelJuego("Vendiste el arma con exito!");
@@ -164,9 +166,10 @@ public class Juego {
         }
     }
 
-    private Planeta Shopping() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+    private Planeta irAlShopping() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaNeutral();
+        jugador.setPlanetaActual(planeta);
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             return planeta;
@@ -177,7 +180,7 @@ public class Juego {
         return null;
     }
 
-    public void realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+    public void realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
         if(planeta==null){
@@ -185,6 +188,7 @@ public class Juego {
             finDelJuego(mensaje);
         }
         else{
+
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.repararNaveAliada(jugador);
@@ -196,7 +200,7 @@ public class Juego {
 
     }
 
-    public void realizarAccionDeInformacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+    public void realizarAccionDeInformacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
         if(planeta==null){
@@ -216,7 +220,7 @@ public class Juego {
 
     }
 
-    public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+    public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaHostil(codigoDePlaneta);
         if (planeta == null) {
@@ -237,11 +241,7 @@ public class Juego {
     }
 
 
-    private void finDelJuego(String mensaje) throws SinCombustibleException, TesoroEncontradoException, NaveDestruidaException, CombustibleInsuficienteException {
-        if (jugador.getPlanetaActual() == null) {
-            throw new SinCombustibleException("¡Game Over! Me quedé sin combustible en el cinturón.");
-        }
-
+    private void finDelJuego(String mensaje) throws SinCombustibleException, TesoroEncontradoException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides {
         if (jugador.mostrarTesoro()) {
             throw new TesoroEncontradoException("¡Game Over! Encontraste el tesoro.");
         }
@@ -264,6 +264,9 @@ public class Juego {
                 default:
                     break;
             }
+        }
+        if(jugador.getNave().getTanque().tanqueVacio()){
+            throw new SinCombustibleEnCinturonDeAsteroides("Te perdiste entre los asteroides al quedarte sin combustible!");
         }
         System.out.println(mensaje);
     }
