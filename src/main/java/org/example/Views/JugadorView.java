@@ -10,6 +10,7 @@ public class JugadorView {
     private String nombre;
     private double uadeCoins;
     private boolean tesoro;
+//jaja xd
 
     public JugadorView(SistemaEstelar sistemaActual, String codigoDePlaneta, NaveAliada nave, String nombre, double uadeCoins, boolean tesoro) {
         this.sistemaActual = sistemaActual;
