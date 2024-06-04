@@ -5,18 +5,33 @@ import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MapaEstelar {
+    private static MapaEstelar instanciaMapaEstelar;
     private List<SistemaEstelar> sistemasEstelares;
     private Dificultades dificultad;
+    private String sistemaConTesoro;
 
-    public MapaEstelar() {
+
+    private MapaEstelar() {
         this.sistemasEstelares = new ArrayList<>();
     }
 
 
-    public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad,boolean tieneTesoro,boolean tieneCinturon) {
-        SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad,tieneTesoro,tieneCinturon);
+    public static MapaEstelar getInstancia() {
+        if (instanciaMapaEstelar == null) {
+            instanciaMapaEstelar = new MapaEstelar();
+        }
+        return instanciaMapaEstelar;
+    }
+
+    public String getSistemaConTesoro() {
+        return sistemaConTesoro;
+    }
+
+    public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad, boolean tieneTesoro, boolean tieneCinturon) {
+        SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad, tieneTesoro, tieneCinturon);
         sistemasEstelares.add(nuevoSistema);
         dificultad = dificutad;
         return nuevoSistema;
@@ -26,11 +41,11 @@ public class MapaEstelar {
         return sistemasEstelares;
     }
 
-    public boolean verificarExistenciaDeSistemaEstelar(String codigoDeSistema){
+    public boolean verificarExistenciaDeSistemaEstelar(String codigoDeSistema) {
         boolean verificacion = false;
-        for (SistemaEstelar sistema : sistemasEstelares){
-            if(sistema.mostrarNombre().equals(codigoDeSistema)){
-               verificacion = true;
+        for (SistemaEstelar sistema : sistemasEstelares) {
+            if (sistema.mostrarNombre().equals(codigoDeSistema)) {
+                verificacion = true;
             }
         }
         return verificacion;
@@ -48,5 +63,17 @@ public class MapaEstelar {
     public Dificultades getDificultad() {
         return dificultad;
     }
+    public void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares){
+        Random random = new Random();
+        int var = random.nextInt(cantidadSistemasEstelares);
+        for (int i = 0; i < cantidadSistemasEstelares; i++) {
+            boolean tieneTesoro = (i == var);
+            boolean tieneCinturon = random.nextBoolean();
+            SistemaEstelar sistemaEstelar = this.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
+            if(tieneTesoro){
+                sistemaConTesoro = sistemaEstelar.mostrarNombre();
+            }
+        }
 
+    }
 }

@@ -3,15 +3,17 @@ package org.example.MapaEstelar.Sistemas.Planetas;
 import org.example.Enums.Acciones;
 import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
+import org.example.MapaEstelar.MapaEstelar;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example.Mercado.Mercado;
 
 public class Aliado extends Planeta {
-
+    private MapaEstelar mapaEstelar;
     private static int count;
 
     public Aliado() {
         super("ALI-" + count++);
+        this.mapaEstelar = MapaEstelar.getInstancia();
     }
 
     @Override
@@ -52,9 +54,9 @@ public class Aliado extends Planeta {
     }
 
 
-    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador){
+    public String obtenerInformacion( Jugador jugador){
         if(jugador.puedoComprar(4000)){
-            return ("El sistema estelar que posee el tesoro es el:"+sistemaEstelar.mostrarNombre());
+            return ("El sistema estelar que posee el tesoro es el:"+mapaEstelar.getSistemaConTesoro());
         }
         else {
             return "Reune mas uade coins para obtener esa informacion!";

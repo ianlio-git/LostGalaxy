@@ -17,13 +17,13 @@ import java.util.Random;
 
 public class Juego {
     private static int turno;
+    private boolean turnoExtra;
     private static Juego instanciaJuego;
     private MapaEstelar mapaEstelar;
     private Jugador jugador;
-    private SistemaEstelar sistemaEstelarConTesoro;
-    private boolean turnoExtra;
+
     private Juego() {
-        this.mapaEstelar = new MapaEstelar();
+        this.mapaEstelar = MapaEstelar.getInstancia();
     }
 
     public static Juego getInstancia() {
@@ -34,7 +34,7 @@ public class Juego {
     }
     public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad){
         if (jugador == null) {
-            crearMapaEstelar(dificultad,cantidadSistemasEstelares);
+            mapaEstelar.crearMapaEstelar(dificultad,cantidadSistemasEstelares);
             SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
             Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
             switch (naveJugador) {
@@ -59,19 +59,7 @@ public class Juego {
             throw new RuntimeException("El juego ya fue iniciado");
         }
     }
-    private void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares){
-        Random random = new Random();
-        int var = random.nextInt(cantidadSistemasEstelares);
-        for (int i = 0; i < cantidadSistemasEstelares; i++) {
-            boolean tieneTesoro = (i == var);
-            boolean tieneCinturon = random.nextBoolean();
-            SistemaEstelar sistemaEstelar = mapaEstelar.agregarSistemaEstelar(dificultad, tieneTesoro, tieneCinturon);
-            if(tieneTesoro){
-                sistemaEstelarConTesoro = sistemaEstelar;
-            }
-        }
 
-    }
 
     public void indicarRumboANuevoSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
@@ -211,7 +199,7 @@ public class Juego {
         else{
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
-                finDelJuego(planeta.obtenerInformacion(sistemaEstelarConTesoro, jugador));
+                finDelJuego(planeta.obtenerInformacion(jugador));
             }
             else {
                 String mensaje = "No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.";

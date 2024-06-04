@@ -51,7 +51,7 @@ public class Hostil extends Planeta {
         jugador.encontreElTesoro(this.tesoro);
     }
     @Override
-    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+    public String obtenerInformacion(Jugador jugador) {
         return "No puedes obtener informacion aqui.";
     }
 

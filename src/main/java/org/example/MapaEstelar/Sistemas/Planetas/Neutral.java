@@ -37,7 +37,7 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+    public String obtenerInformacion(Jugador jugador) {
         return "No puedes obtener informacion aqui.";
     }
 

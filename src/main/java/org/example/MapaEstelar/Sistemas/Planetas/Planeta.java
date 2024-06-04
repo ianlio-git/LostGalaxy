@@ -18,6 +18,6 @@ public abstract class Planeta {
     public abstract Mercado ingresarAlMercado();
     public abstract void combate(Jugador jugador);
     public abstract void repararNaveAliada(Jugador jugador);
-    public abstract String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador);
+    public abstract String obtenerInformacion( Jugador jugador);
 
 }
