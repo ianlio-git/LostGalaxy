@@ -90,7 +90,7 @@ public class Jugador {
     public boolean tengoUadeCoinsParaCombustible(){
         return (uadeCoins > combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_HOSTIL));
     }
-    public void viajarANuevoSistema(SistemaEstelar sistemaEstelar) {
+    public void comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) {
         nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.SISTEMA_ESTELAR));
         if (sistemaEstelar.tieneCinturonAsteroides()){
             sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);

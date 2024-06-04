@@ -73,13 +73,13 @@ public class Juego {
 
     }
 
-    public void cambiarDeSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+    public void indicarRumboANuevoSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         if(mapaEstelar.verificarExistenciaDeSistemaEstelar(codigoDeSistema)){
             if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
                 String mensaje = ("Cambiando de sistema....");
                 SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
-                jugador.viajarANuevoSistema(sistemaNuevo);
+                jugador.comenzarViajeANuevoSistema(sistemaNuevo);
                 if(sistemaNuevo.tieneCinturonAsteroides()) {
                     jugador.setPosicionEnElEspacio("En cinturon de asteroides");
                 }else{

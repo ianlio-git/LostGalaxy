@@ -1,5 +1,6 @@
 package org.example.Controller;
 
+import org.example.Enums.TipoDeArma;
 import org.example.GameMaster.Exception.*;
 import org.example.Views.GameBeginView;
 import org.example.Views.JugadorView;
@@ -44,17 +45,40 @@ public class Controller{
         }
     }
     public static void cambiarDeSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
-        Juego.getInstancia().cambiarDeSistema(codigoDeSistema);
-
+        Juego.getInstancia().indicarRumboANuevoSistema(codigoDeSistema);
     }
-    public static void comprarArma(){}
-    public static void venderArma(){}
-    public static void recargarEscudo(){}
-    public static void comprarEscudoMaximo(){}
-    public static void repararNave(){}
-    public static void localizarTesoro(){}
-    public static void atacarPlanetaHostil(){}
-    public static void comprarCombustible(){}
+    public static void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().comprarArma(tipoDeArma);
+    }
+    public static void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().venderArma(tipoDeArma);
+    }
+
+    public static void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().recargarEscudo(cantidad);
+    }
+
+    public static void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().comprarEscudoMaximo(cantidad);
+    }
+
+    public static void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().comprarCombustible(cantidad);
+    }
+
+    public static void repararNave() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().realizarAccionDeReparacion();
+    }
+
+    public static void localizarTesoro() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().realizarAccionDeInformacion();
+    }
+
+    public static void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Juego.getInstancia().atacarPlanetaHostil(codigoDePlaneta);
+    }
+
+
 
 
 }
