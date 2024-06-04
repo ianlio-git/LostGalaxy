@@ -93,7 +93,7 @@ public class Juego {
             }
         }
         else {
-            String mensaje = "Ingresaste un sistema valido";
+            String mensaje = "Ingrese un sistema valido";
             finDelJuego(mensaje);
         }
     }
@@ -170,6 +170,7 @@ public class Juego {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaNeutral();
         jugador.setPlanetaActual(planeta);
+        jugador.setPosicionEnElEspacio(planeta.getCodigoDePlaneta());
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             return planeta;
@@ -298,4 +299,6 @@ public class Juego {
     public MapaEstelar getMapaEstelar() {
         return mapaEstelar;
     }
+
+
 }
