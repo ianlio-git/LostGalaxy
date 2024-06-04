@@ -4,6 +4,7 @@ import org.example.Enums.Acciones;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.GameMaster.Jugador;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Mercado.Mercado;
 
 public abstract class Planeta {
     private String codigoDePlaneta;
@@ -14,9 +15,9 @@ public abstract class Planeta {
         return codigoDePlaneta;
     }
     public abstract TipoDeCuerpoCeleste soyPlanetaTipo();
-    public abstract void realizarAccionEnMercado(Acciones accion, Jugador jugador, double cantidad);
+    public abstract Mercado ingresarAlMercado();
     public abstract void combate(Jugador jugador);
     public abstract void repararNaveAliada(Jugador jugador);
-    public abstract void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador);
+    public abstract String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador);
 
 }

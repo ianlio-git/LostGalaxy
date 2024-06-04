@@ -8,10 +8,12 @@ import java.util.List;
 
 public class MapaEstelar {
     private List<SistemaEstelar> sistemasEstelares;
-    Dificultades dificultad;
+    private Dificultades dificultad;
+
     public MapaEstelar() {
         this.sistemasEstelares = new ArrayList<>();
     }
+
 
     public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad,boolean tieneTesoro,boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad,tieneTesoro,tieneCinturon);
@@ -22,6 +24,16 @@ public class MapaEstelar {
 
     public List<SistemaEstelar> getSistemasEstelares() {
         return sistemasEstelares;
+    }
+
+    public boolean verificarExistenciaDeSistemaEstelar(String codigoDeSistema){
+        boolean verificacion = false;
+        for (SistemaEstelar sistema : sistemasEstelares){
+            if(sistema.mostrarNombre().equals(codigoDeSistema)){
+               verificacion = true;
+            }
+        }
+        return verificacion;
     }
 
     public SistemaEstelar obtenerSistemaEstelar(String codigo) {

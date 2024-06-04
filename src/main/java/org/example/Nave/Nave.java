@@ -38,4 +38,8 @@ public abstract class Nave {
     public void setVida(double vida) {
         this.vida = vida;
     }
+
+    public void reestablecerVida(){
+        this.vida=this.vidaMaxima;
+    }
 }

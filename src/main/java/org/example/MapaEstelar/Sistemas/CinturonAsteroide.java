@@ -16,9 +16,7 @@ public class CinturonAsteroide {
     }
 
     public void atravesar(Jugador jugador) {
-        System.out.println("===================================================");
         System.out.println("¡CUIDADO! Atravesando cinturón de asteroides.....");
-
         if (jugador.getNave().soyNaveTipo() != TipoDeNave.NAVE_PHANTOM) {
             double vidaInicial = jugador.getNave().getVida();
             jugador.getNave().recibirGolpe(this.calcularPoder());
@@ -32,13 +30,8 @@ public class CinturonAsteroide {
                 if (!jugador.getNave().getTanque().tengoCombustible()) {
                     jugador.setPlanetaActual(null);
                 }
-            } else {
-                System.out.println("¡No sobreviviste al cinturón de asteroides!");
             }
-        } else {
-            System.out.println("Tu nave Phantom ha logrado atravesar el cinturón sin recibir ni un rasguño.");
         }
-        System.out.println("===================================================");
     }
 
     private double calcularRecompensa(double vidaInicial,double vidaFinal){

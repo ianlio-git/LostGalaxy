@@ -4,5 +4,5 @@ public enum TipoDeCuerpoCeleste {
     PLANETA_NEUTRAL,
     PLANETA_HOSTIL,
     PLANETA_ALIADO,
-    CINTURON_ASTEROIDE,
+    SISTEMA_ESTELAR
 }

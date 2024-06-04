@@ -22,37 +22,9 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public void realizarAccionEnMercado(Acciones accion, Jugador jugador,double cantidad) {
-        switch (accion) {
-            case COMPRAR_COMBUSTIBLE:
-                mercado.comprarCombustible(jugador,cantidad);
-                break;
-            case COMPRAR_ESCUDO:
-                mercado.comprarEscudo(jugador,cantidad);
-                break;
-            case COMPRAR_ARMA, VENDER_ARMA:
-                procesarCompraOVentaArma(accion,jugador,cantidad);
-                break;
-            case RECARGAR_ESCUDO:
-                mercado.recargarEscudo(jugador,cantidad);
-                break;
-            default:
-                System.out.println("Acción no válida para el mercado.");
-        }
+    public Mercado ingresarAlMercado() {
+        return mercado;
     }
-    private void procesarCompraOVentaArma(Acciones accion,Jugador jugador,double cantidad) {
-        TipoDeArma arma = TipoDeArma.buscarId(cantidad);
-        if (arma != null) {
-            if (accion == Acciones.COMPRAR_ARMA) {
-                mercado.comprarArma(jugador, arma);
-            } else {
-                mercado.venderArma(jugador, arma);
-            }
-        } else {
-            System.out.println("No ingresó un ID de arma válido");
-        }
-    }
-
 
     @Override
     public void combate(Jugador jugador) {
@@ -65,8 +37,8 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
-        System.out.println("No puedes obtener informacion aqui.");
+    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+        return "No puedes obtener informacion aqui.";
     }
 
 

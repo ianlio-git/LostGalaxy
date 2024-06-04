@@ -12,6 +12,7 @@ public class Escudo {
     public boolean tengoEscudo() {
         return this.escudo>0;
     }
+
     public void agregarEscudoMaximo(double cantDeEscudo){
         this.escudoMax += cantDeEscudo;
 
@@ -19,6 +20,7 @@ public class Escudo {
     public void restablecerEscudo(){
         this.escudo = this.escudoMax;
     }
+
     public void quitarEscudo(double cantDeEscudo) {
         this.escudo -= cantDeEscudo;
 
@@ -42,4 +44,9 @@ public class Escudo {
     public void setEscudo(double escudo) {
         this.escudo = escudo;
     }
+
+    public boolean escudoLleno(){
+        return (this.escudoMax==escudo);
+    }
+
 }

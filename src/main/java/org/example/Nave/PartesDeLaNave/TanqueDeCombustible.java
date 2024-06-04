@@ -47,7 +47,7 @@ public class TanqueDeCombustible {
                 return (15*tasaDeAumento);
             case PLANETA_HOSTIL:
                 return (20*tasaDeAumento);
-            case CINTURON_ASTEROIDE:
+            case SISTEMA_ESTELAR:
                 return (30*tasaDeAumento);
             default:
                 return 0;

@@ -52,9 +52,9 @@ public class SistemaEstelar {
         return planetas;
     }
 
-    public Planeta obtenerPlanetaHostil() {
+    public Planeta obtenerPlanetaHostil(String codigoDePlaneta) {
         for (Planeta planeta : planetas) {
-            if (planeta.soyPlanetaTipo()== TipoDeCuerpoCeleste.PLANETA_HOSTIL) {
+            if (planeta.getCodigoDePlaneta().equals(codigoDePlaneta)) {
                 return planeta;
             }
         }

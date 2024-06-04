@@ -4,6 +4,7 @@ import org.example.Enums.Acciones;
 import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Mercado.Mercado;
 
 public class Aliado extends Planeta {
 
@@ -19,8 +20,8 @@ public class Aliado extends Planeta {
     }
 
     @Override
-    public void realizarAccionEnMercado(Acciones accion, Jugador jugador, double cantidad) {
-        System.out.println("Un planeta Aliado no tiene Mercado");
+    public Mercado ingresarAlMercado() {
+        return null;
     }
 
     @Override
@@ -30,10 +31,8 @@ public class Aliado extends Planeta {
 
     public void repararNaveAliada(Jugador jugador) {
         bienvenidaAlTaller(jugador);
-        double vidaMaxima = jugador.getNave().getVidaMaxima();
-        jugador.getNave().setVida(vidaMaxima);
-        double escudoMaximo = jugador.getNave().getEscudo().cantidadEscudoMax();
-        jugador.getNave().getEscudo().setEscudo(escudoMaximo);
+        jugador.getNave().reestablecerVida();
+        jugador.getNave().getEscudo().restablecerEscudo();
         reparacionDeNave(jugador);
     }
 
@@ -53,13 +52,12 @@ public class Aliado extends Planeta {
     }
 
 
-    public void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador){
+    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador){
         if(jugador.puedoComprar(4000)){
-            System.out.println("El sistema estelar que posee el tesoro es el:"+sistemaEstelar.mostrarNombre());
+            return ("El sistema estelar que posee el tesoro es el:"+sistemaEstelar.mostrarNombre());
         }
         else {
-            System.out.println("Reune mas uade coins para obtener esa informacion!");
+            return "Reune mas uade coins para obtener esa informacion!";
         }
     }
-
 }

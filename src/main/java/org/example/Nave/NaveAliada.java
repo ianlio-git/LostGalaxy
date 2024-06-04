@@ -7,6 +7,7 @@ import org.example.Nave.PartesDeLaNave.Escudo;
 import org.example.Nave.PartesDeLaNave.TanqueDeCombustible;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.lang.Math.abs;
@@ -53,15 +54,20 @@ public abstract class NaveAliada extends Nave {
     public void agregarArma(Arma nuevaArma) {
         this.armas.add(nuevaArma);
     }
-    public void quitarArma(TipoDeArma tipoDeArma) {
+
+    public boolean quitarArma(TipoDeArma tipoDeArma) {
+        boolean removiElArma = false;
         for (Arma arma : armas){
-            if (tipoDeArma == arma.soyTipoDeArma()){
+            if(tipoDeArma.equals(arma.soyTipoDeArma())){
                 this.armas.remove(arma);
-            }else {
-                System.out.println("no podes quitar un arma que no tenes!");
+                return true;
             }
         }
+        return removiElArma;
     }
+
+
+
     public boolean tengoArmas(){
         return armas.size()>0;
     }

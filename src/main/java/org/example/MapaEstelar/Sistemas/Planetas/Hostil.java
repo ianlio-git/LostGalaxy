@@ -4,6 +4,7 @@ import org.example.Enums.Acciones;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.GameMaster.Jugador;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Mercado.Mercado;
 import org.example.Nave.TiposDeNaves.NavePirata;
 
 public class Hostil extends Planeta {
@@ -22,8 +23,8 @@ public class Hostil extends Planeta {
     }
 
     @Override
-    public void realizarAccionEnMercado(Acciones accion, Jugador jugador, double cantidad) {
-        System.out.println("Un planeta Hostil no tiene Mercado");
+    public Mercado ingresarAlMercado() {
+        return null;
     }
 
     public void combate(Jugador jugador) {
@@ -50,8 +51,8 @@ public class Hostil extends Planeta {
         jugador.encontreElTesoro(this.tesoro);
     }
     @Override
-    public void obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
-        System.out.println("No puedes obtener informacion aqui.");
+    public String obtenerInformacion(SistemaEstelar sistemaEstelar, Jugador jugador) {
+        return "No puedes obtener informacion aqui.";
     }
 
 
