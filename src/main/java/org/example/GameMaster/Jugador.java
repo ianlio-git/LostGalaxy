@@ -56,6 +56,10 @@ public class Jugador {
         return (this.getUadeCoins() > precio);
     }
 
+    public SistemaEstelar getSistemaActual() {
+        return sistemaActual;
+    }
+
     public void viajeAPlaneta(Planeta planeta){
         if( !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
             nave.getTanque().consumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
@@ -79,23 +83,17 @@ public class Jugador {
         return (uadeCoins > combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_HOSTIL));
     }
     public void cambioDeSistema(SistemaEstelar sistemaEstelar) {
-        if (sistemaEstelar != null) {
-            if (!sistemaActual.mostrarNombre().equals(sistemaEstelar.mostrarNombre())) {
-                System.out.println("Cambiando de sistema....");
-                nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.CINTURON_ASTEROIDE));
-                if (sistemaEstelar.tieneCinturonAsteroides()){
-                    sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
-                }
-                sistemaActual = sistemaEstelar;
-            }
-        }else{
-            System.out.println("el sistema donde queres ir no existe");
+        nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.CINTURON_ASTEROIDE));
+        if (sistemaEstelar.tieneCinturonAsteroides()){
+            sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
         }
+        sistemaActual = sistemaEstelar;
     }
 
     public JugadorView toViewJugador() {
         return new JugadorView(sistemaActual,planetaActual.getCodigoDePlaneta(),nave,nombre,uadeCoins,tesoro);
     }
+
 
     public String getNombre() {
         return nombre;

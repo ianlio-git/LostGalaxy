@@ -26,6 +26,10 @@ public class Main {
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
 
+        juego.realizarAccionDeCompra(Acciones.RECARGAR_ESCUDO,"SIST-0",150);
+        Controller.mostrarTurno();
+        Controller.mostrarDetalleDelJugador();
+
 
         juego.atacarPlanetaHostil("SIST-0");
         Controller.mostrarTurno();

@@ -1,5 +1,9 @@
 package org.example.GameMaster;
 
+import org.example.GameMaster.Exception.CombustibleInsuficienteException;
+import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example.GameMaster.Exception.SinCombustibleException;
+import org.example.GameMaster.Exception.TesoroEncontradoException;
 import org.example.Views.GameBeginView;
 import org.example.Enums.Acciones;
 import org.example.Enums.Dificultades;
@@ -72,124 +76,118 @@ public class Juego {
 
     }
 
-    private void siguienteTurno(String codigoDeSistema) {
+    private void verificarSiguienteTurno(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
         pasarTurno();
-        SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
-        jugador.cambioDeSistema(sistemaNuevo);
-        finDelJuego();
+        if (jugador.getPlanetaActual() != null) {
+            if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
+                System.out.println("Cambiando de sistema....");
+                SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
+                jugador.cambioDeSistema(sistemaNuevo);
+            }
+        }else{
+            String mensaje = ("el sistema donde queres ir no existe");
+            finDelJuego(mensaje);
+        }
     }
 
 
-    public void realizarAccionDeCompra(Acciones accion, String codigoDeSistema, double compra) {
-        siguienteTurno(codigoDeSistema);
+    public void realizarAccionDeCompra(Acciones accion, String codigoDeSistema, double compra) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+        verificarSiguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaNeutral();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             planeta.realizarAccionEnMercado(accion, jugador, compra);
         } else {
-            System.out.println("No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.");
-            finDelJuego();
+            String mensaje = "No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.";
+            finDelJuego(mensaje);
         }
     }
 
-    public void realizarAccionDeReparacion(String codigoDeSistema) {
-        siguienteTurno(codigoDeSistema);
+    public void realizarAccionDeReparacion(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+        verificarSiguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             planeta.repararNaveAliada(jugador);
         } else {
-            System.out.println("No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.");
-            finDelJuego();
+            String mensaje ="No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.";
+            finDelJuego(mensaje);
         }
     }
 
-    public void realizarAccionDeInformacion(String codigoDeSistema) {
-        siguienteTurno(codigoDeSistema);
+    public void realizarAccionDeInformacion(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+        verificarSiguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaAliado();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             planeta.obtenerInformacion(sistemaEstelarConTesoro, jugador);
         } else {
             if(planeta==null){
-                System.out.println("No hay planeta aliado en este sistema.");
-                finDelJuego();
+                String mensaje ="No hay planeta aliado en este sistema.";
+                finDelJuego(mensaje);
             }else {
-                System.out.println("No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.");
-                finDelJuego();
+                String mensaje ="No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.";
+                finDelJuego(mensaje);
             }
         }
     }
 
-    public void atacarPlanetaHostil(String codigoDeSistema) {
-        siguienteTurno(codigoDeSistema);
+    public void atacarPlanetaHostil(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException {
+        verificarSiguienteTurno(codigoDeSistema);
         Planeta planeta = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).obtenerPlanetaHostil();
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             planeta.combate(this.jugador);
-            finDelJuego();
+            String mensaje;
+            if (this.jugador.mostrarTesoro()){
+                mensaje = "La nave enemiga fue destruida. ¡Muy bien!, ¡Felicidades, has encontrado el tesoro y has ganado el juego!";
+                finDelJuego(mensaje);
+            }else{
+                mensaje = "La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado!";
+                finDelJuego(mensaje);
+            }
             mapaEstelar.obtenerSistemaEstelar(codigoDeSistema).quitarPlaneta(planeta);
         } else {
             if(planeta==null){
-                System.out.println("No hay planeta mas planetas hostiles en este sistema.");
-                finDelJuego();
+                String mensaje ="No hay planeta mas planetas hostiles en este sistema.";
+                finDelJuego(mensaje);
             }else {
-                System.out.println("No puedo atacar el planeta hostil, la nave no tiene combustible suficiente para esta accion.");
-                finDelJuego();
+                String mensaje ="No puedo atacar el planeta hostil, la nave no tiene combustible suficiente para esta accion.";
+                finDelJuego(mensaje);
             }
         }
     }
 
 
-    private void finDelJuego() {
-        if(jugador.getPlanetaActual()==null){
-            System.out.println("****************************************************");
-            System.out.println("¡Game Over! Me quede sin combustible en el cinturon.");
-            System.out.println("****************************************************");
-            System.exit(3);
+    private void finDelJuego(String mensaje) throws SinCombustibleException, TesoroEncontradoException, NaveDestruidaException, CombustibleInsuficienteException {
+        if (jugador.getPlanetaActual() == null) {
+            throw new SinCombustibleException("¡Game Over! Me quedé sin combustible en el cinturón.");
         }
 
         if (jugador.mostrarTesoro()) {
-            System.out.println("****************************************************");
-            System.out.println("¡Game Over! Encontraste el tesoro.");
-            System.out.println("****************************************************");
-            System.exit(0);
+            throw new TesoroEncontradoException("¡Game Over! Encontraste el tesoro.");
         }
 
         if (jugador.naveEstaDestruida()) {
-            System.out.println("****************************************************");
-            System.out.println("Tu nave fue destruida. ¡Game Over!");
-            System.out.println("****************************************************");
-            System.exit(1);
+            throw new NaveDestruidaException("Tu nave fue destruida. ¡Game Over!");
         }
 
         if (!jugador.puedoVolverPlanetaNeutral()) {
             switch (jugador.getPlanetaActual().soyPlanetaTipo()) {
                 case PLANETA_ALIADO:
-                    System.out.println("****************************************************");
-                    System.out.println("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
-                    System.out.println("****************************************************");
-                    System.exit(2);
-                    break;
+                    throw new CombustibleInsuficienteException("Te quedaste sin combustible en un planeta aliado. ¡Game Over!");
                 case PLANETA_HOSTIL:
-                    System.out.println("****************************************************");
-                    System.out.println("Te quedaste sin combustible en un planeta hostil. ¡Game Over!");
-                    System.out.println("****************************************************");
-                    System.exit(2);
-                    break;
+                    throw new CombustibleInsuficienteException("Te quedaste sin combustible en un planeta hostil. ¡Game Over!");
                 case PLANETA_NEUTRAL:
-                    if (!jugador.getNave().tengoArmas()&&jugador.tengoUadeCoinsParaCombustible()) {
-                        System.out.println("****************************************************");
-                        System.out.println("Te quedaste sin combustible en un planeta neutral y no tienes suficientes UadeCoins ni armas para vender. ¡Game Over!");
-                        System.out.println("****************************************************");
-                        System.exit(2);
+                    if (!jugador.getNave().tengoArmas() && jugador.tengoUadeCoinsParaCombustible()) {
+                        throw new CombustibleInsuficienteException("Te quedaste sin combustible en un planeta neutral y no tienes suficientes UadeCoins ni armas para vender. ¡Game Over!");
                     }
                     break;
                 default:
                     break;
             }
         }
-
+        System.out.println(mensaje);
     }
 
     private void pasarTurno(){

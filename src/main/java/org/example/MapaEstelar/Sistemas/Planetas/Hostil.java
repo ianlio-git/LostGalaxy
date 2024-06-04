@@ -36,7 +36,7 @@ public class Hostil extends Planeta {
         }
         if(!naveEnemiga.tengoVida()&&jugador.getNave().tengoVida()) {
             asignarRecomprensas(jugador,acumDeDanio);
-            resultadoCombate();
+
         }
     }
 
@@ -55,13 +55,6 @@ public class Hostil extends Planeta {
     }
 
 
-    private void resultadoCombate(){
-        System.out.println("La nave enemiga fue destruida. ¡Muy bien!");
-        if (this.tesoro){
-            System.out.println("¡Felicidades, has encontrado el tesoro y has ganado el juego!");
-        }else{
-            System.out.println("Por desgracia no has encontrado el tesoro, sigue intentado!");
-        }
-    }
+
 
 }
