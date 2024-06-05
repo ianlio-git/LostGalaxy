@@ -1,0 +1,151 @@
+@startuml
+actor Usuario
+participant  PantallaDeReultados
+participant  Controller
+participant  Juego
+participant  Jugador
+participant  SistemaEstelar
+participant  Hostil
+
+
+
+participant  NavePirata
+participant  NaveAliada
+participant  Mensaje
+
+Usuario -> Juego: atacarPlanetaHostil(String codigoDePlaneta): Void
+
+activate Juego
+    Juego -> Juego: pasarTurno(): Void
+    Juego -> Jugador: getSistemaActual():SistemaEstelar
+    activate Jugador
+    Jugador --> Juego: SistemaEstelar
+    deactivate Jugador
+    Juego -> SistemaEstelar: obtenerPlanetaHostil(String codigoDePlaneta): Planeta
+
+    alt Planeta Hostil no encontrado
+    activate SistemaEstelar
+    SistemaEstelar --> Juego:Null
+        Juego ->  Juego: finDelJuego(Sting Mensaje): String
+        Controller -> Juego : messageToView(): messageToView
+        activate Controller
+        Juego --> Controller: messageToView
+        Controller -> PantallaDeReultados: infoUpdate(): String
+        deactivate Controller
+        activate PantallaDeReultados
+        PantallaDeReultados --> Usuario: String
+        deactivate PantallaDeReultados
+        else Planeta Hostil encontrado
+        SistemaEstelar --> Juego:Planeta
+        deactivate SistemaEstelar
+        end
+        Juego -> Jugador: jugador.puedoViajar(planeta):boolean
+        alt CombustibleInsuficienteException
+            Juego ->  Juego: finDelJuego(Sting Mensaje): String
+            Controller -> Juego : messageToView(): messageToView
+            activate Controller
+            Juego --> Controller: messageToView
+            Controller -> PantallaDeReultados: infoUpdate(): String
+            deactivate Controller
+            activate PantallaDeReultados
+            PantallaDeReultados --> Usuario: String
+            deactivate PantallaDeReultados
+        else No tengo combustible para el viaje pero puedo comprar
+            activate Jugador
+            Jugador --> Juego: False
+            Juego ->  Juego: finDelJuego(Sting Mensaje): String
+
+                Controller -> Juego : messageToView(): messageToView
+                activate Controller
+                Juego --> Controller: messageToView
+                Controller -> PantallaDeReultados: infoUpdate(): String
+                deactivate Controller
+                activate PantallaDeReultados
+                PantallaDeReultados --> Usuario: String
+                deactivate PantallaDeReultados
+
+            else tengo combustible para viajar
+            Jugador --> Juego: True
+            deactivate Jugador
+
+            Juego -> Jugador:viajeAPlaneta(planeta): Void
+            activate Jugador
+            deactivate Jugador
+            Juego -> Hostil:combate(Juegador)
+            activate Hostil
+
+            Hostil -> NaveAliada: getNave(): NaveAliada
+            activate NaveAliada
+            NaveAliada --> Hostil: NaveAliada
+            deactivate NaveAliada
+            Hostil -> NavePirata:getVida()
+            activate NavePirata
+            NavePirata --> Hostil:Double
+            deactivate NavePirata
+            Hostil -> NaveAliada: getVida():Double
+            activate NaveAliada
+
+            NaveAliada --> Hostil: double
+            deactivate NaveAliada
+
+            loop la nave del jugador como y la nave enemiga tienen vida
+                Hostil -> NavePirata:getPoder()
+                activate NavePirata
+                NavePirata --> Hostil:double
+                deactivate NavePirata
+                Hostil -> NaveAliada: recibirGolpe(double poderAtaque): void
+                activate NaveAliada
+                deactivate NaveAliada
+                Hostil -> NaveAliada: getPoder(): double
+                activate NaveAliada
+                NaveAliada --> Hostil: double
+                deactivate NaveAliada
+                Hostil -> NavePirata: quitarVida(double poderAtaque): void
+                activate NavePirata
+                deactivate NavePirata
+                alt si la nave alida fue destruida y el la nave enamiga esta destruida
+                Hostil -> Jugador:  asignarRecomprensas(jugador,acumDeDanio) void
+                activate Jugador
+                deactivate Jugador
+                end
+
+            end
+
+            alt La nave enemiga fue destruida no has encontrado el tesoro
+            Juego-> Juego: finDelJuego(Sting Mensaje): String
+            Controller -> Juego : messageToView(): messageToView
+            activate Controller
+            Juego --> Controller: messageToView
+            Controller -> PantallaDeReultados: infoUpdate(): String
+            deactivate Controller
+            activate PantallaDeReultados
+            PantallaDeReultados --> Usuario: String
+            deactivate PantallaDeReultados
+
+            else TesoroEncontradoException
+            Juego-> Juego: finDelJuego(Sting Mensaje): String
+            Controller -> Juego : messageToView(): messageToView
+            activate Controller
+            Juego --> Controller: messageToView
+            Controller -> PantallaDeReultados: infoUpdate(): String
+            deactivate Controller
+            activate PantallaDeReultados
+            PantallaDeReultados --> Usuario: String
+            deactivate PantallaDeReultados
+
+            else NaveDestruidaException
+            Juego-> Juego: finDelJuego(Sting Mensaje): String
+            Controller -> Juego : messageToView(): messageToView
+            activate Controller
+            Juego --> Controller: messageToView
+            Controller -> PantallaDeReultados: infoUpdate(): String
+            deactivate Controller
+            activate PantallaDeReultados
+            PantallaDeReultados --> Usuario: String
+            deactivate PantallaDeReultados
+            end
+            end
+            deactivate Hostil
+deactivate Juego
+
+@enduml
