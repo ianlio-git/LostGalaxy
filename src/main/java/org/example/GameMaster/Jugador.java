@@ -35,7 +35,6 @@ public class Jugador {
     public Planeta getPlanetaActual(){
         return planetaActual;
     }
-    public String getPosicionEnElEspacio() {return posicionEnElEspacio;}
     public void setPlanetaActual(Planeta planetaActual) {
         this.planetaActual = planetaActual;
     }
@@ -90,12 +89,14 @@ public class Jugador {
     public boolean tengoUadeCoinsParaCombustible(){
         return (uadeCoins > combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_HOSTIL));
     }
-    public void comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) {
+    public String comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) {
         nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.SISTEMA_ESTELAR));
         if (sistemaEstelar.tieneCinturonAsteroides()){
-            sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
+            sistemaActual = sistemaEstelar;
+            return (sistemaEstelar.mostrarCinturonAsteroides().atravesar(this));
         }
         sistemaActual = sistemaEstelar;
+        return "Cambiando de sistema.... \n No atravezaste ningun cinturon de asteroides!";
     }
 
     public JugadorView toViewJugador() {

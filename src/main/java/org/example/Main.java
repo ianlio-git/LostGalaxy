@@ -16,31 +16,37 @@ public class Main {
         Controller.comprarArma(TipoDeArma.CAÑON_DE_IONES);
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
-
+        Juego juego;
 
         Controller.comprarCombustible(400);
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
 
+
         Controller.cambiarDeSistema("SIST-1");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.cambiarDeSistema("SIST-0");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.cambiarDeSistema("SIST-1");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.cambiarDeSistema("SIST-2");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
-        Controller.cambiarDeSistema("SIST-3");
+        Controller.cambiarDeSistema("SIST-0");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.comprarArma(TipoDeArma.CAÑON_DE_PARTICULAS);
         Controller.mostrarTurno();
@@ -69,18 +75,22 @@ public class Main {
         Controller.atacarPlanetaHostil("ENE-0");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.atacarPlanetaHostil("ENE-1");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.atacarPlanetaHostil("ENE-2");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
 
         Controller.atacarPlanetaHostil("ENE-3");
         Controller.mostrarTurno();
         Controller.mostrarDetalleDelJugador();
+        System.out.println(Juego.getInstancia().getMensajeRecibido());
     }
 
 //    public void comprarArma (Juego juego) {

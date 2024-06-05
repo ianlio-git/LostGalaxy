@@ -21,6 +21,7 @@ public class Juego {
     private static Juego instanciaJuego;
     private MapaEstelar mapaEstelar;
     private Jugador jugador;
+    private String mensajeRecibido;
 
     private Juego() {
         this.mapaEstelar = MapaEstelar.getInstancia();
@@ -66,14 +67,12 @@ public class Juego {
         if(mapaEstelar.verificarExistenciaDeSistemaEstelar(codigoDeSistema)){
             if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
                 SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
-                jugador.comenzarViajeANuevoSistema(sistemaNuevo);
+                finDelJuego(jugador.comenzarViajeANuevoSistema(sistemaNuevo));
                 if(sistemaNuevo.tieneCinturonAsteroides()) {
                     jugador.setPosicionEnElEspacio("En cinturon de asteroides");
                 }else{
                     jugador.setPosicionEnElEspacio("En el espacio");
                 }
-                String mensaje = ("Cambiando de sistema....");
-                finDelJuego(mensaje);
             }
             else{
                 String mensaje = ("Continua tu aventura entre los planetas del mismo sistema");
@@ -206,6 +205,7 @@ public class Juego {
     public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaHostil(codigoDePlaneta);
+        double cantDeUadeCoinsInicial = jugador.getUadeCoins();
         if (planeta == null) {
             String mensaje = "No se pudo encontrar el planeta hostil en el sistema.";
             finDelJuego(mensaje);
@@ -213,8 +213,9 @@ public class Juego {
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.combate(this.jugador);
+                double cantDeUadeCoinsFinales = jugador.getUadeCoins();
                 jugador.getSistemaActual().quitarPlaneta(planeta);
-                finDelJuego("La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado!");
+                finDelJuego("La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado! \n UadeCoins obtenidas: "+(cantDeUadeCoinsFinales-cantDeUadeCoinsInicial));
             } else {
                 String mensaje = "No puedo atacar el planeta hostil, la nave no tiene combustible suficiente para esta accion.";
                 finDelJuego(mensaje);
@@ -223,7 +224,7 @@ public class Juego {
     }
 
 
-    private void finDelJuego(String mensaje) throws SinCombustibleException, TesoroEncontradoException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides {
+   private void finDelJuego(String mensaje) throws SinCombustibleException, TesoroEncontradoException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides {
         if (jugador.mostrarTesoro()) {
             throw new TesoroEncontradoException("¡Game Over! Encontraste el tesoro.");
         }
@@ -250,7 +251,11 @@ public class Juego {
         if(jugador.getNave().getTanque().tanqueVacio()){
             throw new SinCombustibleEnCinturonDeAsteroides("Te perdiste entre los asteroides al quedarte sin combustible!");
         }
-        System.out.println(mensaje);
+        mensajeRecibido = mensaje;
+    }
+
+    public String getMensajeRecibido() {
+        return mensajeRecibido;
     }
 
     private void pasarTurno(){
