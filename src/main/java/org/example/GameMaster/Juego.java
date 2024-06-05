@@ -126,16 +126,7 @@ public class Juego {
         }
     }
 
-    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
-        Planeta planeta = irAlShopping();
-            if(planeta!=null){
-                if(planeta.ingresarAlMercado().accionDeComprarEscudoMaximo(jugador,cantidad)){
-                    finDelJuego("Compraste escudo con exito");
-                }else{
-                    finDelJuego("No tienes suficientes uade coins!");
-                }
-            }
-    }
+
 
     public void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         Planeta planeta = irAlShopping();
@@ -144,6 +135,16 @@ public class Juego {
                 finDelJuego("Vendiste el arma con exito!");
             }else{
                 finDelJuego("No posees el arma que quieres vender.");
+            }
+        }
+    }
+    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+        Planeta planeta = irAlShopping();
+        if(planeta!=null){
+            if(planeta.ingresarAlMercado().accionDeComprarEscudoMaximo(jugador,cantidad)){
+                finDelJuego("Compraste escudo con exito");
+            }else{
+                finDelJuego("No tienes suficientes uade coins!");
             }
         }
     }

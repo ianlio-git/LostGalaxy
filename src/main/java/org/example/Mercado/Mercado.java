@@ -62,7 +62,6 @@ public class Mercado {
         if (jugador.puedoComprar(arma.getPrecio()) && jugador.getNave().limiteDeArmas()) {
             jugador.getNave().agregarArma(arma);
             jugador.quitarUadeCoins(arma.getPrecio());
-            System.out.println("Usted ha comprado un: " + arma.soyTipoDeArma());
             pudeComprar = true;
         }
         return pudeComprar;

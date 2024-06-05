@@ -9,11 +9,33 @@ import org.example.GameMaster.Juego;
 import org.example.MapaEstelar.MapaEstelar;
 
 public class Main {
-    public static void main(String[] args) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
+    public static void main(String[] args) {
 
-        Controller.gameBegin("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_PHANTOM, 4, Dificultades.FACIL);
+        Controller.gameBegin("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_AEGIS, 4, Dificultades.FACIL);
         Controller.mostrarSistemas();
-        //hola
+
+
+
+        Controller.mostrarTurno();
+        Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.comprarEscudoMaximo(200);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.recargarEscudo(200);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
         Controller.mostrarTurno();
         Controller.repararNave();
         Controller.infoUpdate();
@@ -33,6 +55,48 @@ public class Main {
         Controller.localizarTesoro();
         Controller.infoUpdate();
         Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-1");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-0");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+
+        Controller.mostrarTurno();
+        Controller.cambiarDeSistema("SIST-1");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-2");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-3");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.cambiarDeSistema("SIST-2");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-4");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-5");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
     }
 
 
