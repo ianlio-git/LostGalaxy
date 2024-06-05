@@ -1,10 +1,8 @@
 package org.example.MapaEstelar.Sistemas.Planetas;
 
-import org.example.Enums.Acciones;
 import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.MapaEstelar;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example.Mercado.Mercado;
 
 public class Aliado extends Planeta {

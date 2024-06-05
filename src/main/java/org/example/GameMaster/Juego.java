@@ -65,7 +65,6 @@ public class Juego {
         pasarTurno();
         if(mapaEstelar.verificarExistenciaDeSistemaEstelar(codigoDeSistema)){
             if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
-                String mensaje = ("Cambiando de sistema....");
                 SistemaEstelar sistemaNuevo = mapaEstelar.obtenerSistemaEstelar(codigoDeSistema);
                 jugador.comenzarViajeANuevoSistema(sistemaNuevo);
                 if(sistemaNuevo.tieneCinturonAsteroides()) {
@@ -73,6 +72,7 @@ public class Juego {
                 }else{
                     jugador.setPosicionEnElEspacio("En el espacio");
                 }
+                String mensaje = ("Cambiando de sistema....");
                 finDelJuego(mensaje);
             }
             else{
@@ -119,13 +119,11 @@ public class Juego {
             if(planeta!=null){
                 if(planeta.ingresarAlMercado().accionDeRecargarEscudo(jugador,cantidad)){
                     finDelJuego("Recargaste escudo con exito!");
-                }
-                else{
+                }else{
                     finDelJuego("No tienes suficientes uade coins!");
                 }
             }
-        }
-        else{
+        }else{
             finDelJuego("Escudos al maximo");
         }
     }
@@ -135,8 +133,7 @@ public class Juego {
             if(planeta!=null){
                 if(planeta.ingresarAlMercado().accionDeComprarEscudoMaximo(jugador,cantidad)){
                     finDelJuego("Compraste escudo con exito");
-                }
-                else{
+                }else{
                     finDelJuego("No tienes suficientes uade coins!");
                 }
             }
@@ -147,8 +144,7 @@ public class Juego {
         if(planeta!=null){
             if(planeta.ingresarAlMercado().accionDeVenderArma(jugador,tipoDeArma)){
                 finDelJuego("Vendiste el arma con exito!");
-            }
-            else{
+            }else{
                 finDelJuego("No posees el arma que quieres vender.");
             }
         }
@@ -162,7 +158,7 @@ public class Juego {
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
             return planeta;
-        } else {
+        }else {
             String mensaje = "No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.";
             finDelJuego(mensaje);
         }
@@ -175,8 +171,7 @@ public class Juego {
         if(planeta==null){
             String mensaje ="No hay planeta aliado en este sistema.";
             finDelJuego(mensaje);
-        }
-        else{
+        }else{
 
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
@@ -195,8 +190,7 @@ public class Juego {
         if(planeta==null){
             String mensaje ="No hay planeta aliado en este sistema.";
             finDelJuego(mensaje);
-        }
-        else{
+        }else{
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 finDelJuego(planeta.obtenerInformacion(jugador));
@@ -215,8 +209,7 @@ public class Juego {
         if (planeta == null) {
             String mensaje = "No se pudo encontrar el planeta hostil en el sistema.";
             finDelJuego(mensaje);
-        }
-        else {
+        }else {
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.combate(this.jugador);
@@ -268,13 +261,11 @@ public class Juego {
                 turnoExtra = true;
                 ++this.turno;
             }
-        }
-        else{
+        }else{
             ++this.turno;
         }
 
     }
-
 
     public Jugador getJugador() {
         return jugador;
