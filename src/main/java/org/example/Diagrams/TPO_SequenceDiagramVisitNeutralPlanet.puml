@@ -1,24 +1,33 @@
 @startuml
-actor main
-main->Juego: siguienteTurno(Acciones accion, String codigoPlaneta ): void
+Main -> Controller : algunMetodoQueMeHagaMovermeEntrePlanetas(planeta)
+activate Main
+Controller -> Juego : algunMetodoQueMeHagaMovermeEntrePlanetas(planeta)
+deactivate Main
+activate Controller
+Juego -> Jugador : viajeAPlaneta(planeta)
+deactivate Controller
 activate Juego
-    loop busca planeta segun codigo
-        alt codigo de planeta valido
 
-            activate Juego
-                Juego -> Planeta: visitarPlaneta(String codigoPlaneta): Planeta
-            activate Planeta
-                Planeta --> Juego: Planeta
-            deactivate Planeta
+alt si el planeta no es el mismo en el que estoy
+    Jugador -> Nave : getTanque()
+    activate Jugador
+    Nave -> Jugador : Tanque
+    activate Nave
+    Jugador -> Tanque : consumirCombustible()
+    activate Tanque
+    Tanque -> Tanque : setCombustible()
+    Jugador -> Jugador : setPlanetaActual()
+    Jugador -> Jugador : setPosicionEnElEspacio()
+    deactivate Tanque
+    deactivate Nave
 
-            Juego -> Jugador : getNave():NaveAliada
-            activate Jugador
-            Jugador -->Juego: NaveAliada
-            deactivate Jugador
-
-        else el planeta no existe o fue destruido.
-                Juego --> main : RuntimeException
-            deactivate Juego
-    end
+else Si el planeta es el mismo no hace nada
+    Jugador -> Jugador : nothing
+    activate Jugador
+    deactivate Jugador
 end
 @enduml
+
+// hay muchos metodos que llaman a este para settear un planeta neutral,
+pero no hay un metodo exclusivo de viajar a planeta nuetral, por eso llamo
+a esos metodos que no existen desde el controller y el main.
