@@ -11,7 +11,7 @@ public class CinturonAsteroide {
     }
 
 
-    public double calcularPoder() {
+    private double calcularPoder() {
         return this.cantidadDeAsteroides * 10;
     }
 

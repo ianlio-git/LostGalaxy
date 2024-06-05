@@ -30,7 +30,7 @@ public class MapaEstelar {
         return sistemaConTesoro;
     }
 
-    public SistemaEstelar agregarSistemaEstelar(Dificultades dificutad, boolean tieneTesoro, boolean tieneCinturon) {
+    private SistemaEstelar agregarSistemaEstelar(Dificultades dificutad, boolean tieneTesoro, boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad, tieneTesoro, tieneCinturon);
         sistemasEstelares.add(nuevoSistema);
         dificultad = dificutad;

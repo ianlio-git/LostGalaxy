@@ -1,35 +1,32 @@
 @startuml
 'class Juego
 TipoDeNave <-- Juego
-Acciones <-- Juego
 Dificultades <-- Juego
-TipoDePlaneta <-- Juego
-TipoDePlaneta <-- Planeta
-Arma -- NaveAliada
+TipoDeCuerpoCeleste <--  Juego
+TipoDeCuerpoCeleste <-- Planeta
+TipoDeCuerpoCeleste <--  SistemaEstelar
 
-Arma -- Mercado
 enum TipoDeNave{
-    AEGIS
-    SWIFT
+     NAVE_AEGIS,
+     NAVE_SWIFT,
+     NAVE_PHANTOM,
+     NAVE_TITAN,
 }
-enum Acciones {
-    COMPRAR_COMBUSTIBLE
-    COMPRAR_ESCUDO
-    COMPRAR_ARMA
-    BUSCAR_TESORO
-}
-
 enum Dificultades {
     FACIL
     MEDIO
     DIFICIL
 }
 
-enum TipoDePlaneta {
-    NEUTRAL
-    HOSTIL
+enum TipoDeCuerpoCeleste {
+    PLANETA_NEUTRAL,
+    PLANETA_HOSTIL,
+    PLANETA_ALIADO,
+    SISTEMA_ESTELAR
 }
+Juego  --> TipoDeArma
 Arma --> TipoDeArma
+Mercado --> TipoDeArma
 enum TipoDeArma{
    CAÑON_DE_IONES
    LASER_DE_FUSION
@@ -37,178 +34,435 @@ enum TipoDeArma{
    CAÑON_DE_PARTICULAS
    CAÑON_GAUSS
 }
-Juego "1" *-- "n" Planeta
 Juego "1" *-- "1" Jugador
 class Juego {
-    - planetas: List<Planeta>
-    - turno: int
-    - jugador: Jugador
-    + Juego()
-    + getInstancia(): Juego
-    + iniciarJuego(nombreDelJugador: String, uadeCoinsJugador: double, naveJugador: TipoDeNave, tamanioDeLaGalaxia: int, dificultad: Dificultades): void
-    + siguienteTurno(accion: Acciones, codigoPlaneta: String): void
-    + mostarListadoPlanetas(tipoPlaneta: TipoDePlaneta): void
-    - crearPlanetas(tamanioDeLaGalaxia: int, dificultad: Dificultades): void
-    - finDelJuego(naveDestruida: boolean, tesoroEncontrado: boolean): void
-    - visitarPlaneta(codigoPlaneta: String): Planeta
-    - mostrarDatosDelJugador():void
+    - {Static} Juego instanciaJuego
+    - {Static} int turno = 0
+    - boolean turnoExtra = true
+    - MapaEstelar mapaEstelar
+    - Jugador jugador
+    - String mensajeRecibido
+
+    - Juego()
+
+    + {Static} Juego getInstancia(): Juego
+    + void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad)
+
+    + void indicarRumboANuevoSistema(String codigoDeSistema)
+
+    + void comprarArma(TipoDeArma tipoDeArma)
+    + void comprarCombustible(double cantidad)
+    + void recargarEscudo(double cantidad)
+    + void venderArma(TipoDeArma tipoDeArma)
+    + void comprarEscudoMaximo(double cantidad)
+    - Planeta irAlShopping(): Planeta
+
+    + void realizarAccionDeReparacion()
+    + void realizarAccionDeInformacion()
+    + void atacarPlanetaHostil(String codigoDePlaneta)
+    - void finDelJuego(String mensaje)
+
+    - void pasarTurno()
+    + MessageView messageToView(): MessageView
+    + GameBeginView toViewgameBegin(): GameBeginView
+
+    + Jugador getJugador(): Jugador
+    + MapaEstelar getMapaEstelar(): MapaEstelar
 }
 Jugador "1" *-- "1" Nave
 'class Jugador
 class Jugador {
-    - nave: NaveAliada
-    - nombre: String
-    - uadeCoins: double
-    + Jugador(nombre: String, uadeCoins: double, nave: NaveAliada)
-    + getUadeCoins(): double
-    + setUadeCoins(uadeCoins: double): void
-    + agregarUadeCoins(uadeCoins: double): void
-    + quitarUadeCoins(uadeCoins: double): void
-    + getNave(): NaveAliada
-    + getNombre(): String
+    - SistemaEstelar sistemaActual
+    - Planeta planetaActual
+    - String posicionEnElEspacio
+    - NaveAliada nave
+    - String nombre
+    - double uadeCoins
+    - boolean tesoro
+
+    + Jugador(String nombre, double uadeCoins, NaveAliada nave, Planeta planetaInicial, SistemaEstelar sistemaEstelar)
+
+    + String getNombre(): String
+    + double getUadeCoins(): double
+    + NaveAliada getNave(): NaveAliada
+    + SistemaEstelar getSistemaActual(): SistemaEstelar
+    + Planeta getPlanetaActual(): Planeta
+    + String getPosicionEnElEspacio(): String
+    + boolean mostrarTesoro(): boolean
+    + boolean naveEstaDestruida(): boolean
+
+    + void setPlanetaActual(Planeta planetaActual)
+    + void setPosicionEnElEspacio(String posicionEnElEspacio)
+
+    + void agregarUadeCoins(double uadeCoins)
+    + void quitarUadeCoins(double uadeCoins)
+
+    + void encontreElTesoro(boolean planetaTesoro)
+
+    + boolean puedoComprar(double precio): boolean
+    + boolean puedoViajar(Planeta planeta): boolean
+    + boolean puedoVolverPlanetaNeutral(): boolean
+    + boolean tengoUadeCoinsParaCombustible(): boolean
+
+    + void viajeAPlaneta(Planeta planeta)
+    + String comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar): String
+    - double combustibleParaViajar(TipoDeCuerpoCeleste tipo): double
+
+    + JugadorView toViewJugador(): JugadorView
 }
 
 
 
 'class Nave
 abstract class Nave {
-  - vida: double
-  - velocidad: double
+    - double vida
+    - double velocidad
+    - double vidaMaxima
 
-  + Nave(velocidad: double, vida: double)
-  + poderAtaque(): double
-  + setVida(vida: double): void
-  + getVida(): double
-  + getVelocidad(): double
+    + Nave(double, double)
+
+    + abstract poderAtaque() : double
+    + agregarVida(double)
+    + quitarVida(double)
+    + getVida() : double
+    + getVelocidad() : double
+    + tengoVida() : boolean
+    + getVidaMaxima() : double
+    + setVida(double)
+    + reestablecerVida()
 }
 
-abstract class NaveAliada extends Nave{
-  - combustible: double
-  - arma: Arma
-  - escudo: double
-  - recompensa: double
+NaveAliada --> TipoDeNave
+abstract class NaveAliada extends Nave {
+    - Escudo escudo
+    - TanqueDeCombustible tanque
+    - List<Arma> armas
 
-  + NaveAliada(velocidad: double, vida: double, combustible: double, arma: Arma, escudo: double)
-  + agregarEscudo(cantDeEscudo: double): void
-  + cambiarArma(nuevaArma: Arma): void
-  + getArma(): Arma
-  + llenarTanqueDeCombustible(combustible: double): void
-  + getCombustible(): double
-  + setRecompensa(cantDeRecompenza: double): void
-  + getRecompensa():double
-}
-' Clase para Nave Aegis
-class NaveAegis extends NaveAliada{
-  + NaveAegis()
-  + poderAtaque():double
-}
-' Clase para Nave Swift
-class NaveSwift extends NaveAliada{
-  + NaveSwift()
-  + poderAtaque():double
+    + NaveAliada(double, double, double, double)
+
+    + recibirGolpe(double)
+    + updateVida()
+    + getEscudo() : Escudo
+    + getTanque() : TanqueDeCombustible
+    + agregarArma(Arma)
+    + quitarArma(TipoDeArma) : boolean
+    + tengoArmas() : boolean
+    + limiteDeArmas() : boolean
+    + tengoEsaArma(TipoDeArma) : boolean
+    + elegirMiArma(TipoDeArma) : Arma
+    + getArmas()
+    + cantidadDeArmas() : double
+    + abstract soyNaveTipo() : TipoDeNave
 }
 
+Arma *-- Mercado
+NaveAliada *-- TanqueDeCombustible
+NaveAliada *-- Escudo
+NaveAliada *-- Arma
 
 'class Arma
-abstract class Arma {
-    - precio: float
-    - poderDeAtaque: float
-    - tipoDeArma: TipoDeArma
-    + Arma(tipoDeArma: TipoDeArma, precio: float, poderDeAtaque: float)
-    + getPoder(): double
-    + getPrecio(): double
-    + getTipoDeArma():TipoDeArma
+class Arma {
+    + Arma(TipoDeArma, double, double)
+    - double precio
+    - double poderDeAtaque
+    - TipoDeArma tipoDeArma
+    + double getPoder() : double
+    + double getPrecio() : double
+    + TipoDeArma soyTipoDeArma() : TipoDeArma
 }
 
-class MisilDeAntiMateria extends Arma{
-  + MisilDeAntiMateria()
+class Escudo {
+    - double escudoMax
+    - double escudo
+
+    + Escudo(double)
+
+    + tengoEscudo() : boolean
+    + agregarEscudoMaximo(double)
+    + restablecerEscudo()
+    + quitarEscudo(double)
+    + agregarEscudo(double)
+    + cantidadEscudoActual() : double
+    + cantidadEscudoMax() : double
+    + escudoAcero()
+    + setEscudo(double)
+    + escudoLleno() : boolean
 }
-class LaserDeFusion extends Arma{
-  + LaserDeFusion()
+class TanqueDeCombustible {
+    - double combustible
+    - double capacidadMaxTanque
+
+    + TanqueDeCombustible(double)
+
+    + cargarCombustible(double) : double
+    + consumirCombustible(double)
+    + tanqueLleno() : boolean
+    + getCombustible() : double
+    + combustibleNecesario(TipoDeCuerpoCeleste, double) : double
+    + tengoCombustible() : boolean
+    + tanqueVacio() : boolean
 }
-class CañonGauss extends Arma{
-  + CañonGauss()
+class NaveAegis extends NaveAliada {
+    + NaveAegis()
+
+    + poderAtaque() : double
+    + soyNaveTipo() : TipoDeNave
 }
-class CañonDeParticulas extends Arma{
-  + CañonDeParticulas()
+class NavePhantom extends NaveAliada {
+    + NavePhantom()
+
+    + poderAtaque() : double
+    + soyNaveTipo() : TipoDeNave
 }
-class CañonDeIones extends Arma{
-  + CañonDeIones()
+class NaveSwift extends NaveAliada {
+    + NaveSwift()
+
+    + poderAtaque(): double
+    + soyNaveTipo(): TipoDeNave
+}
+class NaveTitan extends NaveAliada {
+    + NaveTitan()
+
+    + poderAtaque(): double
+    + soyNaveTipo(): TipoDeNave
 }
 
 Hostil "1"*--"1" NavePirata
 
 'class Enemigo
 class NavePirata extends Nave {
-  - poderDeAtaque: double
-  + NavePirata()
-  + poderAtaque():double
+    - poderDeAtaque: double
+    + NavePirata()
+    + poderAtaque(): double
 }
 
 
+'Mapa estelar
+Juego "1" *-- "1" MapaEstelar
+MapaEstelar "1" *-- "*" SistemaEstelar : sistemasEstelares
+class MapaEstelar {
+    - {static} MapaEstelar instanciaMapaEstelar
+    - List<SistemaEstelar> sistemasEstelares
+    - Dificultades dificultad
+    - String sistemaConTesoro
 
+    - MapaEstelar()
+    + {static}  MapaEstelar getInstancia(): MapaEstelar
+
+    + void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares)
+    - SistemaEstelar agregarSistemaEstelar(Dificultades dificultad, boolean tieneTesoro, boolean tieneCinturon): SistemaEstelar
+
+    + String getSistemaConTesoro(): String
+    + List<SistemaEstelar> getSistemasEstelares(): List<SistemaEstelar>
+    + Dificultades getDificultad(): Dificultades
+
+    + boolean verificarExistenciaDeSistemaEstelar(String codigoDeSistema): boolean
+    + SistemaEstelar obtenerSistemaEstelar(String codigo): SistemaEstelar
+}
+'Sistema Estelar
+SistemaEstelar"1" *-- "*"Planeta
+SistemaEstelar"1" o--"1" CinturonAsteroide : tiene >
+SistemaEstelar --> Dificultades : usa >
+
+
+class SistemaEstelar {
+    - String nombre
+    - {static} int contador
+    - List<Planeta> planetas
+    - CinturonAsteroide cinturonAsteroides
+
+    + SistemaEstelar(Dificultades dificultad, boolean tesoro, boolean cinturon):SistemaEstelar
+    - void crearSistemaEstelar(Dificultades dificultad, boolean tieneTesoro, boolean tieneAsteroide):Void
+    - void agregarPlaneta(Planeta planeta):Void
+
+    + List<Planeta> getPlanetas():List
+    + String mostrarNombre():String
+    + CinturonAsteroide mostrarCinturonAsteroides():CinturonAsteroide
+
+    + Planeta obtenerPlanetaNeutral():Planeta
+    + Planeta obtenerPlanetaHostil(String codigoDePlaneta):Planeta
+    + Planeta obtenerPlanetaAliado():Planeta
+
+    + boolean tieneCinturonAsteroides():boolean
+
+    + void mostrarListadoPlanetas():void
+    + void quitarPlaneta(Planeta planeta):void
+
+    + SistemasView toViewSistema(): SistemasView
+}
+
+class CinturonAsteroide {
+    - int cantidadDeAsteroides
+
+    + CinturonAsteroide(int cantidadDeAsteroides):CinturonAsteroide
+
+    - double calcularPoder():double
+    - double calcularRecompensa(double vidaInicial, double vidaFinal):double
+
+    + String atravesar(Jugador jugador):String
+}
 'class Planeta
-
 Neutral "1"*--"1" Mercado
 abstract class Planeta {
-    - codigoDePlaneta: String
-    + Planeta(codigoDePlaneta: String)
-    + getCodigoDePlaneta(): String
-    {abstract} + soyPlanetaTipo(): TipoDePlaneta
+    - String codigoDePlaneta
+
+    + Planeta(String codigoDePlaneta)
+    + String getCodigoDePlaneta()
+
+    + abstract TipoDeCuerpoCeleste soyPlanetaTipo()
+    + abstract Mercado ingresarAlMercado()
+    + abstract void combate(Jugador jugador)
+    + abstract void repararNaveAliada(Jugador jugador)
+    + abstract String obtenerInformacion(Jugador jugador)
 }
 
 
 class Neutral extends Planeta {
-    - count: int
-    - mercado: Mercado
+    - {static} int count
+    - Mercado mercado
+
     + Neutral()
-    + realizarAccionEnMercado(accion: Acciones, jugador: Jugador): void
-    + soyPlanetaTipo(): TipoDePlaneta
+
+    + TipoDeCuerpoCeleste soyPlanetaTipo() : TipoDeCuerpoCeleste
+    + Mercado ingresarAlMercado() : Mercado
+
+    + void combate(Jugador jugador)
+    + void repararNaveAliada(Jugador jugador)
+
+    + String obtenerInformacion(Jugador jugador)
+}
+
+class Aliado extends Planeta {
+    - MapaEstelar mapaEstelar
+    - {static} int count
+
+    + Aliado()
+
+    + TipoDeCuerpoCeleste soyPlanetaTipo() : TipoDeCuerpoCeleste
+    + Mercado ingresarAlMercado() : Mercado
+    + void combate(Jugador jugador)
+    + void repararNaveAliada(Jugador jugador)
+    + String obtenerInformacion(Jugador jugador)
 }
 
 
 class Mercado {
-  + realizarAccion(accion: AccionMercado, jugador: Jugador):void
-}
+    - Arma arma
 
-Mercado *-- ComprarCombustibleAccion
-Mercado *-- ComprarEscudoAccion
-Mercado *-- ComprarArmaAccion
-Mercado *-- VenderArmaAccion
+    +Mercado()
 
-interface AccionMercado {
-  + realizar(Jugador):void
-}
-
-class ComprarArmaAccion implements AccionMercado{
-  + realizar(Jugador): void
-  - validarCoins(Arma, Jugador):void
-}
-
-class ComprarCombustibleAccion implements AccionMercado {
-  + realizar(Jugador):void
-}
-
-class ComprarEscudoAccion implements AccionMercado {
-    +realizar(Jugador jugador)
-}
-
-class VenderArmaAccion implements AccionMercado {
-    +realizar(Jugador jugador)
+    + boolean accionDeComprarEscudoMaximo(Jugador jugador, double cantidadDeEscudoMaximo)
+    + boolean accionDeRecargarEscudo(Jugador jugador, double cantidadDeEscudo)
+    + boolean accionDeComprarCombustible(Jugador jugador, double cantidadDeCombustible)
+    + boolean accionDeComprarArma(Jugador jugador, TipoDeArma tipoDeArma)
+    + boolean accionDeVenderArma(Jugador jugador, TipoDeArma tipoDeArma)
 }
 
 
 'Subclase de Planeta: Hostil
 class Hostil extends Planeta{
-    - count: int
+    - {static} int count
+    - boolean tesoro
+    - NavePirata naveEnemiga
+
+    + Hostil(boolean tesoro, NavePirata naveEnemiga)
+
+    + TipoDeCuerpoCeleste soyPlanetaTipo() : TipoDeCuerpoCeleste
+    + Mercado ingresarAlMercado() : Mercado
+    + void combate(Jugador jugador)
+    + void repararNaveAliada(Jugador jugador)
+    + String obtenerInformacion(Jugador jugador)
+}
+Juego *--> GameBeginView :Crea
+class GameBeginView {
+    - nombreDelJugador: String
+    - uadeCoinsJugador: double
+    - naveJugador: TipoDeNave
+    - cantidadSistemasEstelares: int
+    - dificultad: Dificultades
+    - turno: int
+    + GameBeginView(nombreDelJugador: String, uadeCoinsJugador: double, naveJugador: TipoDeNave, cantidadSistemasEstelares: int, dificultad: Dificultades, turno: int)
+    + getNombreDelJugador(): String
+    + getUadeCoinsJugador(): double
+    + getNaveJugador(): TipoDeNave
+    + getTurno(): int
+    + getCantidadSistemasEstelares(): int
+    + getDificultad(): Dificultades
+    + setNombreDelJugador(nombreDelJugador: String): void
+    + setUadeCoinsJugador(uadeCoinsJugador: double): void
+    + setNaveJugador(naveJugador: TipoDeNave): void
+    + setCantidadSistemasEstelares(cantidadSistemasEstelares: int): void
+    + setDificultad(dificultad: Dificultades): void
+}
+Jugador *-->JugadorView:Crea
+class JugadorView {
+    - sistemaActual: SistemaEstelar
+    - posicionEnElEspacio: String
+    - nave: NaveAliada
+    - nombre: String
+    - uadeCoins: double
     - tesoro: boolean
-    - naveEnemiga: NavePirata
-    + Hostil(tesoro: boolean, naveEnemiga: NavePirata)
+    - planetaActual: Planeta
+
+    + getSistemaActual(): SistemaEstelar
+    + setSistemaActual(sistemaActual: SistemaEstelar): void
+    + getPosicionEnElEspacio(): String
+    + setPosicionEnElEspacio(posicionEnElEspacio: String): void
+    + getNave(): NaveAliada
+    + setNave(nave: NaveAliada): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getUadeCoins(): double
+    + setUadeCoins(uadeCoins: double): void
     + isTesoro(): boolean
-    + combate(naveAliada: NaveAliada): boolean
-    + soyPlanetaTipo(): TipoDePlaneta
+    + setTesoro(tesoro: boolean): void
+    + getPlanetaActual(): Planeta
+    + setPlanetaActual(planetaActual: Planeta): void
 }
 
+Juego *--> MessageView:Crea
 
+class MessageView {
+    - message: String
 
+    + MessageView(message: String)
+    + getMessage(): String
+    + setMessage(message: String): void
+}
+SistemaEstelar *--> SistemasView: Crea
+class SistemasView {
+    - nombreSistemaEstelar: String
+    - planetas: List<Planeta>
+    - tieneCinturonDeAsteroides: boolean
+
+    + SistemasView(nombreSistemaEstelar: String, planetas: List<Planeta>, tieneCinturonDeAsteroides: boolean)
+    + getPlanetas(): List<Planeta>
+    + getNombreSistemaEstelar(): String
+    + isTieneCinturonDeAsteroides(): boolean
+}
+class Controller {
+    + gameBegin(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad)
+    + mostrarDetalleDelJugador()
+    + mostrarTurno()
+    + mostrarSistemas()
+    + cambiarDeSistema(String codigoDeSistema)
+    + comprarArma(TipoDeArma tipoDeArma)
+    + venderArma(TipoDeArma tipoDeArma)
+    + recargarEscudo(double cantidad)
+    + comprarEscudoMaximo(double cantidad)
+    + comprarCombustible(double cantidad)
+    + repararNave()
+    + localizarTesoro()
+    + atacarPlanetaHostil(String codigoDePlaneta)
+    + infoUpdate()
+    - mostrarError(Exception e)
+}
+
+Controller --> Juego : usa >
+Controller --> Jugador : usa >
+Controller --> SistemaEstelar : usa >
+Controller --> GameBeginView : usa >
+Controller --> MessageView : usa >
+Controller --> JugadorView : usa >
+Controller --> SistemasView: usa >
 @enduml
