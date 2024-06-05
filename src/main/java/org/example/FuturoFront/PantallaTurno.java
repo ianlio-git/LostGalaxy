@@ -10,8 +10,8 @@ public class PantallaTurno {
     }
 
     public void mostrarTurno(){
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("=============================================");
         System.out.println("Turno: " + gameBeginView.getTurno());
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("=============================================");
     }
 }

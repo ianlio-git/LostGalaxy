@@ -2,8 +2,10 @@ package org.example.Controller;
 
 import org.example.Enums.TipoDeArma;
 import org.example.GameMaster.Exception.*;
+import org.example.MapaEstelar.MapaEstelar;
 import org.example.Views.GameBeginView;
 import org.example.Views.JugadorView;
+import org.example.Views.MessageView;
 import org.example.Views.SistemasView;
 import org.example.Enums.Dificultades;
 import org.example.Enums.TipoDeNave;
@@ -66,8 +68,16 @@ public class Controller{
         Juego.getInstancia().comprarCombustible(cantidad);
     }
 
+
     public static void repararNave() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
+        Jugador jugador;
+        jugador = Juego.getInstancia().getJugador();
         Juego.getInstancia().realizarAccionDeReparacion();
+        JugadorView jugadorView = jugador.toViewJugador();
+        PantallaDeReparacionDeNave pantallaDeReparacionDeNave = new PantallaDeReparacionDeNave(jugadorView);
+        if (jugadorView.getPlanetaActual().getCodigoDePlaneta().contains("ALI")) {
+            pantallaDeReparacionDeNave.bienvenidaAlTaller(jugadorView);
+        }
     }
 
     public static void localizarTesoro() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, SinCombustibleEnCinturonDeAsteroides, TesoroEncontradoException {
@@ -78,7 +88,11 @@ public class Controller{
         Juego.getInstancia().atacarPlanetaHostil(codigoDePlaneta);
     }
 
-
+    public static void infoUpdate(){
+        MessageView messageView = Juego.getInstancia().messageToView();
+        PantallaDeResultados pantallaDeResultados = new PantallaDeResultados(messageView);
+        pantallaDeResultados.mostrarMensaje();
+    }
 
 
 }

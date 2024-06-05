@@ -30,30 +30,14 @@ public class Aliado extends Planeta {
     }
 
     public void repararNaveAliada(Jugador jugador) {
-        bienvenidaAlTaller(jugador);
         jugador.getNave().reestablecerVida();
         jugador.getNave().getEscudo().restablecerEscudo();
-        reparacionDeNave(jugador);
-    }
-
-    private void bienvenidaAlTaller(Jugador jugador){
-        System.out.println("Bienvenido al taller del UADE team!");
-        System.out.println("Tu nave tiene "+jugador.getNave().getVida()+" de vida");
-        System.out.println("Y tiene "+jugador.getNave().getEscudo().cantidadEscudoActual()+" de escudo!");
-    }
-    private void reparacionDeNave(Jugador jugador){
-        System.out.println("Someteremos tu nave a reparacion!");
-        System.out.println("...");
-        System.out.println("...");
-        System.out.println("...");
-        System.out.println("Hemos reparado tu nave con exito!");
-        System.out.print("Ahora tiene "+jugador.getNave().getVida()+" de vida");
-        System.out.println(" con "+jugador.getNave().getEscudo().cantidadEscudoActual()+" de escudo!");
     }
 
 
     public String obtenerInformacion( Jugador jugador){
         if(jugador.puedoComprar(4000)){
+            jugador.quitarUadeCoins(4000);
             return ("El sistema estelar que posee el tesoro es el:"+mapaEstelar.getSistemaConTesoro());
         }
         else {

@@ -7,7 +7,7 @@ import org.example.Nave.PartesDeLaNave.Arma;
 public class NaveSwift extends NaveAliada {
 
     public NaveSwift() {
-        super(20, 50, 100, 0);
+        super(20, 50, 500, 0);
 
     }
 

@@ -12,12 +12,11 @@ import org.example.Nave.TiposDeNaves.NaveSwift;
 import org.example.Enums.TipoDeNave;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 import org.example.Nave.TiposDeNaves.NaveTitan;
-
-import java.util.Random;
+import org.example.Views.MessageView;
 
 public class Juego {
-    private static int turno;
-    private boolean turnoExtra;
+    private static int turno =0;
+    private boolean turnoExtra =true;
     private static Juego instanciaJuego;
     private MapaEstelar mapaEstelar;
     private Jugador jugador;
@@ -167,14 +166,17 @@ public class Juego {
     public void realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
+
         if(planeta==null){
             String mensaje ="No hay planeta aliado en este sistema.";
             finDelJuego(mensaje);
         }else{
-
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.repararNaveAliada(jugador);
+                finDelJuego(String.format("¡Someteremos tu nave a reparación! \n ... \n ... \n ... \n ¡Hemos reparado tu nave con éxito! Ahora tiene "+jugador.getNave().getVida()+ " de vida y "+jugador.getNave().getEscudo().cantidadEscudoActual()+" de escudo! "));
+
+
             } else {
                 String mensaje ="No puedo visitar el planeta aliado, la nave no tiene combustible suficiente para esta accion.";
                 finDelJuego(mensaje);
@@ -254,8 +256,8 @@ public class Juego {
         mensajeRecibido = mensaje;
     }
 
-    public String getMensajeRecibido() {
-        return mensajeRecibido;
+    public MessageView messageToView() {
+        return new MessageView(mensajeRecibido);
     }
 
     private void pasarTurno(){
@@ -283,6 +285,7 @@ public class Juego {
     public MapaEstelar getMapaEstelar() {
         return mapaEstelar;
     }
+
 
 
 }

@@ -101,9 +101,9 @@ public class Jugador {
 
     public JugadorView toViewJugador() {
         if(planetaActual == null){
-            return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro);
+            return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro,planetaActual);
         }
-        return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro);
+        return new JugadorView(sistemaActual,posicionEnElEspacio,nave,nombre,uadeCoins,tesoro,planetaActual);
     }
 
 
