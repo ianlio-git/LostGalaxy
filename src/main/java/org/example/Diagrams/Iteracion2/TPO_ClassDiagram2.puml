@@ -4,7 +4,6 @@ TipoDeNave <-- Juego
 Dificultades <-- Juego
 TipoDeCuerpoCeleste <--  Juego
 TipoDeCuerpoCeleste <-- Planeta
-TipoDeCuerpoCeleste <--  SistemaEstelar
 
 enum TipoDeNave{
      NAVE_AEGIS,
@@ -24,7 +23,7 @@ enum TipoDeCuerpoCeleste {
     PLANETA_ALIADO,
     SISTEMA_ESTELAR
 }
-Juego  --> TipoDeArma
+
 Arma --> TipoDeArma
 Mercado --> TipoDeArma
 enum TipoDeArma{
@@ -155,7 +154,7 @@ abstract class NaveAliada extends Nave {
     + abstract soyNaveTipo() : TipoDeNave
 }
 
-Arma *-- Mercado
+Arma o-- Mercado
 NaveAliada *-- TanqueDeCombustible
 NaveAliada *-- Escudo
 NaveAliada *-- Arma
@@ -458,9 +457,7 @@ class Controller {
     - mostrarError(Exception e)
 }
 
-Controller --> Juego : usa >
-Controller --> Jugador : usa >
-Controller --> SistemaEstelar : usa >
+
 Controller --> GameBeginView : usa >
 Controller --> MessageView : usa >
 Controller --> JugadorView : usa >

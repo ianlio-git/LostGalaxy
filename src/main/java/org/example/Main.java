@@ -4,17 +4,11 @@ import org.example.Controller.Controller;
 import org.example.Enums.Dificultades;
 import org.example.Enums.TipoDeArma;
 import org.example.Enums.TipoDeNave;
-import org.example.GameMaster.Exception.*;
-import org.example.GameMaster.Juego;
-import org.example.MapaEstelar.MapaEstelar;
-
 public class Main {
     public static void main(String[] args) {
 
-        Controller.gameBegin("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_AEGIS, 4, Dificultades.FACIL);
+        Controller.gameBegin("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_TITAN, 4, Dificultades.FACIL);
         Controller.mostrarSistemas();
-
-
 
         Controller.mostrarTurno();
         Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
