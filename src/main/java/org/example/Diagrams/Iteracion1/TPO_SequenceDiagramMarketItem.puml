@@ -1,0 +1,45 @@
+actor main
+participant Controller
+participant Juego
+participant Mercado
+participant Planeta
+participant Jugador
+participant Nave
+participant Escudo
+
+main -> Controller : comprarEscudoMaximo(cantidad)
+Controller -> Juego : getInstancia()
+activate Juego
+Juego -> Controller : Instancia
+activate Controller
+Controller -> Juego : recargarEscudo(cantidad)
+deactivate Controller
+Juego -> Juego : irAlShopping()
+Juego -> Juego : planeta
+Juego -> Planeta : ingresarAlMercado()
+activate Planeta
+Planeta -> Juego : mercado
+deactivate Planeta
+activate Mercado
+Juego -> Mercado : accionDeRecargarEscudo(Jugador, cantidad)
+deactivate Mercado
+activate Jugador
+Mercado -> Jugador: puedoComprar(cantidadDeEscudo)
+alt Se puede comprar el escudo
+    Jugador -> Nave: setEscudo()
+    activate Nave
+    Nave -> Escudo: agregarEscudo(cantidadDeEscudo)
+    activate Escudo
+    Escudo -> Escudo: setEscudo(cantidadDeEscudo))
+    Jugador -> Jugador: quitarUadeCoins(cantidadDeEscudo)
+    Jugador -> Juego: pudeRecargarEscudo = true
+    deactivate Jugador
+    Juego --> Jugador: true
+    deactivate Nave
+    deactivate Escudo
+else No se puede comprar el escudo
+    Jugador -> Juego: pudeRecargarEscudo = false
+    Juego --> Jugador: false
+end
+
+@enduml

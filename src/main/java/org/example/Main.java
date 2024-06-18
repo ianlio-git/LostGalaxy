@@ -1,30 +1,105 @@
 package org.example;
 
-import org.example.enums.Acciones;
-import org.example.enums.Dificultades;
-import org.example.enums.TipoDeNave;
-import org.example.enums.TipoDePlaneta;
-
+import org.example.Controller.Controller;
+import org.example.Enums.Dificultades;
+import org.example.Enums.TipoDeArma;
+import org.example.Enums.TipoDeNave;
 public class Main {
     public static void main(String[] args) {
-        Juego juego = Juego.getInstancia();
-        juego.iniciarJuego("Bruno Fernandes", 1000.0, TipoDeNave.NAVE_SWIFT, 20, Dificultades.FACIL);
 
-        System.out.println("Listado de planetas neutrales:");
-        juego.mostarListadoPlanetas(TipoDePlaneta.NEUTRAL);
+        Controller.gameBegin("Bruno Fernandes", 10000.0, TipoDeNave.NAVE_TITAN, 4, Dificultades.FACIL);
+        Controller.mostrarSistemas();
 
-        System.out.println("Listado de planetas hostiles:");
-        juego.mostarListadoPlanetas(TipoDePlaneta.HOSTIL);
+        Controller.mostrarTurno();
+        Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
 
-        juego.siguienteTurno(Acciones.COMPRAR_ARMA, "NEU-1");
-        juego.siguienteTurno(Acciones.COMPRAR_COMBUSTIBLE, "NEU-1");
-        juego.siguienteTurno(Acciones.COMPRAR_ESCUDO, "NEU-1");
-        //juego.siguienteTurno(Acciones.COMPRAR_ARMA, "NEU-1");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-0");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-1");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO, "ENE-2");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-3");
-        juego.siguienteTurno(Acciones.BUSCAR_TESORO,"ENE-4");
+        Controller.mostrarTurno();
+        Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.comprarEscudoMaximo(200);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.recargarEscudo(200);
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.repararNave();
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.localizarTesoro();
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.localizarTesoro();
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.localizarTesoro();
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-1");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-0");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+
+        Controller.mostrarTurno();
+        Controller.cambiarDeSistema("SIST-1");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-2");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-3");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.cambiarDeSistema("SIST-2");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-4");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
+        Controller.mostrarTurno();
+        Controller.atacarPlanetaHostil("ENE-5");
+        Controller.infoUpdate();
+        Controller.mostrarDetalleDelJugador();
+
     }
 
+
+//    public void comprarArma (Juego juego) {
+//        System.out.println("Bienvenido a la tienda de armas");
+//        System.out.println("1. CAÑON_DE_IONES");
+//        System.out.println("2. LASER_DE_FUSION");
+//        System.out.println("3. MISIL_DE_ANTIMATERIA");
+//        System.out.println("4. CAÑON_DE_PARTICULAS");
+//        System.out.println("5. CAÑON_GAUSS");
+//    }
 }
