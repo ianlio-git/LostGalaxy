@@ -1,6 +1,8 @@
 package org.example.MapaEstelar.Sistemas.Planetas;
 
 import org.example.Enums.TipoDeCuerpoCeleste;
+import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example.GameMaster.Exception.TesoroEncontradoException;
 import org.example.GameMaster.Jugador;
 import org.example.Mercado.Mercado;
 import org.example.Nave.TiposDeNaves.NavePirata;
@@ -25,7 +27,7 @@ public class Hostil extends Planeta {
         return null;
     }
 
-    public void combate(Jugador jugador) {
+    public void combate(Jugador jugador) throws NaveDestruidaException, TesoroEncontradoException {
         double acumDeDanio =0;
         while (jugador.getNave().tengoVida()&& naveEnemiga.tengoVida()) {
             jugador.getNave().recibirGolpe(naveEnemiga.poderAtaque());
@@ -35,7 +37,6 @@ public class Hostil extends Planeta {
         }
         if(!naveEnemiga.tengoVida()&&jugador.getNave().tengoVida()) {
             asignarRecomprensas(jugador,acumDeDanio);
-
         }
     }
 
@@ -44,7 +45,7 @@ public class Hostil extends Planeta {
         System.out.println("Aca haces todo menos reparar master");
     }
 
-    private void asignarRecomprensas(Jugador jugador,double acumDeDanio){
+    private void asignarRecomprensas(Jugador jugador,double acumDeDanio) throws TesoroEncontradoException {
         jugador.agregarUadeCoins(2*naveEnemiga.poderAtaque()-acumDeDanio);
         jugador.encontreElTesoro(this.tesoro);
     }

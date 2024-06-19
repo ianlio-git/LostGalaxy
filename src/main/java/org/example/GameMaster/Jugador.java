@@ -1,5 +1,8 @@
 package org.example.GameMaster;
 
+import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example.GameMaster.Exception.PlanetaNoEncontradoException;
+import org.example.GameMaster.Exception.TesoroEncontradoException;
 import org.example.Views.JugadorView;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
@@ -29,16 +32,9 @@ public class Jugador {
         this.posicionEnElEspacio = posicionEnElEspacio;
     }
 
-    public boolean naveEstaDestruida(){
-        return !this.getNave().tengoVida();
-    }
-    public Planeta getPlanetaActual(){
-        return planetaActual;
-    }
     public void setPlanetaActual(Planeta planetaActual) {
         this.planetaActual = planetaActual;
     }
-
     public double getUadeCoins() {
         return uadeCoins;
     }
@@ -51,11 +47,10 @@ public class Jugador {
     public NaveAliada getNave() {
         return nave;
     }
-    public void encontreElTesoro(boolean planetaTesoro){
-         this.tesoro=planetaTesoro;
-    }
-    public boolean mostrarTesoro(){
-        return tesoro;
+    public void encontreElTesoro(boolean planetaTesoro) throws TesoroEncontradoException {
+        if (planetaTesoro) {
+            throw new TesoroEncontradoException("¡Game Over! Encontraste el tesoro.");
+        }
     }
 
     public boolean puedoComprar(double precio) {
@@ -66,7 +61,7 @@ public class Jugador {
         return sistemaActual;
     }
 
-    public void viajeAPlaneta(Planeta planeta){
+    public void viajeAPlaneta(Planeta planeta) throws PlanetaNoEncontradoException {
         if( !planeta.getCodigoDePlaneta().equals(this.planetaActual.getCodigoDePlaneta())){
             nave.getTanque().consumirCombustible(combustibleParaViajar(planeta.soyPlanetaTipo()));
             this.planetaActual = planeta;
@@ -74,10 +69,7 @@ public class Jugador {
         }
     }
     public boolean puedoViajar(Planeta planeta) {
-        if (planeta == null) {
-            return false;
-        }
-        return nave.getTanque().getCombustible() >= combustibleParaViajar(planeta.soyPlanetaTipo());
+        return (nave.getTanque().getCombustible() >= combustibleParaViajar(planeta.soyPlanetaTipo()));
     }
     private double combustibleParaViajar(TipoDeCuerpoCeleste tipo){
         return nave.getTanque().combustibleNecesario(tipo, getNave().cantidadDeArmas());
@@ -86,17 +78,14 @@ public class Jugador {
         return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_NEUTRAL);
     }
 
-    public boolean tengoUadeCoinsParaCombustible(){
-        return (uadeCoins > combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_HOSTIL));
-    }
-    public String comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) {
+    public void comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) throws NaveDestruidaException {
         nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.SISTEMA_ESTELAR));
         if (sistemaEstelar.tieneCinturonAsteroides()){
             sistemaActual = sistemaEstelar;
-            return (sistemaEstelar.mostrarCinturonAsteroides().atravesar(this));
+            sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);//tambien cambie este por void antes era string
         }
         sistemaActual = sistemaEstelar;
-        return "Cambiando de sistema.... \n No atravezaste ningun cinturon de asteroides!";
+        //return "Cambiando de sistema.... \n No atravezaste ningun cinturon de asteroides!"; hay que ver como pasar esto al view
     }
 
     public JugadorView toViewJugador() {
