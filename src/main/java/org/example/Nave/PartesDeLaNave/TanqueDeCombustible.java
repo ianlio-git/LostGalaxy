@@ -28,8 +28,8 @@ public class TanqueDeCombustible {
        else {
            this.combustible -= consumir;
        }
-
     }
+
     public  boolean tanqueLleno(){
         return  this.combustible == this.capacidadMaxTanque;
     }

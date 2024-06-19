@@ -1,5 +1,6 @@
 package org.example.Nave.TiposDeNaves;
 
+import org.example.GameMaster.Exception.NaveDestruidaException;
 import org.example.Nave.Nave;
 
 import java.util.Random;
@@ -18,5 +19,10 @@ public class NavePirata extends Nave {
             poderDeAtaque = rand.nextInt(101) + 50;
         }
         return poderDeAtaque;
+    }
+
+    @Override
+    public boolean tengoVida() {
+        return this.vida > 0;
     }
 }

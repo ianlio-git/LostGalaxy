@@ -2,6 +2,7 @@ package org.example.Nave;
 
 import org.example.Enums.TipoDeArma;
 import org.example.Enums.TipoDeNave;
+import org.example.GameMaster.Exception.NaveDestruidaException;
 import org.example.Nave.PartesDeLaNave.Arma;
 import org.example.Nave.PartesDeLaNave.Escudo;
 import org.example.Nave.PartesDeLaNave.TanqueDeCombustible;
@@ -102,5 +103,11 @@ public abstract class NaveAliada extends Nave {
     }
     abstract public TipoDeNave soyNaveTipo();
 
-
+    @Override
+    public boolean tengoVida() throws NaveDestruidaException {
+        if(this.vida<=0){
+            throw new NaveDestruidaException("Tu nave fue destruida. ¡Game Over!");
+        }
+        return this.vida > 0 ;
+    }
 }

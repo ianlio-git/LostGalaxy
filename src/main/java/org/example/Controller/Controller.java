@@ -150,6 +150,5 @@ public class Controller{
         MessageView messageView = new MessageView(e.getMessage());
         PantallaDeResultados pantallaDeResultados = new PantallaDeResultados(messageView);
         pantallaDeResultados.salirDelJuego(e);
-        System.exit(1);
     }
 }

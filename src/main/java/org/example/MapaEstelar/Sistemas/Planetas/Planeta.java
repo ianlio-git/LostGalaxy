@@ -1,6 +1,8 @@
 package org.example.MapaEstelar.Sistemas.Planetas;
 
 import org.example.Enums.TipoDeCuerpoCeleste;
+import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example.GameMaster.Exception.TesoroEncontradoException;
 import org.example.GameMaster.Jugador;
 import org.example.Mercado.Mercado;
 
@@ -14,7 +16,7 @@ public abstract class Planeta {
     }
     public abstract TipoDeCuerpoCeleste soyPlanetaTipo();
     public abstract Mercado ingresarAlMercado();
-    public abstract void combate(Jugador jugador);
+    public abstract void combate(Jugador jugador) throws NaveDestruidaException, TesoroEncontradoException;
     public abstract void repararNaveAliada(Jugador jugador);
     public abstract String obtenerInformacion( Jugador jugador);
 

@@ -1,5 +1,7 @@
 package org.example.Nave;
 
+import org.example.GameMaster.Exception.NaveDestruidaException;
+
 public abstract class Nave {
     protected double vida;
     protected double velocidad;
@@ -13,9 +15,6 @@ public abstract class Nave {
 
     public abstract double poderAtaque();
 
-    public void agregarVida(double vida) {
-        this.vida += vida;
-    }
     public void quitarVida(double vida) {
         this.vida -= vida;
     }
@@ -27,18 +26,7 @@ public abstract class Nave {
     public double getVelocidad() {
         return velocidad;
     }
-    public boolean tengoVida(){
-        return this.vida > 0 ;
-    }
-
-    public double getVidaMaxima() {
-        return vidaMaxima;
-    }
-
-    public void setVida(double vida) {
-        this.vida = vida;
-    }
-
+    public abstract boolean tengoVida() throws NaveDestruidaException;
     public void reestablecerVida(){
         this.vida=this.vidaMaxima;
     }
