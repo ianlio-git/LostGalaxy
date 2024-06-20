@@ -8,7 +8,6 @@ import org.example.Nave.PartesDeLaNave.Escudo;
 import org.example.Nave.PartesDeLaNave.TanqueDeCombustible;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static java.lang.Math.abs;
@@ -92,10 +91,8 @@ public abstract class NaveAliada extends Nave {
         }
         return null;
     }
-    public void getArmas(){
-        for (Arma arma : armas) {
-            System.out.println(arma.soyTipoDeArma());
-        }
+    public List<Arma> getArmas(){
+        return armas;
     }
 
     public double cantidadDeArmas(){

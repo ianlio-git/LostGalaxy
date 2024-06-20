@@ -1,6 +1,6 @@
 package org.example.MapaEstelar;
 
-import org.example.Enums.Dificultades;
+import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Random;
 public class MapaEstelar {
     private static MapaEstelar instanciaMapaEstelar;
     private List<SistemaEstelar> sistemasEstelares;
-    private Dificultades dificultad;
+    private Dificultad dificultad;
     private String sistemaConTesoro;
 
 
@@ -30,7 +30,7 @@ public class MapaEstelar {
         return sistemaConTesoro;
     }
 
-    private SistemaEstelar agregarSistemaEstelar(Dificultades dificutad, boolean tieneTesoro, boolean tieneCinturon) {
+    private SistemaEstelar agregarSistemaEstelar(Dificultad dificutad, boolean tieneTesoro, boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad, tieneTesoro, tieneCinturon);
         sistemasEstelares.add(nuevoSistema);
         dificultad = dificutad;
@@ -60,10 +60,10 @@ public class MapaEstelar {
         throw new RuntimeException("Sistema estelar no encontrado: " + codigo);
     }
 
-    public Dificultades getDificultad() {
+    public Dificultad getDificultad() {
         return dificultad;
     }
-    public void crearMapaEstelar(Dificultades dificultad, int cantidadSistemasEstelares){
+    public void crearMapaEstelar(Dificultad dificultad, int cantidadSistemasEstelares){
         Random random = new Random();
         int var = random.nextInt(cantidadSistemasEstelares);
         for (int i = 0; i < cantidadSistemasEstelares; i++) {

@@ -1,29 +1,30 @@
 package org.example.Controller;
 
 import org.example.Enums.TipoDeArma;
-import org.example.GameMaster.Exception.*;
 import org.example.Views.GameBeginView;
 import org.example.Views.JugadorView;
 import org.example.Views.MessageView;
 import org.example.Views.SistemasView;
-import org.example.Enums.Dificultades;
+import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeNave;
 import org.example.FuturoFront.*;
 import org.example.GameMaster.Juego;
 import org.example.GameMaster.Jugador;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller{
 
-    public static void gameBegin(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad) {
+    public static void gameBegin() {
         try {
-            Juego.getInstancia().iniciarJuego(nombreDelJugador, uadeCoinsJugador, naveJugador, cantidadSistemasEstelares, dificultad);
-            GameBeginView gameBeginView = Juego.getInstancia().toViewgameBegin();
-            PantallaGameBegin pantallaGameBegin = new PantallaGameBegin(gameBeginView);
-            PantallaGameBeginInfo pantallaGameBeginInfo = new PantallaGameBeginInfo(gameBeginView);
-            pantallaGameBeginInfo.mostrarDatosDeInicio();
+            PantallaGameBegin pantallaGameBegin = new PantallaGameBegin();
+            pantallaGameBegin.setVisible(true);
+            pantallaGameBegin.waitForGameStart();
+            GameBeginView gameBeginView = pantallaGameBegin.getGameBeginView();
+            Juego.getInstancia().iniciarJuego(gameBeginView.getNombreDelJugador(),gameBeginView.getUadeCoinsJugador(),gameBeginView.getNaveJugador(),gameBeginView.getCantidadSistemasEstelares(),gameBeginView.getDificultad());
         } catch (Exception e) {
             mostrarError(e);
         }
@@ -52,15 +53,18 @@ public class Controller{
 
     public static void mostrarSistemas() {
         try {
+            List<SistemasView> sistemasViews = new ArrayList<>();
             for (SistemaEstelar sistemaEstelar : Juego.getInstancia().getMapaEstelar().getSistemasEstelares()) {
                 SistemasView sistemasView = sistemaEstelar.toViewSistema();
-                PantallaSistemasEstelares pantallaSistemasEstelares = new PantallaSistemasEstelares(sistemasView);
-                pantallaSistemasEstelares.mostrarSistema();
+                sistemasViews.add(sistemasView);
             }
+            PantallaSistemasEstelares.mostrarSistemas(sistemasViews);
         } catch (Exception e) {
             mostrarError(e);
         }
     }
+
+
 
     public static void cambiarDeSistema(String codigoDeSistema) {
         try {
@@ -112,8 +116,7 @@ public class Controller{
 
     public static void repararNave() {
         try {
-            Jugador jugador = Juego.getInstancia().getJugador();
-            Juego.getInstancia().realizarAccionDeReparacion();
+            Jugador jugador = Juego.getInstancia().realizarAccionDeReparacion();
             JugadorView jugadorView = jugador.toViewJugador();
             PantallaDeReparacionDeNave pantallaDeReparacionDeNave = new PantallaDeReparacionDeNave(jugadorView);
             if (jugadorView.getPlanetaActual().getCodigoDePlaneta().contains("ALI")) {
@@ -140,11 +143,6 @@ public class Controller{
         }
     }
 
-    public static void infoUpdate() {
-        MessageView messageView = Juego.getInstancia().messageToView();
-        PantallaDeResultados pantallaDeResultados = new PantallaDeResultados(messageView);
-        pantallaDeResultados.mostrarMensaje();
-    }
 
     private static void mostrarError(Exception e) {
         MessageView messageView = new MessageView(e.getMessage());

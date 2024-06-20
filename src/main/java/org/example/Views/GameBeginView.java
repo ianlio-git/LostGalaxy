@@ -1,6 +1,6 @@
 package org.example.Views;
 
-import org.example.Enums.Dificultades;
+import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeNave;
 
 public class GameBeginView {
@@ -9,10 +9,10 @@ public class GameBeginView {
     double uadeCoinsJugador;
     TipoDeNave naveJugador;
     int cantidadSistemasEstelares;
-    Dificultades dificultad;
+    Dificultad dificultad;
     int turno;
 
-    public GameBeginView(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad, int turno) {
+    public GameBeginView(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultad dificultad, int turno) {
         this.nombreDelJugador = nombreDelJugador;
         this.uadeCoinsJugador = uadeCoinsJugador;
         this.naveJugador = naveJugador;
@@ -41,7 +41,7 @@ public class GameBeginView {
         return cantidadSistemasEstelares;
     }
 
-    public Dificultades getDificultad() {
+    public Dificultad getDificultad() {
         return dificultad;
     }
 
@@ -61,7 +61,7 @@ public class GameBeginView {
         this.cantidadSistemasEstelares = cantidadSistemasEstelares;
     }
 
-    public void setDificultad(Dificultades dificultad) {
+    public void setDificultad(Dificultad dificultad) {
         this.dificultad = dificultad;
     }
 }

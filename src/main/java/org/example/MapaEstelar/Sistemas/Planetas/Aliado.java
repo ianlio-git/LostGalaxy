@@ -8,10 +8,12 @@ import org.example.Mercado.Mercado;
 public class Aliado extends Planeta {
     private MapaEstelar mapaEstelar;
     private static int count;
+    private static double costeDeInformacion;
 
     public Aliado() {
         super("ALI-" + count++);
         this.mapaEstelar = MapaEstelar.getInstancia();
+        costeDeInformacion = 4000;
     }
 
     @Override
@@ -36,8 +38,9 @@ public class Aliado extends Planeta {
 
 
     public String obtenerInformacion( Jugador jugador){
-        if(jugador.puedoComprar(4000)){
-            jugador.quitarUadeCoins(4000);
+
+        if(jugador.puedoComprar(costeDeInformacion)){
+            jugador.quitarUadeCoins(costeDeInformacion);
             return ("El sistema estelar que posee el tesoro es el:"+mapaEstelar.getSistemaConTesoro());
         }
         else {

@@ -3,7 +3,7 @@ package org.example.GameMaster;
 import org.example.Enums.TipoDeArma;
 import org.example.GameMaster.Exception.*;
 import org.example.Views.GameBeginView;
-import org.example.Enums.Dificultades;
+import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.MapaEstelar;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example.Nave.TiposDeNaves.NaveAegis;
@@ -15,7 +15,7 @@ import org.example.Nave.TiposDeNaves.NaveTitan;
 import org.example.Views.MessageView;
 
 public class Juego {
-    private static int turno =0;
+    private static int turno = 0;
     private boolean turnoExtra =true;
     private static Juego instanciaJuego;
     private MapaEstelar mapaEstelar;
@@ -32,7 +32,7 @@ public class Juego {
         }
         return instanciaJuego;
     }
-    public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultades dificultad) throws JuegoIniciadoException {
+    public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultad dificultad) throws JuegoIniciadoException {
         if (jugador == null) {
             mapaEstelar.crearMapaEstelar(dificultad,cantidadSistemasEstelares);
             SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
@@ -159,7 +159,7 @@ public class Juego {
         }
     }
 
-    public void realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
+    public Jugador realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
 
@@ -176,6 +176,8 @@ public class Juego {
                 throw new CombustibleInsuficienteException("Te quedaste sin combustible");
             }
         }
+
+        return jugador;
 
     }
 
@@ -247,6 +249,7 @@ public class Juego {
         return mapaEstelar;
     }
 
-
-
+    public static int getTurno() {
+        return turno;
+    }
 }

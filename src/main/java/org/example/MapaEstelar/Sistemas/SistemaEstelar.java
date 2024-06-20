@@ -1,7 +1,7 @@
 package org.example.MapaEstelar.Sistemas;
 
 import org.example.Views.SistemasView;
-import org.example.Enums.Dificultades;
+import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.Planetas.Aliado;
 import org.example.MapaEstelar.Sistemas.Planetas.Neutral;
@@ -19,7 +19,7 @@ public class SistemaEstelar {
     private List<Planeta> planetas;
     private CinturonAsteroide cinturonAsteroides;
 
-    public SistemaEstelar(Dificultades dificultad,boolean tesoro,boolean cinturon) {
+    public SistemaEstelar(Dificultad dificultad, boolean tesoro, boolean cinturon) {
         this.contador = contador;
         this.nombre = "SIST-"+this.contador++;
         this.planetas = new ArrayList<>();
@@ -75,7 +75,7 @@ public class SistemaEstelar {
     public boolean tieneCinturonAsteroides() {
         return cinturonAsteroides != null;
     }
-    private void crearSistemaEstelar( Dificultades dificultad,boolean tieneTesoro, boolean tieneAsteriode) {
+    private void crearSistemaEstelar(Dificultad dificultad, boolean tieneTesoro, boolean tieneAsteriode) {
         Random rand = new Random();
         int cantPlanetasNeutrales = 0;
         int cantPlanetasHostiles = 0;
