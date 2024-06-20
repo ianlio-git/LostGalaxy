@@ -2,6 +2,7 @@ package org.example.MapaEstelar;
 
 import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Views.MapaEstelarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +76,9 @@ public class MapaEstelar {
             }
         }
 
+    }
+
+    public MapaEstelarView mapaEstelarToView(){
+        return new MapaEstelarView(sistemasEstelares,dificultad,sistemaConTesoro);
     }
 }

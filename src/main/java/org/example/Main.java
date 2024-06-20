@@ -4,20 +4,24 @@ import org.example.Controller.Controller;
 import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeArma;
 import org.example.Enums.TipoDeNave;
+import org.example.GameMaster.Juego;
 import org.example.MapaEstelar.MapaEstelar;
+import org.example.Views.MapaEstelarView;
 
 public class Main {
     public static void main(String[] args) {
 
+
         Controller.gameBegin();
         Controller.mostrarSistemas();
 
-        Controller.mostrarDetalleDelJugador();
-        Controller.mostrarTurno();
+       Controller.mostrarDetalleDelJugador();
+       Controller.mostrarTurno();
         Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
-        Controller.mostrarDetalleDelJugador();
+      Controller.mostrarDetalleDelJugador();
 
-        System.out.println("El sistema que tiene el tesoro es el:"+MapaEstelar.getInstancia().getSistemaConTesoro());
+       MapaEstelarView mapaEstelarView = Juego.getInstancia().getMapaEstelar().mapaEstelarToView();
+       System.out.println(mapaEstelarView.getSistemaConTesoro());
 
 
 //        Controller.mostrarTurno();

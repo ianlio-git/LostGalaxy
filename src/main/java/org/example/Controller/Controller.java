@@ -1,10 +1,7 @@
 package org.example.Controller;
 
 import org.example.Enums.TipoDeArma;
-import org.example.Views.GameBeginView;
-import org.example.Views.JugadorView;
-import org.example.Views.MessageView;
-import org.example.Views.SistemasView;
+import org.example.Views.*;
 import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeNave;
 import org.example.FuturoFront.*;
@@ -63,6 +60,7 @@ public class Controller{
             mostrarError(e);
         }
     }
+
 
 
 

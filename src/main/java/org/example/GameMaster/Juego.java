@@ -145,13 +145,10 @@ public class Juego {
     private Planeta irAlShopping() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaNeutral();
-        System.out.println(planeta.getCodigoDePlaneta());
         jugador.setPlanetaActual(planeta);
         jugador.setPosicionEnElEspacio(planeta.getCodigoDePlaneta());
-        System.out.println(planeta.getCodigoDePlaneta());
         if (jugador.puedoViajar(planeta)) {
             jugador.viajeAPlaneta(planeta);
-            System.out.println(planeta.getCodigoDePlaneta());
             return planeta;
         }else {//si no puedo visitar un planeta neutral quiere decir que perdi
            // String mensaje = "No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.";

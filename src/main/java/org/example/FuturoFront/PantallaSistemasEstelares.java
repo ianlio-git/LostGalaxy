@@ -43,6 +43,7 @@ public class PantallaSistemasEstelares extends JFrame {
             JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No"));
             sistemaPanel.add(cinturonLabel);
 
+
             mainPanel.add(sistemaPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
