@@ -1,11 +1,10 @@
 package org.example._MVC.Controller;
 import org.example.GameMaster.Jugador;
-import org.example._MVC.PantallasOK.PantallaDeResultados;
-import org.example._MVC.PantallasOK.PantallaMercado;
-import org.example._MVC.PantallasOK.PantallaGameBegin;
-import org.example._MVC.PantallasOK.PantallaJugador;
-import org.example._MVC.PantallasOK.PantallaSistemasEstelares;
-import org.example._MVC.PantallasOK.PantallaTurno;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
+import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaJugador;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaSistemasEstelares;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaTurno;
 import org.example._MVC.Views.GameBeginView;
 import org.example._MVC.Views.JugadorView;
 import org.example._MVC.Views.MessageView;

@@ -1,10 +1,9 @@
 package org.example._MVC.Controller;
 
 import org.example.GameMaster.Juego;
-import org.example._MVC.PantallasOK.PantallaDeResultados;
-import org.example._MVC.PantallasOK.PantallaGameBegin;
-import org.example._MVC.PantallasOK.PantallaMain;
-import org.example._MVC.PantallasOK.PantallaMain.*;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
+import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaGameBegin;
+import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.GameBeginView;
 import org.example._MVC.Views.MessageView;
 

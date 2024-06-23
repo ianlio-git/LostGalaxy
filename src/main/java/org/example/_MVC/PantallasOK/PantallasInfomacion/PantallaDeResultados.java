@@ -1,4 +1,4 @@
-package org.example._MVC.PantallasOK;
+package org.example._MVC.PantallasOK.PantallasInfomacion;
 
 import org.example._MVC.Views.MessageView;
 

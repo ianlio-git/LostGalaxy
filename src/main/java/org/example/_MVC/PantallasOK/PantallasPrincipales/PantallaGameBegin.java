@@ -1,4 +1,4 @@
-package org.example._MVC.PantallasOK;
+package org.example._MVC.PantallasOK.PantallasPrincipales;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

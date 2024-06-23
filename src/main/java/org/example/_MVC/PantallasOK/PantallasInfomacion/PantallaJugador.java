@@ -1,12 +1,9 @@
-package org.example._MVC.PantallasOK;
+package org.example._MVC.PantallasOK.PantallasInfomacion;
 
 import org.example.Nave.PartesDeLaNave.Arma;
 import org.example._MVC.Views.JugadorView;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PantallaJugador extends JFrame {

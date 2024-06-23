@@ -1,7 +1,6 @@
-package org.example._MVC.PantallasOK;
+package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
 import org.example.Enums.TipoDeArma;
-import org.example._MVC.Controller.MainController;
 import org.example._MVC.Controller.PlanetaNeutralController;
 
 import javax.swing.*;

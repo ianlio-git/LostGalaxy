@@ -1,4 +1,4 @@
-package org.example._MVC.PantallasOK;
+package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
 import org.example._MVC.Views.JugadorView;
 
