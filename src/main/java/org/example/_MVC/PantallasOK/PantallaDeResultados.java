@@ -1,6 +1,6 @@
-package org.example.FuturoFront;
+package org.example._MVC;
 
-import org.example.Views.MessageView;
+import org.example._MVC.Views.MessageView;
 
 import javax.swing.*;
 

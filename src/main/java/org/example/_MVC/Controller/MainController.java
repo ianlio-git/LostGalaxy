@@ -1,10 +1,12 @@
-package org.example.Controller;
+package org.example._MVC.Controller;
 
 import org.example.Enums.TipoDeArma;
-import org.example.Views.*;
-import org.example.Enums.Dificultad;
-import org.example.Enums.TipoDeNave;
-import org.example.FuturoFront.*;
+import org.example._MVC.PantallasOK.*;
+import org.example._MVC.Views.GameBeginView;
+import org.example._MVC.Views.JugadorView;
+import org.example._MVC.Views.MessageView;
+import org.example._MVC.Views.SistemasView;
+import org.example._MVC.*;
 import org.example.GameMaster.Juego;
 import org.example.GameMaster.Jugador;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
@@ -26,7 +28,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void mostrarDetalleDelJugador() {
         try {
             Jugador jugador = Juego.getInstancia().getJugador();
@@ -37,7 +38,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void mostrarTurno() {
         try {
             GameBeginView gameBeginView = Juego.getInstancia().toViewgameBegin();
@@ -47,7 +47,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void mostrarSistemas() {
         try {
             List<SistemasView> sistemasViews = new ArrayList<>();
@@ -60,10 +59,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
-
-
-
     public static void cambiarDeSistema(String codigoDeSistema) {
         try {
             Juego.getInstancia().indicarRumboANuevoSistema(codigoDeSistema);
@@ -71,7 +66,20 @@ public class Controller{
             mostrarError(e);
         }
     }
-
+    public static void mercado() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PantallaMercado pantallaMercado = new PantallaMercado();
+                    pantallaMercado.setVisible(true);
+                } catch (Exception e) {
+                    mostrarError(e);
+                }
+            }
+        });
+    }
+//Planeta Neutral
     public static void comprarArma(TipoDeArma tipoDeArma) {
         try {
             Juego.getInstancia().comprarArma(tipoDeArma);
@@ -79,7 +87,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void venderArma(TipoDeArma tipoDeArma) {
         try {
             Juego.getInstancia().venderArma(tipoDeArma);
@@ -87,7 +94,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void recargarEscudo(double cantidad) {
         try {
             Juego.getInstancia().recargarEscudo(cantidad);
@@ -95,7 +101,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void comprarEscudoMaximo(double cantidad) {
         try {
             Juego.getInstancia().comprarEscudoMaximo(cantidad);
@@ -103,7 +108,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void comprarCombustible(double cantidad) {
         try {
             Juego.getInstancia().comprarCombustible(cantidad);
@@ -111,7 +115,7 @@ public class Controller{
             mostrarError(e);
         }
     }
-
+ //Planeta Aliado
     public static void repararNave() {
         try {
             Jugador jugador = Juego.getInstancia().realizarAccionDeReparacion();
@@ -124,7 +128,6 @@ public class Controller{
             mostrarError(e);
         }
     }
-
     public static void localizarTesoro() {
         try {
             Juego.getInstancia().realizarAccionDeInformacion();
@@ -132,7 +135,7 @@ public class Controller{
             mostrarError(e);
         }
     }
-
+//Planeta Hostil
     public static void atacarPlanetaHostil(String codigoDePlaneta) {
         try {
             Juego.getInstancia().atacarPlanetaHostil(codigoDePlaneta);
@@ -140,8 +143,7 @@ public class Controller{
             mostrarError(e);
         }
     }
-
-
+//error
     private static void mostrarError(Exception e) {
         MessageView messageView = new MessageView(e.getMessage());
         PantallaDeResultados pantallaDeResultados = new PantallaDeResultados(messageView);
