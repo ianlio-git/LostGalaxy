@@ -1,6 +1,6 @@
-package org.example.FuturoFront;
+package org.example._MVC.PantallasOK;
 
-import org.example.Views.SistemasView;
+import org.example._MVC.Views.SistemasView;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import javax.swing.*;

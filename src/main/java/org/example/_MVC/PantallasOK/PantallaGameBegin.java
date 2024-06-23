@@ -1,11 +1,11 @@
-package org.example.FuturoFront;
+package org.example._MVC.PantallasOK;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeNave;
-import org.example.Views.GameBeginView;
+import org.example._MVC.Views.GameBeginView;
 
 public class PantallaGameBegin extends JFrame {
     private JTextField nombreField;
@@ -22,7 +22,7 @@ public class PantallaGameBegin extends JFrame {
 
 
     public PantallaGameBegin() {
-        setTitle("Iniciar Juego");
+        setTitle("Lost Galaxy - GameBegin");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(6, 2));

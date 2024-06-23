@@ -2,7 +2,7 @@ package org.example.MapaEstelar;
 
 import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
-import org.example.Views.MapaEstelarView;
+import org.example._MVC.Views.MapaEstelarView;
 
 import java.util.ArrayList;
 import java.util.List;

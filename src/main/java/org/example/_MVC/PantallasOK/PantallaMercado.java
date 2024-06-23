@@ -1,4 +1,4 @@
-package org.example._MVC;
+package org.example._MVC.PantallasOK;
 
 import org.example.Enums.TipoDeArma;
 import org.example._MVC.Controller.MainController;

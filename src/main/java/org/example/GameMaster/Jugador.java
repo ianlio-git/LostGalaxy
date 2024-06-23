@@ -3,7 +3,7 @@ package org.example.GameMaster;
 import org.example.GameMaster.Exception.NaveDestruidaException;
 import org.example.GameMaster.Exception.PlanetaNoEncontradoException;
 import org.example.GameMaster.Exception.TesoroEncontradoException;
-import org.example.Views.JugadorView;
+import org.example._MVC.Views.JugadorView;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;

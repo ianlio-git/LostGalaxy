@@ -1,6 +1,6 @@
-package org.example.FuturoFront;
+package org.example._MVC.PantallasOK;
 
-import org.example.Views.GameBeginView;
+import org.example._MVC.Views.GameBeginView;
 
 public class PantallaTurno {
     GameBeginView gameBeginView;

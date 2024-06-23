@@ -1,85 +1,15 @@
 package org.example;
 
-import org.example.Controller.Controller;
-import org.example.Enums.Dificultad;
-import org.example.Enums.TipoDeArma;
-import org.example.Enums.TipoDeNave;
-import org.example.GameMaster.Juego;
-import org.example.MapaEstelar.MapaEstelar;
-import org.example.Views.MapaEstelarView;
+import org.example._MVC.Controller.JuegoController;
+import org.example._MVC.Controller.MainController;
 
 public class Main {
     public static void main(String[] args) {
 
 
-        Controller.gameBegin();
-        Controller.mostrarSistemas();
+        MainController.gameBegin();
+        MainController.iniciarPantallaMain();
 
-       Controller.mostrarDetalleDelJugador();
-       Controller.mostrarTurno();
-        Controller.comprarArma(TipoDeArma.MISIL_DE_ANTIMATERIA);
-      Controller.mostrarDetalleDelJugador();
-
-       MapaEstelarView mapaEstelarView = Juego.getInstancia().getMapaEstelar().mapaEstelarToView();
-       System.out.println(mapaEstelarView.getSistemaConTesoro());
-
-
-//        Controller.mostrarTurno();
-//        Controller.comprarEscudoMaximo(200);
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.recargarEscudo(200);
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.repararNave();
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.localizarTesoro();
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.localizarTesoro();
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.localizarTesoro();
-//        Controller.mostrarDetalleDelJugador();
-
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-1");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-0");
-//        Controller.mostrarDetalleDelJugador();
-//
-//
-//        Controller.mostrarTurno();
-//        Controller.cambiarDeSistema("SIST-1");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-2");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-3");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.cambiarDeSistema("SIST-2");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-4");
-//        Controller.mostrarDetalleDelJugador();
-//
-//        Controller.mostrarTurno();
-//        Controller.atacarPlanetaHostil("ENE-5");
-//        Controller.mostrarDetalleDelJugador();
 
     }
 

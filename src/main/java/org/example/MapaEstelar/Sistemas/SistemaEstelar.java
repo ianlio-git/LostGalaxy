@@ -1,6 +1,6 @@
 package org.example.MapaEstelar.Sistemas;
 
-import org.example.Views.SistemasView;
+import org.example._MVC.Views.SistemasView;
 import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.Planetas.Aliado;

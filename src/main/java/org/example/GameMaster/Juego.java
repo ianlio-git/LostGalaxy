@@ -2,7 +2,7 @@ package org.example.GameMaster;
 
 import org.example.Enums.TipoDeArma;
 import org.example.GameMaster.Exception.*;
-import org.example.Views.GameBeginView;
+import org.example._MVC.Views.GameBeginView;
 import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.MapaEstelar;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
@@ -12,7 +12,7 @@ import org.example.Nave.TiposDeNaves.NaveSwift;
 import org.example.Enums.TipoDeNave;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 import org.example.Nave.TiposDeNaves.NaveTitan;
-import org.example.Views.MessageView;
+import org.example._MVC.Views.MessageView;
 
 public class Juego {
     private static int turno = 0;

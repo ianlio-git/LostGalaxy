@@ -1,4 +1,4 @@
-package org.example.Views;
+package org.example._MVC.Views;
 
 import org.example.Enums.Dificultad;
 import org.example.Enums.TipoDeNave;

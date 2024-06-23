@@ -1,4 +1,4 @@
-package org.example.Views;
+package org.example._MVC.Views;
 
 public class MessageView {
     private String message;
