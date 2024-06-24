@@ -20,9 +20,10 @@ public class Mercado {
     }
     public  boolean accionDeRecargarEscudo(Jugador jugador, double cantidadDeEscudo){
         boolean pudeRecargarEscudo = false;
+        double cantitdadDeEscudoAgregada;
         if (jugador.puedoComprar(cantidadDeEscudo)) {
-            jugador.getNave().getEscudo().agregarEscudo(cantidadDeEscudo);
-            jugador.quitarUadeCoins(cantidadDeEscudo);
+            cantitdadDeEscudoAgregada = jugador.getNave().getEscudo().agregarEscudo(cantidadDeEscudo);
+            jugador.quitarUadeCoins(cantitdadDeEscudoAgregada);
             pudeRecargarEscudo = true;
         }
         return pudeRecargarEscudo;

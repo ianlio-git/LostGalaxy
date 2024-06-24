@@ -61,13 +61,12 @@ public abstract class NaveAliada extends Nave {
         return removiElArma;
     }
 
-
-
     public boolean tengoArmas(){
         return armas.size()>0;
     }
+
     public boolean limiteDeArmas(){
-        return armas.size()<=2;
+        return armas.size()<2;
     }
 
     public boolean tengoEsaArma(TipoDeArma tipoDeArma) {

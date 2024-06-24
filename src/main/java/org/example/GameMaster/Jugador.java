@@ -53,6 +53,7 @@ public class Jugador {
         }
     }
 
+
     public boolean puedoComprar(double precio) {
         return (this.getUadeCoins() > precio);
     }

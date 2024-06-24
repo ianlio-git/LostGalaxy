@@ -81,11 +81,14 @@ public class Juego {
 
 
 
-    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException {
+    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, LimiteDeArmas {
         Planeta planeta = irAlShopping();
         if(planeta!=null){
+            if(!jugador.getNave().limiteDeArmas()){
+                throw new LimiteDeArmas("Ya haz comprado 2 armas.");
+            }
             if(planeta.ingresarAlMercado().accionDeComprarArma(jugador, tipoDeArma)){
-               // finDelJuego("Compraste el "+tipoDeArma+" con exito!");  hay que pasar esto a la view
+
             }
             else {
                 throw new UadeCoinsInsuficientesException("No tienes suficientes uade coins!");
@@ -93,29 +96,29 @@ public class Juego {
         }
     }
 
-    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException {
+    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, TanqueLlenoException {
         Planeta planeta = irAlShopping();
         if (!jugador.getNave().getTanque().tanqueLleno()) {
-            if (planeta.ingresarAlMercado().accionDeComprarCombustible(jugador, cantidad)) {
-                //finDelJuego("Compraste combustible con exito!");hay que pasar esto a la view
-            } else {
+            if (!planeta.ingresarAlMercado().accionDeComprarCombustible(jugador, cantidad)) {
                 throw new UadeCoinsInsuficientesException("No tienes suficientes uade coins!");
             }
         }
+        else {
+            throw new TanqueLlenoException("Tanque de combustible lleno");
+        }
     }
 
-    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException {
+    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, EscudoLleno {
         Planeta planeta = irAlShopping();
         if(!jugador.getNave().getEscudo().escudoLleno()){
             if(planeta!=null){
                 if(planeta.ingresarAlMercado().accionDeRecargarEscudo(jugador,cantidad)){
-                    // finDelJuego("Recargaste escudo con exito!"); hay que pasar esto a la view
                 }else{
                     throw new UadeCoinsInsuficientesException("No tienes suficientes uade coins!");
                 }
             }
         }else{
-            // finDelJuego("Escudos al maximo");
+            throw new EscudoLleno("Tu escudo esta lleno, compra mas escudo maximo para añadir más.");
         }
     }
 

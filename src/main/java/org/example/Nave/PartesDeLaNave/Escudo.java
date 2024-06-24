@@ -25,9 +25,17 @@ public class Escudo {
         this.escudo -= cantDeEscudo;
 
     }
-    public void agregarEscudo(double cantDeEscudo){
-        this.escudo += cantDeEscudo;
+    public double agregarEscudo(double cantDeEscudo){
+        if(cantDeEscudo + this.escudo <= this.escudoMax){
+            this.escudo+=cantDeEscudo;
+            return cantDeEscudo;
+        }else{
+            double faltante = this.cantidadEscudoMax() - this.escudo;
+            this.escudo+= faltante;
+            return faltante;
+        }
     }
+
 
     public double cantidadEscudoActual() {
         return escudo;

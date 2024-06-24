@@ -7,43 +7,53 @@ import org.example._MVC.Views.MessageView;
 
 public class PlanetaNeutralController {
 
-    public static void comprarArma(TipoDeArma tipoDeArma) {
+    public static boolean comprarArma(TipoDeArma tipoDeArma) {
         try {
             Juego.getInstancia().comprarArma(tipoDeArma);
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 
-    public static void venderArma(TipoDeArma tipoDeArma) {
+    public static boolean venderArma(TipoDeArma tipoDeArma) {
         try {
             Juego.getInstancia().venderArma(tipoDeArma);
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 
-    public static void recargarEscudo(double cantidad) {
+    public static boolean recargarEscudo(double cantidad) {
         try {
             Juego.getInstancia().recargarEscudo(cantidad);
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 
-    public static void comprarEscudoMaximo(double cantidad) {
+    public static boolean comprarEscudoMaximo(double cantidad) {
         try {
             Juego.getInstancia().comprarEscudoMaximo(cantidad);
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 
-    public static void comprarCombustible(double cantidad) {
+    public static boolean comprarCombustible(double cantidad) {
         try {
             Juego.getInstancia().comprarCombustible(cantidad);
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 

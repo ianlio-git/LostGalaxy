@@ -30,8 +30,9 @@ public class PantallaMercado extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TipoDeArma armaSeleccionada = (TipoDeArma) armaComboBox.getSelectedItem();
                 if (armaSeleccionada != null) {
-                    PlanetaNeutralController.comprarArma(armaSeleccionada);
-                    mostrarMensaje("Compra de arma exitosa.");
+                    if(PlanetaNeutralController.comprarArma(armaSeleccionada)){
+                        mostrarMensaje("Compra de arma exitosa.");
+                    }
                 } else {
                     mostrarMensaje("Seleccione un arma.");
                 }
@@ -44,7 +45,7 @@ public class PantallaMercado extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TipoDeArma armaSeleccionada = (TipoDeArma) armaComboBox.getSelectedItem();
                 if (armaSeleccionada != null) {
-                    PlanetaNeutralController.venderArma(armaSeleccionada);
+                    if(PlanetaNeutralController.venderArma(armaSeleccionada))
                     mostrarMensaje("Venta de arma exitosa.");
                 } else {
                     mostrarMensaje("Seleccione un arma.");
@@ -60,8 +61,10 @@ public class PantallaMercado extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     double cantidad = Double.parseDouble(campoCombustible.getText());
-                    PlanetaNeutralController.comprarCombustible(cantidad);
-                    mostrarMensaje("Compra de combustible exitosa.");
+                    if(PlanetaNeutralController.comprarCombustible(cantidad)){
+                        mostrarMensaje("Compra de combustible exitosa.");
+                    }
+
                 } catch (NumberFormatException ex) {
                     mostrarMensaje("Ingrese una cantidad válida de combustible.");
                 }
@@ -76,8 +79,10 @@ public class PantallaMercado extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     double cantidad = Double.parseDouble(campoEscudoMaximo.getText());
-                    PlanetaNeutralController.comprarEscudoMaximo(cantidad);
-                    mostrarMensaje("Compra de escudo máximo exitosa.");
+                    if(PlanetaNeutralController.comprarEscudoMaximo(cantidad)){
+                        mostrarMensaje("Compra de escudo máximo exitosa.");
+                    }
+
                 } catch (NumberFormatException ex) {
                     mostrarMensaje("Ingrese una cantidad válida de escudo máximo.");
                 }
@@ -92,8 +97,10 @@ public class PantallaMercado extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     double cantidad = Double.parseDouble(campoRecargarEscudo.getText());
-                    PlanetaNeutralController.recargarEscudo(cantidad);
-                    mostrarMensaje("Recarga de escudo exitosa.");
+                    if(PlanetaNeutralController.recargarEscudo(cantidad)){
+                        mostrarMensaje("Recarga de escudo exitosa.");
+                    }
+
                 } catch (NumberFormatException ex) {
                     mostrarMensaje("Ingrese una cantidad válida para recargar el escudo.");
                 }
