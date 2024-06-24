@@ -6,6 +6,8 @@ import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaGameBegin;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.GameBeginView;
 import org.example._MVC.Views.MessageView;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainController {
     public static void gameBegin() {
@@ -35,6 +37,17 @@ public class MainController {
         MessageView messageView = new MessageView(e.getMessage());
         PantallaDeResultados pantallaDeResultados = new PantallaDeResultados(messageView);
         pantallaDeResultados.salirDelJuego(e);
+    }
+
+    public static void cerrarApp(int delayMillis) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Cerrando la aplicación...");
+                System.exit(0); // Cierra la aplicación
+            }
+        }, delayMillis);
     }
 
 }

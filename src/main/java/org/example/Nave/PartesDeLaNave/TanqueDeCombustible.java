@@ -8,7 +8,7 @@ public class TanqueDeCombustible {
     private double capacidadMaxTanque;
 
     public TanqueDeCombustible(double capacidadMaxTanque) {
-        this.combustible = 10;
+        this.combustible = capacidadMaxTanque;
         this.capacidadMaxTanque = capacidadMaxTanque;
     }
     public double cargarCombustible(double cantidad){

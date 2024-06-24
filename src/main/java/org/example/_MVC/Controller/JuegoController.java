@@ -24,8 +24,13 @@ public class JuegoController {
         try {
             Jugador jugador = Juego.getInstancia().getJugador();
             JugadorView jugadorView = jugador.toViewJugador();
-            PantallaJugador pantallaJugador = new PantallaJugador(jugadorView);
+
+            // Obtener la instancia única de PantallaJugador
+            PantallaJugador pantallaJugador = PantallaJugador.obtenerInstancia(jugadorView);
+
+            // Mostrar la ventana con los datos actualizados del jugador
             pantallaJugador.mostrarDatosDelJugador();
+
         } catch (Exception e) {
             mostrarError(e);
         }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public class PantallaJugador extends JFrame {
 
+    private static PantallaJugador instanciaUnica = null; // Variable estática para mantener la única instancia
+
     private JugadorView jugadorView;
 
     private JLabel sistemaLabel;
@@ -24,7 +26,15 @@ public class PantallaJugador extends JFrame {
     private JPanel armasPanel;
     private JLabel poderLabel;
 
-    public PantallaJugador(JugadorView jugadorView) {
+    // Método estático para obtener la instancia única de PantallaJugador
+    public static PantallaJugador obtenerInstancia(JugadorView jugadorView) {
+        if (instanciaUnica == null) {
+            instanciaUnica = new PantallaJugador(jugadorView);
+        }
+        return instanciaUnica;
+    }
+
+    private PantallaJugador(JugadorView jugadorView) {
         this.jugadorView = jugadorView;
         initUI();
         iniciarActualizarDatos(); // Iniciar el temporizador para actualizar los datos del jugador
@@ -108,7 +118,7 @@ public class PantallaJugador extends JFrame {
 
     private void iniciarActualizarDatos() {
         // Iniciar el temporizador para actualizar los datos del jugador cada 5 segundos
-        Timer timer = new Timer(800, e -> {
+        Timer timer = new Timer(5000, e -> {
             try {
                 jugadorView = Juego.getInstancia().getJugador().toViewJugador();
                 SwingUtilities.invokeLater(() -> actualizarDatos(jugadorView));

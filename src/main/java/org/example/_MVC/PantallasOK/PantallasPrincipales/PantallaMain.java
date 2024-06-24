@@ -71,7 +71,7 @@ public class PantallaMain extends JFrame {
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
 
         JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil", "Coste de realizar esta acción es: Y monedas.");
-        btnAtacarPlanetaHostil.addActionListener(e -> PlanetaHostilController.atacarPlanetaHostil("codigoPlaneta"));
+        btnAtacarPlanetaHostil.addActionListener(e -> PlanetaHostilController.atacarPlanetaHostil("ENE-1"));
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnAtacarPlanetaHostil, gbcRestoBotones);
 
