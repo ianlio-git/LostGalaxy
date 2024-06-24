@@ -1,6 +1,8 @@
 package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
+import org.example.GameMaster.Juego;
 import org.example._MVC.Controller.PlanetaAliadoController;
+import org.example._MVC.Views.MapaEstelarView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +27,10 @@ public class PantallaPlanetaAliado extends JFrame {
         botonRepararNave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlanetaAliadoController.repararNave();
-                mostrarMensaje("La nave ha sido reparada.");
+                if(PlanetaAliadoController.repararNave()){
+                    mostrarMensaje("Bienvenido al taller del UADE team!\n" + "Tu nave ha sido reparada con exito! \n"+"Mucha suerte en tus proximas batallas!");
+                }
+
             }
         });
 
@@ -39,8 +43,10 @@ public class PantallaPlanetaAliado extends JFrame {
         botonObtenerInformacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlanetaAliadoController.localizarTesoro();
-                mostrarMensaje("Información de la nave obtenida.");
+                if(PlanetaAliadoController.localizarTesoro()){
+                    MapaEstelarView mapaEstelarView = Juego.getInstancia().getMapaEstelar().mapaEstelarToView();
+                    mostrarMensaje("El sistema con el tesoro es el:"+mapaEstelarView.getSistemaConTesoro());
+                }
             }
         });
 

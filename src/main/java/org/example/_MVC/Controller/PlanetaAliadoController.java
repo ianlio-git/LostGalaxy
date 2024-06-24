@@ -3,30 +3,27 @@ package org.example._MVC.Controller;
 import org.example.GameMaster.Juego;
 import org.example.GameMaster.Jugador;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
-import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeReparacionDeNave;
-import org.example._MVC.Views.JugadorView;
 import org.example._MVC.Views.MessageView;
 
 public class PlanetaAliadoController {
 
-    public static void repararNave() {
+    public static boolean repararNave() {
         try {
             Jugador jugador = Juego.getInstancia().realizarAccionDeReparacion();
-            JugadorView jugadorView = jugador.toViewJugador();
-            PantallaDeReparacionDeNave pantallaDeReparacionDeNave = new PantallaDeReparacionDeNave(jugadorView);
-            if (jugadorView.getPlanetaActual().getCodigoDePlaneta().contains("ALI")) {
-                pantallaDeReparacionDeNave.bienvenidaAlTaller(jugadorView);
-            }
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 
-    public static void localizarTesoro() {
+    public static boolean localizarTesoro() {
         try {
             Juego.getInstancia().realizarAccionDeInformacion();
+            return true;
         } catch (Exception e) {
             mostrarError(e);
+            return false;
         }
     }
 

@@ -1,5 +1,6 @@
 package org.example.MapaEstelar.Sistemas.Planetas;
 
+import org.example.GameMaster.Exception.UadeCoinsInsuficientesException;
 import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.MapaEstelar;
@@ -37,14 +38,13 @@ public class Aliado extends Planeta {
     }
 
 
-    public String obtenerInformacion( Jugador jugador){
+    public void obtenerInformacion( Jugador jugador) throws UadeCoinsInsuficientesException {
 
         if(jugador.puedoComprar(costeDeInformacion)){
             jugador.quitarUadeCoins(costeDeInformacion);
-            return ("El sistema estelar que posee el tesoro es el:"+mapaEstelar.getSistemaConTesoro());
         }
         else {
-            return "Reune mas uade coins para obtener esa informacion!";
+            throw new UadeCoinsInsuficientesException("No tienes suficiente uade coins para obtener informacion.");
         }
     }
 }

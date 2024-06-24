@@ -34,8 +34,8 @@ public class Neutral extends Planeta {
     }
 
     @Override
-    public String obtenerInformacion(Jugador jugador) {
-        return "No puedes obtener informacion aqui.";
+    public void obtenerInformacion(Jugador jugador) {
+        System.out.println("No se puede obtener informacion en un planeta neutral");
     }
 
 

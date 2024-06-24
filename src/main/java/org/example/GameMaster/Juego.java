@@ -178,7 +178,7 @@ public class Juego {
 
     }
 
-    public void realizarAccionDeInformacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
+    public void realizarAccionDeInformacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, UadeCoinsInsuficientesException {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
         if(planeta==null){
@@ -186,8 +186,7 @@ public class Juego {
         }else{
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
-                System.out.println(planeta.obtenerInformacion(jugador));
-               // finDelJuego(planeta.obtenerInformacion(jugador)); que era esto?
+                planeta.obtenerInformacion(jugador);
             }
             else {
                 throw new CombustibleInsuficienteException("Te quedaste sin combustible");

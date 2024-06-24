@@ -49,8 +49,8 @@ public class Hostil extends Planeta {
         jugador.encontreElTesoro(this.tesoro);
     }
     @Override
-    public String obtenerInformacion(Jugador jugador) {
-        return "No puedes obtener informacion aqui.";
+    public void obtenerInformacion(Jugador jugador) {
+        System.out.println("No se puede hacer eso en un planeta hostil");
     }
 
 
