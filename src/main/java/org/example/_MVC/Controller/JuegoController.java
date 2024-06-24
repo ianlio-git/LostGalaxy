@@ -1,5 +1,6 @@
 package org.example._MVC.Controller;
 import org.example.GameMaster.Jugador;
+import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaPlanetaAliado;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaJugador;
@@ -67,6 +68,20 @@ public class JuegoController {
                 try {
                     PantallaMercado pantallaMercado = new PantallaMercado();
                     pantallaMercado.setVisible(true);
+                } catch (Exception e) {
+                    mostrarError(e);
+                }
+            }
+        });
+    }
+
+    public static void planetaAliado() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PantallaPlanetaAliado pantallaPlanetaAliado = new PantallaPlanetaAliado();
+                    pantallaPlanetaAliado.setVisible(true);
                 } catch (Exception e) {
                     mostrarError(e);
                 }

@@ -1,4 +1,5 @@
 package org.example._MVC.PantallasOK.PantallasPrincipales;
+
 import org.example._MVC.Controller.JuegoController;
 import org.example._MVC.Controller.PlanetaAliadoController;
 import org.example._MVC.Controller.PlanetaHostilController;
@@ -69,20 +70,17 @@ public class PantallaMain extends JFrame {
         btnMercado.addActionListener(e -> JuegoController.mercado());
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
 
-        JButton btnRepararNave = createButton("Reparar Nave (Aliado)");
-        btnRepararNave.addActionListener(e -> PlanetaAliadoController.repararNave());
-        gbcRestoBotones.gridy++;
-        panelBotonesDerecha.add(btnRepararNave, gbcRestoBotones);
-
-        JButton btnLocalizarTesoro = createButton("Localizar Tesoro (Aliado)");
-        btnLocalizarTesoro.addActionListener(e -> PlanetaAliadoController.localizarTesoro());
-        gbcRestoBotones.gridy++;
-        panelBotonesDerecha.add(btnLocalizarTesoro, gbcRestoBotones);
 
         JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil");
         btnAtacarPlanetaHostil.addActionListener(e -> PlanetaHostilController.atacarPlanetaHostil("codigoPlaneta"));
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnAtacarPlanetaHostil, gbcRestoBotones);
+
+        // Nuevo botón Planeta Aliado
+        JButton btnPlanetaAliado = createButton("Planeta Aliado");
+        btnPlanetaAliado.addActionListener(e -> JuegoController.planetaAliado());
+        gbcRestoBotones.gridy++;
+        panelBotonesDerecha.add(btnPlanetaAliado, gbcRestoBotones);
 
         // GridBagConstraints para el panel de botones derecho
         GridBagConstraints gbcPanelDerecha = new GridBagConstraints();
