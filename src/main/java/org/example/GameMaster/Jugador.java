@@ -55,11 +55,15 @@ public class Jugador {
 
 
     public boolean puedoComprar(double precio) {
-        return (this.getUadeCoins() > precio);
+        return (this.getUadeCoins() >= precio);
     }
 
     public SistemaEstelar getSistemaActual() {
         return sistemaActual;
+    }
+
+    public Planeta getPlanetaActual() {
+        return planetaActual;
     }
 
     public void viajeAPlaneta(Planeta planeta) throws PlanetaNoEncontradoException {

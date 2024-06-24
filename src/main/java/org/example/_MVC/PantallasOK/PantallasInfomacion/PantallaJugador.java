@@ -1,9 +1,11 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
+import org.example.GameMaster.Juego;
 import org.example.Nave.PartesDeLaNave.Arma;
 import org.example._MVC.Views.JugadorView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class PantallaJugador extends JFrame {
@@ -25,6 +27,7 @@ public class PantallaJugador extends JFrame {
     public PantallaJugador(JugadorView jugadorView) {
         this.jugadorView = jugadorView;
         initUI();
+        iniciarActualizarDatos(); // Iniciar el temporizador para actualizar los datos del jugador
     }
 
     private void initUI() {
@@ -103,8 +106,20 @@ public class PantallaJugador extends JFrame {
         armasPanel.repaint();
     }
 
-    public void actualizarDatos(JugadorView jugadorView) {
-        this.jugadorView = jugadorView;
+    private void iniciarActualizarDatos() {
+        // Iniciar el temporizador para actualizar los datos del jugador cada 5 segundos
+        Timer timer = new Timer(800, e -> {
+            try {
+                jugadorView = Juego.getInstancia().getJugador().toViewJugador();
+                SwingUtilities.invokeLater(() -> actualizarDatos(jugadorView));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        timer.start();
+    }
+
+    private void actualizarDatos(JugadorView jugadorView) {
         sistemaLabel.setText("Dentro del sistema: " + jugadorView.getSistemaActual().mostrarNombre());
         posicionLabel.setText("Posicionado en el: " + jugadorView.getPosicionEnElEspacio());
         nombreLabel.setText("Nombre: " + jugadorView.getNombre());
@@ -125,4 +140,3 @@ public class PantallaJugador extends JFrame {
         setVisible(true);
     }
 }
-

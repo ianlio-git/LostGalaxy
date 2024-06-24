@@ -81,7 +81,7 @@ public class Juego {
 
 
 
-    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, LimiteDeArmas {
+    public void comprarArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, LimiteDeArmas, SinCombustibleNiUadeCoins {
         Planeta planeta = irAlShopping();
         if(planeta!=null){
             if(!jugador.getNave().limiteDeArmas()){
@@ -96,7 +96,7 @@ public class Juego {
         }
     }
 
-    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, TanqueLlenoException {
+    public void comprarCombustible(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, TanqueLlenoException, SinCombustibleNiUadeCoins {
         Planeta planeta = irAlShopping();
         if (!jugador.getNave().getTanque().tanqueLleno()) {
             if (!planeta.ingresarAlMercado().accionDeComprarCombustible(jugador, cantidad)) {
@@ -108,7 +108,7 @@ public class Juego {
         }
     }
 
-    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, EscudoLleno {
+    public void recargarEscudo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, EscudoLleno, SinCombustibleNiUadeCoins {
         Planeta planeta = irAlShopping();
         if(!jugador.getNave().getEscudo().escudoLleno()){
             if(planeta!=null){
@@ -124,7 +124,7 @@ public class Juego {
 
 
 
-    public void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, ArmaNoEncontradaException, PlanetaNoEncontradoException {
+    public void venderArma(TipoDeArma tipoDeArma) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, ArmaNoEncontradaException, PlanetaNoEncontradoException, SinCombustibleNiUadeCoins {
         Planeta planeta = irAlShopping();
         if(planeta!=null){
             if(planeta.ingresarAlMercado().accionDeVenderArma(jugador,tipoDeArma)){
@@ -134,7 +134,7 @@ public class Juego {
             }
         }
     }
-    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException {
+    public void comprarEscudoMaximo(double cantidad) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, UadeCoinsInsuficientesException, PlanetaNoEncontradoException, SinCombustibleNiUadeCoins {
         Planeta planeta = irAlShopping();
         if(planeta!=null){
             if(planeta.ingresarAlMercado().accionDeComprarEscudoMaximo(jugador,cantidad)){
@@ -145,22 +145,24 @@ public class Juego {
         }
     }
 
-    private Planeta irAlShopping() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
-        pasarTurno();
+    private Planeta irAlShopping() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, SinCombustibleNiUadeCoins {
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaNeutral();
-        jugador.setPlanetaActual(planeta);
-        jugador.setPosicionEnElEspacio(planeta.getCodigoDePlaneta());
-        if (jugador.puedoViajar(planeta)) {
-            jugador.viajeAPlaneta(planeta);
-            return planeta;
-        }else {//si no puedo visitar un planeta neutral quiere decir que perdi
-           // String mensaje = "No puedo visitar el planeta neutral, la nave no tiene combustible suficiente para esta accion.";
-            throw new CombustibleInsuficienteException("Te quedaste sin combustible");
+        if(jugador.getPlanetaActual() != planeta){
+            if (jugador.puedoViajar(planeta)) {
+                jugador.setPlanetaActual(planeta);
+                jugador.setPosicionEnElEspacio(planeta.getCodigoDePlaneta());
+                jugador.viajeAPlaneta(planeta);
+                pasarTurno();
+                return planeta;
+            }else {
+                pasarTurno();
+                throw new SinCombustibleNiUadeCoins("Te quedaste sin combustible");
+            }
         }
+        return jugador.getPlanetaActual();
     }
 
     public Jugador realizarAccionDeReparacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException {
-        pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
 
         if(planeta==null){
@@ -169,8 +171,7 @@ public class Juego {
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.repararNaveAliada(jugador);
-                // finDelJuego(String.format("¡Someteremos tu nave a reparación! \n ... \n ... \n ... \n ¡Hemos reparado tu nave con éxito! Ahora tiene "+jugador.getNave().getVida()+ " de vida y "+jugador.getNave().getEscudo().cantidadEscudoActual()+" de escudo! "));
-                // hay que ver como pasar esto a la view
+                pasarTurno();
 
             } else {
                 throw new CombustibleInsuficienteException("Te quedaste sin combustible");
@@ -182,7 +183,7 @@ public class Juego {
     }
 
     public void realizarAccionDeInformacion() throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, UadeCoinsInsuficientesException {
-        pasarTurno();
+
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaAliado();
         if(planeta==null){
             throw new PlanetaNoEncontradoException("No se pudo encontrar el planeta.");
@@ -190,6 +191,7 @@ public class Juego {
             if (jugador.puedoViajar(planeta)) {
                 jugador.viajeAPlaneta(planeta);
                 planeta.obtenerInformacion(jugador);
+                pasarTurno();
             }
             else {
                 throw new CombustibleInsuficienteException("Te quedaste sin combustible");

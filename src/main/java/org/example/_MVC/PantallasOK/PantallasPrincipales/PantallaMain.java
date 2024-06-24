@@ -26,13 +26,13 @@ public class PantallaMain extends JFrame {
         panelBotonesIzquierda.setLayout(new GridLayout(3, 1, 0, 10)); // Usar GridLayout para alinear verticalmente los botones
 
         // Crear botones con estilo para la sección izquierda
-        JButton btnDetalleJugador = createButton("Detalle del Jugador");
+        JButton btnDetalleJugador = createButton("Detalle del Jugador", "Muestra los detalles del jugador.");
         btnDetalleJugador.addActionListener(e -> JuegoController.mostrarDetalleDelJugador());
 
-        JButton btnMostrarTurno = createButton("Mostrar Turno");
+        JButton btnMostrarTurno = createButton("Mostrar Turno", "Muestra el turno actual.");
         btnMostrarTurno.addActionListener(e -> JuegoController.mostrarTurno());
 
-        JButton btnMostrarSistemas = createButton("Mostrar Sistemas Estelares");
+        JButton btnMostrarSistemas = createButton("Mostrar Sistemas Estelares", "Muestra los sistemas estelares.");
         btnMostrarSistemas.addActionListener(e -> JuegoController.mostrarSistemas());
 
         // Añadir los primeros tres botones al panel izquierdo
@@ -66,18 +66,17 @@ public class PantallaMain extends JFrame {
         gbcRestoBotones.weightx = 1.0; // Distribuir espacio horizontalmente
         gbcRestoBotones.weighty = 0.25; // Distribuir espacio verticalmente
 
-        JButton btnMercado = createButton("Mercado");
+        JButton btnMercado = createButton("Mercado", "Coste de realizar esta acción es: X monedas.");
         btnMercado.addActionListener(e -> JuegoController.mercado());
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
 
-
-        JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil");
+        JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil", "Coste de realizar esta acción es: Y monedas.");
         btnAtacarPlanetaHostil.addActionListener(e -> PlanetaHostilController.atacarPlanetaHostil("codigoPlaneta"));
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnAtacarPlanetaHostil, gbcRestoBotones);
 
         // Nuevo botón Planeta Aliado
-        JButton btnPlanetaAliado = createButton("Planeta Aliado");
+        JButton btnPlanetaAliado = createButton("Planeta Aliado", "Coste de realizar esta acción es: Z monedas.");
         btnPlanetaAliado.addActionListener(e -> JuegoController.planetaAliado());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnPlanetaAliado, gbcRestoBotones);
@@ -99,14 +98,15 @@ public class PantallaMain extends JFrame {
         setVisible(true);
     }
 
-    // Método para crear botones con estilos
-    private JButton createButton(String text) {
+    // Método para crear botones con estilos y tooltips
+    private JButton createButton(String text, String tooltipText) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setBackground(new Color(0, 0, 0)); // Fondo negro
         button.setForeground(new Color(255, 255, 255)); // Texto blanco
         button.setFocusPainted(false); // Quitar el borde de enfoque
         button.setMargin(new Insets(10, 20, 10, 20)); // Ajustar márgenes
+        button.setToolTipText(tooltipText); // Agregar tooltip
         return button;
     }
 }

@@ -33,13 +33,16 @@ public class JuegoController {
 
     public static void mostrarTurno() {
         try {
-            GameBeginView gameBeginView = Juego.getInstancia().toViewgameBegin();
-            PantallaTurno pantallaTurno = new PantallaTurno(gameBeginView);
-            pantallaTurno.mostrarTurno();
+            PantallaTurno pantallaTurno = new PantallaTurno();
+            pantallaTurno.setVisible(true); // Hacer visible la ventana
+            pantallaTurno.iniciarActualizarTurno(); // Iniciar la actualización del turno
+
         } catch (Exception e) {
             mostrarError(e);
         }
     }
+
+
 
     public static void mostrarSistemas() {
         try {
