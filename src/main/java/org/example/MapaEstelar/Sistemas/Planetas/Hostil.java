@@ -32,7 +32,6 @@ public class Hostil extends Planeta {
         while (jugador.getNave().tengoVida()&& naveEnemiga.tengoVida()) {
             jugador.getNave().recibirGolpe(naveEnemiga.poderAtaque());
             naveEnemiga.quitarVida(jugador.getNave().poderAtaque());
-            jugador.getNave().updateVida();
             acumDeDanio+=naveEnemiga.poderAtaque();
         }
         if(!naveEnemiga.tengoVida()&&jugador.getNave().tengoVida()) {

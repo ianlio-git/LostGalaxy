@@ -24,18 +24,13 @@ public abstract class NaveAliada extends Nave {
         this.escudo = new Escudo(cantidadEscudo);
     }
 
+
     public void recibirGolpe(double ataque){
         if(escudo.tengoEscudo()){
             escudo.quitarEscudo(ataque);
-        } else if (escudo.cantidadEscudoActual()<0) {
-            this.quitarVida(abs(escudo.cantidadEscudoActual()));
-            escudo.escudoAcero();
-        }else {
+        } else {
             this.quitarVida(ataque);
         }
-
-    }
-    public void updateVida(){
         if(escudo.cantidadEscudoActual()<0){
             this.vida+= escudo.cantidadEscudoActual();
             escudo.escudoAcero();
