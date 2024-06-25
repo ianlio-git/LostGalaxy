@@ -11,7 +11,11 @@ public class PantallaDeCombate extends JFrame {
     private JTextField codigoPlanetaField;
     private JTextArea resultadoArea;
 
-    public PantallaDeCombate() {
+    // Instancia única como campo estático privado
+    private static PantallaDeCombate instancia = null;
+
+    // Constructor privado para evitar instanciación externa
+    private PantallaDeCombate() {
         setTitle("Pantalla de Combate");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -58,5 +62,13 @@ public class PantallaDeCombate extends JFrame {
                 atacarPlanetaHostil(codigoDePlaneta.toUpperCase());
             }
         });
+    }
+
+    // Método estático para obtener la instancia única
+    public static PantallaDeCombate getInstance() {
+        if (instancia == null) {
+            instancia = new PantallaDeCombate();
+        }
+        return instancia;
     }
 }

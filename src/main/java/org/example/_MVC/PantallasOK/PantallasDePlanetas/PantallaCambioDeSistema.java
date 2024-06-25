@@ -11,7 +11,11 @@ public class PantallaCambioDeSistema extends JFrame {
     private JTextField codigoSistemaField;
     private JTextArea resultadoArea;
 
-    public PantallaCambioDeSistema() {
+    // Instancia única como campo estático privado
+    private static PantallaCambioDeSistema instancia = null;
+
+    // Constructor privado para evitar instanciación externa
+    private PantallaCambioDeSistema() {
         setTitle("Pantalla de Cambio de Sistema");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,5 +61,13 @@ public class PantallaCambioDeSistema extends JFrame {
                 cambiarSistema(codigoDeSistema.toUpperCase());
             }
         });
+    }
+
+    // Método estático para obtener la instancia única
+    public static PantallaCambioDeSistema getInstance() {
+        if (instancia == null) {
+            instancia = new PantallaCambioDeSistema();
+        }
+        return instancia;
     }
 }

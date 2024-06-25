@@ -11,7 +11,11 @@ import java.awt.event.ActionListener;
 
 public class PantallaPlanetaAliado extends JFrame {
 
-    public PantallaPlanetaAliado() {
+    // Instancia única como campo estático privado
+    private static PantallaPlanetaAliado instancia = null;
+
+    // Constructor privado para evitar instanciación externa
+    private PantallaPlanetaAliado() {
         setTitle("Opciones de Nave");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,8 +31,8 @@ public class PantallaPlanetaAliado extends JFrame {
         botonRepararNave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(PlanetaAliadoController.repararNave()){
-                    mostrarMensaje("Bienvenido al taller del UADE team!\n" + "Tu nave ha sido reparada con exito! \n"+"Mucha suerte en tus proximas batallas!");
+                if (PlanetaAliadoController.repararNave()) {
+                    mostrarMensaje("Bienvenido al taller del UADE team!\n" + "Tu nave ha sido reparada con exito! \n" + "Mucha suerte en tus proximas batallas!");
                 }
 
             }
@@ -43,9 +47,9 @@ public class PantallaPlanetaAliado extends JFrame {
         botonObtenerInformacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(PlanetaAliadoController.localizarTesoro()){
+                if (PlanetaAliadoController.localizarTesoro()) {
                     MapaEstelarView mapaEstelarView = Juego.getInstancia().getMapaEstelar().mapaEstelarToView();
-                    mostrarMensaje("El sistema con el tesoro es el:"+mapaEstelarView.getSistemaConTesoro());
+                    mostrarMensaje("El sistema con el tesoro es el:" + mapaEstelarView.getSistemaConTesoro());
                 }
             }
         });
@@ -55,6 +59,14 @@ public class PantallaPlanetaAliado extends JFrame {
         add(botonObtenerInformacion);
 
         setVisible(true);
+    }
+
+    // Método estático para obtener la instancia única
+    public static PantallaPlanetaAliado getInstance() {
+        if (instancia == null) {
+            instancia = new PantallaPlanetaAliado();
+        }
+        return instancia;
     }
 
     private void mostrarMensaje(String mensaje) {

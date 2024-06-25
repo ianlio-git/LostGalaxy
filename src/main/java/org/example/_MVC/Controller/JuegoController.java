@@ -67,8 +67,7 @@ public class JuegoController {
             @Override
             public void run() {
                 try {
-                    PantallaCambioDeSistema pantallaCambioDeSistema= new PantallaCambioDeSistema();
-                    pantallaCambioDeSistema.setVisible(true);
+                    PantallaCambioDeSistema.getInstance().setVisible(true);
                 } catch (Exception e) {
                     mostrarError(e);
                 }
@@ -80,8 +79,7 @@ public class JuegoController {
             @Override
             public void run() {
                 try {
-                    PantallaDeCombate pantallaDeCombate = new PantallaDeCombate();
-                    pantallaDeCombate.setVisible(true);
+                    PantallaDeCombate.getInstance().setVisible(true);
                 } catch (Exception e) {
                     mostrarError(e);
                 }
@@ -107,8 +105,8 @@ public class JuegoController {
             @Override
             public void run() {
                 try {
-                    PantallaPlanetaAliado pantallaPlanetaAliado = new PantallaPlanetaAliado();
-                    pantallaPlanetaAliado.setVisible(true);
+
+                    PantallaPlanetaAliado.getInstance().setVisible(true);
                 } catch (Exception e) {
                     mostrarError(e);
                 }
