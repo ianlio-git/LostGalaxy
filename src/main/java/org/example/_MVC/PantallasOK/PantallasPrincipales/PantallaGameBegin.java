@@ -15,17 +15,18 @@ public class PantallaGameBegin extends JFrame {
     private JComboBox<Dificultad> dificultadComboBox;
     private JButton iniciarButton;
 
-
     private GameBeginView gameBeginView;
     private final Object lock = new Object();
     private boolean gameStarted = false;
-
 
     public PantallaGameBegin() {
         setTitle("Lost Galaxy - GameBegin");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(6, 2));
+
+        // Centrar la pantalla
+        setLocationRelativeTo(null);
 
         // Nombre del jugador
         add(new JLabel("Nombre del Jugador:"));

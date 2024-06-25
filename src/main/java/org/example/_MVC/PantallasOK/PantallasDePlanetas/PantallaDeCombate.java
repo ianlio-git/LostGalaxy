@@ -54,7 +54,8 @@ public class PantallaDeCombate extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String codigoDePlaneta = codigoPlanetaField.getText();
-                atacarPlanetaHostil(codigoDePlaneta);
+
+                atacarPlanetaHostil(codigoDePlaneta.toUpperCase());
             }
         });
     }

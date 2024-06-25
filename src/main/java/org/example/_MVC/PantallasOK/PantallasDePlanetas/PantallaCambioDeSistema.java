@@ -54,7 +54,7 @@ public class PantallaCambioDeSistema extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String codigoDeSistema = codigoSistemaField.getText();
-                cambiarSistema(codigoDeSistema);
+                cambiarSistema(codigoDeSistema.toUpperCase());
             }
         });
     }
