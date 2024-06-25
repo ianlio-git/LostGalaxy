@@ -152,8 +152,8 @@ public class PantallaMercado extends JFrame {
 
         // Añadir componentes al panel principal con títulos punteados
         panelPrincipal.add(crearPanelConTitulo(armaComboBox, "Arma"));
-        panelPrincipal.add(crearPanelConTitulo(etiquetaPrecio, ""));
         panelPrincipal.add(crearPanelConTitulo(botonVenderArma, ""));
+        panelPrincipal.add(crearPanelConTitulo(etiquetaPrecio, ""));
         panelPrincipal.add(crearPanelConTitulo(botonComprarArma, ""));
         panelPrincipal.add(crearPanelConTitulo(campoCombustible, "Combustible"));
         panelPrincipal.add(crearPanelConTitulo(botonComprarCombustible, ""));
