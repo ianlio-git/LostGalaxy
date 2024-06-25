@@ -1,5 +1,6 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
+import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.SistemasView;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 public class PantallaSistemasEstelares extends JFrame {
+    private boolean abiertoSistemas = true;
     private static PantallaSistemasEstelares instancia;
     private List<SistemasView> sistemasViews;
     private JPanel mainPanel;
@@ -24,7 +26,7 @@ public class PantallaSistemasEstelares extends JFrame {
 
     private void initUI() {
         setTitle("Información de los Sistemas Estelares");
-        setSize(600, 400);
+        setSize(400, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -84,7 +86,15 @@ public class PantallaSistemasEstelares extends JFrame {
 
 
     public void mostrarSistemas() {
-        SwingUtilities.invokeLater(() -> setVisible(true));
+        PantallaMain pantallaMain = PantallaMain.getInstance();
+        int x = pantallaMain.getX() + pantallaMain.getWidth(); // Colocar a la derecha sumando el ancho de la ventana principal
+        int y = pantallaMain.getY();
+        setLocation(x, y);
+        setVisible(alternarPantallaSistemas());
+    }
+    private boolean alternarPantallaSistemas() {
+        abiertoSistemas = !abiertoSistemas; // Alternar el estado de abiertoSistemas
+        return !abiertoSistemas; // Devolver el estado anterior antes de la alternancia
     }
 
 }

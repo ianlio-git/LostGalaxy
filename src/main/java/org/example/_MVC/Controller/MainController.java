@@ -38,8 +38,7 @@ public class MainController {
 
     public static void iniciarPantallaMain() {
         try {
-            PantallaMain pantallaMain = new PantallaMain();
-            pantallaMain.setVisible(true);
+            PantallaMain.getInstance().setVisible(true);
         } catch (Exception e) {
             mostrarError(e);
         }

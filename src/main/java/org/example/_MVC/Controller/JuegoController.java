@@ -40,7 +40,7 @@ public class JuegoController {
 
     public static void mostrarTurno() {
         try {
-            PantallaTurno.getInstancia().setVisible(true);
+            PantallaTurno.getInstancia().mostrarTurno();
             PantallaTurno.getInstancia().iniciarActualizarTurno(); // Iniciar la actualización del turno
         } catch (Exception e) {
             mostrarError(e);
@@ -56,6 +56,7 @@ public class JuegoController {
                 SistemasView sistemasView = sistemaEstelar.toViewSistema();
                 sistemasViews.add(sistemasView);
             }
+
             PantallaSistemasEstelares.getInstancia(sistemasViews).mostrarSistemas();
         } catch (Exception e) {
             mostrarError(e);

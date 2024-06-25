@@ -1,6 +1,7 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
 import org.example.GameMaster.Juego;
+import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.GameBeginView;
 
 import javax.swing.*;
@@ -9,14 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PantallaTurno extends JFrame {
-
+    private boolean abiertoTurno = true;
     private static PantallaTurno instancia;
     private JLabel lblTurno;
 
     // Constructor privado para evitar instanciación desde fuera de la clase
     private PantallaTurno() {
         setTitle("Turno Actual");
-        setSize(300, 100);
+        setSize(550, 100);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -59,5 +60,18 @@ public class PantallaTurno extends JFrame {
             lblTurno.setText("Error al obtener el turno"); // Manejar errores
             e.printStackTrace();
         }
+    }
+    public void mostrarTurno() {
+        PantallaMain pantallaMain = PantallaMain.getInstance();
+        int x = pantallaMain.getX(); // Misma posición X que PantallaMain
+        int y = pantallaMain.getY() - PantallaTurno.getInstancia().getHeight(); // Ajustar en Y arriba de PantallaMain
+
+        setLocation(x, y);
+        setVisible(alternarTurno());
+    }
+
+    private boolean alternarTurno() {
+        abiertoTurno = !abiertoTurno; // Alternar el estado de abiertoSistemas
+        return !abiertoTurno; // Devolver el estado anterior antes de la alternancia
     }
 }

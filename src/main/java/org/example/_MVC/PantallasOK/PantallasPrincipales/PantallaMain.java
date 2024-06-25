@@ -7,15 +7,16 @@ import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class PantallaMain extends JFrame {
 
+    private static PantallaMain instance = null;
+
     private boolean mercadoAbierto = false; // Flag para controlar si la pantalla de mercado está abierta
 
-    public PantallaMain() {
+    private PantallaMain() {
         setTitle("Lost Galaxy - Main Menu");
-        setSize(550, 300); // Tamaño inicial más grande
+        setSize(550, 500); // Tamaño inicial más grande
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -146,4 +147,10 @@ public class PantallaMain extends JFrame {
         return button;
     }
 
+    public static PantallaMain getInstance() {
+        if (instance == null) {
+            instance = new PantallaMain();
+        }
+        return instance;
+    }
 }

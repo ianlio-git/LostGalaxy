@@ -4,16 +4,19 @@ import org.example.Enums.TipoDeArma;
 import org.example._MVC.Controller.PlanetaNeutralController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PantallaMercado extends JFrame {
 
     private static PantallaMercado instance = null;
 
     private JComboBox<TipoDeArma> armaComboBox;
-    private JPanel panelPrecio;
     private JLabel etiquetaPrecio;
     private JTextField campoCombustible;
     private JTextField campoEscudoMaximo;
@@ -22,12 +25,18 @@ public class PantallaMercado extends JFrame {
     // Constructor privado para evitar la instanciación directa
     private PantallaMercado() {
         setTitle("Mercado");
-        setSize(800, 300);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(550, 500);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cierra solo esta ventana
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(5, 3));
+
+        // Panel principal con disposición GridLayout
+        JPanel panelPrincipal = new JPanel(new GridLayout(6, 2, 10, 10)); // Filas, Columnas, Espacio Horizontal, Espacio Vertical
+        panelPrincipal.setBackground(Color.BLACK);
+        setContentPane(panelPrincipal);
 
         armaComboBox = new JComboBox<>(TipoDeArma.values());
+        armaComboBox.setBackground(Color.BLACK);
+        armaComboBox.setForeground(Color.WHITE);
         armaComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,13 +47,12 @@ public class PantallaMercado extends JFrame {
             }
         });
 
-        etiquetaPrecio = new JLabel();
+        etiquetaPrecio = new JLabel("PRECIO: $150");
         etiquetaPrecio.setHorizontalAlignment(SwingConstants.CENTER);
-
-        panelPrecio = new JPanel(new BorderLayout());
-        panelPrecio.add(etiquetaPrecio, BorderLayout.CENTER);
+        etiquetaPrecio.setForeground(Color.WHITE);
 
         JButton botonComprarArma = new JButton("Comprar Arma");
+        configurarBoton(botonComprarArma);
         botonComprarArma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +68,7 @@ public class PantallaMercado extends JFrame {
         });
 
         JButton botonVenderArma = new JButton("Vender Arma");
+        configurarBoton(botonVenderArma);
         botonVenderArma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,7 +84,9 @@ public class PantallaMercado extends JFrame {
         });
 
         campoCombustible = new JTextField();
+        configurarCampoTexto(campoCombustible);
         JButton botonComprarCombustible = new JButton("Comprar Combustible");
+        configurarBoton(botonComprarCombustible);
         botonComprarCombustible.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,7 +103,9 @@ public class PantallaMercado extends JFrame {
         });
 
         campoEscudoMaximo = new JTextField();
+        configurarCampoTexto(campoEscudoMaximo);
         JButton botonComprarEscudoMaximo = new JButton("Comprar Escudo Máximo");
+        configurarBoton(botonComprarEscudoMaximo);
         botonComprarEscudoMaximo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,7 +122,9 @@ public class PantallaMercado extends JFrame {
         });
 
         campoRecargarEscudo = new JTextField();
+        configurarCampoTexto(campoRecargarEscudo);
         JButton botonRecargarEscudo = new JButton("Recargar Escudo");
+        configurarBoton(botonRecargarEscudo);
         botonRecargarEscudo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,22 +140,76 @@ public class PantallaMercado extends JFrame {
             }
         });
 
-        add(new JLabel("Arma:"));
-        add(armaComboBox);
-        add(panelPrecio); // Agregar el panel que contiene el precio centrado
-        add(botonComprarArma);
-        add(botonVenderArma);
-        add(new JLabel());
-        add(new JLabel("Combustible:"));
-        add(campoCombustible);
-        add(botonComprarCombustible);
-        add(new JLabel("Escudo Máximo:"));
-        add(campoEscudoMaximo);
-        add(botonComprarEscudoMaximo);
-        add(new JLabel("Recargar Escudo:"));
-        add(campoRecargarEscudo);
-        add(botonRecargarEscudo);
-        etiquetaPrecio.setText("PRECIO: $150");
+        // Botón para cerrar la pantalla
+        JButton botonCerrar = new JButton("Cerrar");
+        configurarBoton(botonCerrar);
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cierra la ventana actual
+            }
+        });
+
+        // Añadir componentes al panel principal con títulos punteados
+        panelPrincipal.add(crearPanelConTitulo(armaComboBox, "Arma"));
+        panelPrincipal.add(crearPanelConTitulo(etiquetaPrecio, ""));
+        panelPrincipal.add(crearPanelConTitulo(botonVenderArma, ""));
+        panelPrincipal.add(crearPanelConTitulo(botonComprarArma, ""));
+        panelPrincipal.add(crearPanelConTitulo(campoCombustible, "Combustible"));
+        panelPrincipal.add(crearPanelConTitulo(botonComprarCombustible, ""));
+        panelPrincipal.add(crearPanelConTitulo(campoEscudoMaximo, "Escudo Máximo"));
+        panelPrincipal.add(crearPanelConTitulo(botonComprarEscudoMaximo, ""));
+        panelPrincipal.add(crearPanelConTitulo(campoRecargarEscudo, "Recargar Escudo"));
+        panelPrincipal.add(crearPanelConTitulo(botonRecargarEscudo, ""));
+        panelPrincipal.add(new JLabel()); // Espacio vacío
+        panelPrincipal.add(crearPanelConTitulo(botonCerrar, ""));
+
+    }
+
+    // Método para crear un panel con borde punteado y título
+    private JPanel crearPanelConTitulo(Component componente, String titulo) {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(componente, BorderLayout.CENTER);
+        Border borde = BorderFactory.createTitledBorder(
+                BorderFactory.createDashedBorder(Color.WHITE),
+                titulo,
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
+                null,
+                Color.WHITE
+        );
+        panel.setBorder(borde);
+        panel.setBackground(Color.BLACK); // Fondo negro
+        return panel;
+    }
+
+    // Método para configurar botones
+    private void configurarBoton(JButton boton) {
+        boton.setBackground(Color.BLACK);
+        boton.setForeground(Color.WHITE);
+        boton.setFocusPainted(false); // Remueve el borde de enfoque
+        boton.setFont(new Font("Arial", Font.BOLD, 14));
+        boton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+        // Añadir MouseListener para cambiar el color al pasar el mouse por encima
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                boton.setBackground(Color.DARK_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                boton.setBackground(Color.BLACK);
+            }
+        });
+    }
+
+    // Método para configurar campos de texto
+    private void configurarCampoTexto(JTextField campo) {
+        campo.setBackground(Color.BLACK);
+        campo.setForeground(Color.WHITE);
+        campo.setCaretColor(Color.WHITE); // Cursor de texto verde
     }
 
     // Método estático para obtener la instancia única
