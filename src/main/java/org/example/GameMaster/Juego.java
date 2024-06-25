@@ -206,21 +206,26 @@ public class Juego {
 
     }
 
-    public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, NaveEnemigaDestuidaException, NaveEnemigaDestuidaException {
+    public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, NaveEnemigaDestuidaException, NaveEnemigaDestuidaException, AtacarSoloPlanetasHostiles {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaHostil(codigoDePlaneta);
         double cantDeUadeCoinsInicial = jugador.getUadeCoins();
         if(planeta==null){
             throw new PlanetaNoEncontradoException("No se pudo encontrar el planeta.");
         }else {
-            if (jugador.puedoViajar(planeta)) {
-                jugador.viajeAPlaneta(planeta);
-                planeta.combate(this.jugador);
-                double cantDeUadeCoinsFinales = jugador.getUadeCoins();
-                jugador.getSistemaActual().quitarPlaneta(planeta);
-                throw new NaveEnemigaDestuidaException("La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado! \n UadeCoins obtenidas: " + (cantDeUadeCoinsFinales - cantDeUadeCoinsInicial));
-            } else {
-                throw new CombustibleInsuficienteException("Te quedaste sin combustible");
+            if(planeta.getCodigoDePlaneta().contains("ENE")){
+                if (jugador.puedoViajar(planeta)) {
+                    jugador.viajeAPlaneta(planeta);
+                    planeta.combate(this.jugador);
+                    double cantDeUadeCoinsFinales = jugador.getUadeCoins();
+                    jugador.getSistemaActual().quitarPlaneta(planeta);
+                    throw new NaveEnemigaDestuidaException("La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado! \n UadeCoins obtenidas: " + (cantDeUadeCoinsFinales - cantDeUadeCoinsInicial));
+                } else {
+                    throw new CombustibleInsuficienteException("Te quedaste sin combustible");
+                }
+            }
+            else {
+                throw new AtacarSoloPlanetasHostiles("Que malvados planes tienes? Solo ataca planetas enemigos.");
             }
         }
     }
@@ -256,20 +261,18 @@ public class Juego {
         return mapaEstelar;
     }
 
-    public static int getTurno() {
-        return turno;
-    }
 
 
     public void reiniciarJuego() {
-        mapaEstelar.crearMapaEstelar(MapaEstelar.getInstancia().getDificultad(), cantidadSistemasEstelares);
+        jugador.getNave().vaciarArmamentos();
+        jugador.getNave().reestablecerVida();
+        jugador.setUadeCoins(1000);
         SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
         Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
-        jugador.setPosicionEnElEspacio(planetaInicial.getCodigoDePlaneta());
-        jugador.setPlanetaActual(planetaInicial);
         jugador.setSistemaActual(sistemaInicial);
-        jugador.getNave().vaciarArmamentos();
-        MapaEstelarView mapaEstelarView = MapaEstelar.getInstancia().mapaEstelarToView();
-        System.out.println(mapaEstelarView.getSistemaConTesoro());;
+        jugador.setPlanetaActual(planetaInicial);
+        jugador.setPosicionEnElEspacio(planetaInicial.getCodigoDePlaneta());
+        jugador.getNave().getEscudo().escudoAcero();
+        jugador.getNave().getTanque().tanqueADefault();
     }
 }

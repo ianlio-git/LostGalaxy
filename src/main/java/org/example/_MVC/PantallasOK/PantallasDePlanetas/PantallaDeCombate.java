@@ -1,11 +1,13 @@
 package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
+import org.example.GameMaster.Exception.AtacarSoloPlanetasHostiles;
+import org.example._MVC.Controller.MainController;
+import org.example._MVC.Controller.PlanetaHostilController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static org.example._MVC.Controller.PlanetaHostilController.atacarPlanetaHostil;
 
 public class PantallaDeCombate extends JFrame {
     private JTextField codigoPlanetaField;
@@ -59,7 +61,8 @@ public class PantallaDeCombate extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigoDePlaneta = codigoPlanetaField.getText();
 
-                atacarPlanetaHostil(codigoDePlaneta.toUpperCase());
+                   PlanetaHostilController planetaHostilController = new PlanetaHostilController();
+                   planetaHostilController.atacarPlanetaHostil(codigoDePlaneta.toUpperCase());
             }
         });
     }

@@ -5,6 +5,8 @@ import org.example._MVC.Views.SistemasView;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class PantallaSistemasEstelares extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        mainPanel.setBackground(Color.BLACK); // Fondo negro
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -49,19 +52,25 @@ public class PantallaSistemasEstelares extends JFrame {
         for (SistemasView sistemasView : sistemasViews) {
             JPanel sistemaPanel = new JPanel();
             sistemaPanel.setLayout(new BoxLayout(sistemaPanel, BoxLayout.Y_AXIS));
-            sistemaPanel.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createTitledBorder("Sistema Estelar: " + sistemasView.getNombreSistemaEstelar()),
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            sistemaPanel.setBackground(Color.BLACK); // Fondo negro
+
+            Border border = BorderFactory.createCompoundBorder(
+                    BorderFactory.createDashedBorder(Color.GREEN),
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            sistemaPanel.setBorder(BorderFactory.createTitledBorder(border, "Sistema Estelar: " + sistemasView.getNombreSistemaEstelar(), TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.GREEN));
 
             JLabel planetasLabel = new JLabel("Lista de Planetas:");
+            planetasLabel.setForeground(Color.GREEN); // Texto verde
             sistemaPanel.add(planetasLabel);
 
             for (Planeta planeta : sistemasView.getPlanetas()) {
-                JLabel planetaLabel = new JLabel(" - Código del Planeta: " + planeta.getCodigoDePlaneta());
+                JLabel planetaLabel = new JLabel(" - Código del Planeta: " + planeta.getCodigoDePlaneta() + " ");
+                planetaLabel.setForeground(Color.GREEN); // Texto verde
                 sistemaPanel.add(planetaLabel);
             }
 
-            JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No"));
+            JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No") + " ");
+            cinturonLabel.setForeground(Color.GREEN); // Texto verde
             sistemaPanel.add(cinturonLabel);
 
             mainPanel.add(sistemaPanel);
@@ -84,7 +93,6 @@ public class PantallaSistemasEstelares extends JFrame {
         return instancia;
     }
 
-
     public void mostrarSistemas() {
         PantallaMain pantallaMain = PantallaMain.getInstance();
         int x = pantallaMain.getX() + pantallaMain.getWidth(); // Colocar a la derecha sumando el ancho de la ventana principal
@@ -92,9 +100,9 @@ public class PantallaSistemasEstelares extends JFrame {
         setLocation(x, y);
         setVisible(alternarPantallaSistemas());
     }
+
     private boolean alternarPantallaSistemas() {
         abiertoSistemas = !abiertoSistemas; // Alternar el estado de abiertoSistemas
         return !abiertoSistemas; // Devolver el estado anterior antes de la alternancia
     }
-
 }

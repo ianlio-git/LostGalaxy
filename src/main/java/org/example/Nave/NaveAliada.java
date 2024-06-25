@@ -8,6 +8,7 @@ import org.example.Nave.PartesDeLaNave.Escudo;
 import org.example.Nave.PartesDeLaNave.TanqueDeCombustible;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.lang.Math.abs;
@@ -46,13 +47,16 @@ public abstract class NaveAliada extends Nave {
     }
 
 
+
     public void agregarArma(Arma nuevaArma) {
         this.armas.add(nuevaArma);
     }
 
-    public void vaciarArmamentos(){
-        for(Arma arma : armas){
-            this.armas.remove(arma);
+    public void vaciarArmamentos() {
+        Iterator<Arma> iterator = armas.iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
         }
     }
 

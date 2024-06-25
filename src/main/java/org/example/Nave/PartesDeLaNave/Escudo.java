@@ -47,6 +47,7 @@ public class Escudo {
 
     public void escudoAcero() {
         this.escudo = 0;
+        this.escudoMax = 0;
     }
 
     public void setEscudo(double escudo) {

@@ -64,22 +64,20 @@ public class MainController {
     }
 
     public static void gameReset(){
-        PantallaCambioDeSistema.getInstance().setVisible(false);
-        PantallaDeCombate.getInstance().setVisible(false);
-        PantallaMercado.getInstance().setVisible(false);
-        PantallaPlanetaAliado.getInstance().setVisible(false);
+        PantallaCambioDeSistema.getInstance().dispose();
+        PantallaDeCombate.getInstance().dispose();
+        PantallaMercado.getInstance().dispose();
+        PantallaPlanetaAliado.getInstance().dispose();
         JugadorView jugadorView = Juego.getInstancia().getJugador().toViewJugador();
         PantallaJugador pantallaJugador = PantallaJugador.obtenerInstancia(jugadorView);
-        pantallaJugador.setVisible(false);
-
+        pantallaJugador.dispose();
         List<SistemasView> sistemasViews = new ArrayList<>();
         for (SistemaEstelar sistemaEstelar : Juego.getInstancia().getMapaEstelar().getSistemasEstelares()) {
             SistemasView sistemasView = sistemaEstelar.toViewSistema();
             sistemasViews.add(sistemasView);
         }
-        PantallaSistemasEstelares.getInstancia(sistemasViews).setVisible(false);
-        // PantallaSistemasEstelares.getInstancia(sistemasViews).destruirPantalla(); Esto se rompe todo porque no reinicia los planetas, es decir, si lo destruiste no lo vuelve a construir.
-        PantallaTurno.getInstancia().setVisible(false);
+        PantallaSistemasEstelares.getInstancia(sistemasViews).dispose();
+        PantallaTurno.getInstancia().dispose();
         Juego.getInstancia().reiniciarJuego();
     }
 
