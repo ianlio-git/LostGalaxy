@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 
 public class PantallaTurno extends JFrame {
 
+    private static PantallaTurno instancia;
     private JLabel lblTurno;
 
-    public PantallaTurno() {
+    // Constructor privado para evitar instanciación desde fuera de la clase
+    private PantallaTurno() {
         setTitle("Turno Actual");
         setSize(300, 100);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Crear el JLabel para mostrar el turno
@@ -25,6 +27,14 @@ public class PantallaTurno extends JFrame {
 
         // Añadir el JLabel al contenido del JFrame
         getContentPane().add(lblTurno, BorderLayout.CENTER);
+    }
+
+    // Método estático para obtener la instancia única
+    public static PantallaTurno getInstancia() {
+        if (instancia == null) {
+            instancia = new PantallaTurno();
+        }
+        return instancia;
     }
 
     // Método para iniciar el temporizador y actualizar el turno

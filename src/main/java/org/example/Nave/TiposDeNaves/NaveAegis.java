@@ -7,7 +7,7 @@ import org.example.Nave.PartesDeLaNave.Arma;
 public class NaveAegis extends NaveAliada {
 
     public NaveAegis() {
-        super(5, 100, 100,0);
+        super(5, 100, 200,0);
     }
 
     @Override

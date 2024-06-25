@@ -40,10 +40,8 @@ public class JuegoController {
 
     public static void mostrarTurno() {
         try {
-            PantallaTurno pantallaTurno = new PantallaTurno();
-            pantallaTurno.setVisible(true); // Hacer visible la ventana
-            pantallaTurno.iniciarActualizarTurno(); // Iniciar la actualización del turno
-
+            PantallaTurno.getInstancia().setVisible(true);
+            PantallaTurno.getInstancia().iniciarActualizarTurno(); // Iniciar la actualización del turno
         } catch (Exception e) {
             mostrarError(e);
         }
