@@ -85,6 +85,12 @@ public class PantallaMain extends JFrame {
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnCambiarSistema, gbcRestoBotones);
 
+        // Botón Salir
+        JButton btnSalir = createButton("Salir", "Salir de la aplicación.");
+        btnSalir.addActionListener(e -> System.exit(1));
+        gbcRestoBotones.gridy++;
+        panelBotonesDerecha.add(btnSalir, gbcRestoBotones);
+
         // GridBagConstraints para el panel de botones derecho
         GridBagConstraints gbcPanelDerecha = new GridBagConstraints();
         gbcPanelDerecha.anchor = GridBagConstraints.CENTER; // Alinear al centro

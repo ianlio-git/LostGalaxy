@@ -8,11 +8,14 @@ import java.awt.*;
 import java.util.List;
 
 public class PantallaSistemasEstelares extends JFrame {
+    private static PantallaSistemasEstelares instancia;
     private List<SistemasView> sistemasViews;
+    private JPanel mainPanel;
 
-    public PantallaSistemasEstelares(List<SistemasView> sistemasViews) {
+    private PantallaSistemasEstelares(List<SistemasView> sistemasViews) {
         this.sistemasViews = sistemasViews;
         initUI();
+        iniciarActualizarSistemas();
     }
 
     private void initUI() {
@@ -21,9 +24,21 @@ public class PantallaSistemasEstelares extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        add(scrollPane);
+
+        actualizarSistemas();
+    }
+
+    private void actualizarSistemas() {
+        mainPanel.removeAll();
 
         for (SistemasView sistemasView : sistemasViews) {
             JPanel sistemaPanel = new JPanel();
@@ -43,34 +58,28 @@ public class PantallaSistemasEstelares extends JFrame {
             JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No"));
             sistemaPanel.add(cinturonLabel);
 
-
             mainPanel.add(sistemaPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
 
-        add(scrollPane);
+    public void iniciarActualizarSistemas() {
+        Timer timer = new Timer(800, e -> actualizarSistemas()); // Actualizar cada 10 segundos
+        timer.start();
+    }
+
+    public static PantallaSistemasEstelares getInstancia(List<SistemasView> sistemasViews) {
+        if (instancia == null) {
+            instancia = new PantallaSistemasEstelares(sistemasViews);
+        }
+        return instancia;
     }
 
     public void mostrarSistemas() {
         SwingUtilities.invokeLater(() -> setVisible(true));
     }
 
-    // Método estático para mostrar los sistemas estelares
-    public static void mostrarSistemas(List<SistemasView> sistemasViews) {
-        try {
-            PantallaSistemasEstelares pantallaSistemasEstelares = new PantallaSistemasEstelares(sistemasViews);
-            pantallaSistemasEstelares.mostrarSistemas();
-        } catch (Exception e) {
-            mostrarError(e);
-        }
-    }
-
-    // Método de ejemplo para mostrar errores
-    private static void mostrarError(Exception e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
 }

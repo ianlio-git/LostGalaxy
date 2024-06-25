@@ -56,7 +56,7 @@ public class JuegoController {
                 SistemasView sistemasView = sistemaEstelar.toViewSistema();
                 sistemasViews.add(sistemasView);
             }
-            PantallaSistemasEstelares.mostrarSistemas(sistemasViews);
+            PantallaSistemasEstelares.getInstancia(sistemasViews).mostrarSistemas();
         } catch (Exception e) {
             mostrarError(e);
         }
