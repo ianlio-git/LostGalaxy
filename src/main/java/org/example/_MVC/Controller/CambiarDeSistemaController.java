@@ -1,15 +1,13 @@
 package org.example._MVC.Controller;
 
 import org.example.GameMaster.Juego;
-import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeCombate;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.Views.MessageView;
 
-public class PlanetaHostilController {
-
-    public static void atacarPlanetaHostil(String codigoDePlaneta) {
+public class CambiarDeSistemaController {
+    public static void cambiarSistema(String codigoDeSistema) {
         try {
-            Juego.getInstancia().atacarPlanetaHostil(codigoDePlaneta);
+            Juego.getInstancia().indicarRumboANuevoSistema(codigoDeSistema);
         } catch (Exception e) {
             mostrarError(e);
         }
@@ -21,3 +19,4 @@ public class PlanetaHostilController {
         pantallaDeResultados.salirDelJuego(e);
     }
 }
+

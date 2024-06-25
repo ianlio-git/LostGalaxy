@@ -1,8 +1,6 @@
 package org.example._MVC.PantallasOK.PantallasPrincipales;
 
 import org.example._MVC.Controller.JuegoController;
-import org.example._MVC.Controller.PlanetaAliadoController;
-import org.example._MVC.Controller.PlanetaHostilController;
 import org.example._MVC.PantallasOK.ImagenesJPanel.BackgroundPanel;
 
 import javax.swing.*;
@@ -71,7 +69,7 @@ public class PantallaMain extends JFrame {
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
 
         JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil", "Coste de realizar esta acción es: Y monedas.");
-        btnAtacarPlanetaHostil.addActionListener(e -> PlanetaHostilController.atacarPlanetaHostil("ENE-1"));
+        btnAtacarPlanetaHostil.addActionListener(e -> JuegoController.combate());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnAtacarPlanetaHostil, gbcRestoBotones);
 
@@ -80,6 +78,12 @@ public class PantallaMain extends JFrame {
         btnPlanetaAliado.addActionListener(e -> JuegoController.planetaAliado());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnPlanetaAliado, gbcRestoBotones);
+
+        // Nuevo botón Cambiar de Sistema Estelar
+        JButton btnCambiarSistema = createButton("Cambiar Sistema Estelar", "Cambiar al siguiente sistema estelar disponible.");
+        btnCambiarSistema.addActionListener(e -> JuegoController.cambiarDeSistema());
+        gbcRestoBotones.gridy++;
+        panelBotonesDerecha.add(btnCambiarSistema, gbcRestoBotones);
 
         // GridBagConstraints para el panel de botones derecho
         GridBagConstraints gbcPanelDerecha = new GridBagConstraints();

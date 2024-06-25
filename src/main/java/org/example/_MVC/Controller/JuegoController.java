@@ -1,5 +1,7 @@
 package org.example._MVC.Controller;
 import org.example.GameMaster.Jugador;
+import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaCambioDeSistema;
+import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeCombate;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaPlanetaAliado;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
@@ -62,12 +64,31 @@ public class JuegoController {
         }
     }
 
-    public static void cambiarDeSistema(String codigoDeSistema) {
-        try {
-            Juego.getInstancia().indicarRumboANuevoSistema(codigoDeSistema);
-        } catch (Exception e) {
-            mostrarError(e);
-        }
+    public static void cambiarDeSistema() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PantallaCambioDeSistema pantallaCambioDeSistema= new PantallaCambioDeSistema();
+                    pantallaCambioDeSistema.setVisible(true);
+                } catch (Exception e) {
+                    mostrarError(e);
+                }
+            }
+        });
+    }
+    public static void combate() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PantallaDeCombate pantallaDeCombate = new PantallaDeCombate();
+                    pantallaDeCombate.setVisible(true);
+                } catch (Exception e) {
+                    mostrarError(e);
+                }
+            }
+        });
     }
     public static void mercado() {
         SwingUtilities.invokeLater(new Runnable() {
