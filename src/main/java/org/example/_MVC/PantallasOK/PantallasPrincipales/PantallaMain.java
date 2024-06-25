@@ -1,13 +1,13 @@
 package org.example._MVC.PantallasOK.PantallasPrincipales;
 
 import org.example._MVC.Controller.JuegoController;
+import org.example._MVC.Controller.MainController;
 import org.example._MVC.PantallasOK.ImagenesJPanel.BackgroundPanel;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PantallaMain extends JFrame {
 
@@ -70,20 +70,17 @@ public class PantallaMain extends JFrame {
         gbcRestoBotones.weighty = 0.25; // Distribuir espacio verticalmente
 
         JButton btnMercado = createButton("Mercado", "Coste de realizar esta acción es: X monedas.");
-        btnMercado.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!mercadoAbierto) { // Si el mercado no está abierto
-                    mercadoAbierto = true; // Establecer el flag a true
-                    PantallaMercado pantallaMercado = new PantallaMercado(); // Crear nueva instancia de PantallaMercado
-                    pantallaMercado.setVisible(true); // Mostrar la pantalla de mercado
-                    pantallaMercado.addWindowListener(new java.awt.event.WindowAdapter() {
-                        @Override
-                        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                            mercadoAbierto = false; // Cuando se cierre la ventana, establecer el flag a false
-                        }
-                    });
-                }
+        btnMercado.addActionListener(e -> {
+            if (!mercadoAbierto) { // Si el mercado no está abierto
+                mercadoAbierto = true; // Establecer el flag a true
+
+                PantallaMercado.getInstance().setVisible(true); // Mostrar la pantalla de mercado
+                PantallaMercado.getInstance().addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        mercadoAbierto = false; // Cuando se cierre la ventana, establecer el flag a false
+                    }
+                });
             }
         });
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
@@ -104,6 +101,15 @@ public class PantallaMain extends JFrame {
         btnCambiarSistema.addActionListener(e -> JuegoController.cambiarDeSistema());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnCambiarSistema, gbcRestoBotones);
+
+        // Botón Reset
+        JButton btnReset = createButton("Reset", "Reinicia el juego.");
+        btnReset.addActionListener(e -> {
+            MainController.gameReset();
+            JOptionPane.showMessageDialog(this, "Juego reiniciado con exito");
+        });
+        gbcRestoBotones.gridy++;
+        panelBotonesDerecha.add(btnReset, gbcRestoBotones);
 
         // Botón Salir
         JButton btnSalir = createButton("Salir", "Salir de la aplicación.");

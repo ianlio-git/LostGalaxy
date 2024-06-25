@@ -50,6 +50,12 @@ public abstract class NaveAliada extends Nave {
         this.armas.add(nuevaArma);
     }
 
+    public void vaciarArmamentos(){
+        for(Arma arma : armas){
+            this.armas.remove(arma);
+        }
+    }
+
     public boolean quitarArma(TipoDeArma tipoDeArma) {
         boolean removiElArma = false;
         for (Arma arma : armas){
@@ -101,4 +107,5 @@ public abstract class NaveAliada extends Nave {
         }
         return this.vida > 0 ;
     }
+
 }

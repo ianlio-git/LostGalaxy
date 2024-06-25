@@ -23,6 +23,7 @@ public class JugadorView {
         this.planetaActual = planetaActual;
     }
 
+
     public SistemaEstelar getSistemaActual() {
         return sistemaActual;
     }

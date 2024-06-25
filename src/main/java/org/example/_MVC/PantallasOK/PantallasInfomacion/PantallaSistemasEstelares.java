@@ -12,6 +12,10 @@ public class PantallaSistemasEstelares extends JFrame {
     private List<SistemasView> sistemasViews;
     private JPanel mainPanel;
 
+    public void destruirPantalla(){
+        instancia = null;
+    }
+
     private PantallaSistemasEstelares(List<SistemasView> sistemasViews) {
         this.sistemasViews = sistemasViews;
         initUI();
@@ -77,6 +81,7 @@ public class PantallaSistemasEstelares extends JFrame {
         }
         return instancia;
     }
+
 
     public void mostrarSistemas() {
         SwingUtilities.invokeLater(() -> setVisible(true));

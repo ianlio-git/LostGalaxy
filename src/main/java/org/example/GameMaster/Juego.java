@@ -12,6 +12,7 @@ import org.example.Nave.TiposDeNaves.NaveSwift;
 import org.example.Enums.TipoDeNave;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 import org.example.Nave.TiposDeNaves.NaveTitan;
+import org.example._MVC.Views.MapaEstelarView;
 import org.example._MVC.Views.MessageView;
 
 public class Juego {
@@ -21,10 +22,11 @@ public class Juego {
     private MapaEstelar mapaEstelar;
     private Jugador jugador;
     private String mensajeRecibido;
-
+    private int cantidadSistemasEstelares;
     private Juego() {
         this.mapaEstelar = MapaEstelar.getInstancia();
     }
+
 
     public static Juego getInstancia() {
         if (instanciaJuego == null) {
@@ -32,7 +34,9 @@ public class Juego {
         }
         return instanciaJuego;
     }
-    public void iniciarJuego(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultad dificultad) throws JuegoIniciadoException {
+    public void iniciarJuego(String nombreDelJugador, TipoDeNave naveJugador, int cantidadSistemasEstelaresEstablecida, Dificultad dificultad) throws JuegoIniciadoException {
+        double uadeCoinsJugador = 1000000;
+        cantidadSistemasEstelares = cantidadSistemasEstelaresEstablecida;
         if (jugador == null) {
             mapaEstelar.crearMapaEstelar(dificultad,cantidadSistemasEstelares);
             SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
@@ -54,6 +58,8 @@ public class Juego {
                     NaveTitan naveTitan = new NaveTitan();
                     this.jugador = new Jugador(nombreDelJugador, uadeCoinsJugador, naveTitan,planetaInicial,sistemaInicial);
                     break;
+
+
             }
         } else {
             throw new JuegoIniciadoException("El juego ya fue iniciado");
@@ -243,7 +249,7 @@ public class Juego {
     }
 
     public GameBeginView toViewgameBegin(){
-        return new GameBeginView(jugador.getNombre(), jugador.getUadeCoins(),jugador.getNave().soyNaveTipo(),mapaEstelar.getSistemasEstelares().size(),mapaEstelar.getDificultad(),turno);
+        return new GameBeginView(jugador.getNombre(),jugador.getNave().soyNaveTipo(),mapaEstelar.getSistemasEstelares().size(),mapaEstelar.getDificultad(),turno);
     }
 
     public MapaEstelar getMapaEstelar() {
@@ -252,5 +258,18 @@ public class Juego {
 
     public static int getTurno() {
         return turno;
+    }
+
+
+    public void reiniciarJuego() {
+        mapaEstelar.crearMapaEstelar(MapaEstelar.getInstancia().getDificultad(), cantidadSistemasEstelares);
+        SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
+        Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
+        jugador.setPosicionEnElEspacio(planetaInicial.getCodigoDePlaneta());
+        jugador.setPlanetaActual(planetaInicial);
+        jugador.setSistemaActual(sistemaInicial);
+        jugador.getNave().vaciarArmamentos();
+        MapaEstelarView mapaEstelarView = MapaEstelar.getInstancia().mapaEstelarToView();
+        System.out.println(mapaEstelarView.getSistemaConTesoro());;
     }
 }

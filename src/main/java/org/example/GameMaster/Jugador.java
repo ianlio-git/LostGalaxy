@@ -104,5 +104,25 @@ public class Jugador {
     public String getNombre() {
         return nombre;
     }
+
+    public void setSistemaActual(SistemaEstelar sistemaActual) {
+        this.sistemaActual = sistemaActual;
+    }
+
+    public void setNave(NaveAliada nave) {
+        this.nave = nave;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setUadeCoins(double uadeCoins) {
+        this.uadeCoins = uadeCoins;
+    }
+
+    public void setTesoro(boolean tesoro) {
+        this.tesoro = tesoro;
+    }
 }
 

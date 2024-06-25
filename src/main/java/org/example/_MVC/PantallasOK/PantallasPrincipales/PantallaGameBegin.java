@@ -1,4 +1,5 @@
 package org.example._MVC.PantallasOK.PantallasPrincipales;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,6 @@ import org.example._MVC.Views.GameBeginView;
 
 public class PantallaGameBegin extends JFrame {
     private JTextField nombreField;
-    private JTextField uadeCoinsField;
     private JComboBox<TipoDeNave> naveComboBox;
     private JTextField sistemasEstelaresField;
     private JComboBox<Dificultad> dificultadComboBox;
@@ -23,7 +23,7 @@ public class PantallaGameBegin extends JFrame {
         setTitle("Lost Galaxy - GameBegin");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(6, 2));
+        setLayout(new GridLayout(5, 2, 10, 10)); // Añadido espaciado entre filas y columnas
 
         // Centrar la pantalla
         setLocationRelativeTo(null);
@@ -32,11 +32,6 @@ public class PantallaGameBegin extends JFrame {
         add(new JLabel("Nombre del Jugador:"));
         nombreField = new JTextField();
         add(nombreField);
-
-        // UadeCoins del jugador
-        add(new JLabel("UadeCoins del Jugador:"));
-        uadeCoinsField = new JTextField();
-        add(uadeCoinsField);
 
         // Nave del jugador
         add(new JLabel("Nave del Jugador:"));
@@ -53,8 +48,12 @@ public class PantallaGameBegin extends JFrame {
         dificultadComboBox = new JComboBox<>(Dificultad.values());
         add(dificultadComboBox);
 
-        // Botón de iniciar juego
+        // Espacio vacío para alinear el botón en el centro
+        add(new JPanel());
+
+        // Botón de iniciar juego centrado
         iniciarButton = new JButton("Iniciar Juego");
+        iniciarButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
         add(iniciarButton);
 
         iniciarButton.addActionListener(new ActionListener() {
@@ -67,15 +66,13 @@ public class PantallaGameBegin extends JFrame {
 
     private void iniciarJuego() {
         String nombre = nombreField.getText();
-        double uadeCoins = Double.parseDouble(uadeCoinsField.getText());
         TipoDeNave nave = (TipoDeNave) naveComboBox.getSelectedItem();
         int sistemasEstelares = Integer.parseInt(sistemasEstelaresField.getText());
         Dificultad dificultad = (Dificultad) dificultadComboBox.getSelectedItem();
 
-        gameBeginView = new GameBeginView(nombre, uadeCoins, nave, sistemasEstelares, dificultad, 0);
+        gameBeginView = new GameBeginView(nombre, nave, sistemasEstelares, dificultad, 0);
 
         gameBeginView.setNombreDelJugador(nombre);
-        gameBeginView.setUadeCoinsJugador(uadeCoins);
         gameBeginView.setNaveJugador(nave);
         gameBeginView.setCantidadSistemasEstelares(sistemasEstelares);
         gameBeginView.setDificultad(dificultad);
@@ -99,4 +96,5 @@ public class PantallaGameBegin extends JFrame {
             }
         }
     }
+
 }

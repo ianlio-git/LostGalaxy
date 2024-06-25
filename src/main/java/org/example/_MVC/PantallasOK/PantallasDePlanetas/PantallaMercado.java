@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 
 public class PantallaMercado extends JFrame {
 
+    private static PantallaMercado instance = null;
+
     private JComboBox<TipoDeArma> armaComboBox;
     private JPanel panelPrecio;
     private JLabel etiquetaPrecio;
@@ -17,7 +19,8 @@ public class PantallaMercado extends JFrame {
     private JTextField campoEscudoMaximo;
     private JTextField campoRecargarEscudo;
 
-    public PantallaMercado() {
+    // Constructor privado para evitar la instanciación directa
+    private PantallaMercado() {
         setTitle("Mercado");
         setSize(800, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -140,9 +143,16 @@ public class PantallaMercado extends JFrame {
         etiquetaPrecio.setText("PRECIO: $150");
     }
 
+    // Método estático para obtener la instancia única
+    public static PantallaMercado getInstance() {
+        if (instance == null) {
+            instance = new PantallaMercado();
+        }
+        return instance;
+    }
+
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }
-

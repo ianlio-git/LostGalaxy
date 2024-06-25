@@ -19,7 +19,6 @@ public class MapaEstelar {
         this.sistemasEstelares = new ArrayList<>();
     }
 
-
     public static MapaEstelar getInstancia() {
         if (instanciaMapaEstelar == null) {
             instanciaMapaEstelar = new MapaEstelar();
@@ -27,9 +26,6 @@ public class MapaEstelar {
         return instanciaMapaEstelar;
     }
 
-    public String getSistemaConTesoro() {
-        return sistemaConTesoro;
-    }
 
     private SistemaEstelar agregarSistemaEstelar(Dificultad dificutad, boolean tieneTesoro, boolean tieneCinturon) {
         SistemaEstelar nuevoSistema = new SistemaEstelar(dificutad, tieneTesoro, tieneCinturon);
@@ -64,6 +60,8 @@ public class MapaEstelar {
     public Dificultad getDificultad() {
         return dificultad;
     }
+
+
     public void crearMapaEstelar(Dificultad dificultad, int cantidadSistemasEstelares){
         Random random = new Random();
         int var = random.nextInt(cantidadSistemasEstelares);

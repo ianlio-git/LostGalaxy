@@ -91,8 +91,8 @@ public class JuegoController {
             @Override
             public void run() {
                 try {
-                    PantallaMercado pantallaMercado = new PantallaMercado();
-                    pantallaMercado.setVisible(true);
+
+                    PantallaMercado.getInstance().setVisible(true);
                 } catch (Exception e) {
                     mostrarError(e);
                 }

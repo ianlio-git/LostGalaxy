@@ -6,15 +6,13 @@ import org.example.Enums.TipoDeNave;
 public class GameBeginView {
 
     String nombreDelJugador;
-    double uadeCoinsJugador;
     TipoDeNave naveJugador;
     int cantidadSistemasEstelares;
     Dificultad dificultad;
     int turno;
 
-    public GameBeginView(String nombreDelJugador, double uadeCoinsJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultad dificultad, int turno) {
+    public GameBeginView(String nombreDelJugador, TipoDeNave naveJugador, int cantidadSistemasEstelares, Dificultad dificultad, int turno) {
         this.nombreDelJugador = nombreDelJugador;
-        this.uadeCoinsJugador = uadeCoinsJugador;
         this.naveJugador = naveJugador;
         this.cantidadSistemasEstelares = cantidadSistemasEstelares;
         this.dificultad = dificultad;
@@ -25,9 +23,6 @@ public class GameBeginView {
         return nombreDelJugador;
     }
 
-    public double getUadeCoinsJugador() {
-        return uadeCoinsJugador;
-    }
 
     public TipoDeNave getNaveJugador() {
         return naveJugador;
@@ -49,9 +44,6 @@ public class GameBeginView {
         this.nombreDelJugador = nombreDelJugador;
     }
 
-    public void setUadeCoinsJugador(double uadeCoinsJugador) {
-        this.uadeCoinsJugador = uadeCoinsJugador;
-    }
 
     public void setNaveJugador(TipoDeNave naveJugador) {
         this.naveJugador = naveJugador;
