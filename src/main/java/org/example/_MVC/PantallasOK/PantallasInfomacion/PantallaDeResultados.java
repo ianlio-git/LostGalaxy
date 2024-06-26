@@ -1,6 +1,6 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
-import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example._MVC.Model.GameMaster.Exception.NaveDestruidaException;
 import org.example._MVC.Views.MessageView;
 
 import javax.swing.*;

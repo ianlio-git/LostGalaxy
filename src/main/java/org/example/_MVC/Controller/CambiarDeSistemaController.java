@@ -1,10 +1,9 @@
 package org.example._MVC.Controller;
 
-import org.example.GameMaster.Juego;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.Views.MessageView;
-import org.example._MVC.Views.MapaEstelarView;
 
 public class CambiarDeSistemaController {
     public static void cambiarSistema(String codigoDeSistema) {

@@ -1,14 +1,13 @@
 package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
-import org.example._MVC.Views.SistemasView;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
 
 import static org.example._MVC.Controller.CambiarDeSistemaController.cambiarSistema;
 import static org.example._MVC.Controller.CambiarDeSistemaController.obtenerSistema;

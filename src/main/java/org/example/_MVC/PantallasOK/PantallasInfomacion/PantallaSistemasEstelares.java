@@ -1,13 +1,11 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
-import org.example.GameMaster.Juego;
-import org.example.MapaEstelar.MapaEstelar;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.JugadorView;
-import org.example._MVC.Views.MapaEstelarView;
 import org.example._MVC.Views.SistemasView;
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import javax.swing.*;
 import javax.swing.border.Border;

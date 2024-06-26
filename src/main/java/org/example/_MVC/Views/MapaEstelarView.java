@@ -1,7 +1,7 @@
 package org.example._MVC.Views;
 
-import org.example.Enums.Dificultad;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.Enums.Dificultad;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
-import org.example.GameMaster.Juego;
-import org.example.GameMaster.Jugador;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.GameMaster.Jugador;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.JugadorView;
 

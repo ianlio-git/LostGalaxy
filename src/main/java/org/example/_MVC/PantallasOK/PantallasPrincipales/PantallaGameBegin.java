@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.example.Enums.Dificultad;
-import org.example.Enums.TipoDeNave;
+import org.example._MVC.Model.Enums.Dificultad;
+import org.example._MVC.Model.Enums.TipoDeNave;
 import org.example._MVC.Views.GameBeginView;
 
 public class PantallaGameBegin extends JFrame {

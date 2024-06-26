@@ -1,6 +1,6 @@
 package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
-import org.example.GameMaster.Juego;
+import org.example._MVC.Model.GameMaster.Juego;
 import org.example._MVC.Controller.PlanetaAliadoController;
 import org.example._MVC.Views.MapaEstelarView;
 

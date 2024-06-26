@@ -1,8 +1,8 @@
 package org.example._MVC.Views;
 
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
-import org.example.Nave.NaveAliada;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.Nave.NaveAliada;
 
 public class JugadorView {
     private SistemaEstelar sistemaActual;

@@ -1,7 +1,7 @@
 package org.example._MVC.Controller;
 
-import org.example.GameMaster.Juego;
-import org.example.GameMaster.Jugador;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.GameMaster.Jugador;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.Views.MessageView;
 

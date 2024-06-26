@@ -1,13 +1,9 @@
 package org.example._MVC.PantallasOK.PantallasDePlanetas;
 
-import org.example.GameMaster.Exception.AtacarSoloPlanetasHostiles;
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
-import org.example._MVC.Controller.MainController;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
 import org.example._MVC.Controller.PlanetaHostilController;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

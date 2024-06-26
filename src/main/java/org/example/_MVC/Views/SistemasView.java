@@ -1,6 +1,6 @@
 package org.example._MVC.Views;
 
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
 
 import java.util.List;
 

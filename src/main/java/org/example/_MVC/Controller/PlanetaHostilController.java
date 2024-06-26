@@ -1,11 +1,8 @@
 package org.example._MVC.Controller;
 
-import org.example.GameMaster.Exception.*;
-import org.example.GameMaster.Juego;
-import org.example.GameMaster.Jugador;
-import org.example.MapaEstelar.Sistemas.Planetas.Hostil;
-import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
-import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeCombate;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.GameMaster.Jugador;
+import org.example._MVC.Model.MapaEstelar.Sistemas.Planetas.Planeta;
 import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
 import org.example._MVC.Views.MessageView;
 

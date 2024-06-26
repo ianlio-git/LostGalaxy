@@ -1,8 +1,7 @@
 package org.example._MVC.Controller;
 
-import org.example.GameMaster.Juego;
-import org.example.GameMaster.Jugador;
-import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example._MVC.Model.GameMaster.Juego;
+import org.example._MVC.Model.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaCambioDeSistema;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeCombate;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
