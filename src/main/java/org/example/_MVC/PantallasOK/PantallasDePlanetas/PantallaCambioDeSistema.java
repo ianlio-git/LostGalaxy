@@ -6,7 +6,6 @@ import org.example._MVC.Views.SistemasView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
@@ -102,6 +101,10 @@ public class PantallaCambioDeSistema extends JFrame {
                 info.append(" - Código del Planeta: ").append(planeta.getCodigoDePlaneta()).append("\n");
             }
             info.append("Tiene Cinturón de Asteroides: ").append(sistema.tieneCinturonAsteroides() ? "Sí" : "No").append("\n");
+            if (sistema.tieneCinturonAsteroides()) {
+                info.append("Cantidad de Asteroides: ").append(sistema.mostrarCinturonAsteroides().getCantidadDeAsteroides()).append("\n");
+                info.append("Daño Posible: ").append(sistema.mostrarCinturonAsteroides().calcularPoder()).append("\n");
+            }
 
             resultadoArea.setText(info.toString());
         } else {
@@ -109,4 +112,5 @@ public class PantallaCambioDeSistema extends JFrame {
         }
     }
 }
+
 

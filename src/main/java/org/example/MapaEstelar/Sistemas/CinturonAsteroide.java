@@ -14,7 +14,7 @@ public class CinturonAsteroide {
     }
 
 
-    private double calcularPoder() {
+    public double calcularPoder() {
         return this.cantidadDeAsteroides * 10;
     }
 
@@ -39,7 +39,11 @@ public class CinturonAsteroide {
         }
     }
 
-    private double calcularRecompensa(double vidaInicial,double vidaFinal){
+    public int getCantidadDeAsteroides() {
+        return cantidadDeAsteroides;
+    }
+
+    private double calcularRecompensa(double vidaInicial, double vidaFinal){
         return this.calcularPoder() + (vidaInicial-vidaFinal);
     }
 }
