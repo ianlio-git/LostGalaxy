@@ -32,7 +32,7 @@ public class Juego {
         return instanciaJuego;
     }
     public void iniciarJuego(String nombreDelJugador, TipoDeNave naveJugador, int cantidadSistemasEstelaresEstablecida, Dificultad dificultad) throws JuegoIniciadoException {
-        double uadeCoinsJugador = 5000000;
+        double uadeCoinsJugador = 10000;
         cantidadSistemasEstelares = cantidadSistemasEstelaresEstablecida;
         if (jugador == null) {
             mapaEstelar.crearMapaEstelar(dificultad,cantidadSistemasEstelares);
@@ -232,9 +232,6 @@ public class Juego {
     }
 
 
-    public MessageView messageToView() {
-        return new MessageView(mensajeRecibido);
-    }
 
     private void pasarTurno(){
         if (jugador.getNave().soyNaveTipo() == TipoDeNave.NAVE_TITAN) {
@@ -267,7 +264,7 @@ public class Juego {
     public void reiniciarJuego() {
         jugador.getNave().vaciarArmamentos();
         jugador.getNave().reestablecerVida();
-        jugador.setUadeCoins(1000000);
+        jugador.setUadeCoins(10000);
         jugador.getNave().getEscudo().escudoAcero();
         jugador.getNave().getTanque().tanqueADefault();
         turno = 0;
