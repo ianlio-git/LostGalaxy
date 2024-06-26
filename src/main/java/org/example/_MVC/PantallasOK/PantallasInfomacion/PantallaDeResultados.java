@@ -18,11 +18,46 @@ public class PantallaDeResultados {
     }
 
     public void salirDelJuego(Exception e) {
-        if (e instanceof NaveDestruidaException) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Vitacora del viaje", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Vitacora del viaje", JOptionPane.WARNING_MESSAGE);
+        String message = e.getMessage();
+        String title = "Vitacora del viaje";
+
+        switch (e.getClass().getSimpleName()) {
+            case "ArmaNoEncontradaException":
+            case "PlanetaNoEncontradoException":
+            case "NavePhantomException":
+            case "SistenaInvalidoException":
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+                break;
+
+            case "AtacarSoloPlanetasHostiles":
+            case "AtravesandoCinturonException":
+            case "CambianDeSistemaException":
+            case "JuegoIniciadoException":
+            case "SinCombustibleEnCinturonDeAsteroides":
+            case "SinCombustibleNiUadeCoins":
+            case "UadeCoinsInsuficientesException":
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+                break;
+
+            case "CombustibleInsuficienteException":
+            case "EscudoLleno":
+            case "LimiteDeArmas":
+            case "TanqueLlenoException":
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+                break;
+
+            case "NaveDestruidaException":
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+                break;
+
+            case "NaveEnemigaDestruidaException":
+            case "TesoroEncontradoException":
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+                break;
         }
     }
-
 }
