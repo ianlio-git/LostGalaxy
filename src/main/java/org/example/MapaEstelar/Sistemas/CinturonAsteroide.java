@@ -1,7 +1,9 @@
 package org.example.MapaEstelar.Sistemas;
 
 import org.example.Enums.TipoDeNave;
+import org.example.GameMaster.Exception.AtravesandoCinturonException;
 import org.example.GameMaster.Exception.NaveDestruidaException;
+import org.example.GameMaster.Exception.NavePhantomException;
 import org.example.GameMaster.Jugador;
 
 public class CinturonAsteroide {
@@ -16,7 +18,7 @@ public class CinturonAsteroide {
         return this.cantidadDeAsteroides * 10;
     }
 
-    public void atravesar(Jugador jugador) throws NaveDestruidaException {
+    public void atravesar(Jugador jugador) throws NaveDestruidaException, AtravesandoCinturonException, NavePhantomException {
 
         if (jugador.getNave().soyNaveTipo() != TipoDeNave.NAVE_PHANTOM) {
             double vidaInicial = jugador.getNave().getVida();
@@ -29,15 +31,15 @@ public class CinturonAsteroide {
                 if (!jugador.getNave().getTanque().tengoCombustible()) {
                     jugador.setPlanetaActual(null);
                 }
-                //hay que ver como pasar esto a la view
-                //return ("¡CUIDADO! Atravezando el cinturon de Asteroides... \n ¡Conseguiste atravesar el cinturón! \n Ganaste:"+ uadeCoinsConseguidos +"UADEcoins");
+                System.out.println(uadeCoinsConseguidos);
+                throw new AtravesandoCinturonException("¡CUIDADO! Atravesando el cinturón de Asteroides... \n ¡Conseguiste atravesar el cinturón! \n Ganaste: " + uadeCoinsConseguidos + " UADEcoins");
             }
+        } else {
+            throw new NavePhantomException("Atravesé el cinturón sin problemas, soy una nave Phantom.");
         }
-            //hay que ver como pasar esto a la view
-            //return "Atraveze el cinturon sin problemas, soy una nave Phantom.";
     }
 
     private double calcularRecompensa(double vidaInicial,double vidaFinal){
-        return this.calcularPoder() - (vidaInicial-vidaFinal);
+        return this.calcularPoder() + (vidaInicial-vidaFinal);
     }
 }

@@ -46,9 +46,6 @@ public class JuegoController {
             mostrarError(e);
         }
     }
-
-
-
     public static void mostrarSistemas() {
         try {
             List<SistemasView> sistemasViews = new ArrayList<>();

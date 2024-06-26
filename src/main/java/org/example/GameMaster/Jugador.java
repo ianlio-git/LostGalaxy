@@ -1,8 +1,6 @@
 package org.example.GameMaster;
 
-import org.example.GameMaster.Exception.NaveDestruidaException;
-import org.example.GameMaster.Exception.PlanetaNoEncontradoException;
-import org.example.GameMaster.Exception.TesoroEncontradoException;
+import org.example.GameMaster.Exception.*;
 import org.example._MVC.Views.JugadorView;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
@@ -83,14 +81,14 @@ public class Jugador {
         return  this.nave.getTanque().getCombustible() >= combustibleParaViajar(TipoDeCuerpoCeleste.PLANETA_NEUTRAL);
     }
 
-    public void comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) throws NaveDestruidaException {
+    public void comenzarViajeANuevoSistema(SistemaEstelar sistemaEstelar) throws NaveDestruidaException, AtravesandoCinturonException, NavePhantomException, CambiandoDeSistemaExeption {
         nave.getTanque().consumirCombustible(combustibleParaViajar(TipoDeCuerpoCeleste.SISTEMA_ESTELAR));
         if (sistemaEstelar.tieneCinturonAsteroides()){
             sistemaActual = sistemaEstelar;
-            sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);//tambien cambie este por void antes era string
+            sistemaEstelar.mostrarCinturonAsteroides().atravesar(this);
         }
         sistemaActual = sistemaEstelar;
-        //return "Cambiando de sistema.... \n No atravezaste ningun cinturon de asteroides!"; hay que ver como pasar esto al view
+        throw new CambiandoDeSistemaExeption("No se encuentran asteroides en este sistema.... ATRAVEZANDO SIN PROBLEMAS!");
     }
 
     public JugadorView toViewJugador() {
@@ -113,16 +111,9 @@ public class Jugador {
         this.nave = nave;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public void setUadeCoins(double uadeCoins) {
         this.uadeCoins = uadeCoins;
     }
 
-    public void setTesoro(boolean tesoro) {
-        this.tesoro = tesoro;
-    }
 }
 

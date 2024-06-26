@@ -69,7 +69,7 @@ public class PantallaSistemasEstelares extends JFrame {
                 sistemaPanel.add(planetaLabel);
             }
 
-            JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No") + " ");
+            JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí /nCantidad de Asteoides: /nDanio Esperado:" : "No") + " ");
             cinturonLabel.setForeground(Color.GREEN); // Texto verde
             sistemaPanel.add(cinturonLabel);
 

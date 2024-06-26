@@ -67,7 +67,7 @@ public class Juego {
     }
 
 
-    public void indicarRumboANuevoSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, SistemaInvalidoException {
+    public void indicarRumboANuevoSistema(String codigoDeSistema) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, SistemaInvalidoException, AtravesandoCinturonException, NavePhantomException, CambiandoDeSistemaExeption {
         pasarTurno();
         if(mapaEstelar.verificarExistenciaDeSistemaEstelar(codigoDeSistema)){
             if (!jugador.getSistemaActual().mostrarNombre().equals(codigoDeSistema)) {
