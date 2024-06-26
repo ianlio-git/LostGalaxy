@@ -10,6 +10,7 @@ import org.example.Nave.TiposDeNaves.NavePirata;
 import org.example.MapaEstelar.Sistemas.Planetas.Hostil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +19,18 @@ public class SistemaEstelar {
     static private int contador;
     private List<Planeta> planetas;
     private CinturonAsteroide cinturonAsteroides;
+
+    public int getContador(){
+        return this.contador;
+    }
+
+    public void resetListaPlanetas() {
+        Iterator<Planeta> iterator = planetas.iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+    }
 
     public SistemaEstelar(Dificultad dificultad, boolean tesoro, boolean cinturon) {
         this.contador = contador;
@@ -34,11 +47,7 @@ public class SistemaEstelar {
         return cinturonAsteroides;
     }
 
-    public void mostarListadoPlanetas() {
-        for (Planeta planeta : planetas) {
-            System.out.println(planeta.getCodigoDePlaneta());
-        }
-    }
+
     public Planeta obtenerPlanetaNeutral() {
         for (Planeta planeta : planetas) {
             if (planeta.soyPlanetaTipo()== TipoDeCuerpoCeleste.PLANETA_NEUTRAL) {

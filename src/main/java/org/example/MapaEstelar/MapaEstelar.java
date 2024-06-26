@@ -2,9 +2,11 @@ package org.example.MapaEstelar;
 
 import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
+import org.example.Nave.PartesDeLaNave.Arma;
 import org.example._MVC.Views.MapaEstelarView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +15,17 @@ public class MapaEstelar {
     private List<SistemaEstelar> sistemasEstelares;
     private Dificultad dificultad;
     private String sistemaConTesoro;
+
+
+
+    public void mapaEstelarReset() {
+        Iterator<SistemaEstelar> iterator = sistemasEstelares.iterator();
+        while (iterator.hasNext()) {
+            SistemaEstelar sistema = iterator.next();
+            sistema.resetListaPlanetas();
+            iterator.remove();
+        }
+    }
 
 
     private MapaEstelar() {
@@ -48,6 +61,12 @@ public class MapaEstelar {
         return verificacion;
     }
 
+    public SistemaEstelar obtenerSistemRandom(){
+        for (SistemaEstelar sistema : sistemasEstelares) {
+                return sistema;
+            }
+        throw new RuntimeException("Sistema estelar no encontrado.");
+    }
     public SistemaEstelar obtenerSistemaEstelar(String codigo) {
         for (SistemaEstelar sistema : sistemasEstelares) {
             if (sistema.mostrarNombre().equals(codigo)) {

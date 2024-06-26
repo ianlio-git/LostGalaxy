@@ -268,13 +268,15 @@ public class Juego {
         jugador.getNave().vaciarArmamentos();
         jugador.getNave().reestablecerVida();
         jugador.setUadeCoins(500);
-        SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemaEstelar("SIST-0");
+        jugador.getNave().getEscudo().escudoAcero();
+        jugador.getNave().getTanque().tanqueADefault();
+        turno = 0;
+        mapaEstelar.mapaEstelarReset();
+        mapaEstelar.crearMapaEstelar(MapaEstelar.getInstancia().getDificultad(), cantidadSistemasEstelares);
+        SistemaEstelar sistemaInicial = mapaEstelar.obtenerSistemRandom();
         Planeta planetaInicial = sistemaInicial.obtenerPlanetaNeutral();
         jugador.setSistemaActual(sistemaInicial);
         jugador.setPlanetaActual(planetaInicial);
         jugador.setPosicionEnElEspacio(planetaInicial.getCodigoDePlaneta());
-        jugador.getNave().getEscudo().escudoAcero();
-        jugador.getNave().getTanque().tanqueADefault();
-        turno = 0;
     }
 }

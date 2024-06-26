@@ -1,7 +1,11 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
+import org.example.GameMaster.Juego;
+import org.example.MapaEstelar.MapaEstelar;
+import org.example.MapaEstelar.Sistemas.SistemaEstelar;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.JugadorView;
+import org.example._MVC.Views.MapaEstelarView;
 import org.example._MVC.Views.SistemasView;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
@@ -9,6 +13,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PantallaSistemasEstelares extends JFrame {
@@ -17,8 +22,12 @@ public class PantallaSistemasEstelares extends JFrame {
     private List<SistemasView> sistemasViews;
     private JugadorView jugadorView;
     private JPanel mainPanel;
+    private Timer timer;
 
     public void destruirPantalla(){
+        if (timer != null) {
+            timer.stop();
+        }
         instancia = null;
     }
 
@@ -49,43 +58,58 @@ public class PantallaSistemasEstelares extends JFrame {
     }
 
     private void actualizarSistemas() {
-        mainPanel.removeAll();
+        // Aquí obtenemos la lista actualizada de sistemasViews antes de actualizar la UI
+        sistemasViews = obtenerSistemasViewsActualizados();
 
-        for (SistemasView sistemasView : sistemasViews) {
-            JPanel sistemaPanel = new JPanel();
-            sistemaPanel.setLayout(new BoxLayout(sistemaPanel, BoxLayout.Y_AXIS));
-            sistemaPanel.setBackground(Color.BLACK); // Fondo negro
+        SwingUtilities.invokeLater(() -> {
+            mainPanel.removeAll();
 
-            Border border = BorderFactory.createCompoundBorder(
-                    BorderFactory.createDashedBorder(Color.GREEN),
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            sistemaPanel.setBorder(BorderFactory.createTitledBorder(border, "Sistema Estelar: " + sistemasView.getNombreSistemaEstelar(), TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.GREEN));
+            for (SistemasView sistemasView : sistemasViews) {
+                JPanel sistemaPanel = new JPanel();
+                sistemaPanel.setLayout(new BoxLayout(sistemaPanel, BoxLayout.Y_AXIS));
+                sistemaPanel.setBackground(Color.BLACK); // Fondo negro
 
-            JLabel planetasLabel = new JLabel("Lista de Planetas:");
-            planetasLabel.setForeground(Color.GREEN); // Texto verde
-            sistemaPanel.add(planetasLabel);
+                Border border = BorderFactory.createCompoundBorder(
+                        BorderFactory.createDashedBorder(Color.GREEN),
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                sistemaPanel.setBorder(BorderFactory.createTitledBorder(border, "Sistema Estelar: " + sistemasView.getNombreSistemaEstelar(), TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.GREEN));
 
-            for (Planeta planeta : sistemasView.getPlanetas()) {
-                JLabel planetaLabel = new JLabel(" - Código del Planeta: " + planeta.getCodigoDePlaneta() + " ");
-                planetaLabel.setForeground(Color.GREEN); // Texto verde
-                sistemaPanel.add(planetaLabel);
+                JLabel planetasLabel = new JLabel("Lista de Planetas:");
+                planetasLabel.setForeground(Color.GREEN); // Texto verde
+                sistemaPanel.add(planetasLabel);
+
+                for (Planeta planeta : sistemasView.getPlanetas()) {
+                    JLabel planetaLabel = new JLabel(" - Código del Planeta: " + planeta.getCodigoDePlaneta() + " ");
+                    planetaLabel.setForeground(Color.GREEN); // Texto verde
+                    sistemaPanel.add(planetaLabel);
+                }
+
+                JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No"));
+                cinturonLabel.setForeground(Color.GREEN); // Texto verde
+                sistemaPanel.add(cinturonLabel);
+
+                mainPanel.add(sistemaPanel);
+                mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
             }
 
-            JLabel cinturonLabel = new JLabel("Tiene Cinturón de Asteroides: " + (sistemasView.isTieneCinturonDeAsteroides() ? "Sí" : "No"));
-            cinturonLabel.setForeground(Color.GREEN); // Texto verde
-            sistemaPanel.add(cinturonLabel);
-
-            mainPanel.add(sistemaPanel);
-            mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        }
-
-        mainPanel.revalidate();
-        mainPanel.repaint();
+            mainPanel.revalidate();
+            mainPanel.repaint();
+        });
     }
 
     public void iniciarActualizarSistemas() {
-        Timer timer = new Timer(800, e -> actualizarSistemas()); // Actualizar cada 10 segundos
+        timer = new Timer(800, e -> actualizarSistemas()); // Actualizar cada 800 ms
         timer.start();
+    }
+
+    // Método para obtener la lista actualizada de SistemasView
+    private List<SistemasView> obtenerSistemasViewsActualizados() {
+        List<SistemasView> sistemasViews = new ArrayList<>();
+        for (SistemaEstelar sistemaEstelar : Juego.getInstancia().getMapaEstelar().getSistemasEstelares()) {
+            SistemasView sistemasView = sistemaEstelar.toViewSistema();
+            sistemasViews.add(sistemasView);
+        }
+        return sistemasViews; // Actualiza esta línea con la lógica adecuada
     }
 
     public static PantallaSistemasEstelares getInstancia(List<SistemasView> sistemasViews) {
