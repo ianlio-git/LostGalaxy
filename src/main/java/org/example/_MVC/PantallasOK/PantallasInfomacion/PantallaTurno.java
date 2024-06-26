@@ -25,7 +25,7 @@ public class PantallaTurno extends JFrame {
         lblTurno = new JLabel("Turno: ");
         lblTurno.setFont(new Font("Arial", Font.BOLD, 16));
         lblTurno.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTurno.setForeground(Color.WHITE); // Color de texto blanco
+        lblTurno.setForeground(Color.GREEN); // Color de texto blanco
         getContentPane().setBackground(Color.BLACK); // Fondo negro
 
         // Añadir el JLabel al contenido del JFrame

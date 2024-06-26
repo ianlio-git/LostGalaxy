@@ -10,13 +10,15 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 public class PantallaDeCostes extends JFrame {
-
+    private static PantallaDeCostes instancia;
+    private boolean abiertoSistemas = true;
     private JLabel lblTitulo;
     private JTextArea txtAreaCostes;
     private JButton btnSalir;
     private Timer timer;
 
-    public PantallaDeCostes() {
+    // Private constructor to prevent instantiation
+    private PantallaDeCostes() {
         setTitle("Tabla de Costes");
         setSize(550, 250); // Ancho ajustado a 500
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -65,6 +67,14 @@ public class PantallaDeCostes extends JFrame {
         calcularYMostrarCostes();
     }
 
+    // Public method to get the singleton instance
+    public static synchronized PantallaDeCostes getInstancia() {
+        if (instancia == null) {
+            instancia = new PantallaDeCostes();
+        }
+        return instancia;
+    }
+
     private void calcularYMostrarCostes() {
         Jugador jugador = Juego.getInstancia().getJugador();
         JugadorView jugadorView = jugador.toViewJugador();
@@ -93,15 +103,19 @@ public class PantallaDeCostes extends JFrame {
     public static void mostrarPantalla() {
         SwingUtilities.invokeLater(() -> {
             PantallaMain pantallaMain = PantallaMain.getInstance();
-            PantallaDeCostes pantalla = new PantallaDeCostes();
+            PantallaDeCostes pantalla = PantallaDeCostes.getInstancia();
 
             // Obtener las coordenadas de la pantalla principal
             int x = pantallaMain.getX();
             int y = pantallaMain.getY() + pantallaMain.getHeight(); // Colocar debajo de la pantalla principal
 
             pantalla.setLocation(x, y);
-            pantalla.setVisible(true);
+            pantalla.setVisible(pantalla.alternarPantallaSistemas());
         });
     }
 
+    private boolean alternarPantallaSistemas() {
+        abiertoSistemas = !abiertoSistemas; // Alternar el estado de abiertoSistemas
+        return !abiertoSistemas; // Devolver el estado anterior antes de la alternancia
+    }
 }
