@@ -47,7 +47,7 @@ public class Jugador {
     }
     public void encontreElTesoro(boolean planetaTesoro) throws TesoroEncontradoException {
         if (planetaTesoro) {
-            throw new TesoroEncontradoException("¡Game Over! Encontraste el tesoro.");
+            throw new TesoroEncontradoException("¡Ganaste! Encontraste el tesoro.");
         }
     }
 

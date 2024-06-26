@@ -1,5 +1,6 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
+import org.example.GameMaster.Exception.NaveDestruidaException;
 import org.example._MVC.Views.MessageView;
 
 import javax.swing.*;
@@ -17,6 +18,11 @@ public class PantallaDeResultados {
     }
 
     public void salirDelJuego(Exception e) {
-        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        if (e instanceof NaveDestruidaException) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Vitacora del viaje", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Vitacora del viaje", JOptionPane.WARNING_MESSAGE);
+        }
     }
+
 }
