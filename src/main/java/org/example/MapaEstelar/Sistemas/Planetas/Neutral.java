@@ -3,6 +3,7 @@ package org.example.MapaEstelar.Sistemas.Planetas;
 import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.Mercado.Mercado;
+import org.example.Nave.TiposDeNaves.NavePirata;
 
 public class Neutral extends Planeta {
     private static int count;
@@ -11,6 +12,11 @@ public class Neutral extends Planeta {
     public Neutral() {
         super("NEU-"+ count++);
         this.mercado = new Mercado();
+    }
+
+    @Override
+    public NavePirata getNavePirata() {
+        return null;
     }
 
     @Override

@@ -25,7 +25,7 @@ public class PantallaDeResultados {
             case "ArmaNoEncontradaException":
             case "PlanetaNoEncontradoException":
             case "NavePhantomException":
-            case "SistenaInvalidoException":
+            case "SistemaInvalidoException":
                 JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
                 break;
 

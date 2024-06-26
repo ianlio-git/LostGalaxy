@@ -23,21 +23,41 @@ public class PantallaCambioDeSistema extends JFrame {
     // Constructor privado para evitar instanciación externa
     private PantallaCambioDeSistema() {
         setTitle("Pantalla de Cambio de Sistema");
-        setSize(400, 300);
+        setSize(550, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Crear componentes
         JLabel codigoSistemaLabel = new JLabel("Código del Sistema:");
+        codigoSistemaLabel.setForeground(Color.GREEN); // Texto verde
+
         codigoSistemaField = new JTextField(20);
+
         JButton cambiarButton = new JButton("Cambiar de Sistema");
+        cambiarButton.setBackground(Color.BLACK); // Fondo negro
+        cambiarButton.setForeground(Color.GREEN); // Texto verde
+        cambiarButton.setBorder(BorderFactory.createLineBorder(Color.GREEN)); // Borde verde
+
         JButton mostrarInfoButton = new JButton("Mostrar Información");
+        mostrarInfoButton.setBackground(Color.BLACK); // Fondo negro
+        mostrarInfoButton.setForeground(Color.GREEN); // Texto verde
+        mostrarInfoButton.setBorder(BorderFactory.createLineBorder(Color.GREEN)); // Borde verde
+
         resultadoArea = new JTextArea();
         resultadoArea.setEditable(false);
+        resultadoArea.setBackground(Color.BLACK); // Fondo negro
+        resultadoArea.setForeground(Color.GREEN); // Texto verde
+        resultadoArea.setBorder(BorderFactory.createLineBorder(Color.GREEN)); // Borde verde
+
+        JButton salirButton = new JButton("Salir");
+        salirButton.setBackground(Color.BLACK); // Fondo negro
+        salirButton.setForeground(Color.GREEN); // Texto verde
+        salirButton.setBorder(BorderFactory.createLineBorder(Color.GREEN)); // Borde verde
 
         // Configurar el layout
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.BLACK); // Fondo negro
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
@@ -61,6 +81,12 @@ public class PantallaCambioDeSistema extends JFrame {
         gbc.weighty = 1.0;
         panel.add(new JScrollPane(resultadoArea), gbc);
 
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        gbc.weighty = 0.0; // Restablecer weighty para el botón de salir
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(salirButton, gbc);
+
         add(panel);
 
         // Añadir ActionListener al botón "Cambiar de Sistema"
@@ -78,6 +104,14 @@ public class PantallaCambioDeSistema extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigoDeSistema = codigoSistemaField.getText();
                 mostrarInformacionSistema(codigoDeSistema.toUpperCase());
+            }
+        });
+
+        // Añadir ActionListener al botón Salir
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cierra la ventana de cambio de sistema
             }
         });
     }
@@ -112,5 +146,3 @@ public class PantallaCambioDeSistema extends JFrame {
         }
     }
 }
-
-

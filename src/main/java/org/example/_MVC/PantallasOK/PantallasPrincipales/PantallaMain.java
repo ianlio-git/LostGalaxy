@@ -4,6 +4,8 @@ import org.example._MVC.Controller.JuegoController;
 import org.example._MVC.Controller.MainController;
 import org.example._MVC.PantallasOK.ImagenesJPanel.BackgroundPanel;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
+import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeCostes;
+import org.example._MVC.Views.JugadorView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +29,7 @@ public class PantallaMain extends JFrame {
         // Panel para los primeros tres botones alineados a la izquierda
         JPanel panelBotonesIzquierda = new JPanel();
         panelBotonesIzquierda.setOpaque(false); // Hacer el panel transparente
-        panelBotonesIzquierda.setLayout(new GridLayout(3, 1, 0, 10)); // Usar GridLayout para alinear verticalmente los botones
+        panelBotonesIzquierda.setLayout(new GridLayout(4, 1, 0, 10)); // Usar GridLayout para alinear verticalmente los botones
 
         // Crear botones con estilo para la sección izquierda
         JButton btnDetalleJugador = createButton("Detalle del Jugador", "Muestra los detalles del jugador.");
@@ -43,6 +45,11 @@ public class PantallaMain extends JFrame {
         panelBotonesIzquierda.add(btnDetalleJugador);
         panelBotonesIzquierda.add(btnMostrarTurno);
         panelBotonesIzquierda.add(btnMostrarSistemas);
+
+        // Nuevo botón para mostrar los costes
+        JButton btnMostrarCostes = createButton("Mostrar Costes", "Muestra los costes actuales.");
+        btnMostrarCostes.addActionListener(e -> PantallaDeCostes.mostrarPantalla());
+        panelBotonesIzquierda.add(btnMostrarCostes);
 
         // GridBagConstraints para panelBotonesIzquierda
         GridBagConstraints gbcPanelIzquierda = new GridBagConstraints();
@@ -70,7 +77,7 @@ public class PantallaMain extends JFrame {
         gbcRestoBotones.weightx = 1.0; // Distribuir espacio horizontalmente
         gbcRestoBotones.weighty = 0.25; // Distribuir espacio verticalmente
 
-        JButton btnMercado = createButton("Mercado", "Coste de realizar esta acción es: X monedas.");
+        JButton btnMercado = createButton("Mercado", "Abre el mercado para comprar valiosos items.");
         btnMercado.addActionListener(e -> {
             if (!mercadoAbierto) { // Si el mercado no está abierto
                 mercadoAbierto = true; // Establecer el flag a true
@@ -86,13 +93,13 @@ public class PantallaMain extends JFrame {
         });
         panelBotonesDerecha.add(btnMercado, gbcRestoBotones);
 
-        JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil", "Coste de realizar esta acción es: Y monedas.");
+        JButton btnAtacarPlanetaHostil = createButton("Atacar Planeta Hostil", "Ingresa el planeta que quieres atacar.");
         btnAtacarPlanetaHostil.addActionListener(e -> JuegoController.combate());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnAtacarPlanetaHostil, gbcRestoBotones);
 
         // Nuevo botón Planeta Aliado
-        JButton btnPlanetaAliado = createButton("Planeta Aliado", "Coste de realizar esta acción es: Z monedas.");
+        JButton btnPlanetaAliado = createButton("Planeta Aliado", "Visita un planeta aliado para obtener ayuda.");
         btnPlanetaAliado.addActionListener(e -> JuegoController.planetaAliado());
         gbcRestoBotones.gridy++;
         panelBotonesDerecha.add(btnPlanetaAliado, gbcRestoBotones);

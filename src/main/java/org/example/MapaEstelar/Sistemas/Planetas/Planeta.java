@@ -6,6 +6,7 @@ import org.example.GameMaster.Exception.TesoroEncontradoException;
 import org.example.GameMaster.Exception.UadeCoinsInsuficientesException;
 import org.example.GameMaster.Jugador;
 import org.example.Mercado.Mercado;
+import org.example.Nave.TiposDeNaves.NavePirata;
 
 public abstract class Planeta {
     private String codigoDePlaneta;
@@ -20,5 +21,5 @@ public abstract class Planeta {
     public abstract void combate(Jugador jugador) throws NaveDestruidaException, TesoroEncontradoException;
     public abstract void repararNaveAliada(Jugador jugador);
     public abstract void obtenerInformacion( Jugador jugador) throws UadeCoinsInsuficientesException;
-
+    public abstract NavePirata getNavePirata();
 }

@@ -36,6 +36,7 @@ public class MainController {
         }
     }
 
+
     public static void iniciarPantallaMain() {
         try {
             PantallaMain.getInstance().setVisible(true);

@@ -1,6 +1,7 @@
 package org.example._MVC.PantallasOK.PantallasInfomacion;
 
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
+import org.example._MVC.Views.JugadorView;
 import org.example._MVC.Views.SistemasView;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
 
@@ -14,6 +15,7 @@ public class PantallaSistemasEstelares extends JFrame {
     private boolean abiertoSistemas = true;
     private static PantallaSistemasEstelares instancia;
     private List<SistemasView> sistemasViews;
+    private JugadorView jugadorView;
     private JPanel mainPanel;
 
     public void destruirPantalla(){

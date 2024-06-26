@@ -2,16 +2,13 @@ package org.example.GameMaster;
 
 import org.example.Enums.TipoDeArma;
 import org.example.GameMaster.Exception.*;
+import org.example.Nave.TiposDeNaves.*;
 import org.example._MVC.Views.GameBeginView;
 import org.example.Enums.Dificultad;
 import org.example.MapaEstelar.MapaEstelar;
 import org.example.MapaEstelar.Sistemas.SistemaEstelar;
-import org.example.Nave.TiposDeNaves.NaveAegis;
-import org.example.Nave.TiposDeNaves.NavePhantom;
-import org.example.Nave.TiposDeNaves.NaveSwift;
 import org.example.Enums.TipoDeNave;
 import org.example.MapaEstelar.Sistemas.Planetas.Planeta;
-import org.example.Nave.TiposDeNaves.NaveTitan;
 import org.example._MVC.Views.MapaEstelarView;
 import org.example._MVC.Views.MessageView;
 
@@ -206,9 +203,11 @@ public class Juego {
 
     }
 
-    public void atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, NaveEnemigaDestuidaException, NaveEnemigaDestuidaException, AtacarSoloPlanetasHostiles {
+    public double atacarPlanetaHostil(String codigoDePlaneta) throws SinCombustibleException, NaveDestruidaException, CombustibleInsuficienteException, TesoroEncontradoException, SinCombustibleEnCinturonDeAsteroides, PlanetaNoEncontradoException, NaveEnemigaDestuidaException, NaveEnemigaDestuidaException, AtacarSoloPlanetasHostiles {
         pasarTurno();
         Planeta planeta = jugador.getSistemaActual().obtenerPlanetaHostil(codigoDePlaneta);
+        NavePirata navePirata = planeta.getNavePirata();
+        System.out.println(navePirata.poderAtaque());
         double cantDeUadeCoinsInicial = jugador.getUadeCoins();
         if(planeta==null){
             throw new PlanetaNoEncontradoException("No se pudo encontrar el planeta.");
@@ -219,6 +218,7 @@ public class Juego {
                     planeta.combate(this.jugador);
                     double cantDeUadeCoinsFinales = jugador.getUadeCoins();
                     jugador.getSistemaActual().quitarPlaneta(planeta);
+
                     throw new NaveEnemigaDestuidaException("La nave enemiga fue destruida. ¡Muy bien!, Por desgracia no has encontrado el tesoro, sigue intentado! \n UadeCoins obtenidas: " + (cantDeUadeCoinsFinales - cantDeUadeCoinsInicial));
                 } else {
                     throw new CombustibleInsuficienteException("Te quedaste sin combustible");
@@ -228,6 +228,7 @@ public class Juego {
                 throw new AtacarSoloPlanetasHostiles("Que malvados planes tienes? Solo ataca planetas enemigos.");
             }
         }
+
     }
 
 
@@ -274,5 +275,6 @@ public class Juego {
         jugador.setPosicionEnElEspacio(planetaInicial.getCodigoDePlaneta());
         jugador.getNave().getEscudo().escudoAcero();
         jugador.getNave().getTanque().tanqueADefault();
+        turno = 0;
     }
 }

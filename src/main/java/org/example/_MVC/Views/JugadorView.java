@@ -79,4 +79,8 @@ public class JugadorView {
     public void setPlanetaActual(Planeta planetaActual) {
         this.planetaActual = planetaActual;
     }
+
+    public double getCantidadDeArmas(){
+        return this.nave.cantidadDeArmas();
+    }
 }

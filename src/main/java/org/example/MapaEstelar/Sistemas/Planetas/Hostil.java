@@ -27,6 +27,10 @@ public class Hostil extends Planeta {
         return null;
     }
 
+    public NavePirata getNavePirata(){
+        return naveEnemiga;
+    }
+
     public void combate(Jugador jugador) throws NaveDestruidaException, TesoroEncontradoException {
         double acumDeDanio =0;
         while (jugador.getNave().tengoVida()&& naveEnemiga.tengoVida()) {

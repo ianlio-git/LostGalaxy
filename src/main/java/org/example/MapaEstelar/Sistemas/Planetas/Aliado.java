@@ -5,6 +5,7 @@ import org.example.GameMaster.Jugador;
 import org.example.Enums.TipoDeCuerpoCeleste;
 import org.example.MapaEstelar.MapaEstelar;
 import org.example.Mercado.Mercado;
+import org.example.Nave.TiposDeNaves.NavePirata;
 
 public class Aliado extends Planeta {
     private MapaEstelar mapaEstelar;
@@ -15,6 +16,11 @@ public class Aliado extends Planeta {
         super("ALI-" + count++);
         this.mapaEstelar = MapaEstelar.getInstancia();
         costeDeInformacion = 4000;
+    }
+
+    @Override
+    public NavePirata getNavePirata() {
+        return null;
     }
 
     @Override
