@@ -32,7 +32,7 @@ public class Juego {
         return instanciaJuego;
     }
     public void iniciarJuego(String nombreDelJugador, TipoDeNave naveJugador, int cantidadSistemasEstelaresEstablecida, Dificultad dificultad) throws JuegoIniciadoException {
-        double uadeCoinsJugador = 500;
+        double uadeCoinsJugador = 5000000;
         cantidadSistemasEstelares = cantidadSistemasEstelaresEstablecida;
         if (jugador == null) {
             mapaEstelar.crearMapaEstelar(dificultad,cantidadSistemasEstelares);
@@ -267,7 +267,7 @@ public class Juego {
     public void reiniciarJuego() {
         jugador.getNave().vaciarArmamentos();
         jugador.getNave().reestablecerVida();
-        jugador.setUadeCoins(500);
+        jugador.setUadeCoins(1000000);
         jugador.getNave().getEscudo().escudoAcero();
         jugador.getNave().getTanque().tanqueADefault();
         turno = 0;

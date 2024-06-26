@@ -7,10 +7,7 @@ import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaCambioDeSistema;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaDeCombate;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaMercado;
 import org.example._MVC.PantallasOK.PantallasDePlanetas.PantallaPlanetaAliado;
-import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaDeResultados;
-import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaJugador;
-import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaSistemasEstelares;
-import org.example._MVC.PantallasOK.PantallasInfomacion.PantallaTurno;
+import org.example._MVC.PantallasOK.PantallasInfomacion.*;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaGameBegin;
 import org.example._MVC.PantallasOK.PantallasPrincipales.PantallaMain;
 import org.example._MVC.Views.GameBeginView;
@@ -40,6 +37,17 @@ public class MainController {
     public static void iniciarPantallaMain() {
         try {
             PantallaMain.getInstance().setVisible(true);
+            PantallaDeCostes.mostrarPantalla();
+            PantallaTurno.getInstancia().mostrarTurno();
+            JugadorView jugadorView = Juego.getInstancia().getJugador().toViewJugador();
+            PantallaJugador pantallaJugador = PantallaJugador.obtenerInstancia(jugadorView);
+            pantallaJugador.mostrarDatosDelJugador();
+            List<SistemasView> sistemasViews = new ArrayList<>();
+            for (SistemaEstelar sistemaEstelar : Juego.getInstancia().getMapaEstelar().getSistemasEstelares()) {
+                SistemasView sistemasView = sistemaEstelar.toViewSistema();
+                sistemasViews.add(sistemasView);
+            }
+            PantallaSistemasEstelares.getInstancia(sistemasViews).mostrarSistemas();
         } catch (Exception e) {
             mostrarError(e);
         }
