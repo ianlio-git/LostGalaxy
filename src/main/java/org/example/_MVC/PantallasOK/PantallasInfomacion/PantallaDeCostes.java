@@ -14,6 +14,7 @@ public class PantallaDeCostes extends JFrame {
     private JLabel lblTitulo;
     private JTextArea txtAreaCostes;
     private JButton btnSalir;
+    private Timer timer;
 
     public PantallaDeCostes() {
         setTitle("Tabla de Costes");
@@ -26,9 +27,9 @@ public class PantallaDeCostes extends JFrame {
         lblTitulo = new JLabel("Tabla de Costes");
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 18));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setForeground(Color.GREEN); // Texto blanco
+        lblTitulo.setForeground(Color.GREEN); // Texto verde
         lblTitulo.setOpaque(true);
-        lblTitulo.setBackground(Color.BLACK); // Fondo verde oscuro
+        lblTitulo.setBackground(Color.BLACK); // Fondo negro
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Margen
 
         // Panel para mostrar los costes
@@ -56,7 +57,11 @@ public class PantallaDeCostes extends JFrame {
         add(new JScrollPane(txtAreaCostes), BorderLayout.CENTER);
         add(panelBotonSalir, BorderLayout.SOUTH);
 
-        // Calcular y mostrar los costes
+        // Crear el timer para actualizar cada 800 milisegundos
+        timer = new Timer(800, e -> actualizarCostes());
+        timer.start(); // Iniciar el timer
+
+        // Calcular y mostrar los costes inicialmente
         calcularYMostrarCostes();
     }
 
@@ -64,9 +69,9 @@ public class PantallaDeCostes extends JFrame {
         Jugador jugador = Juego.getInstancia().getJugador();
         JugadorView jugadorView = jugador.toViewJugador();
         double tasaDeAumento;
-        if(jugadorView.getCantidadDeArmas() == 0){
+        if (jugadorView.getCantidadDeArmas() == 0) {
             tasaDeAumento = 1;
-        }else{
+        } else {
             tasaDeAumento = Math.pow(1.5, jugadorView.getCantidadDeArmas());
         }
 
@@ -79,6 +84,10 @@ public class PantallaDeCostes extends JFrame {
         sb.append("Coste Sistema Estelar: ").append(df.format(tasaDeAumento * 30)).append(" uade coins\n");
 
         txtAreaCostes.setText(sb.toString());
+    }
+
+    private void actualizarCostes() {
+        calcularYMostrarCostes(); // Actualizar los costes cada 800 ms
     }
 
     public static void mostrarPantalla() {
